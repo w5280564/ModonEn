@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <TextView
+        android:id="@+id/popup_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="" />
+
+    <FrameLayout
+        android:id="@+id/main_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <RadioGroup
+        android:id="@+id/tab_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:elevation="5dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_energy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_selector_energy"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/tab_pk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_selector_pk"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/tab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:button="@null"
+            android:clickable="false" />
+
+
+        <RadioButton
+            android:id="@+id/tab_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_selector_find"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/tab_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_selector_person"
+            android:button="@null" />
+    </RadioGroup>
+
+    <com.moying.energyring.waylenBaseView.MyArcMenu
+        android:id="@+id/id_arcmenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5dp"
+        app:arcPosition="center_bottom"
+        app:arcRadius="100dp" />
+
+
+</RelativeLayout>

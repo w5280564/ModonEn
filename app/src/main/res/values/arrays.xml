@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pk_daily_all_project_action">
+        <item>完成</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>记忆</item>
+        <item>连续</item>
+        <item>连续</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>骑行</item>
+        <item>完成</item>
+        <item>打</item>
+        <item>打</item>
+        <item>踢</item>
+        <item>打</item>
+        <item>打</item>
+        <item>完成</item>
+        <item>完成</item>
+        <item>完成</item>
+    </string-array>
+
+    <string-array name="pk_daily_all_project_unit">
+        <item>公里</item>
+        <item>个</item>
+        <item>个</item>
+        <item>个</item>
+        <item>页</item>
+        <item>次</item>
+        <item>个</item>
+        <item>天</item>
+        <item>天</item>
+        <item>个</item>
+        <item>个</item>
+        <item>个</item>
+        <item>公里</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>小时</item>
+        <item>分钟</item>
+    </string-array>
+
+    <string-array name="study_course_sign_up_2_fill_table_item_part_1">
+        <item>学员姓名</item>
+        <item>性别</item>
+        <item>生日</item>
+        <item>电话</item>
+        <item>邮箱</item>
+        <item>城市</item>
+        <item>地址</item>
+        <item>学校/年级/班级</item>
+    </string-array>
+
+    <string-array name="study_course_sign_up_2_fill_table_item_part_2">
+        <item>父亲姓名</item>
+        <item>父亲电话</item>
+        <item>母亲姓名</item>
+        <item>母亲电话</item>
+    </string-array>
+
+    <string-array name="course_sign_up_step_1_fill_table_humans_options">
+        <item>父亲</item>
+        <item>母亲</item>
+        <item>本人</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="course_sign_up_step_1_understand_ways_options">
+        <item>老学员介绍</item>
+        <item>网络搜索</item>
+        <item>摩英教育微信公众号</item>
+        <item>微信朋友圈</item>
+        <item>APP</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="user_verify_level">
+        <item>一阶</item>
+        <item>二阶</item>
+        <item>三阶</item>
+    </string-array>
+
+    <!-- used to set the minTextSize via xml -->
+    <attr name="autoScaleTextViewStyle" format="reference" />
+    <declare-styleable name="AutoScaleTextView">
+        <attr name="minTextSize" format="dimension" />
+    </declare-styleable>
+</resources>
