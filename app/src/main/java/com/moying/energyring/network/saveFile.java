@@ -1,6 +1,8 @@
 package com.moying.energyring.network;
 
-import android.annotation.SuppressLint;
+import
+
+        android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -28,11 +30,51 @@ import java.util.Map;
 
 @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
 public class saveFile {
-//    public static String BaseUrl = "http://www.ec.dev.com";
-    public static String BaseUrl = "http://192.168.1.111/";
+//    public static String BaseUrl = "http://www.ec.dev.com/";
+//    public static String BaseUrl = "http://192.168.1.111/";
+    public static String BaseUrl = "http://172.16.0.111/";
     public static String CodeUrl = "ec/Account/PhoneCode_Get";
     public static String LoginUrl = "ec/Account/Login";
     public static String EnergyListUrl = "ec/Post/Post_List";
+    public static String pkUrl = "ec/PK/PK_Statistics_List";
+    public static String rankUrl = "ec/PK/PK_LikesRank_List";
+    public static String checkUrl = "ec/CheckIn/CheckIn_Early_List";
+    public static String checMyDatakUrl = "ec/CheckIn/MyCheckIn_Get";
+    public static String BadgeGuiZeUrl = "ec/Badge/MyBadge_List";
+    public static String dayPkProjectUrl = "ec/PK/Project_List";
+    public static String ReportRankUrl = "ec/PK/Report_Rank_List";
+    public static String PersonData_Url = "ec/PK/MyReport_Get";
+    public static String TargetDetails_ListUrl = "ec/Target/My_TargetDetails_List_Android";
+    public static String Target_ListUrl = "ec/Target/My_Target_List";
+    public static String Target_DetailsUrl = "ec/Target/Target_Details_Get";
+    public static String Target_DelsUrl = "ec/Target/Target_Del";
+    public static String Target_AddsUrl = "ec/Target/Target_ADD";
+    public static String uploadPhoto_Url = "ec/File/File_Upload";
+    public static String AddPk_Url = "ec/PK/Report_Add";
+    public static String like_Url = "ec/PK/Likes_Add";
+    public static String AddPkBg_Url = "ec/User/PKCoverImg_Upd";
+    public static String Check_Url = "ec/CheckIn/CheckIn_IsExists";
+    public static String CheckAdd_Url = "ec/CheckIn/CheckIn_Add";
+    public static String Post_Add_Url = "ec/Post/Post_Add";
+    public static String My_Friend_Url = "ec/User/My_Friend_List";
+    public static String banner_Url = "ec/Banner/Banner_List";
+    public static String seekUser_Url = "ec/User/Discover_UserInfo_List";
+    public static String Recommend_User_Url = "ec/User/Recommend_User_List";
+    public static String Friend_Add_User_Url = "ec/User/Friend_Add";
+    public static String RadioList_Url = "ec/Radio/Radio_List";
+    public static String UserInfo_Url = "ec/User/UserInfo_GetByUserID";
+    public static String PkHistory_Url = "ec/PK/Report_List_UserID";
+    public static String DayPk_Url = "ec/PK/Report_List_Today_UserID";
+    public static String PersonBg_Url = "ec/User/User_CoverImg_Upd";
+    public static String PersonHead_Url = "ec/User/User_ProfilePicture_Edit";
+    public static String DelePost_Url = "ec/Post/Post_Del";
+    public static String PersonRank_List_Url = "ec/User/Integral_Rank_List";
+    public static String EditInfo_Url = "ec/User/UserInfo_Edit";
+    public static String Product_List_Url = "ec/Product/Product_List";
+    public static String Notice_Like_Url = "ec/Notice/Notice_Like_List";
+    public static String Notice_Comment_Url = "ec/Notice/Notice_Comment_List";
+    public static String Notice_Attention_Url = "ec/User/Attention_Me_List";
+    public static String Notice_NoticeList_Url = "ec/Notice/Notice_List";
 
 
     private static SharedPreferences mShared = null;
@@ -307,7 +349,7 @@ public class saveFile {
         Boolean flag = null;
         try {
             Date nowdate = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA);
             Date d = sdf.parse(str);
             if (d == nowdate) {
                 flag = true;//日期相同

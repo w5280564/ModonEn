@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="bottom"
     android:orientation="vertical">
@@ -72,18 +72,20 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/myGif_Lin"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#ffffff"
-        android:paddingTop="10dip">
+        android:layout_height="wrap_content"
+        android:background="#00ffffff"
+        android:gravity="center">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/my_DraweeView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"/>
-    </RelativeLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

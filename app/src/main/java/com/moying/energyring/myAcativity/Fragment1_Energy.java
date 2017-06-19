@@ -72,7 +72,7 @@ public class Fragment1_Energy extends Fragment {
         userArr.add("成长日志");
         userArr.add("公众承诺");
         userArr.add("我的关注");
-        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
+        tablayout.setTabMode(TabLayout.GRAVITY_CENTER);//设置可以滑动 根据标签自适应宽度
         tablayout.setSelectedTabIndicatorHeight(0);//去掉下导航条
         //添加页卡标题
         if (fragments != null) {
@@ -119,7 +119,7 @@ public class Fragment1_Energy extends Fragment {
         }
 
         public View getTabView(int position) {
-            View v = LayoutInflater.from(getContext()).inflate(R.layout.custom_tab, null);
+            View v = LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
             LinearLayout Lin = (LinearLayout) v.findViewById(R.id.Lin);
             StaticData.ViewScale(Lin, 0, 80);
             LinearLayout tab_Lin = (LinearLayout) v.findViewById(R.id.tab_Lin);

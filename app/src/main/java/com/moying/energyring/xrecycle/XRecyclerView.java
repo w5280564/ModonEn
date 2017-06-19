@@ -1,6 +1,7 @@
 package com.moying.energyring.xrecycle;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,16 +73,21 @@ public class XRecyclerView extends RecyclerView {
     }
 
     public void loadMoreComplete() {//上拉加载完成后的   隐藏上拉加载布局
-        if (previousTotal < getLayoutManager().getItemCount()) {
-            Log.d(TAG, "loadMoreComplete: ");
+        if (mFooter instanceof XRecyclerViewFooter) {
             mFooter.setState(XRecyclerViewFooter.STATE_COMPLETE);
         }
+//        if (previousTotal < getLayoutManager().getItemCount()) {
+//        if (previousTotal <= getLayoutManager().getItemCount()) {//修改比对条件
+////            Log.d(TAG, "loadMoreComplete: ");
+//            mFooter.setState(XRecyclerViewFooter.STATE_COMPLETE);
+//        }
         previousTotal = getLayoutManager().getItemCount();
     }
 
     public void refreshComplete() {//下拉刷新完成后的  隐藏下拉加载 布局
         mHeader.refreshComplate();
     }
+
 
     public void setPullRefreshEnabled(boolean enabled) {//设置是否可以刷新
         pullRefreshEnabled = enabled;
@@ -100,7 +106,7 @@ public class XRecyclerView extends RecyclerView {
 //        mWrapAdapter.notifyDataSetChanged();
     }
 
-    public void refresState(int index){
+    public void refresState(int index) {
         mHeader.setState(index);
     }
 
@@ -414,4 +420,9 @@ public class XRecyclerView extends RecyclerView {
 
         void onLoadMore();
     }
+
+    public void addGif(Uri uri, int width, int height) {
+        mHeader.addGif(uri, width, height);
+    }
+
 }

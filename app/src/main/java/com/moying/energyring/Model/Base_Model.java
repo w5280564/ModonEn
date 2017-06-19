@@ -5,6 +5,15 @@ package com.moying.energyring.Model;
  */
 
 public class Base_Model {
+
+
+    /**
+     * IsSuccess : true
+     * Msg : 操作成功！
+     * Status : 200
+     * Data : true
+     */
+
     private boolean IsSuccess;
     private String Msg;
     private int Status;

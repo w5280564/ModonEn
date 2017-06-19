@@ -2,9 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moying.energyring">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 拍照权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
-
+    <!-- shareSdk 分享权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 蓝牙分享所需的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name=".waylenBaseView.MyApplication"
@@ -23,8 +39,167 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".myAcativity.LoginRegister" android:screenOrientation="portrait"  />
-        <activity android:name=".myAcativity.Energy.Energy_WebDetail" android:screenOrientation="portrait"  />
+        <activity
+            android:name=".myAcativity.LoginRegister"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Energy.Energy_WebDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_Daypk"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeprice" />
+        <activity
+            android:name=".myAcativity.Pk.pk_ZanRanking"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_CheckIn"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_Gui"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_AllPerson"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_AllHostory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_Goal"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_TimeChoice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_Overview"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_AllPersonDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkAdd"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkAdd_Project"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StaticData.ImagePickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".myAcativity.RemindListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 修改后面的schemeID 为AppId -->
+            <intent-filter>
+                <data android:scheme="tencent1104987324" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- 调用新浪原生SDK，需要注册的回调activity -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 微信分享回调 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".myAcativity.PostingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.FindSeekActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.FindRadioListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.Person_StopVideo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.Person_Play"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.Person_CountDownTimer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.Person_WeekChoice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Find.Person_PlayVideoList"
+            android:screenOrientation="portrait" />
+
+        <receiver
+            android:name=".myAcativity.Find.AlarmReceiver"
+            android:process=":remote" />
+
+        <activity
+            android:name=".myAcativity.Person.PersonMyCentertest"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeprice" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeprice" />
+        <activity android:name=".waylenBaseView.viewpagercards.MainActivity" />
+        <activity
+            android:name=".myAcativity.Person.Person_Notice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Set"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Integral"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Data"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_PiontsList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.PersonDeaft"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Shop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.person_Data_Edit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Relus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Notice_NoticeList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Notice_Fans"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Notice_Nomm"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Notice_Like"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_ShopDetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".myAcativity.Person.Person_ShopDetails_Adress"></activity>
     </application>
 
 </manifest>

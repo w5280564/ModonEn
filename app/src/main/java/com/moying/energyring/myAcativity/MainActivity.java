@@ -12,12 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.basePopup.popupFour;
+import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
+import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BaseActivity;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -91,7 +92,27 @@ public class MainActivity extends BaseActivity {
         menu.setOnMenuItemClickListener(new MyArcMenu.OnMenuItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
-                Toast.makeText(MainActivity.this, view.getTag() + "; position :" + pos, Toast.LENGTH_SHORT).show();
+                if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
+                    Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                    startActivity(intent);
+//                            tab_energy.setChecked(true);
+                } else {
+                    switch (pos) {
+                        case 0:
+                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd.class);
+                            startActivity(intent1);
+                            break;
+                        case 1:
+                            Intent intent2 = new Intent(MainActivity.this, PostingActivity.class);
+                            startActivity(intent2);
+                            break;
+                        case 2:
+                            Intent intent3 = new Intent(MainActivity.this, Leran_AllPerson.class);
+                            startActivity(intent3);
+                            break;
+                    }
+                }
+ //                Toast.makeText(MainActivity.this, view.getTag() + "; position :" + pos, Toast.LENGTH_SHORT).show();
             }
         });
         menu.setStatusChange(new MyArcMenu.StatusChange() {
@@ -108,7 +129,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(new Fragment1_Energy());
         fragments.add(new Fragment2_Pk());
         fragments.add(new Fragment3_Find());
-        fragments.add(new Fragment1_Energy());
+        fragments.add(new Fragment4_Person());
 
         tab_group = (RadioGroup) findViewById(R.id.tab_group);
         StaticData.ViewScale(tab_group, 0, 98);
@@ -136,13 +157,13 @@ public class MainActivity extends BaseActivity {
                     addFragmentStack(fragments, R.id.main_content_layout, 0);//加载不同的fragment
                     break;
                 case R.id.tab_pk:
-//                    if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
-//                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
-//                        startActivity(intent);
-//                        tab_energy.setChecked(true);
-//                    } else {
+                    if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
+                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                        startActivity(intent);
+                        tab_energy.setChecked(true);
+                    } else {
                         addFragmentStack(fragments, R.id.main_content_layout, 1);
-//                    }
+                    }
                     break;
                 case R.id.tab_find:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
@@ -172,6 +193,10 @@ public class MainActivity extends BaseActivity {
     public void backFragment(int pos) {
         ((RadioButton) tab_group.getChildAt(pos)).setChecked(true);
         addFragmentStack(fragments, R.id.main_content_layout, pos);//加载不同的fragment
+    }
+
+    public Fragment3_Find getFrag(){
+        return (Fragment3_Find) fragments.get(2);
     }
 
 

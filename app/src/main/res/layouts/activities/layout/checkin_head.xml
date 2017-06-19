@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/toal_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/popupwhite_bg">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/allday_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="999天"
+                android:textColor="#4d4d4d"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:text="累计签到"
+                android:textColor="#4d4d4d"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="#ffecec" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/con_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="999天"
+                android:textColor="#4d4d4d"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:text="连续签到"
+                android:textColor="#4d4d4d"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/top_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/toal_Lin"
+        android:background="@drawable/popupwhite_bg">
+
+        <TextView
+            android:id="@+id/zan_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="早起签到"
+            android:textColor="#4d4d4d"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/rank_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/zan_Txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:text="第999名"
+            android:textColor="#4d4d4d"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/rankCount_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/zan_Txt"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="获赞"
+            android:textColor="#4d4d4d"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/below_Txt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/top_Rel"
+        android:background="@drawable/ban_round"
+        android:gravity="center"
+        android:text="排行"
+        android:textColor="#4d4d4d"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/ban_Txt"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/below_Txt"
+        android:background="#ffecec"
+        android:text="早晨5:00-6:30累计签到有效"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:textColor="#878787"/>
+
+    <ImageView
+        android:id="@+id/round_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/top_Rel"
+        android:layout_below="@+id/top_Rel"
+        android:src="@drawable/round_line" />
+
+    <ImageView
+        android:id="@+id/round_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/top_Rel"
+        android:layout_below="@+id/top_Rel"
+        android:src="@drawable/round_line" />
+
+
+    <ImageView
+        android:id="@+id/toal_round_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/toal_Lin"
+        android:layout_below="@+id/toal_Lin"
+        android:src="@drawable/round_line" />
+
+    <ImageView
+        android:id="@+id/toa_round_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/toal_Lin"
+        android:layout_below="@+id/toal_Lin"
+        android:src="@drawable/round_line" />
+
+
+
+</RelativeLayout>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f3f3f3"
     android:orientation="vertical">
 
     <include
@@ -34,17 +35,17 @@
     </LinearLayout>
 
 
-    <com.waylen.StaticData.FlowLayout
+    <com.moying.energyring.waylenBaseView.FlowLayout
         android:id="@+id/badge_Flow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="*根据您发布每日pk汇报的累积天数，获得相应的徽章"
         android:gravity="center_horizontal"
+        android:text="*根据您发布每日pk汇报的累积天数，获得相应的徽章"
         android:textColor="#c9c9c9"
         android:textSize="14sp" />
 

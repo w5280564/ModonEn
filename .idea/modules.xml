@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ModonEn.iml" filepath="$PROJECT_DIR$/ModonEn.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/selectorphotolibrary/selectorphotolibrary.iml" filepath="$PROJECT_DIR$/selectorphotolibrary/selectorphotolibrary.iml" />
     </modules>
   </component>
 </project>

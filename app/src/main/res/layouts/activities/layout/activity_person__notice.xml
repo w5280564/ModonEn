@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f3f3"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/return_black" />
+
+        <RelativeLayout
+            android:id="@+id/choice_Rel"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/timechioce_next"
+            android:padding="1dp">
+
+            <TextView
+                android:id="@+id/remind_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/personnotice_choice"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="提醒"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/mes_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/round_rectangle"
+                android:gravity="center"
+                android:text="私信"
+                android:textColor="#4d4d4d"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/noticecontent_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/popupwhite_bg"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/fans_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/fans_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_newfans_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/fans_icon"
+                android:text="新粉丝"
+                android:textColor="#7b7b7b"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/fans_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/fansunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/fans_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/fans_icon"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/nomm_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/nomm_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_nomm_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/nomm_icon"
+                android:text="评论"
+                android:textColor="#7b7b7b"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/nomm_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/nommunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/nomm_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/nomm_icon"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/like_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/like_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_like_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/like_icon"
+                android:text="喜欢"
+                android:textColor="#7b7b7b"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/like_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/likeunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/like_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/like_icon"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/notice_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/notice_iocn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_iocn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/notice_iocn"
+                android:text="通知"
+                android:textColor="#7b7b7b"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/notice_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/noticeunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/notice_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/notice_iocn"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mes_left"
+        android:text="你好你好你好你好你好你好你好你好你好你好你好你好你好你好"
+        android:gravity="center"/>
+
+</LinearLayout>

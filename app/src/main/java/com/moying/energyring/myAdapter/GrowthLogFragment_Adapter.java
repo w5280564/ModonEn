@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
     private EnergyList_Model listModel;
     Context context;
     private int myposition;
+    final int POST_TYPE = 4;
 
     public GrowthLogFragment_Adapter(Context context, List<EnergyList_Model.DataBean> otherList, EnergyList_Model listModel) {
         this.otherList = otherList;
@@ -72,10 +74,9 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             }
         }
 
-
         EnergyList_Model.DataBean oneData = otherList.get(position);
-
         if (oneData.getFilePath() != null){
+            StaticData.ViewScale(holder.content_simple, 710, 440);
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
             holder.content_simple.setImageURI(contentUri);
         }
@@ -86,7 +87,13 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         holder.content_Txt.setText(oneData.getPostContent());
         holder.talk_Txt.setText(oneData.getCommentNum()+"");
         holder.like_Txt.setText(oneData.getLikes()+"");
+
+        if (oneData.getPostType() == POST_TYPE){//4英雄榜
+            holder.hero_Lin.setVisibility(View.VISIBLE);
+        }
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -101,6 +108,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  LinearLayout hero_Lin;
         private  TextView name_Txt,time_Txt,content_Txt,talk_Txt,like_Txt;
         private  ImageView energy_img;
         private  SimpleDraweeView myhead_simple,content_simple;
@@ -109,6 +117,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         public MyViewHolder(View itemView) {
             super(itemView);
             mu_Rel = (RelativeLayout) itemView.findViewById(R.id.mu_Rel);
+            hero_Lin = (LinearLayout) itemView.findViewById(R.id.hero_Lin);
             myhead_simple = (SimpleDraweeView) itemView.findViewById(R.id.myhead_simple);
             content_simple = (SimpleDraweeView) itemView.findViewById(R.id.content_simple);
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
@@ -120,8 +129,8 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
              talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
             StaticData.ViewScale(mu_Rel, 710, 0);
-            StaticData.ViewScale(myhead_simple, 50, 50);
-            StaticData.ViewScale(content_simple, 710, 440);
+            StaticData.ViewScale(myhead_simple, 100, 100);
+
             StaticData.ViewScale(energy_img, 40, 40);
             StaticData.ViewScale(energy_talk, 40, 40);
             StaticData.ViewScale(energy_like, 40, 40);

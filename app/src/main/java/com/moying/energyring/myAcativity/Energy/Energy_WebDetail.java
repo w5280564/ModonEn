@@ -85,6 +85,7 @@ public class Energy_WebDetail extends Activity {
         });
 
         final View view = LayoutInflater.from(Energy_WebDetail.this).inflate(R.layout.base_titlebar, null);
+//        view.setBackgroundColor(Color.parseColor("#ffffff"));
         RelativeLayout.LayoutParams paramrel = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         StaticData.layoutParamsScale(paramrel, 0, 88);
         view.setLayoutParams(paramrel);

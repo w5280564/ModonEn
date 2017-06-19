@@ -30,14 +30,14 @@
                 android:id="@+id/content_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="999"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="14sp" />
              <TextView
                  android:id="@+id/tag_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="999"
+                android:text=""
                 android:textColor="#878787"
                 android:textSize="10sp" />
         </LinearLayout>

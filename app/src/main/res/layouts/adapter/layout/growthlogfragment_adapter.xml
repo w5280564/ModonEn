@@ -46,15 +46,15 @@
                 android:paddingRight="15dp"
                 android:textColor="#6b6b6b"
                 android:textSize="12sp" />
-
         </LinearLayout>
 
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/content_simple"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@id/title_Lin" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_Lin"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/content_Txt"
@@ -89,9 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="摩英英雄榜"
-                android:textColor="#f3fb23"
+                android:textColor="#F3DB23"
                 android:textSize="12sp" />
-
         </LinearLayout>
 
         <View
@@ -104,13 +103,14 @@
             android:layout_marginLeft="10dp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hero_Lin"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:gravity="right|bottom"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
             <ImageView
@@ -141,7 +141,6 @@
                 android:layout_marginLeft="5dp"
                 android:textColor="#aeaeae"
                 android:textSize="9sp" />
-
         </LinearLayout>
 
 

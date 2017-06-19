@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:focusableInTouchMode="true"
+    android:background="@drawable/findbg_gradient"
     android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/person_Txt"
+    <com.moying.energyring.xrecycle.XRecyclerView
+        android:id="@+id/find_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="个人信息"
-        android:textColor="#7f000000"
-        android:textSize="18sp" />
+        android:overScrollMode="never"/>
 
-
-</LinearLayout>
+    <Button
+        android:id="@+id/seek_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/find_seekbg"
+        android:textColor="#5b5b5b"
+        android:text="搜索 用户/成长日志"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textSize="10sp"/>
+</RelativeLayout>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f3f3"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/bg_img"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/pk_addbg" />
+
+
+    <RelativeLayout
+        android:id="@+id/title_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/return_black" />
+
+        <TextView
+            android:id="@+id/return_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/return_Btn"
+            android:text="返回"
+            android:textColor="#909090"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/centent_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="添加项目"
+            android:textColor="#909090"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/add_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/pk_addicon" />
+
+    <RelativeLayout
+        android:id="@+id/project_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_Rel"
+        android:visibility="gone">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/project_simple"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            app:roundAsCircle="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/project_simple"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/count_Edit"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="@null"
+                android:gravity="center"
+                android:lines="1"
+                android:phoneNumber="true"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@id/unit_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="个"
+                android:textColor="#000000"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/mu_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bg_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/timechioce_next"
+        android:text="提交"
+        android:textColor="#f24d4d"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:id="@+id/add_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mu_Btn">
+
+        <com.moying.energyring.waylenBaseView.FlowLayout
+            android:id="@+id/photoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp">
+
+            <ImageButton
+                android:id="@+id/add_photo_Img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_photo"
+                android:scaleType="centerInside" />
+        </com.moying.energyring.waylenBaseView.FlowLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignBottom="@id/add_Rel"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#545454" />
+
+    <RelativeLayout
+        android:id="@+id/energy_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/add_Rel">
+
+        <TextView
+            android:id="@+id/tie_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:text="一键生成能量帖"
+            android:textColor="#545454"
+            android:textSize="13sp" />
+
+        <CheckBox
+            android:id="@+id/add_energy_Img"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tie_Txt"
+            android:background="@drawable/remindcheck_selector"
+            android:button="@null"
+            android:focusable="false" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignBottom="@id/energy_Rel"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#545454" />
+
+    <LinearLayout
+        android:id="@+id/share_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/energy_Rel"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="同步分享到"
+            android:textColor="#545454"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/share_friend"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/share_friend_icon" />
+
+        <ImageView
+            android:id="@+id/share_mom"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/share_wechat_icon" />
+
+        <ImageView
+            android:id="@+id/share_sina"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/share_sina_icon" />
+
+        <ImageView
+            android:id="@+id/share_qq"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/share_qq_icon" />
+
+        <ImageView
+            android:id="@+id/share_qzone"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/share_qzone_icon" />
+    </LinearLayout>
+
+
+</RelativeLayout>

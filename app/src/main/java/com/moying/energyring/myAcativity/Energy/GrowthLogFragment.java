@@ -3,7 +3,6 @@ package com.moying.energyring.myAcativity.Energy;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +13,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAdapter.GrowthLogFragment_Adapter;
 import com.moying.energyring.network.saveFile;
+import com.moying.energyring.waylenBaseView.lazyLoadFragment;
 import com.moying.energyring.xrecycle.XRecyclerView;
 
 import org.xutils.common.Callback;
@@ -30,7 +31,7 @@ import java.util.List;
  * Created by Admin on 2016/4/18.
  * 成长日志
  */
-public class GrowthLogFragment extends Fragment implements XRecyclerView.LoadingListener{
+public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
     private String defaultHello = "default value";
     private String stringtype;
     private String workType;
@@ -51,7 +52,8 @@ public class GrowthLogFragment extends Fragment implements XRecyclerView.Loading
         //bundle可以在每个标签里传送数据
         return newFragment;
     }
-//    @Override
+
+    //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //    }
@@ -64,39 +66,60 @@ public class GrowthLogFragment extends Fragment implements XRecyclerView.Loading
         workType = args != null ? args.getString("workType") : defaultHello;
 
 
-        other_recycle = (XRecyclerView)parentView.findViewById(R.id.other_recycle);
+        other_recycle = (XRecyclerView) parentView.findViewById(R.id.other_recycle);
 //        other_recycle.setLoadingMoreEnabled(false);//底部不加载
         other_recycle.setLoadingListener(this);//添加事件
-        PageIndex = 1;
-        pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl+"?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        StaticData.changeXRecycleHeadGif(other_recycle,R.drawable.gif_bird_icon,750,200);
         return parentView;
     }
+
+    /**
+     * 标志位，标志已经初始化完成
+     */
+    private boolean isPrepared;
+
+    @Override
+    protected void lazyLoad() {
+        if (!isPrepared || !isVisible) {
+            return;
+        }
+        PageIndex = 1;
+        pageSize = 10;
+        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+    }
+
 
 
     @Override
     public void onRefresh() {//刷新
-        PageIndex = 1;
-        pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl+"?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        lazyLoad();
+
+//        PageIndex = 1;
+//        pageSize = 10;
+//        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
     }
 
     @Override
     public void onLoadMore() {//加载更多
         PageIndex = PageIndex + 1;
         pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl+"?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
+        isPrepared = true;
+        lazyLoad();
+//        PageIndex = 1;
+//        pageSize = 10;
+//        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
 //        my_recycle.refresState(2);
 //        tableData(saveFile.BaseUrl+"/Study/Search");
     }
 
-    GrowthLogFragment_Adapter mAdapter;
+       GrowthLogFragment_Adapter mAdapter;
     public void initlist(final Context context) {
         LinearLayoutManager mMangaer = new LinearLayoutManager(context);
         other_recycle.setLayoutManager(mMangaer);
@@ -166,9 +189,6 @@ public class GrowthLogFragment extends Fragment implements XRecyclerView.Loading
             }
         });
     }
-
-
-
 
 
 }

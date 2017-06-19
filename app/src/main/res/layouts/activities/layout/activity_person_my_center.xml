@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f3f3f3"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/mAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="#f3f3f3">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/person_bg_simple"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/user_simple"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                fresco:roundAsCircle="true" />
+
+            <TextView
+                android:id="@+id/userName_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text=""
+                android:textColor="#ffffff"
+                android:layout_below="@id/user_simple"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/gender_img"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_toRightOf="@id/user_simple"
+                android:layout_alignBottom="@id/userName_Txt"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:id="@+id/fans_Lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userName_Txt"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="关注"
+                    android:textColor="#9c9c9c"
+                    android:layout_marginRight="5dp"
+                    android:textSize="10sp" />
+
+
+                <TextView
+                    android:id="@+id/atten_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:lines="1"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="粉丝"
+                    android:textColor="#9c9c9c"
+                    android:layout_marginRight="5dp"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/fans_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/user_simple"
+                android:layout_centerHorizontal="true"
+                android:text="nihao" />
+
+            <Button
+                android:id="@+id/return_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/return_icon"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                app:layout_collapseMode="pin" />
+
+            <LinearLayout
+                android:id="@+id/other_Mes_Lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/intr_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fans_Lin"
+                android:layout_centerHorizontal="true"
+                android:lines="1"
+                android:textColor="#9c9c9c"
+                android:textSize="11sp" />
+
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/ac_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            app:tabPaddingBottom="-1dp"
+            app:tabPaddingEnd="-1dp"
+            app:tabPaddingStart="-1dp"
+            app:tabPaddingTop="-1dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/Slideviewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

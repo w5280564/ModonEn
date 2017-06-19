@@ -24,8 +24,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.moying.energyring.R;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyApplication;
+import com.moying.energyring.xrecycle.XRecyclerView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,7 +52,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 
 public class StaticData {
@@ -82,7 +84,7 @@ public class StaticData {
      * 验证邮箱格式
      *
      * @param email
-     * @return
+     * @return true 是格式不正确
      */
     public static boolean isEmail(String email) {
         String pattern_email = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
@@ -530,7 +532,7 @@ public class StaticData {
     public static String Datatypetwo(String datestr) {
         String datestring = "";
         if (datestr != null) {
-             datestring = datestr.substring(0, 10);
+            datestring = datestr.substring(0, 10);
         }
         return datestring;
     }
@@ -732,7 +734,7 @@ public class StaticData {
 
     //2061-09-01固定格式
     public static String getTodaystyle() {
-      Date currentTime = new Date();
+        Date currentTime = new Date();
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         String dateString = formatter.format(currentTime);
@@ -754,33 +756,9 @@ public class StaticData {
         }
     }
 
-//    public static void setBadge(int countDay, ImageView myview) {
-//        myview.setBackgroundResource(0);
-//        if (countDay >= 30) {
-//            myview.setBackgroundResource(R.drawable.badge_head30);
-//        }
-//        if (countDay >= 50) {
-//            myview.setBackgroundResource(R.drawable.badge_head50);
-//        }
-//        if (countDay >= 100) {
-//            myview.setBackgroundResource(R.drawable.badge_head100);
-//        }
-//        if (countDay >= 150) {
-//            myview.setBackgroundResource(R.drawable.badge_head150);
-//        }
-//        if (countDay >= 200) {
-//            myview.setBackgroundResource(R.drawable.badge_head200);
-//        }
-//        if (countDay >= 250) {
-//            myview.setBackgroundResource(R.drawable.badge_head250);
-//        }
-//        if (countDay >= 300) {
-//            myview.setBackgroundResource(R.drawable.badge_head300);
-//        }
-//    }
-
     /**
      * 固定格式
+     *
      * @param sformat MMdd
      * @return
      */
@@ -815,6 +793,26 @@ public class StaticData {
          */
         maxDay = calendar.getActualMaximum(Calendar.DATE);
         return maxDay;
+    }
+
+    public static void lodingheadBg(SimpleDraweeView simPle) {
+        Uri uri = Uri.parse("res:///" + R.drawable.loading_icon);
+        simPle.setImageURI(uri);
+    }
+
+    public static void PkBg(SimpleDraweeView simPle) {
+        Uri uri = Uri.parse("res:///" + R.drawable.pk_bg);
+        simPle.setImageURI(uri);
+    }
+
+    public static void PersonBg(SimpleDraweeView simPle) {
+        Uri uri = Uri.parse("res:///" + R.drawable.person_bg);
+        simPle.setImageURI(uri);
+    }
+
+    public static void changeXRecycleHeadGif(XRecyclerView myView, int iconId, int width, int height) {
+        Uri uri = Uri.parse("res:// /" + iconId);
+        myView.addGif(uri, width, height);
     }
 
 

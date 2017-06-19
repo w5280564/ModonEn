@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/redio_sim"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:scaleType="fitXY"
+        app:roundedCornerRadius="10dp" />
+
+    <TextView
+        android:id="@+id/banner_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/redio_sim"
+        android:layout_alignRight="@id/redio_sim"
+        android:layout_below="@id/redio_sim"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:lines="2"
+        android:textColor="#ffffff"
+        android:textSize="12sp" />
+
+</RelativeLayout>

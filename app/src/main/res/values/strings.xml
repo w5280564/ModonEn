@@ -22,4 +22,10 @@
     <string name="title_activity_grid">GridActivity</string>
     <string name="title_activity_staggered_grid">StaggeredGridActivity</string>
 
+    <string name="title_1">Cool card</string>
+    <string name="title_2">Ok card</string>
+    <string name="title_3">Bad card</string>
+    <string name="title_4">Ugly card</string>
+    <string name="text_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum.</string>
+
 </resources>

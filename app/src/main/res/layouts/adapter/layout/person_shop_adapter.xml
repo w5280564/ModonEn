@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/shop_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/content_simple"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/name_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/content_simple"
+            android:layout_alignRight="@id/content_simple"
+            android:lines="1"
+            android:textSize="15sp"
+            android:layout_below="@id/content_simple"/>
+
+
+        <TextView
+            android:id="@+id/price_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/content_simple"
+            android:layout_alignRight="@id/content_simple"
+            android:text="200"
+            android:lines="1"
+            android:layout_below="@id/name_Txt"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/fen_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/content_simple"
+            android:layout_alignRight="@id/content_simple"
+            android:lines="1"
+            android:textSize="18sp"
+            android:layout_below="@id/price_Txt"
+            android:textColor="#f14d4c"/>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:gravity="left"
+
+                android:gravity="right"
                 android:paddingRight="15dp"
                 android:textColor="#6b6b6b"
                 android:textSize="12sp" />
@@ -55,36 +56,43 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_below="@id/title_Lin"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp" />
 
-        <RelativeLayout
+
+        <TextView
+            android:id="@+id/content_Txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_Lin"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/content_simple"
-            android:layout_marginRight="10dp">
+            android:lines="3"
+            android:textColor="#676767"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/content_Txt"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/content_simple"
+            android:orientation="vertical">
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:lines="3"
-                android:textColor="#676767"
-                android:textSize="12sp" />
-
+                android:layout_height="5dp"
+                android:background="@drawable/dash_line"
+                android:layerType="software" />
 
             <LinearLayout
                 android:id="@+id/talk_Lin"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="right|bottom"
+                android:layout_gravity="right"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -116,14 +124,8 @@
                     android:textColor="#aeaeae"
                     android:textSize="9sp" />
             </LinearLayout>
+        </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_above="@id/talk_Lin"
-                android:background="@drawable/dash_line"
-                android:layerType="software" />
-        </RelativeLayout>
 
     </RelativeLayout>
 
