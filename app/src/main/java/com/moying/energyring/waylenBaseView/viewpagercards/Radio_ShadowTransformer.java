@@ -16,7 +16,7 @@ import com.moying.energyring.myAcativity.Find.radioInfo.radio_Model;
 
 public class Radio_ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPager.PageTransformer {
 
-    private  myMediaplayer myplayer;
+    private myMediaplayer myplayer;
     private ViewPager mViewPager;
     private Radio_CardAdapter mAdapter;
     private float mLastOffset;
@@ -26,7 +26,7 @@ public class Radio_ShadowTransformer implements ViewPager.OnPageChangeListener, 
     TextView radio_Name_Txt;
     private FindRadioListActivity context;
 
-    public Radio_ShadowTransformer(FindRadioListActivity context,RadioList_Model radioModel, ViewPager viewPager, Radio_CardAdapter adapter, SimpleDraweeView radio_bg, TextView radio_Name_Txt) {
+    public Radio_ShadowTransformer(FindRadioListActivity context, RadioList_Model radioModel, ViewPager viewPager, Radio_CardAdapter adapter, SimpleDraweeView radio_bg, TextView radio_Name_Txt) {
         mViewPager = viewPager;
         viewPager.addOnPageChangeListener(this);
         mAdapter = adapter;
@@ -64,6 +64,7 @@ public class Radio_ShadowTransformer implements ViewPager.OnPageChangeListener, 
     }
 
     int position;
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         int realCurrentPosition;
@@ -128,12 +129,17 @@ public class Radio_ShadowTransformer implements ViewPager.OnPageChangeListener, 
             radio_bg.setImageURI(uri);
         }
         radio_Name_Txt.setText(oneData.getRadioName());
-       if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {
-            isplayRadio(position);
-           AddOneLocaInfo(oneData, 2);//存储数据
-       } else {
-           AddOneLocaInfo(oneData, 0);
-       }
+//        if (myplayer.mediaPlayer == null){
+//            context.radioPlayUrl(position);
+//        }else
+            if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {//对象不是空 并且在播放
+//            isplayRadio(position);
+//           AddOneLocaInfo(oneData, 2);//存储数据
+            context.radioPlaySlide(position);
+        } else {
+            context.radioStop(oneData);
+//           AddOneLocaInfo(oneData, 0);
+        }
 //        saveFile.saveShareData("englishVideo","0",context);
 //        context.startDownTimer();
     }
@@ -145,7 +151,7 @@ public class Radio_ShadowTransformer implements ViewPager.OnPageChangeListener, 
     public void isplayRadio(int pos) { //正在播放需要停止后重新加载
         RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
         myplayer.stop();
-        myplayer.playUrl(oneData.getRadioUrl(),context.radio_list_play);
+        myplayer.playUrl(oneData.getRadioUrl(), context.radio_list_play);
     }
 
     public void AddOneLocaInfo(RadioList_Model.DataBean onedata, int state) {

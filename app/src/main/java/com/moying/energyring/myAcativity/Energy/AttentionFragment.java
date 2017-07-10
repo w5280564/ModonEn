@@ -19,6 +19,7 @@ import com.moying.energyring.myAdapter.AttenttionFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
 import com.moying.energyring.xrecycle.XRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -32,7 +33,7 @@ import java.util.List;
  * Created by Admin on 2016/4/18.
  * 我的关注
  */
-public class AttentionFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener{
+public class AttentionFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
     private String defaultHello = "default value";
     private String stringtype;
     private String workType;
@@ -53,7 +54,8 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
         //bundle可以在每个标签里传送数据
         return newFragment;
     }
-//    @Override
+
+    //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //    }
@@ -66,16 +68,29 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
         workType = args != null ? args.getString("workType") : defaultHello;
 
 
-        other_recycle = (XRecyclerView)parentView.findViewById(R.id.other_recycle);
+        other_recycle = (XRecyclerView) parentView.findViewById(R.id.other_recycle);
 //        other_recycle.setLoadingMoreEnabled(false);//底部不加载
         other_recycle.setLoadingListener(this);//添加事件
-        StaticData.changeXRecycleHeadGif(other_recycle,R.drawable.gif_bird_icon,750,200);
+        other_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
+        StaticData.changeXRecycleHeadGif(other_recycle, R.drawable.gif_bird_icon, 750, 200);
 
         isPrepared = true;
         lazyLoad();
 
         return parentView;
     }
+
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("AttentionFragment"); //统计页面，"AttentionFragment"为页面名称，可自定义
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("AttentionFragment");
+    }
+
 
     /**
      * 标志位，标志已经初始化完成
@@ -89,9 +104,8 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
         }
         PageIndex = 1;
         pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl+"?Type=5&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=5&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
     }
-
 
 
     @Override
@@ -107,18 +121,19 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
     public void onLoadMore() {//加载更多
         PageIndex = PageIndex + 1;
         pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl+"?Type=5&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=5&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        my_recycle.refresState(2);
-//        tableData(saveFile.BaseUrl+"/Study/Search");
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        my_recycle.refresState(2);
+////        tableData(saveFile.BaseUrl+"/Study/Search");
+//    }
 
     AttenttionFragment_Adapter mAdapter;
+
     public void initlist(final Context context) {
         LinearLayoutManager mMangaer = new LinearLayoutManager(context);
         other_recycle.setLayoutManager(mMangaer);
@@ -129,9 +144,14 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
         mAdapter.setOnItemClickLitener(new AttenttionFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
-//                startActivity(intent);
+                String content = baseModel.get(position).getPostContent();
+                String postId = baseModel.get(position).getPostID() + "";
+                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
+                Intent intent = new Intent(context, Energy_WebDetail.class);
+                intent.putExtra("content", content);
+                intent.putExtra("postId", postId);
+                intent.putExtra("url", url);
+                startActivity(intent);
             }
 
             @Override
@@ -161,13 +181,13 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
                     }
                     listModel = new Gson().fromJson(resultString, EnergyList_Model.class);
                     if (listModel.isIsSuccess() && !listModel.getData().equals("[]")) {
-                        baseModel.addAll(listModel.getData());
                         if (PageIndex == 1) {
+                            baseModel.addAll(listModel.getData());
                             other_recycle.refreshComplete();
                             initlist(getActivity());
                         } else {
                             other_recycle.loadMoreComplete();
-                            mAdapter.addMoreData(baseModel);
+                            mAdapter.addMoreData(listModel);
                         }
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -196,9 +216,6 @@ public class AttentionFragment extends lazyLoadFragment implements XRecyclerView
             }
         });
     }
-
-
-
 
 
 }

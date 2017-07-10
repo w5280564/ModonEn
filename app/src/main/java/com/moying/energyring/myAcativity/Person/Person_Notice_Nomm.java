@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.Notice_Nomm_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAdapter.Person_NoticeNomm_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -113,7 +114,14 @@ public class Person_Notice_Nomm extends Activity implements XRecyclerView.Loadin
         mAdapter.setOnItemClickLitener(new Person_NoticeNomm_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                String content = ListModel.get(position).getPostContent();
+                String postId = ListModel.get(position).getPostID() +"";
+                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + ListModel.get(position).getPostID();
+                Intent intent = new Intent(context, Energy_WebDetail.class);
+                intent.putExtra("content", content);
+                intent.putExtra("postId", postId);
+                intent.putExtra("url", url);
+                startActivity(intent);
             }
 
             @Override

@@ -46,9 +46,9 @@ public class Person_Notice_Fans extends Activity implements XRecyclerView.Loadin
         All_XRecy = (XRecyclerView) findViewById(R.id.All_XRecy);
 //        All_XRecy.setBackgroundResource(R.drawable.popupwhite_bg);
         All_XRecy.setLoadingListener(this);//添加事件
+        All_XRecy.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
 
         initData();
-
 
     }
 
@@ -76,12 +76,14 @@ public class Person_Notice_Fans extends Activity implements XRecyclerView.Loadin
             finish();
         }
     }
-
+    String UserID;
     private void initData() {
+        Intent intent = getIntent();
+        UserID = intent.getStringExtra("UserID");
         PageIndex = 1;
         pageSize = 10;
 //        seekData(Person_Notice_Nomm.this,saveFile.BaseUrl + saveFile.seekUser_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize + "&SearchKey=" + "S");
-        seekData(Person_Notice_Fans.this, saveFile.BaseUrl + saveFile.Notice_Attention_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        fansData(Person_Notice_Fans.this, saveFile.BaseUrl + saveFile.Notice_Attention_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize+"&ToUserID="+UserID+"&Type=1");
     }
 
     @Override
@@ -94,7 +96,7 @@ public class Person_Notice_Fans extends Activity implements XRecyclerView.Loadin
         PageIndex += 1;
         pageSize = 10;
 //        ListData(saveFile.BaseUrl + saveFile. + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
-        seekData(Person_Notice_Fans.this, saveFile.BaseUrl + saveFile.Notice_Attention_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        fansData(Person_Notice_Fans.this, saveFile.BaseUrl + saveFile.Notice_Attention_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize+"&ToUserID="+UserID+"&Type=1");
     }
 
     Person_NoticeFans_Adapter mAdapter;
@@ -126,7 +128,7 @@ public class Person_Notice_Fans extends Activity implements XRecyclerView.Loadin
     private List<Recommend_Model.DataBean> seekListModel;
     Recommend_Model seekModel;
 
-    public void seekData(final Context context, String baseUrl) {
+    public void fansData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", this) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", this));

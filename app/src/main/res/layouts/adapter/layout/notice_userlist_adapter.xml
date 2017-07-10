@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/my_Head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            fresco:roundAsCircle="true"
+            />
+
+
+        <TextView
+            android:id="@+id/unrend_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/calendar_item_red"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            android:visibility="invisible" />
+
+        <RelativeLayout
+            android:id="@+id/content_Rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/unrend_Txt"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/my_Head"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/name_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="名字"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/content_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_Txt"
+                android:lines="1"
+                android:text="内容"
+                android:textColor="#4d4d4d"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/time_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:lines="1"
+                android:text="时间"
+                android:textColor="#7d7d7d"
+                android:textSize="10sp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

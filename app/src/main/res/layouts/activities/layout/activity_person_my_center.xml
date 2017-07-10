@@ -12,20 +12,21 @@
         android:id="@+id/mAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:background="#f3f3f3">
+        android:background="#f3f3f3"
+        android:fitsSystemWindows="true">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_scrollFlags="scroll|enterAlways">
 
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/person_bg_simple"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="match_parent"/>
 
 
             <com.facebook.drawee.view.SimpleDraweeView
@@ -33,29 +34,31 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
-                android:scaleType="fitXY"
-                fresco:roundAsCircle="true" />
+                android:scaleType="centerCrop"
+                fresco:roundAsCircle="true"
+
+                />
 
             <TextView
                 android:id="@+id/userName_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/user_simple"
                 android:layout_centerHorizontal="true"
                 android:text=""
                 android:textColor="#ffffff"
-                android:layout_below="@id/user_simple"
                 android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/gender_img"
                 android:layout_width="6dp"
                 android:layout_height="6dp"
-                android:layout_toRightOf="@id/user_simple"
                 android:layout_alignBottom="@id/userName_Txt"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/user_simple" />
 
             <LinearLayout
-                android:id="@+id/fans_Lin"
+                android:id="@+id/fen_Lin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/userName_Txt"
@@ -63,43 +66,57 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/atten_Lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="关注"
-                    android:textColor="#9c9c9c"
-                    android:layout_marginRight="5dp"
-                    android:textSize="10sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:lines="1"
+                        android:text="关注"
+                        android:textColor="#9c9c9c"
+                        android:textSize="10sp" />
 
 
-                <TextView
-                    android:id="@+id/atten_Txt"
+                    <TextView
+                        android:id="@+id/atten_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:lines="1"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fans_Lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:lines="1"
+                        android:text="粉丝"
+                        android:textColor="#9c9c9c"
+                        android:textSize="10sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:text="粉丝"
-                    android:textColor="#9c9c9c"
-                    android:layout_marginRight="5dp"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/fans_Txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lines="1"
-                    android:textColor="#ffffff"
-                    android:textSize="10sp" />
-
+                    <TextView
+                        android:id="@+id/fans_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -113,17 +130,35 @@
                 android:id="@+id/return_Btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/return_icon"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/return_icon"
                 app:layout_collapseMode="pin" />
+
+
 
             <LinearLayout
                 android:id="@+id/other_Mes_Lin"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/intr_Txt"
                 android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/person_mes_Img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/person_mes_icon" />
+
+
+                <TextView
+                    android:id="@+id/person_focus_Img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/person_focus_icon" />
+
 
             </LinearLayout>
 
@@ -131,12 +166,11 @@
                 android:id="@+id/intr_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fans_Lin"
+                android:layout_below="@id/fen_Lin"
                 android:layout_centerHorizontal="true"
                 android:lines="1"
                 android:textColor="#9c9c9c"
                 android:textSize="11sp" />
-
 
         </RelativeLayout>
 
@@ -152,7 +186,6 @@
             android:id="@+id/ac_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
             app:tabPaddingBottom="-1dp"
             app:tabPaddingEnd="-1dp"
             app:tabPaddingStart="-1dp"

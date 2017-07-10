@@ -25,6 +25,8 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -78,6 +80,7 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
             holder.my_Rel.setBackgroundResource(R.drawable.ban_round_top);
         } else if (position == otherList.size() - 1) {
             holder.my_Rel.setBackgroundResource(R.drawable.ban_round_below);
+            holder.line.setVisibility(View.GONE);
         }
 
         final DayPkList_Model.DataBean oneData = otherList.get(position);
@@ -89,18 +92,20 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
         } else {
             StaticData.lodingheadBg(holder.head_simple);
         }
-        holder.name_Txt.setText(oneData.getNickName() + "");
+        if (oneData.getNickName() != null) {
+            holder.name_Txt.setText(oneData.getNickName() + "");
+        }
 
 //        if (oneData.getLimit() >= oneData.getReportNum()) {
 //            holder.all_Txt.setText(oneData.getReportNum() + "+");
 //        } else {
 //            holder.all_Txt.setText(oneData.getReportNum() + "个");
 //        }
-
-        if (oneData.getReportNum() >= oneData.getLimit() ){
-            holder.all_Txt.setText(oneData.getLimit() + "+");
-        }else{
-            holder.all_Txt.setText(oneData.getReportNum() + "个");
+        NumberFormat nf = new DecimalFormat("#.#");//# 0不显示
+        if (oneData.getReportNum() >= oneData.getLimit()) {
+            holder.all_Txt.setText(nf.format(oneData.getLimit()) + "+");
+        } else {
+            holder.all_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
         }
 
         holder.zan_Txt.setText(oneData.getLikes() + "");
@@ -114,7 +119,7 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
             @Override
             public void onClick(View view) {
                 int ReportID = oneData.getReportID();
-                zanData(context, saveFile.BaseUrl + saveFile.like_Url + "?ReportID=" + ReportID,position);
+                zanData(context, saveFile.BaseUrl + saveFile.like_Url + "?ReportID=" + ReportID, position);
             }
         });
 
@@ -133,6 +138,7 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  View line;
         private ImageView zan_img;
         private SimpleDraweeView head_simple;
         private TextView rank_Txt, name_Txt, all_Txt, zan_Txt;
@@ -147,6 +153,7 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
             all_Txt = (TextView) itemView.findViewById(R.id.all_Txt);
             zan_Txt = (TextView) itemView.findViewById(R.id.zan_Txt);
             zan_img = (ImageView) itemView.findViewById(R.id.zan_img);
+            line = (View) itemView.findViewById(R.id.line);
             StaticData.ViewScale(my_Rel, 710, 120);
             StaticData.ViewScale(head_simple, 80, 80);
             StaticData.ViewScale(zan_img, 40, 40);
@@ -177,18 +184,20 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
                     BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                     if (model.isIsSuccess()) {
                         DayPkList_Model.DataBean oneData = otherList.get(pos);
-                        if (oneData.isIs_Like()){
+                        if (oneData.isIs_Like()) {
                             oneData.setIs_Like(false);
                             if (oneData.getLikes() == 0) {
                                 oneData.setLikes(0);
                             } else {
                                 oneData.setLikes(oneData.getLikes() - 1);
                             }
-                        }else{
+                        } else {
                             oneData.setIs_Like(true);
                             oneData.setLikes(oneData.getLikes() + 1);
                         }
-                        notifyDataSetChanged();
+//                        notifyDataSetChanged();
+                        notifyItemChanged(pos + 2);//刷新一个item +2有一个刷新头部 跟头部个人资料
+
 
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -204,7 +213,7 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
                     Intent intent = new Intent(context, LoginRegister.class);
-                   context.startActivity(intent);
+                    context.startActivity(intent);
                 }
             }
 
@@ -217,7 +226,6 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
             }
         });
     }
-
 
 
 }

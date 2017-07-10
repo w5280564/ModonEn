@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.Notice_NoticeList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAdapter.Person_NoticeList_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -103,9 +102,9 @@ public class Person_Notice_NoticeList extends Activity implements XRecyclerView.
         mAdapter.setOnItemClickLitener(new Person_NoticeList_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(context, Energy_WebDetail.class);
+//                Intent intent = new Intent(context, Energy_WebDetail.class);
 //                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
-                startActivity(intent);
+//                startActivity(intent);
             }
 
             @Override

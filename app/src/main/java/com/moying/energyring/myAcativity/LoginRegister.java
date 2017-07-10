@@ -38,6 +38,7 @@ import org.xutils.x;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -145,14 +146,6 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
 //            UrlVO.saveShareData("stupthree","2",LoginRegister.this);
             LoginType = 1;
             //QQ登录配置
-//            <QQ
-//                    Id="7"
-//            SortId="7"
-//            AppId="1104987324"
-//            AppKey="Icfd6jAfqflPmMuL"
-//            ShareByAppClient="true"
-//            Enable="true" />
-
 
 //            HashMap<String,Object> map = new HashMap<String,Object>();
 //            map.put("Id","7");
@@ -265,7 +258,7 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
 
 
     //普通用户与第三方登录
-    public void LoginMethod(String baseUrl,int loginType) {
+    public void LoginMethod(final String baseUrl, int loginType) {
         JSONObject obj = new JSONObject();
         try {
             if (loginType == 0){
@@ -285,23 +278,32 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
         RequestParams params = new RequestParams(baseUrl);
         params.setAsJsonContent(true);
         params.setBodyContent(obj.toString());
-        Log.e("第三方数据",obj.toString());
+//        Log.e("第三方数据",obj.toString());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {
                 if (resultString != null) {
-                    Log.e("第三方数据",resultString);
+//                    Log.e("第三方数据",resultString);
                     Login_Model baseModel = new Gson().fromJson(resultString, Login_Model.class);
                     if (baseModel.isIsSuccess() && !baseModel.getData().equals("[]")) {
 //                        initlist(Leran_Goal.this);
 //                        setResult(RESULT_OK);
+
+                        String userId = baseModel.getData().getUserID()+"";
                         saveFile.saveShareData("islogin", "true", LoginRegister.this);
                         saveFile.saveShareData("role", baseModel.getData().getRole() + "", LoginRegister.this);//管理员
+                        saveFile.saveShareData("userId",   userId, LoginRegister.this);
+                        saveFile.saveShareData("InviteCode",baseModel.getData().getInviteCode(),LoginRegister.this);
+                        saveFile.saveShareData("NickName",baseModel.getData().getNickName(),LoginRegister.this);
 //                        finish();
                         Intent intent = new Intent(LoginRegister.this,MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         mam.outOneActivity(LoginRegister.this);
+
+                        saveFile.saveShareData("ispush", "true", LoginRegister.this);
+                        JPushInterface.resumePush(LoginRegister.this);
+                        JPushInterface.setAlias(LoginRegister.this,"ET_" + userId,null);
 
                     } else {
                         Toast.makeText(LoginRegister.this, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -328,6 +330,7 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
                 List cookies = dbCookie.getCookies();
                 if (cookies.size() != 0) {
                     saveFile.saveShareData("JSESSIONID", cookies.get(cookies.size() - 1).toString(), LoginRegister.this);
+                    saveFile.saveShareData("cookieDomain",dbCookie.getCookies().get(cookies.size() - 1).getDomain(),LoginRegister.this);
                 }
             }
         });

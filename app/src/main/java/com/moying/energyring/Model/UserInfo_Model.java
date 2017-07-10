@@ -108,6 +108,16 @@ public class UserInfo_Model implements Parcelable {
         private int Code;
         private int Attention;
         private int Attention_Me;
+        private boolean Is_Attention;
+
+        public boolean is_Attention() {
+            return Is_Attention;
+        }
+
+        public void setIs_Attention(boolean is_Attention) {
+            Is_Attention = is_Attention;
+        }
+
 
         public int getUserID() {
             return UserID;

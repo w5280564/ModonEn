@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/time_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mes_time_bg"
+        android:text="时间"
+        android:textColor="#b1b1b1"
+        android:textSize="10sp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/mesleft_Rel"
+        android:layout_width="match_parent"
+        android:layout_below="@id/time_Txt"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/mesleft_simple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            fresco:roundAsCircle="true"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/mes_left_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mesleft_simple"
+            android:background="@drawable/mes_left" />
+
+        <TextView
+            android:id="@+id/mesleft_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/mes_left_img"
+            android:background="@drawable/mes_left_bg"
+            android:layout_marginRight="10dp"
+            android:padding="15dp"
+            android:text="温度"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/mesright_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_Txt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/mesright_simple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            fresco:roundAsCircle="true"
+            />
+
+        <ImageView
+            android:id="@+id/mes_right_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/mesright_simple"
+            android:background="@drawable/mes_right" />
+
+        <TextView
+            android:id="@+id/mesright_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/mes_right_img"
+            android:background="@drawable/mes_right_bg"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:text="温度"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

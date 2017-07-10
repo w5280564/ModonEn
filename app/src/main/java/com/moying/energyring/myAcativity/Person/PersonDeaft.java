@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.basePopup.popupThree;
 import com.moying.energyring.database.ChildInfo;
 import com.moying.energyring.database.Deaft_Adapter;
 import com.moying.energyring.myAcativity.PostingActivity;
@@ -46,7 +47,7 @@ public class PersonDeaft extends Activity {
         initDb();
     }
 
-    private void initTitle(){
+    private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
         title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -63,6 +64,7 @@ public class PersonDeaft extends Activity {
         return_Btn.setOnClickListener(new return_Btn());
 //        right_Btn.setOnClickListener(new right_Btn());
     }
+
     public class return_Btn implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -95,18 +97,21 @@ public class PersonDeaft extends Activity {
         mAdapter.setOnItemClickLitener(new Deaft_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent  = new Intent(PersonDeaft.this,PostingActivity.class);
-                intent.putExtra("dbId",myArr.get(position-1).getId()+"");
+                Intent intent = new Intent(PersonDeaft.this, PostingActivity.class);
+                intent.putExtra("dbId", myArr.get(position - 1).getId() + "");
                 startActivity(intent);
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
 //                new remove_Popup(PersonDeaft.this,my_recycle,position);
+                showPopup(position);
             }
         });
     }
+
     protected DbManager db;
+
     protected void initDb() {
         //本地数据的初始化
         DbManager.DaoConfig daoConfig = new DbManager.DaoConfig()
@@ -154,6 +159,17 @@ public class PersonDeaft extends Activity {
         }
     }
 
+    public void showPopup(final int position) {
+        final popupThree removePopup = new popupThree(this, my_recycle, "草稿箱", "删除草稿");
+        Button sure_btn = (Button) removePopup.getContentView().findViewById(R.id.sure_btn);
+        sure_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbDelete(position - 1);
+                removePopup.dismiss();
+            }
+        });
+    }
 
 //    public class remove_Popup extends PopupWindow {
 //        public remove_Popup(Context mContext, View parent, final int position) {
@@ -183,7 +199,6 @@ public class PersonDeaft extends Activity {
 //            });
 //        }
 //    }
-
 
 
 }

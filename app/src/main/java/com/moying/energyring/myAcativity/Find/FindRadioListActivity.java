@@ -29,6 +29,7 @@ import com.moying.energyring.waylenBaseView.MySeekBar;
 import com.moying.energyring.waylenBaseView.viewpagercards.Radio_CardItem;
 import com.moying.energyring.waylenBaseView.viewpagercards.Radio_CardPagerAdapter;
 import com.moying.energyring.waylenBaseView.viewpagercards.Radio_ShadowTransformer;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -58,8 +59,20 @@ public class FindRadioListActivity extends AppCompatActivity {
         setTheme(R.style.AppThemeAppCompat);
         setContentView(R.layout.activity_find_radio_list);
         initView();
+
         initData();
 
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("FindRadioListActivity"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);          //统计时长
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("FindRadioListActivity"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
     }
 
     private void initView() {
@@ -112,59 +125,107 @@ public class FindRadioListActivity extends AppCompatActivity {
 
     private void initData() {
 //        RadioList_Model radioModel = (RadioList_Model) getIntent() .getSerializableExtra("radioList");
-        int PageIndex = 1;
-        int pageSize = 20;
-        RadioData(saveFile.BaseUrl + saveFile.RadioList_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
-    }
-
-    LocalRadioInfo radioInfo;
-
-    private void initRadioData() {
         myplayer = myMediaplayer.getInstance();
-        radioInfo = new LocalRadioInfo(this);
-
-
         String stopCount = saveFile.getShareData("stopCount", this);//定时播放关闭时间
         if (stopCount.equals("false") || stopCount.equals("关闭")) {
-            countName_Txt.setText("收听时长");
+            //没有闹钟
+            Intent intent = getIntent();
+            radioModel = intent.getParcelableExtra("radioList");
+            String nowRadioName = intent.getStringExtra("nowRadioName");
 
-            if (!radioInfo.getUserInfo().getRadioName().equals("false")) {
-                if (radioInfo.getUserInfo().getRadioisPlay() == 2) {
-                    //正在播放
-                    myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_list_play);
-                    startUpTimer();//启动计时器
-                    radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
-                } else {
-                    radio_list_play.setBackgroundResource(R.drawable.radio_list_play);
-                }
-                int idex = radioModel.getData().size();
-                String locaName = radioInfo.getUserInfo().getRadioName();
-                for (int i = 0; i < idex; i++) {
-                    String radioName = radioModel.getData().get(i).getRadioName();
-                    if (locaName.equals(radioName)) {
-                        viewPager.setCurrentItem(i, true);
+            initList();
+            radioInit(nowRadioName);
 
-                        break;
-                    }
-                }
-            }
         } else {
 
-            int idex = radioModel.getData().size();
-            String locaName = saveFile.getShareData("englishVideo", this);
-            for (int i = 0; i < idex; i++) {
-                String radioName = radioModel.getData().get(i).getRadioName();
-                if (locaName.equals(radioName)) {
-                    viewPager.setCurrentItem(i, true);
-                    myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_list_play);
-                    break;
-                }
-            }
-            startDownTimer();//启动倒计时
+            int PageIndex = 1;
+            int pageSize = 20;
+            RadioData(saveFile.BaseUrl + saveFile.RadioList_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
         }
 
     }
 
+    private void radioInit(String nowRadioName) {
+        int idex = radioModel.getData().size();
+        for (int i = 0; i < idex; i++) {
+            RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+            String radioName = oneData.getRadioName();
+            if (radioName.equals(nowRadioName)) {
+
+                if (oneData.getIsPlay()) {
+                    radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
+                    oneData.setIsPlay(true);
+                    myplayer.playUrl(oneData.getRadioUrl(), radio_list_play);
+                }
+                viewPager.setCurrentItem(i, true);
+                break;
+            }
+
+
+        }
+    }
+
+    //没有闹钟 倒计时时间为0 启动计时器
+    public void sendNoColock(boolean iscolock){
+        startUpTimer();
+    }
+
+    //没有闹钟 倒计时时间为0 计时器 继续计时
+    public void sendNoColockCarryon(boolean iscolock){
+        initAddStatus((int) uptimer_couting);
+        timerStatus = PREPARE;
+        startTimer();
+    }
+
+
+    LocalRadioInfo radioInfo;
+
+    private void initRadioData() {
+
+        radioInfo = new LocalRadioInfo(this);
+
+
+//        if (stopCount.equals("false") || stopCount.equals("关闭")) {
+//            countName_Txt.setText("收听时长");
+//
+//            if (!radioInfo.getUserInfo().getRadioName().equals("false")) {
+//                if (radioInfo.getUserInfo().getRadioisPlay() == 2) {
+//                    //正在播放
+//                    myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_list_play);
+//                    startUpTimer();//启动计时器
+//                    radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
+//                } else {
+//                    radio_list_play.setBackgroundResource(R.drawable.radio_list_play);
+//                }
+//                int idex = radioModel.getData().size();
+//                String locaName = radioInfo.getUserInfo().getRadioName();
+//                for (int i = 0; i < idex; i++) {
+//                    String radioName = radioModel.getData().get(i).getRadioName();
+//                    if (locaName.equals(radioName)) {
+//                        viewPager.setCurrentItem(i, true);
+//
+//                        break;
+//                    }
+//                }
+//            }
+//        } else {
+//
+//            int idex = radioModel.getData().size();
+//            String locaName = saveFile.getShareData("englishVideo", this);
+//            for (int i = 0; i < idex; i++) {
+//                String radioName = radioModel.getData().get(i).getRadioName();
+//                if (locaName.equals(radioName)) {
+//                    viewPager.setCurrentItem(i, true);
+//                    myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_list_play);
+//                    break;
+//                }
+//            }
+//            startDownTimer();//启动倒计时
+//        }
+
+    }
+
+    //计时器开始
     private void startUpTimer() {
         initAddStatus(0);
         timerStatus = PREPARE;
@@ -172,8 +233,9 @@ public class FindRadioListActivity extends AppCompatActivity {
         timerStatus = START;
     }
 
+    //倒计时开始
     public void startDownTimer() {
-        initTimerStatus();//倒计时开始
+        initTimerStatus();
         timerStatus = PREPARE;
         timer_couting = Long.parseLong(saveFile.getShareData("stopCount", FindRadioListActivity.this));
         radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
@@ -186,8 +248,22 @@ public class FindRadioListActivity extends AppCompatActivity {
     private class find_arrow_img implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            finish();
+            finshThisActivity();
         }
+    }
+
+    private void finshThisActivity() {
+        Intent intent = new Intent();
+        intent.putExtra("radioList", radioModel);
+        intent.putExtra("nowRadioName", radioModel.getData().get(viewPager.getCurrentItem()).getRadioName());
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finshThisActivity();//先setResult，然后自己来调用finish
+        super.onBackPressed();
     }
 
     //打開電台列表
@@ -257,75 +333,125 @@ public class FindRadioListActivity extends AppCompatActivity {
     private boolean isUpfristTimer = false;
     private boolean downfristTimer = false;
 
-
     private class radio_list_play implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             int pos = viewPager.getCurrentItem();
-            RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
-
-//            if (myplayer.mediaPlayer == null)//添加是空判断 空第一次播放 监听mediaplay事件加载完成 timer开始加载
-
-            if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {
-
-                if (oneData.getRadioName().equals(saveFile.getShareData("englishVideo", FindRadioListActivity.this))) {//定时播放的电台暂停
-                    stopSendTimerTask(); //暂停播放
-                    timerStatus = PREPARE;
-                    mHandler.sendEmptyMessage(2);
-                    saveFile.saveShareData("stopCount", timer_couting + "", FindRadioListActivity.this);
-                } else {
-                    stopSendTimerTask(); //暂停播放
-                    timerStatus = PREPARE;
-                    mHandler.sendEmptyMessage(1);
-
-//                    initAddStatus(0);
-//                    timerStatus = PREPARE;
-//                    startTimer();
-                }
-
-
-                AddOneLocaInfo(oneData, 0);//存储数据
-                radio_list_play.setBackgroundResource(R.drawable.radio_list_play);
+            if (myplayer.mediaPlayer == null) {
+                radioPlayUrl(pos);
+            } else if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) { //正在播放
+                radioPauseset(pos);
                 myplayer.pause();
             } else {
-                AddOneLocaInfo(oneData, 2);//存储数据
-                radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
-                myplayer.playUrl(oneData.getRadioUrl(),radio_list_play);
-
-                if (oneData.getRadioName().equals(saveFile.getShareData("englishVideo", FindRadioListActivity.this))) {//定时播放的电台暂停
-                    String stopCount = saveFile.getShareData("stopCount", FindRadioListActivity.this);//定时播放关闭时间
-                    if (stopCount.equals("false") || stopCount.equals("关闭")) {
-
-                    } else {
-                        startDownTimer();
-                    }
-                } else {
-
-//                    isUpfristTimer =! isUpfristTimer;
-//                    if (isUpfristTimer){
-                    initAddStatus((int) uptimer_couting);
-                    timerStatus = PREPARE;
-                    startTimer();
-
-//                    myplayer.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//                        @Override
-//                        public void onPrepared(MediaPlayer mediaPlayer) {
-//                            mediaPlayer.start();
-//                            radio_list_play.setEnabled(true);
-//
-//                        }
-//                    });
-
-
-
-//                    }
-
-
-                }
-
+                radioPlayNew(pos);
             }
         }
     }
+
+    //对象是空 初始播放
+    public void radioPlayUrl(int pos) {
+        radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
+//        startUpTimer();//启动计时器
+        sendNoColock(false);
+        RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+        oneData.setIsPlay(true);
+        myplayer.playUrl(oneData.getRadioUrl(), radio_list_play);
+    }
+
+    public void radioPlayNew(int pos) {//暂停后点击播放
+        radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
+//        startUpTimer();//启动计时器
+        sendNoColockCarryon(false);
+        RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+        oneData.setIsPlay(true);
+        myplayer.playUrl(oneData.getRadioUrl(), radio_list_play);
+    }
+
+    public void radioPauseset(int pos) {
+        radio_list_play.setBackgroundResource(R.drawable.radio_list_play);
+        RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+        oneData.setIsPlay(false);
+    }
+
+    public void radioPlaySlide(int pos) { //滑动正在播放重新加载
+        radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
+//        startUpTimer();//启动计时器
+        sendNoColockCarryon(false);
+        RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+        oneData.setIsPlay(true);
+        myplayer.stop();
+        myplayer.playUrl(oneData.getRadioUrl(), radio_list_play);
+    }
+
+
+
+
+//    private class radio_list_play implements View.OnClickListener {
+//        @Override
+//        public void onClick(View view) {
+//            int pos = viewPager.getCurrentItem();
+//            RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+//
+////            if (myplayer.mediaPlayer == null)//添加是空判断 空第一次播放 监听mediaplay事件加载完成 timer开始加载
+//            if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {
+//
+//                if (oneData.getRadioName().equals(saveFile.getShareData("englishVideo", FindRadioListActivity.this))) {//定时播放的电台暂停
+//                    stopSendTimerTask(); //暂停播放
+//                    timerStatus = PREPARE;
+//                    mHandler.sendEmptyMessage(2);
+//                    saveFile.saveShareData("stopCount", timer_couting + "", FindRadioListActivity.this);
+//                } else {
+//                    stopSendTimerTask(); //暂停播放
+//                    timerStatus = PREPARE;
+//                    mHandler.sendEmptyMessage(1);
+//
+////                    initAddStatus(0);
+////                    timerStatus = PREPARE;
+////                    startTimer();
+//                }
+//
+//
+//                AddOneLocaInfo(oneData, 0);//存储数据
+//                radio_list_play.setBackgroundResource(R.drawable.radio_list_play);
+//                myplayer.pause();
+//            } else {
+//                AddOneLocaInfo(oneData, 2);//存储数据
+//                radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
+//                myplayer.playUrl(oneData.getRadioUrl(), radio_list_play);
+//
+//                if (oneData.getRadioName().equals(saveFile.getShareData("englishVideo", FindRadioListActivity.this))) {//定时播放的电台暂停
+//                    String stopCount = saveFile.getShareData("stopCount", FindRadioListActivity.this);//定时播放关闭时间
+//                    if (stopCount.equals("false") || stopCount.equals("关闭")) {
+//
+//                    } else {
+//                        startDownTimer();
+//                    }
+//                } else {
+//
+////                    isUpfristTimer =! isUpfristTimer;
+////                    if (isUpfristTimer){
+//                    initAddStatus((int) uptimer_couting);
+//                    timerStatus = PREPARE;
+//                    startTimer();
+//
+////                    myplayer.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+////                        @Override
+////                        public void onPrepared(MediaPlayer mediaPlayer) {
+////                            mediaPlayer.start();
+////                            radio_list_play.setEnabled(true);
+////
+////                        }
+////                    });
+//
+//
+////                    }
+//
+//
+//                }
+//
+//            }
+//        }
+//    }
 
 
     //存储一条电台数据
@@ -338,29 +464,41 @@ public class FindRadioListActivity extends AppCompatActivity {
         radioInfo.setUserInfo(model);
     }
 
-    private class radio_list_left implements View.OnClickListener {
+    public class radio_list_left implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             int pos = viewPager.getCurrentItem();
             if (pos > 0) {
                 pos -= 1;
-                viewPager.setCurrentItem(pos, true);
-                RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
-                if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {
-                    AddOneLocaInfo(oneData, 2);//存储数据
-                    isplayRadio(oneData, pos);
 
-                    if (oneData.getRadioName().equals(saveFile.getShareData("englishVideo", FindRadioListActivity.this))) {//定时播放的电台暂停
-                        stopSendTimerTask(); //暂停播放
-                        timerStatus = PREPARE;
-                        mHandler.sendEmptyMessage(2);
-                        saveFile.saveShareData("stopCount", timer_couting + "", FindRadioListActivity.this);
-                    }
-
-
-                } else {
-                    AddOneLocaInfo(oneData, 0);
+                for (int i = 0; i < radioModel.getData().size(); i++) {
+                    radioModel.getData().get(i).setIsPlay(false);
                 }
+                RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+//                if (myplayer.mediaPlayer == null){
+////                    isplayRadio(oneData, pos);
+//                    radioPlayUrl(pos);
+//                }else if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) { //正在播放状态
+////                    AddOneLocaInfo(oneData, 2);//存储数据
+////                    isplayRadio(oneData, pos);
+////
+////                    if (oneData.getRadioName().equals(saveFile.getShareData("englishVideo", FindRadioListActivity.this))) {//定时播放的电台暂停
+////                        stopSendTimerTask(); //暂停播放
+////                        timerStatus = PREPARE;
+////                        mHandler.sendEmptyMessage(2);
+////                        saveFile.saveShareData("stopCount", timer_couting + "", FindRadioListActivity.this);
+////                    }
+//
+////                    isplayRadio(oneData, pos);
+//                    radioPlayNew(pos);
+////                    radioPlayUrl(pos);
+//                } else {
+////                    radioPauseset(pos);
+////                    AddOneLocaInfo(oneData, 0);
+//
+//                    radioStop(oneData);
+//                }
+                viewPager.setCurrentItem(pos, true);
             }
         }
     }
@@ -370,22 +508,44 @@ public class FindRadioListActivity extends AppCompatActivity {
         public void onClick(View view) {
             int pos = viewPager.getCurrentItem() + 1;
             if (pos < radioModel.getData().size()) {
-                RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
-                if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {//数据页数不需要加一页
-                    isplayRadio(oneData, pos);
-                    AddOneLocaInfo(oneData, 2);//存储数据
-                } else {
-                    AddOneLocaInfo(oneData, 0);
+
+                for (int i = 0; i < radioModel.getData().size(); i++) {
+                    radioModel.getData().get(i).setIsPlay(false);
                 }
+                RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+
+//                if (myplayer.mediaPlayer != null) {//数据页数不需要加一页
+//                if (myplayer.mediaPlayer == null){
+////                    isplayRadio(oneData, pos);
+//                    radioPlayUrl(pos);
+//                }else  if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {//数据页数不需要加一页
+////                    AddOneLocaInfo(oneData, 2);//存储数据
+//
+//                    radioPlayNew(pos);
+////                    radioInit(oneData.getRadioName());
+////                    isplayRadio(oneData, pos);
+////                    radioPlayUrl(pos);
+//                } else {
+////                    radioPauseset(pos);
+////                    AddOneLocaInfo(oneData, 0);
+//                    radioStop(oneData);
+//                }
                 viewPager.setCurrentItem(pos, true);
             }
         }
     }
 
+    public void radioStop(RadioList_Model.DataBean oneData){
+        oneData.setIsPlay(false);
+        myplayer.stop();
+    }
+
 
     public void isplayRadio(RadioList_Model.DataBean oneData, int pos) { //正在播放需要停止后重新加载
+        oneData.setIsPlay(true);
+        radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
         myplayer.stop();
-        myplayer.playUrl(oneData.getRadioUrl(),radio_list_play);
+        myplayer.playUrl(oneData.getRadioUrl(), radio_list_play);
     }
 
 
@@ -435,7 +595,7 @@ public class FindRadioListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (radioInfo.getUserInfo().getRadioisPlay() == 2) {//正在播放
-                        myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_list_play);
+                        myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(), radio_list_play);
                         radio_list_play.setBackgroundResource(R.drawable.radio_list_push);
                     } else {
                         radio_list_play.setBackgroundResource(R.drawable.radio_list_play);

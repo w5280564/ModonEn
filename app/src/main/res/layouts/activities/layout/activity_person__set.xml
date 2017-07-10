@@ -4,12 +4,178 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3">
+    android:background="#f3f3f3"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/title_Include"
         layout="@layout/base_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/popupwhite_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/push_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="消息推送"
+                android:textColor="#4b4b4b"
+                android:textSize="14sp" />
+
+
+            <com.kyleduo.switchbutton.SwitchButton
+                android:id="@+id/push_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true"
+                app:kswBackDrawable="@drawable/sb_back_drawable"
+                app:kswThumbDrawable="@drawable/sb_thumb_drawable"
+                app:kswThumbHeight="20dp"
+                app:kswThumbWidth="20dp"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#f6eaea" />
+
+        <RelativeLayout
+            android:id="@+id/cache_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <TextView
+                android:id="@+id/qing_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="清理缓存"
+                android:textColor="#4b4b4b"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/cache_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/cache_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/cache_arrow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignLeft="@id/qing_Txt"
+                android:layout_alignParentBottom="true"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/idea_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <TextView
+                android:id="@+id/fan_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="意见反馈"
+                android:textColor="#4b4b4b"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/idea_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignLeft="@id/fan_Txt"
+                android:layout_alignParentBottom="true"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/about_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <TextView
+                android:id="@+id/neng_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="关于能量圈"
+                android:textColor="#4b4b4b"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/about_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignLeft="@id/neng_Txt"
+                android:layout_alignParentBottom="true"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/quit_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/popupwhite_bg"
+        android:text="退出登录"
+        android:textColor="#f14d4c"
+        android:textSize="14sp" />
+
 
 </LinearLayout>

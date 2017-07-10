@@ -1,11 +1,17 @@
 package com.moying.energyring.myAcativity;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,12 +23,16 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.basePopup.popupFour;
+import com.moying.energyring.myAcativity.Person.Service.BindService;
+import com.moying.energyring.myAcativity.Person.Service.DaemonService;
+import com.moying.energyring.myAcativity.Person.Service.JobSchedulerService;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
 import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BaseActivity;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 import com.moying.energyring.waylenBaseView.MyArcMenu;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -30,8 +40,6 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.moying.energyring.network.saveFile.saveShareData;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
@@ -44,6 +52,7 @@ public class MainActivity extends BaseActivity {
     @ViewInject(R.id.popup_Txt)
     TextView popup_Txt;
 
+
 //   public static Activity mainActivitySta;
 
     @Override
@@ -53,11 +62,6 @@ public class MainActivity extends BaseActivity {
         mam.pushOneActivity(this);//把当前activity压入了栈中
 //        setContentView(R.layout.activity_main);
 
-        DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
-        Float scale = (float) dm.widthPixels / 750;
-        Float heghtSclae = (float) dm.heightPixels / 1334;
-        saveShareData("scale", scale + "", this);
-        saveShareData("heghtSclae", heghtSclae + "", this);
 
         x.view().inject(this);
         initView();
@@ -71,7 +75,105 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+//        SelfStarting_Manage.jumpStartInterface(this);
+
+//        startService(new Intent(this, DaemonService.class));
+//        initJobScheduler();
+
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initAlarmService();
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    private void initAlarmService() {
+        startService(new Intent(this, DaemonService.class));//启动闹钟服务
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //JobScheduler
+            initJobScheduler();
+        }
+
+        //绑定闹钟服务
+        Intent intent = new Intent(this, DaemonService.class);
+        intent.setAction("android.intent.action.DaemonServiceClock");
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private JobScheduler mJobScheduler;
+    private void  initJobScheduler(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mJobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+            JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), JobSchedulerService.class.getName()));
+
+            builder.setPeriodic(60*1000); //每隔60秒运行一次
+//            builder.setPeriodic(30000); //每隔30秒运行一次
+//            Log.e("tttttttttt","30秒重新注册");
+            builder.setRequiresCharging(true);// 设置是否充电的条件,默认false
+            builder.setPersisted(true);  //设置设备重启后，是否重新执行任务
+            builder.setRequiresDeviceIdle(true);// 设置手机是否空闲的条件,默认false
+//            builder.setOverrideDeadline(5000);// 设置deadline，若到期还没有达到规定的条件则会开始执行
+            if (mJobScheduler.schedule(builder.build()) <= 0) {
+//                Log.e("tttttttttt","服务出问题");
+                //If something goes wrong
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        try {//判断是否有闹钟，没有则关闭闹钟服务
+
+//            String alarm = localPreferencesHelper.getString(LocalPreferencesHelper.ALARM_CLOCK);
+//
+//            if (daemonService != -1 && mIRemoteService != null) {
+////                android.os.Process.killProcess(daemonService);
+//                mIRemoteService.resetAlarm();
+//            }
+//
+//            if (!alarm.equals("[]")) {
+//                if (daemonService != -1) {
+//                    startService(new Intent(this, DaemonService.class));
+//                }
+//            } else {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    mJobScheduler.cancel(1);
+//                }
+//
+//            }
+            unbindService(mConnection); //解除绑定服务。
+//        } catch (Exception e) {
+//
+//        }
+    }
+    /** Called when the activity is first created. */
+    private BindService myService;
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            myService = null;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            myService = ((BindService.MyBinder) service).getService();
+//            System.out.println("Service连接成功");
+            // 执行Service内部自己的方法
+            myService.excute();
+        }
+    };
+
 
 
     private void initArcMenu(final MyArcMenu menu, int[] itemDrawables) {
@@ -99,14 +201,17 @@ public class MainActivity extends BaseActivity {
                 } else {
                     switch (pos) {
                         case 0:
+                            MobclickAgent.onEvent(MainActivity.this, "Pk_DayPkAdd");//统计页签
                             Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd.class);
                             startActivity(intent1);
                             break;
                         case 1:
+                            MobclickAgent.onEvent(MainActivity.this, "PostAdd");//统计页签
                             Intent intent2 = new Intent(MainActivity.this, PostingActivity.class);
                             startActivity(intent2);
                             break;
                         case 2:
+                            MobclickAgent.onEvent(MainActivity.this, "AllPerson");//统计页签
                             Intent intent3 = new Intent(MainActivity.this, Leran_AllPerson.class);
                             startActivity(intent3);
                             break;
@@ -124,11 +229,15 @@ public class MainActivity extends BaseActivity {
     }
 
 
+
+
+
     private void initView() {
         fragments = new ArrayList<>();
         fragments.add(new Fragment1_Energy());
         fragments.add(new Fragment2_Pk());
-        fragments.add(new Fragment3_Find());
+//        fragments.add(new Fragment3_Find());
+        fragments.add(new Fragment3_FindTest());
         fragments.add(new Fragment4_Person());
 
         tab_group = (RadioGroup) findViewById(R.id.tab_group);
@@ -195,8 +304,8 @@ public class MainActivity extends BaseActivity {
         addFragmentStack(fragments, R.id.main_content_layout, pos);//加载不同的fragment
     }
 
-    public Fragment3_Find getFrag(){
-        return (Fragment3_Find) fragments.get(2);
+    public Fragment3_FindTest getFragmentFindTest(){
+        return (Fragment3_FindTest) fragments.get(2);
     }
 
 
@@ -220,5 +329,8 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
     }
+
+
+
 
 }

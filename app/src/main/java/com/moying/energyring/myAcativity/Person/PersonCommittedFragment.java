@@ -1,6 +1,7 @@
 package com.moying.energyring.myAcativity.Person;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.Committed_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
 import com.moying.energyring.myAdapter.Person_CommittedFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
@@ -132,9 +134,14 @@ public class PersonCommittedFragment extends lazyLoadFragment implements XRecycl
         mAdapter.setOnItemClickLitener(new Person_CommittedFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
-//                startActivity(intent);
+                String content = baseModel.get(position).getPostContent();
+                String postId = baseModel.get(position).getPostID() +"";
+                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
+                Intent intent = new Intent(context, Energy_WebDetail.class);
+                intent.putExtra("content", content);
+                intent.putExtra("postId", postId);
+                intent.putExtra("url", url);
+                startActivity(intent);
             }
 
             @Override

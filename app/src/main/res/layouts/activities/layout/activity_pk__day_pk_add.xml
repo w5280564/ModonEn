@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:background="#f3f3f3"
     android:focusableInTouchMode="true">
 
@@ -45,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:text="添加项目"
+            android:text="发布每日PK"
             android:textColor="#909090"
             android:textSize="16sp" />
     </RelativeLayout>
@@ -69,7 +68,9 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            app:roundAsCircle="true" />
+            fresco:roundAsCircle="true"
+
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,13 +106,13 @@
         android:id="@+id/mu_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bg_img"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/timechioce_next"
         android:text="提交"
         android:textColor="#f24d4d"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/bg_img"
+        android:layout_centerHorizontal="true" />
 
     <RelativeLayout
         android:id="@+id/add_Rel"

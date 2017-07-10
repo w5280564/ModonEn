@@ -3,10 +3,10 @@ package com.moying.energyring.myAcativity.Find;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.AlarmManagerUtil;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.network.saveFile;
 
@@ -54,6 +55,8 @@ public class Person_Play extends Activity {
 
         video_switch.setOnCheckedChangeListener(new video_switch());
 
+//        Daemon.run(this, DaemonService.class, Daemon.INTERVAL_ONE_MINUTE);
+
     }
 
     @Override
@@ -83,6 +86,7 @@ public class Person_Play extends Activity {
 
     }
 
+
     public class return_Btn implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -108,7 +112,7 @@ public class Person_Play extends Activity {
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (saveFile.getShareData("videoSwitch", Person_Play.this).equals("false")) {
             manager.cancel(sender);//取消闹钟
-        }else{
+        } else {
             startAlarm(manager, sender);// 进行闹铃注册
         }
     }
@@ -136,11 +140,12 @@ public class Person_Play extends Activity {
                 Toast.makeText(Person_Play.this, "请设置闹钟时间", Toast.LENGTH_SHORT).show();
                 video_switch.setChecked(false);
                 return;
-            }else  if (saveFile.getShareData("englishVideo", Person_Play.this).equals("false")){
-                Toast.makeText(Person_Play.this,"请设置电台",Toast.LENGTH_SHORT).show();
+            } else if (saveFile.getShareData("englishVideo", Person_Play.this).equals("false")) {
+                Toast.makeText(Person_Play.this, "请设置电台", Toast.LENGTH_SHORT).show();
                 video_switch.setChecked(false);
                 return;
             }
+
 
             Intent intent = new Intent(Person_Play.this, AlarmReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(Person_Play.this, 0, intent, 0);
@@ -165,10 +170,9 @@ public class Person_Play extends Activity {
 
 
     //定时闹钟参数
-    public void  startAlarm(AlarmManager mAlamManager, PendingIntent pi) {
+    public void startAlarm(AlarmManager mAlamManager, PendingIntent pi) {
 
         String[] timelegth = saveFile.getShareData("timeTxt", Person_Play.this).split(":");
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis()); //设置日历的时间，主要是让日历的年月日和当前同步
         // 这里时区需要设置一下，不然会有8个小时的时间差
@@ -181,38 +185,32 @@ public class Person_Play extends Activity {
 
 
         // 选择的定时时间
-        long firstTime = SystemClock.elapsedRealtime(); // 开机之后到现在的运行时间(包括睡眠时间)
-        long systemTime = System.currentTimeMillis();
-        long selectTime = calendar.getTimeInMillis();
-        // 如果当前时间大于设置的时间，那么就从第二天的设定时间开始
-        if (systemTime > selectTime) {
-            Toast.makeText(Person_Play.this, "设置的时间小于当前时间", Toast.LENGTH_SHORT).show();
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-            selectTime = calendar.getTimeInMillis();
-        }
-        // 计算现在时间到设定时间的时间差
-        long time = selectTime - systemTime;
-        firstTime += time;
+//        long firstTime = SystemClock.elapsedRealtime(); // 开机之后到现在的运行时间(包括睡眠时间)
+//        long systemTime = System.currentTimeMillis();
+//        long selectTime = calendar.getTimeInMillis();
+//        // 如果当前时间大于设置的时间，那么就从第二天的设定时间开始
+//        if (systemTime > selectTime) {
+//            Toast.makeText(Person_Play.this, "设置的时间小于当前时间", Toast.LENGTH_SHORT).show();
+//            calendar.add(Calendar.DAY_OF_MONTH, 1);
+//            selectTime = calendar.getTimeInMillis();
+//        }
+//        // 计算现在时间到设定时间的时间差
+//        long time = selectTime - systemTime;
+//        firstTime += time;
 
-//        IntentFilter filter = new IntentFilter();
-//        // 闹钟响起时触发com.android.deskclock.ALARM_ALERT
-//        filter.addAction("com.android.deskclock.ALARM_ALERT");
-//        alarmReceiver = new AlarmReceiver();
-//        registerReceiver(alarmReceiver, filter);//动态注册
 
         Intent intent = new Intent(Person_Play.this, AlarmReceiver.class);
         intent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);//添加此Flag 的广播可以被停止状态的应用接收到
-        PendingIntent sender = PendingIntent.getBroadcast(Person_Play.this, 0, intent, 0);
-        // 进行闹铃注册
-        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        manager.setRepeating(AlarmManager.RTC_WAKEUP, selectTime, AlarmManager.INTERVAL_DAY, sender);
+//        PendingIntent sender = PendingIntent.getBroadcast(Person_Play.this, 0, intent, 0);
+//        // 进行闹铃注册
+//        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        manager.setWindow(AlarmManager.RTC_WAKEUP,selectTime,AlarmManager.INTERVAL_DAY,sender);//最后测试使用这个tag 查看AlarmReceiver calendarWeek返回值
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            manager.setExact(AlarmManager.RTC_WAKEUP,firstTime,sender);
-//        }
+        initColockTime();//每次定闹钟设定倒计时时间
+        calendarWeek(timelegth, this);//周期闹钟
+
     }
-//    AlarmReceiver alarmReceiver;
+
+    //    AlarmReceiver alarmReceiver;
 //    /*动态注册需在Acticity生命周期onPause通过
 //    *unregisterReceiver()方法移除广播接收器，
 //    * 优化内存空间，避免内存溢出
@@ -223,30 +221,39 @@ public class Person_Play extends Activity {
 //        unregisterReceiver(alarmReceiver);
 //    }
 
+    private void initColockTime() {
+        String stopCount;
+        String stopString = saveFile.getShareData("stopString", Person_Play.this);
+        if (stopString.equals("关闭") || stopString.equals("false")) {
+//            stopCount = "关闭";
+            stopCount = 10 * 60 * 1000 + "";
+        } else {
+//            stopCount = Long.parseLong(saveFile.getShareData("stopString", Person_Play.this).substring(0, 2)) * 3000 + "";
+            stopCount = Long.parseLong(saveFile.getShareData("stopString", Person_Play.this).substring(0, 2)) * 60 * 1000 + "";
+        }
+        saveFile.saveShareData("stopCount", stopCount, Person_Play.this);
+    }
 
 
-    public void calendarWeek(Calendar calendar) {
-        List<String> myChoice = saveFile.getUserList(Person_Play.this, "choiceWeek");
+    public static void calendarWeek(String[] timelegth, Context context) {
+        Calendar calendar = Calendar.getInstance();
+        // 这里时区需要设置一下，不然会有8个小时的时间差
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        dayOfWeek -= 1;
+        List<String> myChoice = saveFile.getUserList(context, "choiceWeek");
         for (int i = 0; i < myChoice.size(); i++) {
             if (myChoice.get(i).equals("true")) {
+                int weeki = i;
                 if (i == 0) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                } else if (i == 1) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                } else if (i == 2) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                } else if (i == 3) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                } else if (i == 4) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                } else if (i == 5) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                } else if (i == 6) {
-                    calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+                    weeki = 7;
                 }
+                AlarmManagerUtil.setAlarm(context, 0, Integer.parseInt(timelegth[0]), Integer.parseInt(timelegth[1]), i, weeki, "闹钟响了", 1);
             }
         }
     }
+
+
 
 }
 

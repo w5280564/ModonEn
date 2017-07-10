@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
+import com.umeng.analytics.MobclickAgent;
 
 public class Person_Relus extends Activity {
 
@@ -27,6 +28,18 @@ public class Person_Relus extends Activity {
         StaticData.ViewScale(gui_Img,710,1160);
 
     }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("Person_Relus"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);          //统计时长
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("Person_Relus"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
+    }
+
 
     private void initTitle(){
         View title_Include = (View) findViewById(R.id.title_Include);

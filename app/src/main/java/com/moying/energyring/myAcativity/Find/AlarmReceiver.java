@@ -9,62 +9,81 @@ import android.content.Intent;
 import android.support.v7.app.NotificationCompat;
 
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.AlarmManagerUtil;
 import com.moying.energyring.network.saveFile;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
+import com.umeng.analytics.MobclickAgent;
 
 public class AlarmReceiver extends BroadcastReceiver {
     private NotificationManager manager;
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
 //        Toast.makeText(context, "闹铃响了, 可以做点事情了~~", Toast.LENGTH_LONG).show();
-        if (intent.getAction().equals("com.android.deskclock.ALARM_ALERT")) {
-            String stopCount;
-            String stopString = saveFile.getShareData("stopString", context);
-            if (stopString.equals("关闭") || stopString.equals("false")) {
-                stopCount = "关闭";
-            } else {
-                stopCount = Long.parseLong(saveFile.getShareData("stopString", context).substring(0, 2)) * 60 * 1000 + "";
-            }
-            saveFile.saveShareData("stopCount", stopCount, context);
+//        if (intent.getAction().equals("com.android.deskclock.ALARM_ALERT")) {
 
-            Intent intent2 = new Intent(context, FindRadioListActivity.class);
-            intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //因为setWindow只执行一次，所以要重新定义闹钟实现循环。
+        long colockMillis =  24 * 3600 * 1000 * 7;
+        if (colockMillis != 0) {
+            AlarmManagerUtil.setAlarmTime(context, System.currentTimeMillis() + colockMillis, intent);
+        }
+
+//        String[] timelegth = saveFile.getShareData("timeTxt", context).split(":");
+//        Person_Play.calendarWeek(timelegth, context);//周期闹钟
+
+        String stopCount;
+        String stopString = saveFile.getShareData("stopString", context);
+        if (stopString.equals("关闭") || stopString.equals("false")) {
+//                stopCount = "关闭";
+            stopCount = 10 * 60 * 1000 + "";
+        } else {
+            stopCount = Long.parseLong(saveFile.getShareData("stopString", context).substring(0, 2)) * 60 * 1000 + "";
+        }
+        saveFile.saveShareData("stopCount", stopCount, context);
+
+
+        sendMes(context);
+    }
+
+    //发送通知
+    private void sendMes(Context context){
+        Intent intent2 = new Intent(context, FindRadioListActivityTest.class);
+        intent2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //        intent2.putExtra("myPlayMap", (Serializable) saveFile.getHashMap("videoPlay", context));
 //        intent2.putExtra("myPlayMap", (Serializable) myPlayMap);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
-            manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            //例如这个id就是你传过来的
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-            String time = saveFile.getShareData("timeTxt", context);
-            String video = saveFile.getShareData("englishVideo", context);
-            builder.setContentTitle("能量圈").setContentText("一个暖心的提醒").setSubText(time + "啦！能量圈提醒您应该收听" + video + "电台啦！点击本消息收听~").setSmallIcon(R.drawable.ring_icon).setDefaults(Notification.DEFAULT_ALL).setContentIntent(pendingIntent).setAutoCancel(true);
-            if (calendarWeek(context)) {
-                manager.notify(1, builder.build());
-            }
-        }
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+        manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        //例如这个id就是你传过来的
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        String time = saveFile.getShareData("timeTxt", context);
+        String video = saveFile.getShareData("englishVideo", context);
+        builder.setContentTitle("能量圈").setContentText("一个暖心的提醒").setSubText("能量圈提醒您应该收听" + video + "电台啦！点击本消息收听~").setSmallIcon(R.drawable.ring).setDefaults(Notification.DEFAULT_ALL).setContentIntent(pendingIntent).setAutoCancel(true);
+//            builder.setContentTitle("能量圈").setContentText("一个暖心的提醒").setSubText(time + "啦！能量圈提醒您应该收听" + video + "电台啦！点击本消息收听~").setSmallIcon(R.drawable.ring_icon).setDefaults(Notification.DEFAULT_ALL).setContentIntent(pendingIntent).setAutoCancel(true);
+//            if (calendarWeek(context)) {
+
+        MobclickAgent.onEvent(context, "AlarmReceiver");//统计页签
+        manager.notify(1, builder.build());
+//            }
+//        }
     }
 
 
-    public boolean calendarWeek(Context context) {
-        boolean isweek = false;
-        Calendar calendar = Calendar.getInstance();
-        // 这里时区需要设置一下，不然会有8个小时的时间差
-        calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        dayOfWeek -= 1;
-        List<String> myChoice = saveFile.getUserList(context, "choiceWeek");
-        for (int i = 0; i < myChoice.size(); i++) {
-            if (myChoice.get(i).equals("true") && i == dayOfWeek) {
-                isweek = true;
-                break;
-            }
-        }
-        return isweek;
-    }
+//    public boolean calendarWeek(Context context) {
+//        boolean isweek = false;
+//        Calendar calendar = Calendar.getInstance();
+//        // 这里时区需要设置一下，不然会有8个小时的时间差
+//        calendar.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+//        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+//        dayOfWeek -= 1;
+//        List<String> myChoice = saveFile.getUserList(context, "choiceWeek");
+//        for (int i = 0; i < myChoice.size(); i++) {
+//            if (myChoice.get(i).equals("true") && i == dayOfWeek) {
+//                isweek = true;
+//                break;
+//            }
+//        }
+//        return isweek;
+//    }
 
 
 //    public NotificationManager mNotificationManager;

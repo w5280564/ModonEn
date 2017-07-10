@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="连续训练"
+            android:text=""
             android:textColor="#c86a6a"
             android:textSize="18sp" />
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="连续训练"
+            android:text=""
             android:textColor="#c86a6a"
             android:textSize="12sp" />
 

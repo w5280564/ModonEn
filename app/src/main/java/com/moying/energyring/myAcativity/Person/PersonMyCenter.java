@@ -102,6 +102,8 @@ public class PersonMyCenter extends FragmentActivity {
         layoutmarginTop(this, user_simple);
         gender_img = (ImageView) findViewById(R.id.gender_img);
         userName_Txt = (TextView) findViewById(R.id.userName_Txt);
+        LinearLayout atten_Lin = (LinearLayout) findViewById(R.id.atten_Lin);
+        LinearLayout fans_Lin = (LinearLayout) findViewById(R.id.fans_Lin);
         atten_Txt = (TextView) findViewById(R.id.atten_Txt);
         fans_Txt = (TextView) findViewById(R.id.fans_Txt);
         intr_Txt = (TextView) findViewById(R.id.intr_Txt);
@@ -114,6 +116,8 @@ public class PersonMyCenter extends FragmentActivity {
         return_Btn.setOnClickListener(new return_Btn());
         person_bg_simple.setOnClickListener(new person_bg_simple());
         user_simple.setOnClickListener(new user_simple());
+        atten_Lin.setOnClickListener(new atten_Lin());
+        fans_Lin.setOnClickListener(new fans_Lin());
 
         AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.mAppBarLayout);
 
@@ -172,6 +176,31 @@ public class PersonMyCenter extends FragmentActivity {
         }
     }
 
+    //粉丝与关注
+    private class atten_Lin implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(PersonMyCenter.this, Person_Center_FansAndAtten.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
+            intent.putExtra("titleName", "关注");
+            intent.putExtra("Type", "1");
+            startActivity(intent);
+        }
+    }
+
+    //粉丝与关注
+    private class fans_Lin implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(PersonMyCenter.this, Person_Center_FansAndAtten.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
+            intent.putExtra("titleName", "粉丝");
+            intent.putExtra("Type", "2");
+            startActivity(intent);
+        }
+    }
+
+
     private String userId = "0";
 
     private void initAddData() {
@@ -210,12 +239,16 @@ public class PersonMyCenter extends FragmentActivity {
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                LinearLayout tab_Lin = (LinearLayout) tab.getCustomView().findViewById(R.id.tab_Lin);
+                StaticData.ViewScale(tab_Lin, 260, 140);
                 ImageView tab_Img = (ImageView) tab.getCustomView().findViewById(R.id.tab_Img);
                 StaticData.ViewScale(tab_Img, 100, 112);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                LinearLayout tab_Lin = (LinearLayout) tab.getCustomView().findViewById(R.id.tab_Lin);
+                StaticData.ViewScale(tab_Lin, 200, 110);
                 ImageView tab_Img = (ImageView) tab.getCustomView().findViewById(R.id.tab_Img);
                 StaticData.ViewScale(tab_Img, 80, 90);
             }
@@ -240,10 +273,30 @@ public class PersonMyCenter extends FragmentActivity {
             TabLayout.Tab tab = tablayout.getTabAt(postion);
             if (tab != null) {
                 tab.setCustomView(myAdapter.getTabView(postion));
+
 //                if (i == 0) {
-//                    tab.getCustomView().findViewById(R.id.tab_Img).setSelected(true);//第一个tab被选中
+//                    LinearLayout tab_Lin = (LinearLayout) tab.getCustomView().findViewById(R.id.tab_Lin);
+//                    StaticData.ViewScale(tab_Lin, 260, 140);
+//                    tab_Lin.setSelected(true);
+////                    tab.getCustomView().findViewById(R.id.tab_Lin).setSelected(true);//第一个tab被选中
 //                }
+
             }
+        }
+
+        Intent intent = getIntent();
+        String tabType = intent.getStringExtra("tabType");
+        if (tabType != null) {
+//            TabLayout.Tab tabnow = tablayout.getTabAt(Integer.parseInt(tabType));
+//            LinearLayout TypeLin = (LinearLayout) tabnow.getCustomView().findViewById(R.id.tab_Lin);
+//            StaticData.ViewScale(TypeLin, 260, 140);
+//            TypeLin.setSelected(true);
+            Slideviewpager.setCurrentItem(Integer.parseInt(tabType), true);
+        } else {
+            TabLayout.Tab tabnow = tablayout.getTabAt(0);
+            LinearLayout TypeLin = (LinearLayout) tabnow.getCustomView().findViewById(R.id.tab_Lin);
+            StaticData.ViewScale(TypeLin, 260, 140);
+            TypeLin.setSelected(true);
         }
     }
 
@@ -285,13 +338,13 @@ public class PersonMyCenter extends FragmentActivity {
 
                         int sexId = oneData.getGender();
 
-                         if (sexId == 1){//男
-                             gender_img.setBackgroundResource(R.drawable.sex_man);
-                         }else if (sexId == 2){// 女
-                             gender_img.setBackgroundResource(R.drawable.sex_woman);
-                         }else{
+                        if (sexId == 1) {//男
+                            gender_img.setBackgroundResource(R.drawable.sex_man);
+                        } else if (sexId == 2) {// 女
+                            gender_img.setBackgroundResource(R.drawable.sex_woman);
+                        } else {
                             gender_img.setVisibility(View.GONE);
-                         }
+                        }
 
 
                         initLocaData();
@@ -336,7 +389,7 @@ public class PersonMyCenter extends FragmentActivity {
         public View getTabView(int position) {
             View v = LayoutInflater.from(PersonMyCenter.this).inflate(R.layout.person_custom_tab, null);
             LinearLayout tab_Lin = (LinearLayout) v.findViewById(R.id.tab_Lin);
-            StaticData.ViewScale(tab_Lin, 260, 140);
+            StaticData.ViewScale(tab_Lin, 200, 110);
             tab_Img = (ImageView) v.findViewById(R.id.tab_Img);
             StaticData.ViewScale(tab_Img, 80, 90);
             tab_Img.setImageResource(iconImg[position]);
@@ -366,9 +419,9 @@ public class PersonMyCenter extends FragmentActivity {
 
 
                 if (requestCode == REQUEST_CODE_IMAGE_PICK) {
-                    compressSingleListener(new File(path),Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK);//压缩 THIRD_GEAR  普通压缩 FIRST_GEAR快速压缩
-                }  else{
-                    compressSingleListener(new File(path),Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+                    compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK);//压缩 THIRD_GEAR  普通压缩 FIRST_GEAR快速压缩
+                } else {
+                    compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
                 }
 
 
@@ -377,7 +430,7 @@ public class PersonMyCenter extends FragmentActivity {
     }
 
     //压缩图片
-    private void compressSingleListener(File file ,int gear, final int type) {
+    private void compressSingleListener(File file, int gear, final int type) {
 //        if (file.isEmpty()) {
 //            return;
 //        }
@@ -430,7 +483,7 @@ public class PersonMyCenter extends FragmentActivity {
 
 
     //上传图片
-    public void upload_PhotoData(final int type, final Context context, String baseUrl,File file) {
+    public void upload_PhotoData(final int type, final Context context, String baseUrl, File file) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));

@@ -28,6 +28,7 @@ import com.moying.energyring.myAdapter.pk_ZanRanking_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.myActivity;
 import com.moying.energyring.xrecycle.XRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -48,6 +49,19 @@ public class pk_ZanRanking extends myActivity implements XRecyclerView.LoadingLi
         initHead(pk_ZanRanking.this);
         initData(pk_ZanRanking.this);
     }
+
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("pk_ZanRanking"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);          //统计时长
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("pk_ZanRanking"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
+    }
+
 
     private int PageIndex;
     private int pageSize;

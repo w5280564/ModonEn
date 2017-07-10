@@ -573,7 +573,7 @@ public class StaticData {
         String verName = "";
         try {
             //注意："com.example.try_downloadfile_progress"对应AndroidManifest.xml里的package="……"部分
-            verName = context.getPackageManager().getPackageInfo("com.waylen.zenzox", 0).versionName;
+            verName = context.getPackageManager().getPackageInfo("com.moying.energyring", 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             Log.e("msg", e.getMessage());
         }
@@ -814,6 +814,34 @@ public class StaticData {
         Uri uri = Uri.parse("res:// /" + iconId);
         myView.addGif(uri, width, height);
     }
+
+
+//    public static void addPlace(SimpleDraweeView myDraw, Context context) {
+//        //获取GenericDraweeHierarchy对象
+//        GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(context.getResources())
+//                //设置占位图及它的缩放方式
+//                .setProgressBarImage(R.drawable.placeholder_icon)
+////                .setPlaceholderImage(ContextCompat.getDrawable(context, R.drawable.placeholder_icon), ScalingUtils.ScaleType.FIT_XY)
+//                //构建
+//                .build();
+//
+//        //设置GenericDraweeHierarchy
+//        myDraw.setHierarchy(hierarchy);
+//    }
+//
+//    public static void addPlaceRound(SimpleDraweeView myDraw, Context context) {
+//        //获取GenericDraweeHierarchy对象
+//        GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(context.getResources())
+//                .setRoundingParams(RoundingParams.asCircle())
+//                //设置占位图及它的缩放方式
+//                .setProgressBarImage(R.drawable.placeholder_icon)
+////                .setPlaceholderImage(ContextCompat.getDrawable(context, R.drawable.placeholder_icon), ScalingUtils.ScaleType.FOCUS_CROP)
+//                //构建
+//                .build();
+//
+//        //设置GenericDraweeHierarchy
+//        myDraw.setHierarchy(hierarchy);
+//    }
 
 
 }

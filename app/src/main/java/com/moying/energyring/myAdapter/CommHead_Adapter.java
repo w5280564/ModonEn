@@ -66,7 +66,9 @@ public class CommHead_Adapter extends RecyclerView.Adapter<CommHead_Adapter.MyVi
         }
 
         AllPerson_Model.DataBean oneData = baseModel.getData().get(position);
+
         if (oneData.getFilePath() != null) {
+//            StaticData.addPlace(holder.nohead_simple, context);
             Uri imgUri = Uri.parse(oneData.getFilePath());
             holder.nohead_simple.setImageURI(imgUri);
         } else {

@@ -2,15 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/redio_sim"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
-        app:roundedCornerRadius="5dp"
-        android:scaleType="fitXY"/>
+        app:roundedCornerRadius="10dp"
+        />
 
     <TextView
         android:id="@+id/banner_Txt"

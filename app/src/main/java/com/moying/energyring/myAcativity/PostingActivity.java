@@ -49,6 +49,7 @@ import com.moying.energyring.network.saveFile;
 import com.moying.energyring.pinyin.SortModel;
 import com.moying.energyring.waylenBaseView.FlowLayout;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,8 +108,22 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
         initTitle();
         initView();
+        initView();
         initData();
     }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("PostingActivity"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);          //统计时长
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PostingActivity"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
+    }
+
 
     private void initTitle() {
         View title_Include = findViewById(R.id.title_Include);
@@ -121,6 +136,9 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         return_Btn.setVisibility(View.VISIBLE);
         return_Btn.setTextColor(Color.parseColor("#000000"));
         return_Btn.setText("取消");
+        TextView cententTxt = (TextView) title_Include.findViewById(R.id.cententtxt);
+        cententTxt.setTextColor(Color.parseColor("#000000"));
+        cententTxt.setText("成长日志");
         right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
         right_Btn.setTextColor(Color.parseColor("#000000"));
@@ -178,6 +196,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 return;
             }
             right_Btn.setEnabled(false);
+            MobclickAgent.onEvent(PostingActivity.this, "releaseAdd");//统计页签
             if (photoPaths.size() == 0) {
                 AddPost_Data(PostingActivity.this, saveFile.BaseUrl + saveFile.Post_Add_Url, "");
             } else {
@@ -194,6 +213,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
     //压缩图片
     private List<File> mFileList;
+
     private void compressMultiListener(int gear) {
         if (mFileList.isEmpty()) {
             return;
@@ -212,7 +232,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 //                        while (size-- > 0) {
 //                            mImageViews.get(size).setImageURI(Uri.fromFile(fileList.get(size)));
 //                        }
-                        upload_PhotoData(PostingActivity.this, saveFile.BaseUrl + saveFile.uploadPhoto_Url,filesList);
+                        upload_PhotoData(PostingActivity.this, saveFile.BaseUrl + saveFile.uploadPhoto_Url, filesList);
 
                     }
 
@@ -222,7 +242,6 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                     }
                 });
     }
-
 
 
     private void initView() {
@@ -300,7 +319,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         }
     }
 
-    int pop = 0;
+    private boolean popisShow = false;
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -309,12 +328,10 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             if (dbId != null) {
                 return;
             }
-            if (db.findAll(ChildInfo.class) != null) {
-                if (db.findAll(ChildInfo.class).size() > 0) {
-                    if (pop == 0) {
-                        pop = 1;
-                        new wei_Popup(PostingActivity.this, right_Btn);
-                    }
+            if (!popisShow) {
+                popisShow = true;
+                if (db.findAll(ChildInfo.class) != null && db.findAll(ChildInfo.class).size() > 0) {
+                    new wei_Popup(PostingActivity.this, right_Btn);
                 }
             }
         } catch (DbException e) {
@@ -454,7 +471,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     //上传图片
     private AddPhoto_Model model;
 
-    public void upload_PhotoData(final Context context, String baseUrl,List<File> filesList) {
+    public void upload_PhotoData(final Context context, String baseUrl, List<File> filesList) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -526,6 +543,10 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 right_Btn.setEnabled(true);
                 BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                 if (model.isIsSuccess()) {
+                    shareTitle = content_Edit.getText().toString();
+                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode", PostingActivity.this);
+                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + model.getData();
+
                     isShare(shareIndex());//同步分享
                 } else {
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
@@ -658,9 +679,9 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         }
     }
 
-    private String shareTitle = "能量圈";
-    private String shareContent = "能量圈";
-    private String shareUrl = "http://172.16.0.111/Share/PostDetails";
+    private String shareTitle = "";
+    private String shareContent = "";
+    private String shareUrl = "";
 
     //分享给微信朋友
     public void shareWechatFriend() {
@@ -668,7 +689,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         Platform.ShareParams wechat = new Platform.ShareParams();
         wechat.setTitle(shareTitle);
         wechat.setText(shareContent);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
 //        msg.thumbData = Util.bmpToByteArray(bitmap, true);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
@@ -690,7 +711,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         wechat.setText(shareContent);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
         wechat.setImageData(bitmap);
         wechat.setUrl(shareUrl);
 //        wechat.setImageData(wechatfriendbit);
@@ -733,7 +754,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         sp.setTitleUrl(shareUrl);
         sp.setText(shareContent);
         sp.setSite("能量圈");//分享应用的名称
-        sp.setSiteUrl("https://www.baidu.com/");//分享应用的网页地址
+        sp.setSiteUrl("http://m.pp.cn/detail.html?appid=6863306&ch_src=pp_dev&ch=default");//分享应用的网页地址
         Platform qzone = ShareSDK.getPlatform(QZone.NAME);
         qzone.setPlatformActionListener(this); // 设置分享事件回调
         qzone.share(sp);
@@ -937,6 +958,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             sure_Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    MobclickAgent.onEvent(PostingActivity.this, "postDBAdd");
                     dbFindFrist();
                     dismiss();
                 }

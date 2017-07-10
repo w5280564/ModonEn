@@ -40,6 +40,7 @@ import java.util.List;
 public class Person_Shop extends Activity implements XRecyclerView.LoadingListener {
     private XRecyclerView pk_xrecy;
     private TextView rankCount_Txt;
+    private String Integral;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,10 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
         initView();
         initHead(Person_Shop.this);
         initData(Person_Shop.this);
+
+        Intent intent = getIntent();
+         Integral = intent.getStringExtra("Integral");
+        rankCountTextsColor(72, Integral + "", rankCount_Txt);
     }
 
     private int PageIndex;
@@ -72,6 +77,8 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
         StaticData.ViewScale(pink_view, 0, 176);
         pk_xrecy = (XRecyclerView) findViewById(R.id.pk_xrecy);
         pk_xrecy.setLoadingListener(this);//添加事件
+
+
         return_Btn.setOnClickListener(new return_Btn());
     }
 
@@ -131,7 +138,7 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
     public void initData(Context context) {
         PageIndex = 1;
         pageSize = 10;
-        ListData(context, saveFile.BaseUrl + saveFile.Product_List_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+        ListData(Person_Shop.this, saveFile.BaseUrl + saveFile.Product_List_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
     }
 
     @Override
@@ -167,7 +174,8 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, Person_ShopDetails.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
+                intent.putExtra("ProductID", baseModel.get(position).getProductID() + "");
+                intent.putExtra("Integral",Integral);
                 startActivity(intent);
             }
 
@@ -183,6 +191,9 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
 
     public void ListData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {
@@ -199,9 +210,9 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
                         if (PageIndex == 1) {
                             pk_xrecy.refreshComplete();
                             initlist(context);
-                            if (Model.getData().size() > 0) {
-                                rankCountTextsColor(72, Model.getData().get(0).getIntegral() + "", rankCount_Txt);
-                            }
+//                            if (Model.getData().size() > 0) {
+//                                rankCountTextsColor(72, Model.getData().get(0).getIntegral() + "", rankCount_Txt);
+//                            }
                         } else {
                             pk_xrecy.loadMoreComplete();
                             mAdapter.addMoreData(baseModel);

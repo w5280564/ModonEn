@@ -38,12 +38,14 @@ import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.pk_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
 import com.moying.energyring.myAcativity.Pk.Pk_CheckIn;
 import com.moying.energyring.myAcativity.Pk.Pk_Daypk;
 import com.moying.energyring.myAcativity.Pk.Pk_Gui;
 import com.moying.energyring.myAcativity.Pk.pk_ZanRanking;
 import com.moying.energyring.network.saveFile;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -82,19 +84,28 @@ public class Fragment2_Pk extends Fragment {
         return parentView;
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart("Fragment2_Pk"); //统计页面，"MainScreen"为页面名称，可自定义
         pkData(saveFile.BaseUrl + saveFile.pkUrl);
         checkData(saveFile.BaseUrl + saveFile.Check_Url);//是否签到
     }
 
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("Fragment2_Pk");
+    }
+
+
+
     public void initView(View view) {
         View title_Include = view.findViewById(R.id.title_Include);
         title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            title_Include.setElevation(2f);//阴影
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            title_Include.setElevation(2f);//阴影
+//        }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setVisibility(View.GONE);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
@@ -154,6 +165,8 @@ public class Fragment2_Pk extends Fragment {
     private class pk_check_simple implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            MobclickAgent.onEvent(getActivity(),"pkCheck");//簽到點擊統計
+            pk_check_simple.setEnabled(false);
             pk_check_gif.setVisibility(View.VISIBLE);
             Uri gifuri = Uri.parse("res:///" + R.drawable.pk_check_gif);
             addGif(getActivity(), pk_check_gif, gifuri);
@@ -172,7 +185,7 @@ public class Fragment2_Pk extends Fragment {
 
     private int[] badgeArr = {R.drawable.pk_report, R.drawable.pk_allday, R.drawable.pk_zan, R.drawable.pk_zanranking, R.drawable.pk_rule};
     private String[] nameArr = {"次", "天", "个", "名", "徽章规则"};
-    private String[] tagArr = {"总汇报次数", "累积天数", "获赞个数", "获赞排名", ""};
+    private String[] tagArr = {"总汇报次数", "累计天数", "获赞个数", "获赞排名", ""};
 
     public void imgBadge(Context context, FlexboxLayout myFlex, int count) {
         if (myFlex != null) {
@@ -222,6 +235,11 @@ public class Fragment2_Pk extends Fragment {
                         startActivity(intent);
                     } else if (tagData.getProjectName().equals("徽章规则")) {
                         Intent intent = new Intent(getActivity(), Pk_Gui.class);
+                        startActivity(intent);
+                    }else if (tagData.getProjectName().equals("总汇报次数")||tagData.getProjectName().equals("累计天数")||tagData.getProjectName().equals("获赞个数")){
+                        Intent intent = new Intent(getActivity(), PersonMyCenter.class);
+                        intent.putExtra("UserID","0");
+                        intent.putExtra("tabType","2");
                         startActivity(intent);
                     }
                 }

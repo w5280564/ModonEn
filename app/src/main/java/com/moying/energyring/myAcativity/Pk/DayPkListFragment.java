@@ -34,6 +34,7 @@ import com.moying.energyring.myAdapter.DayPkFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
 import com.moying.energyring.xrecycle.XRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -42,6 +43,8 @@ import org.xutils.x;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +54,7 @@ import me.shaohui.advancedluban.OnCompressListener;
 
 /**
  * Created by Admin on 2016/4/18.
- * 公众承诺
+ * 每日pk
  */
 public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
     private String defaultHello = "default value";
@@ -147,6 +150,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 //        other_recycle.setLoadingMoreEnabled(false);//底部不加载
         other_recycle.setLoadingListener(this);//添加事件
         other_recycle.setPullRefreshEnabled(false);
+        other_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
 
 
         daypk_pen.setOnClickListener(new daypk_pen());
@@ -154,6 +158,27 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         set_Btn.setOnClickListener(new set_Btn());
         return parentView;
     }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("DayPkListFragment");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("DayPkListFragment"); //统计页面，"MainScreen"为页面名称，可自定义
+
+        isPrepared = true;
+        lazyLoad();
+//        onRefresh();
+//        PageIndex = 1;
+//        pageSize = 10;
+//        ListData(getActivity(), saveFile.BaseUrl + saveFile.ReportRankUrl + "?ProjectID=" + ProjectID + "&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+//        other_recycle.refresState(2);
+//        tableData(saveFile.BaseUrl+"/Study/Search");
+    }
+
 
     /**
      * 标志位，标志已经初始化完成
@@ -204,6 +229,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
     }
 
     public static final int REQUEST_CODE_IMAGE_PICK = 34;
+
     private class set_Btn extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
@@ -211,23 +237,11 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
             startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK);
         }
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        isPrepared = true;
-        lazyLoad();
-//        onRefresh();
-//        PageIndex = 1;
-//        pageSize = 10;
-//        ListData(getActivity(), saveFile.BaseUrl + saveFile.ReportRankUrl + "?ProjectID=" + ProjectID + "&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
-//        other_recycle.refresState(2);
-//        tableData(saveFile.BaseUrl+"/Study/Search");
-    }
 
     private class daypk_pen implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            MobclickAgent.onEvent(getActivity(), "DayPkListAdd");//统计页签
             Intent intent = new Intent(getActivity(), Pk_DayPkAdd.class);
             startActivity(intent);
         }
@@ -275,8 +289,8 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
     }
 
     //压缩图片
-    private void compressSingleListener(File file ,int gear, final int type) {
-        if (StaticData.isSpace(file.getName())){
+    private void compressSingleListener(File file, int gear, final int type) {
+        if (StaticData.isSpace(file.getName())) {
             return;
         }
         Luban.compress(file, getActivity().getFilesDir())
@@ -293,7 +307,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
                         Uri imgUri = Uri.fromFile(file);
                         pkbg_simple.setImageURI(imgUri);
                         //上传每日PK背景图
-                        upload_PhotoData(getActivity() , saveFile.BaseUrl + saveFile.uploadPhoto_Url,file);
+                        upload_PhotoData(getActivity(), saveFile.BaseUrl + saveFile.uploadPhoto_Url, file);
                     }
 
                     @Override
@@ -302,7 +316,6 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
                     }
                 });
     }
-
 
 
     private List<DayPkList_Model.DataBean> baseModel;
@@ -479,6 +492,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
     private void myheadData() {
         PersonData_Model.DataBean perdata = PersonModel.getData();
         if (perdata.getProfilePicture() != null) {
+//            StaticData.addPlaceRound(my_simple,getActivity());//占位图
             Uri imgUri = Uri.parse(String.valueOf(perdata.getProfilePicture()));
             my_simple.setImageURI(imgUri);
         } else {
@@ -497,10 +511,11 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
             } else {
                 zan_img.setImageResource(R.drawable.energy_like);
             }
+            NumberFormat nf = new DecimalFormat("#.#");//# 0 不显示
             if (perdata.getReportNum() >= perdata.getLimit()) {
-                myhui_count_Txt.setText(perdata.getLimit() + "+");
+                myhui_count_Txt.setText(nf.format(perdata.getLimit()) + "+");
             } else {
-                myhui_count_Txt.setText(perdata.getReportNum() + "个");
+                myhui_count_Txt.setText(nf.format(perdata.getReportNum()) + perdata.getProjectUnit());
             }
         }
 
@@ -514,12 +529,17 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
             DayPkList_Model.DataBean oneData = Model.get(pos);
             zhan_Lin.setVisibility(View.VISIBLE);//占领封面item
             if (oneData.getProfilePicture() != null) {
+//                StaticData.addPlaceRound(zhan_simple,getActivity());//占位图
                 Uri imgUri = Uri.parse(String.valueOf(oneData.getProfilePicture()));
                 zhan_simple.setImageURI(imgUri);
             }
-            zhanTxt.setText(String.valueOf(oneData.getNickName()));
-
+            if (oneData.getNickName() != null) {
+                zhanTxt.setText(String.valueOf(oneData.getNickName()));
+            }else{
+                zhanTxt.setText("没有名字");
+            }
             if (oneData.getPKCoverImg() != null) {
+//                StaticData.addPlace(pkbg_simple,getActivity());//占位图
                 Uri imgUri = Uri.parse(String.valueOf(oneData.getPKCoverImg()));
                 pkbg_simple.setImageURI(imgUri);
             } else {
@@ -536,7 +556,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 //        }
     }
 
-    public void upload_PhotoData(final Context context, String baseUrl,File file) {
+    public void upload_PhotoData(final Context context, String baseUrl, File file) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -544,20 +564,20 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         params.setMultipart(true);//表单格式
         params.setCancelFast(true);//支持断点续传
 //            params.addBodyParameter("file"+i,photoPaths.get(i),null,photoPaths.get(i));
-            try {
-                FileInputStream fileStream = new FileInputStream(file);
-                params.addBodyParameter("file", fileStream, null, file.getName());
-                //最后fileName InputStream参数获取不到文件名, 最好设置, 除非服务端不关心这个参数.
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        try {
+            FileInputStream fileStream = new FileInputStream(file);
+            params.addBodyParameter("file", fileStream, null, file.getName());
+            //最后fileName InputStream参数获取不到文件名, 最好设置, 除非服务端不关心这个参数.
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {
                 AddPhoto_Model model = new Gson().fromJson(resultString, AddPhoto_Model.class);
                 if (model.isIsSuccess()) {
                     String files = model.getData().toString().replace("[", "").replace("]", "");
-                    AddPkBg_Data(getActivity(), saveFile.BaseUrl + saveFile.AddPkBg_Url+"?FileID="+files, files);
+                    AddPkBg_Data(getActivity(), saveFile.BaseUrl + saveFile.AddPkBg_Url + "?FileID=" + files, files);
                 } else {
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
                 }
@@ -598,6 +618,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
                 }
             }
+
             @Override
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
@@ -616,8 +637,6 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
             }
         });
     }
-
-
 
 
 }

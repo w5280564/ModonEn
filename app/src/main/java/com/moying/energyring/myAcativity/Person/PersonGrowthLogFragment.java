@@ -32,7 +32,7 @@ import java.util.List;
  * Created by Admin on 2016/4/18.
  * 成长日志
  */
-public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
+public class   PersonGrowthLogFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
     private String defaultHello = "default value";
     private String Type;
     private String FromUserID;
@@ -66,11 +66,11 @@ public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecycl
         Type = args != null ? args.getString("Type") : defaultHello;
         FromUserID = args != null ? args.getString("FromUserID") : defaultHello;
 
-
         other_recycle = (XRecyclerView) parentView.findViewById(R.id.other_recycle);
 //        other_recycle.setLoadingMoreEnabled(false);//底部不加载
         other_recycle.setPullRefreshEnabled(false);
         other_recycle.setLoadingListener(this);//添加事件
+        other_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
         StaticData.changeXRecycleHeadGif(other_recycle,R.drawable.gif_bird_icon,750,200);
         return parentView;
     }
@@ -132,8 +132,13 @@ public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecycl
         mAdapter.setOnItemClickLitener(new Person_GrowthLogFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
+                String content = baseModel.get(position).getPostContent();
+                String postId = baseModel.get(position).getPostID() +"";
+                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
                 Intent intent = new Intent(context, Energy_WebDetail.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
+                intent.putExtra("content", content);
+                intent.putExtra("postId", postId);
+                intent.putExtra("url", url);
                 startActivity(intent);
             }
 
@@ -167,7 +172,7 @@ public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecycl
                             initlist(getActivity());
                         } else {
                             other_recycle.loadMoreComplete();
-                            mAdapter.addMoreData(baseModel);
+                            mAdapter.addMoreData(listModel);
                         }
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();

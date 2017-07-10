@@ -45,6 +45,7 @@ import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.FlowLayout;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -159,6 +160,20 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         setShareFlag();
     }
 
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("PostingActivity"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);          //统计时长
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PostingActivity"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
+    }
+
+
+
     private class return_Btn implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -214,6 +229,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
                 Toast.makeText(Pk_DayPkAdd.this, "请填写pk数", Toast.LENGTH_SHORT).show();
                 return;
             }
+            MobclickAgent.onEvent(Pk_DayPkAdd.this, "releasePk");//统计页签
             if (photoPaths.size() == 0) {
                 AddPk_Data(Pk_DayPkAdd.this, saveFile.BaseUrl + saveFile.AddPk_Url, "");
             } else {
@@ -389,9 +405,9 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         }
     }
 
-    private String shareTitle = "能量圈";
-    private String shareContent = "能量圈";
-    private String shareUrl = "http://172.16.0.111/Share/PostDetails";
+    private String shareTitle = "";
+    private String shareContent = "";
+    private String shareUrl = "";
 
     //分享给微信朋友
     public void shareWechatFriend() {
@@ -399,7 +415,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         Platform.ShareParams wechat = new Platform.ShareParams();
         wechat.setTitle(shareTitle);
         wechat.setText(shareContent);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
 //        msg.thumbData = Util.bmpToByteArray(bitmap, true);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
@@ -422,7 +438,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         wechat.setText(shareContent);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
         wechat.setImageData(bitmap);
         wechat.setUrl(shareUrl);
 //        wechat.setImageData(wechatfriendbit);
@@ -430,7 +446,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         Platform weixin = ShareSDK.getPlatform(this, WechatMoments.NAME);
         weixin.setPlatformActionListener(this);
         weixin.share(wechat);
-        Toast.makeText(this, "微信朋友圈分享成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "微信朋友圈分享成功", Toast.LENGTH_SHORT).show();
     }
 
     //分享-新浪微博
@@ -443,7 +459,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         sinap.setPlatformActionListener(this);
 //        sinap.SSOSetting(true);//审核未通过
         sinap.share(sina);
-        Toast.makeText(this, "新浪微博分享成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "新浪微博分享成功", Toast.LENGTH_SHORT).show();
     }
 
     public void share_qq() {
@@ -458,7 +474,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         Platform qq = ShareSDK.getPlatform(QQ.NAME);
         qq.setPlatformActionListener(this); // 设置分享事件回调
         qq.share(sp);
-        Toast.makeText(this, "qq分享成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "qq分享成功", Toast.LENGTH_SHORT).show();
     }
 
     public void share_qzone() {
@@ -468,11 +484,11 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         sp.setTitleUrl(shareUrl);
         sp.setText(shareContent);
         sp.setSite("能量圈");//分享应用的名称
-        sp.setSiteUrl("https://www.baidu.com/");//分享应用的网页地址
+        sp.setSiteUrl("http://m.pp.cn/detail.html?appid=6863306&ch_src=pp_dev&ch=default");//分享应用的网页地址
         Platform qzone = ShareSDK.getPlatform(QZone.NAME);
         qzone.setPlatformActionListener(this); // 设置分享事件回调
         qzone.share(sp);
-        Toast.makeText(this, "qq空间分享成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "qq空间分享成功", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -643,7 +659,10 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         }
         JSONObject obj = new JSONObject();
         try {
+
+
             obj.put("ProjectID", ProjectID);
+
             obj.put("ReportNum", count_Edit.getText());
             obj.put("FileIDs", files);
             boolean sync = false;
@@ -661,6 +680,15 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
             public void onSuccess(String resultString) {
                 BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                 if (model.isIsSuccess()) {
+//                    StringBuffer sbf = new StringBuffer();
+//                    sbf.append();
+                    String sbf = centent_Txt.getText().toString()+count_Edit.getText().toString()+unit_Txt.getText().toString()+"，";
+//                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
+
+                    shareTitle = "我今天" + sbf + "(根据实际的汇报内容)，加入能量圈，和我一起PK吧！";
+//                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode",Pk_DayPkAdd.this);
+                    shareContent = "";
+                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + model.getData();
                     isShare(shareIndex());//同步分享
 //                    finish();
                 } else {

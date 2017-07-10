@@ -26,8 +26,10 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
+import com.moying.energyring.pinyin.CharacterParser;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -47,6 +49,17 @@ public class Pk_Daypk extends FragmentActivity {
         mam.pushOneActivity(this);//把当前activity压入了栈中
 
         initView();
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("Pk_Daypk"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
+        MobclickAgent.onResume(this);          //统计时长
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("Pk_Daypk"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
     }
 
     private Button more_Btn;
@@ -90,6 +103,24 @@ public class Pk_Daypk extends FragmentActivity {
         tablayout.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
 //        viewpager.setOffscreenPageLimit(1);
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                // 实例化汉字转拼音类
+                CharacterParser  characterParser = CharacterParser.getInstance();
+                String pinyin = characterParser.getSelling(baseModel.getData().get(tab.getPosition()).getProjectName());
+                MobclickAgent.onEvent(Pk_Daypk.this, pinyin);//统计页签
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         //添加页卡标题
         if (fragments != null) {
@@ -136,7 +167,6 @@ public class Pk_Daypk extends FragmentActivity {
     }
 
     DayPkProject_Model baseModel;
-
     public void dayPkData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -227,6 +257,18 @@ public class Pk_Daypk extends FragmentActivity {
                     popupWindow.dismiss();
                     int tag = (Integer) v.getTag();
                     setpage(tag);
+                    // 实例化汉字转拼音类
+                    CharacterParser  characterParser = CharacterParser.getInstance();
+                    String pinyin = characterParser.getSelling(baseModel.getData().get(tag).getProjectName());
+                    MobclickAgent.onEvent(Pk_Daypk.this, pinyin);//统计页签
+
+//                    StringBuffer sbf = new StringBuffer();
+//                    for (int i1 =0;i1<baseModel.getData().size();i1++){
+//                        String piny = characterParser.getSelling(baseModel.getData().get(i1).getProjectName());
+//                        sbf.append(piny+",");
+//                    }
+//
+//                    Log.e("pinyin",sbf.toString());
                 }
             });
         }

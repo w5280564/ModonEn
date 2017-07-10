@@ -40,6 +40,7 @@ import com.moying.energyring.Model.AllPerson_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAdapter.AllPersonOneDay_Adapter;
 import com.moying.energyring.myAdapter.AllPerson_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -47,6 +48,7 @@ import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 import com.moying.energyring.xrecycle.XRecyclerView;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -213,6 +215,7 @@ public class Leran_AllPerson extends Activity implements XRecyclerView.LoadingLi
     public class mu_Rel implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            MobclickAgent.onEvent(Leran_AllPerson.this, "setagoal");//统计页签
             Intent intent = new Intent(Leran_AllPerson.this, Leran_Goal.class);
             startActivity(intent);
         }
@@ -413,6 +416,10 @@ public class Leran_AllPerson extends Activity implements XRecyclerView.LoadingLi
             @Override
             public void onClick(View view) {
                 popupWindow.dismiss();
+                Intent intent = new Intent(Leran_AllPerson.this, PersonMyCenter.class);
+                intent.putExtra("UserID","0");
+                intent.putExtra("tabType","2");
+                startActivity(intent);
 //                Intent intent = new Intent(Leran_AllPerson.this, pkDay.class);
 //                startActivity(intent);
             }

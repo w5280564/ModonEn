@@ -77,7 +77,7 @@ public class Person_NoticeNomm_Adapter extends RecyclerView.Adapter<Person_Notic
 //            StaticData.lodingheadBg(holder.my_Head);
         }
         holder.name_Txt.setText(oneData.getNickName());
-        holder.content_Txt.setText(oneData.getPostContent());
+        holder.content_Txt.setText(String.valueOf(oneData.getCommentContent()));
         holder.time_Txt.setText(oneData.getCreateTime());
 
         if (oneData.getFilePath() != null){

@@ -32,7 +32,8 @@ import java.util.Map;
 public class saveFile {
 //    public static String BaseUrl = "http://www.ec.dev.com/";
 //    public static String BaseUrl = "http://192.168.1.111/";
-    public static String BaseUrl = "http://172.16.0.111/";
+//    public static String BaseUrl = "http://172.16.0.111/";
+    public static String BaseUrl = "http://120.26.218.68:1111/";
     public static String CodeUrl = "ec/Account/PhoneCode_Get";
     public static String LoginUrl = "ec/Account/Login";
     public static String EnergyListUrl = "ec/Post/Post_List";
@@ -75,6 +76,17 @@ public class saveFile {
     public static String Notice_Comment_Url = "ec/Notice/Notice_Comment_List";
     public static String Notice_Attention_Url = "ec/User/Attention_Me_List";
     public static String Notice_NoticeList_Url = "ec/Notice/Notice_List";
+    public static String Notice_Unread_Url = "ec/Notice/Notice_NotRead_Num";
+    public static String Product_Detrail_Url = "ec/Product/Product_Get";
+    public static String shop_Adress_Url = "ec/Product/Exchange_Add";
+    public static String Mess_UserList_Url = "ec/Message/Message_User_List";
+    public static String MesList_Url = "ec/Message/Message_List";
+    public static String SendMess_Url = "ec/Message/Message_Add";
+    public static String Integral_Url = "ec/User/IntegralSource_List";
+    public static String Attention_Url = "ec/User/My_Attention_List";
+    public static String Fans_Url = "ec/User/Attention_Me_List";
+    public static String AtMe_Url = "ec/Notice/Notice_MenTion_List";
+    public static String PostLike_Url = "ec/Post/Likes_Add";
 
 
     private static SharedPreferences mShared = null;

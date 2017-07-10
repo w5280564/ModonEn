@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
 import com.moying.energyring.myAcativity.LoginRegister;
-import com.moying.energyring.myAdapter.GrowthLogFragment_Adapter;
+import com.moying.energyring.myAdapter.FindSeek_GrowthLogFragment_Adapter;
 import com.moying.energyring.myAdapter.HeadAfter_Adapter;
 import com.moying.energyring.myAdapter.HeadBefo_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -70,21 +71,29 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
         setContentView(R.layout.activity_find_seek);
         setView();
         initView();
+        Type = 6;
         initData();
+
+        shareTitle = "我的邀请码是" + saveFile.getShareData("role",this) + "，一起加入能量圈吧！";
+        shareContent = "能量圈—新圈子，新起点，新生活；输入能量源，获得100积分，赢取丰厚奖品！";
+//        shareUrl = saveFile.BaseUrl + "/html/ShareReg/ShareReg.html?UserID" + saveFile.getShareData("userId",this);
+        shareUrl = "http://m.pp.cn/detail.html?appid=6863306&ch_src=pp_dev&ch=default";
     }
 
     public void setView() {
-        setTheme(R.style.MyDialog);
-//        setContentView(getIntent().getIntExtra("view", R.layout.activity_find_seek));
-//        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-////        layoutParams.gravity = Gravity.BOTTOM;
-//        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        getWindow().setAttributes(layoutParams);
+//        setTheme(R.style.MyDialog);
+        setContentView(getIntent().getIntExtra("view", R.layout.activity_find_seek));
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+//        layoutParams.gravity = Gravity.BOTTOM;
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+        getWindow().setAttributes(layoutParams);
     }
 
     private void initView() {
         find_recy = (XRecyclerView) findViewById(R.id.find_recy);
         find_recy.setLoadingListener(this);
+        find_recy.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
         initAddListHead(find_recy);
         seek_Edit = (EditText) findViewById(R.id.seek_Edit);
         TextView cancel_Txt = (TextView) findViewById(R.id.cancel_Txt);
@@ -100,6 +109,7 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
         View header = LayoutInflater.from(FindSeekActivity.this).inflate(R.layout.findseek_head, (ViewGroup) findViewById(android.R.id.content), false);
         head_recy = (RecyclerView) header.findViewById(R.id.head_recy);
         head_recy.setFocusable(false);//一定要在java文件中添加
+        head_recy.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
 
         findfriend_Lin = (LinearLayout) header.findViewById(R.id.findfriend_Lin);
         RelativeLayout phoneadress_Rel = (RelativeLayout) header.findViewById(R.id.phoneadress_Rel);
@@ -151,7 +161,7 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
     private String SearchKey = "";
     int indexHead;
     int indexSixe;
-
+    int Type;
     private void initData() {
         addHeadData();
         addListData();
@@ -164,9 +174,10 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
     }
 
     private void addListData() {
+        //Type = 6 精选帖子 ，1 =  普通帖子
         PageIndex = 1;
         pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=6&PageIndex=" + PageIndex + "&PageSize=" + pageSize + "&SearchKey=" + SearchKey);
+        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type="+ Type+"&PageIndex=" + PageIndex + "&PageSize=" + pageSize + "&SearchKey=" + SearchKey);
     }
 
     private void afterData() {//
@@ -187,9 +198,10 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
 
     @Override
     public void onLoadMore() {
+
         PageIndex += 1;
         pageSize = 10;
-        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=6&PageIndex=" + PageIndex + "&PageSize=" + pageSize + "&SearchKey=" + SearchKey);
+        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type="+ Type +"&PageIndex=" + PageIndex + "&PageSize=" + pageSize + "&SearchKey=" + SearchKey);
     }
 
     private class seek_Edit implements TextWatcher {
@@ -210,12 +222,14 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
                 head_recy.setBackgroundResource(0);//列表背景框
                 SearchKey = "";
                 addHeadData();
+                Type = 6;
                 addListData();
             } else {
                 findfriend_Lin.setVisibility(View.GONE);
                 head_recy.setBackgroundResource(R.drawable.popupwhite_bg);
                 SearchKey = editable.toString();
                 afterData();
+                Type = 1;
                 addListData();
             }
         }
@@ -264,20 +278,25 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
     }
 
 
-    GrowthLogFragment_Adapter mAdapter;
+    FindSeek_GrowthLogFragment_Adapter mAdapter;
 
     public void initlist(final Context context) {
         LinearLayoutManager mMangaer = new LinearLayoutManager(context);
         find_recy.setLayoutManager(mMangaer);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         find_recy.setHasFixedSize(true);
-        mAdapter = new GrowthLogFragment_Adapter(context, baseModel, listModel);
+        mAdapter = new FindSeek_GrowthLogFragment_Adapter(context, baseModel, listModel);
         find_recy.setAdapter(mAdapter);
-        mAdapter.setOnItemClickLitener(new com.moying.energyring.myAdapter.GrowthLogFragment_Adapter.OnItemClickLitener() {
+        mAdapter.setOnItemClickLitener(new FindSeek_GrowthLogFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
+                String content = baseModel.get(position).getPostContent();
+                String postId = baseModel.get(position).getPostID() +"";
+                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
                 Intent intent = new Intent(context, Energy_WebDetail.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
+                intent.putExtra("content", content);
+                intent.putExtra("postId", postId);
+                intent.putExtra("url", url);
                 startActivity(intent);
             }
 
@@ -449,9 +468,9 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
     }
 
 
-    private String shareTitle = "能量圈";
-    private String shareContent = "能量圈";
-    private String shareUrl = "http://172.16.0.111/Share/PostDetails";
+    private String shareTitle = "";
+    private String shareContent = "";
+    private String shareUrl = "";
 
     //分享给微信朋友
     public void shareWechatFriend() {
@@ -459,7 +478,7 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
         Platform.ShareParams wechat = new Platform.ShareParams();
         wechat.setTitle(shareTitle);
         wechat.setText(shareContent);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
 //        msg.thumbData = Util.bmpToByteArray(bitmap, true);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
@@ -481,7 +500,7 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
         wechat.setText(shareContent);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
         wechat.setImageData(bitmap);
         wechat.setUrl(shareUrl);
 //        wechat.setImageData(wechatfriendbit);
@@ -524,7 +543,7 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
         sp.setTitleUrl(shareUrl);
         sp.setText(shareContent);
         sp.setSite("能量圈");//分享应用的名称
-        sp.setSiteUrl("https://www.baidu.com/");//分享应用的网页地址
+        sp.setSiteUrl("http://m.pp.cn/detail.html?appid=6863306&ch_src=pp_dev&ch=default");//分享应用的网页地址
         Platform qzone = ShareSDK.getPlatform(QZone.NAME);
         qzone.setPlatformActionListener(this); // 设置分享事件回调
         qzone.share(sp);

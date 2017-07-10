@@ -1,6 +1,7 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +11,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
+import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.network.saveFile;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.util.List;
 
@@ -34,9 +46,11 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         this.listModel = listModel;
     }
 
-    public void addMoreData(List<EnergyList_Model.DataBean> otherList) {
-//        this.otherList = otherList;
-        notifyDataSetChanged();
+    public void addMoreData(EnergyList_Model list) {
+        int lastIndex = this.otherList.size();
+        if (this.otherList.addAll(list.getData())) {
+            notifyItemRangeInserted(lastIndex+1, list.getData().size());
+        }
     }
 
     @Override
@@ -67,32 +81,71 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             });
         }
 
-        String headStr = otherList.get(position).getProfilePicture();
-        if (!headStr.isEmpty()) {
-            if (!headStr.substring(0, 4).equals("http")) {
-                headStr = "http://" + headStr;
-            }
+//        String headStr = otherList.get(position).getProfilePicture();
+//        if (!headStr.isEmpty()) {
+//            if (!headStr.substring(0, 4).equals("http")) {
+//                headStr = "http://" + headStr;
+//            }
+//        }
+
+        final EnergyList_Model.DataBean oneData = otherList.get(position);
+
+        if (oneData.getProfilePicture() != null) {
+//            StaticData.addPlaceRound(holder.myhead_simple, context);
+            Uri headUri = Uri.parse(oneData.getProfilePicture());
+            holder.myhead_simple.setImageURI(headUri);
+
         }
 
-        EnergyList_Model.DataBean oneData = otherList.get(position);
-        if (oneData.getFilePath() != null){
+        holder.name_Txt.setText(oneData.getNickName());
+        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+        holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
+
+        holder.talk_Txt.setText(oneData.getCommentNum() + "");
+        holder.like_Txt.setText(oneData.getLikes() + "");
+        if (oneData.isIs_Like()) {
+            holder.energy_like.setImageResource(R.drawable.like_red_icon);
+        } else {
+            holder.energy_like.setImageResource(R.drawable.energy_like);
+        }
+
+        if (oneData.getPostType() == POST_TYPE) {//4英雄榜
+            holder.hero_Lin.setVisibility(View.VISIBLE);
+        } else if (oneData.getPostType() == 5) {
+            if (oneData.getPostTitle() != null) {
+                holder.content_Txt.setText(String.valueOf(oneData.getPostTitle()));
+            } else {
+                holder.content_Txt.setVisibility(View.INVISIBLE);
+            }
+        }
+//        else if (oneData.getPostType() == 1 || oneData.getPostType() == 2) { //1是普通帖子 2是每日PK
+//
+//        }
+        if (oneData.getFilePath() != null) {
+//            StaticData.addPlace(holder.content_simple, context);
             StaticData.ViewScale(holder.content_simple, 710, 440);
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
             holder.content_simple.setImageURI(contentUri);
         }
-        Uri headUri = Uri.parse(oneData.getProfilePicture());
-        holder.myhead_simple.setImageURI(headUri);
-        holder.name_Txt.setText(oneData.getNickName());
-        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
-        holder.content_Txt.setText(oneData.getPostContent());
-        holder.talk_Txt.setText(oneData.getCommentNum()+"");
-        holder.like_Txt.setText(oneData.getLikes()+"");
 
-        if (oneData.getPostType() == POST_TYPE){//4英雄榜
-            holder.hero_Lin.setVisibility(View.VISIBLE);
-        }
+
+        holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                intent.putExtra("UserID", oneData.getUserID() + "");
+                context.startActivity(intent);
+            }
+        });
+
+        holder.like_Lin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int PostID = oneData.getPostID();
+                zanData(context, saveFile.BaseUrl + saveFile.PostLike_Url + "?PostID=" + PostID, position);
+            }
+        });
     }
-
 
 
     @Override
@@ -108,10 +161,10 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private  LinearLayout hero_Lin;
-        private  TextView name_Txt,time_Txt,content_Txt,talk_Txt,like_Txt;
-        private  ImageView energy_img;
-        private  SimpleDraweeView myhead_simple,content_simple;
+        private LinearLayout hero_Lin, like_Lin;
+        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt;
+        private ImageView energy_img, energy_like;
+        private SimpleDraweeView myhead_simple, content_simple;
         private RelativeLayout mu_Rel;
 
         public MyViewHolder(View itemView) {
@@ -125,9 +178,10 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             content_Txt = (TextView) itemView.findViewById(R.id.content_Txt);
             energy_img = (ImageView) itemView.findViewById(R.id.energy_img);
             ImageView energy_talk = (ImageView) itemView.findViewById(R.id.energy_talk);
-            ImageView energy_like = (ImageView) itemView.findViewById(R.id.energy_like);
-             talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
+            energy_like = (ImageView) itemView.findViewById(R.id.energy_like);
+            talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
+            like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
             StaticData.ViewScale(mu_Rel, 710, 0);
             StaticData.ViewScale(myhead_simple, 100, 100);
 
@@ -147,6 +201,60 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 
     public void setOnItemClickLitener(OnItemClickLitener listener) {
         mOnItemClickLitener = listener;
+    }
+
+    public void zanData(final Context context, String baseUrl, final int pos) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                    if (model.isIsSuccess()) {
+                        EnergyList_Model.DataBean oneData = otherList.get(pos);
+                        if (oneData.isIs_Like()) {
+                            oneData.setIs_Like(false);
+                            if (oneData.getLikes() == 0) {
+                                oneData.setLikes(0);
+                            } else {
+                                oneData.setLikes(oneData.getLikes() - 1);
+                            }
+                        } else {
+                            oneData.setIs_Like(true);
+                            oneData.setLikes(oneData.getLikes() + 1);
+                        }
+                        notifyItemChanged(pos + 1);//刷新一个item +1有一个刷新头部
+
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    context.startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
     }
 
 

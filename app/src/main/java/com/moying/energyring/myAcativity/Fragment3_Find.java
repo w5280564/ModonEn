@@ -30,7 +30,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.myMediaplayer;
 import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
-import com.moying.energyring.myAcativity.Find.FindRadioListActivity;
+import com.moying.energyring.myAcativity.Find.FindRadioListActivityTest;
 import com.moying.energyring.myAcativity.Find.FindSeekActivity;
 import com.moying.energyring.myAcativity.Find.radioInfo.LocalRadioInfo;
 import com.moying.energyring.myAcativity.Find.radioInfo.radio_Model;
@@ -44,6 +44,8 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Admin on 2016/3/25.
@@ -123,12 +125,13 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
         radio_play_img.setOnClickListener(new radio_play_img());
         radio_moreimg.setOnClickListener(new radio_moreimg());
         myplayer = myMediaplayer.getInstance();
+        initData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+//        initData();
     }
 
     private void initData() {
@@ -147,20 +150,21 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
 
     private void addRadioVideo() {
         radioInfo = new LocalRadioInfo(getActivity());
-        if (!radioInfo.getUserInfo().getRadioName().equals("false")) {
 
-            if (radioInfo.getUserInfo().getRadioisPlay() == 2) {//正在播放
-                radio_play_img.setImageResource(R.drawable.radio_push);
-                myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_play_img);
-            } else {
-                radio_play_img.setImageResource(R.drawable.radio_play);
-            }
-            Uri radioUri = Uri.parse(radioInfo.getUserInfo().getRadioImgpath());
-            radio_simple.setImageURI(radioUri);
-            radio_Name.setText(radioInfo.getUserInfo().getRadioName());
-        } else {
-            RadioData(saveFile.BaseUrl + saveFile.RadioList_Url + "?PageIndex=" + 1 + "&PageSize=" + 20);
-        }
+//        if (!radioInfo.getUserInfo().getRadioName().equals("false")) {
+//
+//            if (radioInfo.getUserInfo().getRadioisPlay() == 2) {//正在播放
+//                radio_play_img.setImageResource(R.drawable.radio_push);
+//                myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_play_img);
+//            } else {
+//                radio_play_img.setImageResource(R.drawable.radio_play);
+//            }
+//            Uri radioUri = Uri.parse(radioInfo.getUserInfo().getRadioImgpath());
+//            radio_simple.setImageURI(radioUri);
+//            radio_Name.setText(radioInfo.getUserInfo().getRadioName());
+//        } else {
+        RadioData(saveFile.BaseUrl + saveFile.RadioList_Url + "?PageIndex=" + 1 + "&PageSize=" + 20);
+//        }
 
     }
 
@@ -196,22 +200,99 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
     private class radio_play_img implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) {
-                AddRadioState(0);
-                radio_play_img.setImageResource(R.drawable.radio_play);
+
+            if (myplayer.mediaPlayer == null) {
+//                radio_play_img.setImageResource(R.drawable.radio_push);
+//                myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_play_img);
+
+
+//                radioModel.getData().get(0).setIsPlay(true);
+
+
+//                int idex = radioModel.getData().size();
+//                String locaName = "";
+//                if (!StaticData.isSpace(radio_Name.getText().toString())) {
+//                    locaName = radio_Name.getText().toString();
+//                }
+//                for (int i = 0; i < idex; i++) {
+//                    RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+//                    String radioName = oneData.getRadioName();
+//                    if (locaName.equals(radioName)) {
+//                        myplayer.playUrl(oneData.getRadioUrl(), radio_play_img);
+//                        break;
+//                    }
+//                }
+
+                radioUrl();
+
+            } else if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) { //正在播放
+
                 myplayer.pause();
+                radioPauseset();
+
             } else {
-                AddRadioState(2);
+//                radio_play_img.setImageResource(R.drawable.radio_push);
+//                myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(), radio_play_img);
+                radioUrl();
+            }
+
+//            if (myplayer.mediaPlayer != null && myplayer.mediaPlayer.isPlaying()) { //正在播放
+//                AddRadioState(0);
+//                radio_play_img.setImageResource(R.drawable.radio_play);
+//                myplayer.pause();
+//            } else {
+//                AddRadioState(2);
+//                radio_play_img.setImageResource(R.drawable.radio_push);
+////                RadioList_Model.DataBean oneData = radioModel.getData().get(0);
+//                myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_play_img);
+////                AddOneLocaInfo(oneData);
+//            }
+        }
+    }
+
+    private void radioUrl() {
+        int idex = radioModel.getData().size();
+        String locaName = "";
+        if (!StaticData.isSpace(radio_Name.getText().toString())) {
+            locaName = radio_Name.getText().toString();
+        }
+        for (int i = 0; i < idex; i++) {
+            RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+            String radioName = oneData.getRadioName();
+            if (locaName.equals(radioName)) {
+                oneData.setIsPlay(true);
                 radio_play_img.setImageResource(R.drawable.radio_push);
-//                RadioList_Model.DataBean oneData = radioModel.getData().get(0);
-                myplayer.playUrl(radioInfo.getUserInfo().getRadioUrl(),radio_play_img);
-//                AddOneLocaInfo(oneData);
+                myplayer.playUrl(oneData.getRadioUrl(), radio_play_img);
+                break;
             }
         }
     }
 
+    private void radioPauseset() {
+
+        int idex = radioModel.getData().size();
+        String locaName = "";
+        if (!StaticData.isSpace(radio_Name.getText().toString())) {
+            locaName = radio_Name.getText().toString();
+        }
+        for (int i = 0; i < idex; i++) {
+            RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+            String radioName = oneData.getRadioName();
+            if (locaName.equals(radioName)) {
+                oneData.setIsPlay(false);
+                radio_play_img.setImageResource(R.drawable.radio_play);
+                break;
+            }
+        }
+
+//        radio_play_img.setBackgroundResource(R.drawable.radio_play);
+//        RadioList_Model.DataBean oneData = radioModel.getData().get(pos);
+//        oneData.setIsPlay(false);
+    }
+
+
     //存储一条电台数据
-    public void AddOneLocaInfo(RadioList_Model.DataBean onedata,int state) {
+    public void AddOneLocaInfo(RadioList_Model.DataBean onedata, int state) {
         radio_Model model = new radio_Model();
         model.setRadioName(onedata.getRadioName());
         model.setRadioImgpath(onedata.getRadio_Icon());
@@ -220,7 +301,7 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
         radioInfo.setUserInfo(model);
     }
 
-    private void AddRadioState(int state){
+    private void AddRadioState(int state) {
         radio_Model model = new radio_Model();
         model.setRadioName(radioInfo.getUserInfo().getRadioName());
         model.setRadioImgpath(radioInfo.getUserInfo().getRadioImgpath());
@@ -229,22 +310,95 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
         radioInfo.setUserInfo(model);
     }
 
-
+    public static int RadioRESULT = 301;
 
     private class radio_moreimg implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), FindRadioListActivity.class);
+//            Intent intent = new Intent(getActivity(), FindRadioListActivity.class);
+            Intent intent = new Intent(getActivity(), FindRadioListActivityTest.class);
+            intent.putExtra("radioList", radioModel);
+            intent.putExtra("nowRadioName", radio_Name.getText());
 //            Intent intent = new Intent(getActivity(), com.moying.energyring.waylenBaseView.viewpagercards.MainActivity.class);
-            startActivity(intent);
+
+
+            startActivityForResult(intent, RadioRESULT);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        addRadioVideo();
+        if (RESULT_OK == resultCode) {
+            radioModel = data.getParcelableExtra("radioList");
+            String nowRadioName = data.getStringExtra("nowRadioName");
+
+            radioResult(nowRadioName);
+//            updataMyData(userModel);
+        }
+//        addRadioVideo();
     }
+
+    private void radioResult(String locaName) {
+        int idex = radioModel.getData().size();
+        for (int i = 0; i < idex; i++) {
+            RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+            String radioName = oneData.getRadioName();
+
+            if (locaName.equals(radioName)) {
+                if (oneData.getRadio_Icon() != null) {
+                    Uri radioUri = Uri.parse(oneData.getRadio_Icon());
+                    radio_simple.setImageURI(radioUri);
+                }
+                radio_Name.setText(oneData.getRadioName());
+
+//                radio_play_img.setImageResource(R.drawable.radio_play);
+                if (oneData.getIsPlay()) {
+                    oneData.setIsPlay(true);
+                    radio_play_img.setImageResource(R.drawable.radio_push);
+                    myplayer.playUrl(oneData.getRadioUrl(), radio_play_img);
+                    break;
+                }
+            }
+
+        }
+
+
+//        int idex = radioModel.getData().size();
+//        for (int i = 0; i < idex; i++) {
+//            RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+//            if (oneData.getIsPlay()) {
+////                startUpTimer();//启动计时器
+////                oneData.setIsPlay(true);
+//                if (oneData.getRadio_Icon() != null) {
+//                    Uri radioUri = Uri.parse(oneData.getRadio_Icon());
+//                    radio_simple.setImageURI(radioUri);
+//                }
+//                radio_Name.setText(oneData.getRadioName());
+//                radio_play_img.setBackgroundResource(R.drawable.radio_list_push);
+//                myplayer.playUrl(oneData.getRadioUrl(), radio_play_img);
+//                break;
+//            }
+//        }
+    }
+//    private void radioResult() {
+//        int idex = radioModel.getData().size();
+//        String locaName = "";
+//        if (!StaticData.isSpace(radio_Name.getText().toString())) {
+//            locaName = radio_Name.getText().toString();
+//        }
+//        for (int i = 0; i < idex; i++) {
+//            RadioList_Model.DataBean oneData = radioModel.getData().get(i);
+//            String radioName = oneData.getRadioName();
+//            if (locaName.equals(radioName)) {
+//                oneData.setIsPlay(true);
+//                radio_play_img.setImageResource(R.drawable.radio_push);
+//                myplayer.playUrl(oneData.getRadioUrl(), radio_play_img);
+//                break;
+//            }
+//        }
+//    }
+
 
     GrowthLogFragment_Adapter mAdapter;
 
@@ -293,7 +447,7 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
                             initlist(getActivity());
                         } else {
                             find_recy.loadMoreComplete();
-                            mAdapter.addMoreData(baseModel);
+                            mAdapter.addMoreData(listModel);
                         }
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -390,7 +544,9 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
                     radioModel = new Gson().fromJson(resultString, RadioList_Model.class);
                     if (radioModel.isIsSuccess() && !radioModel.getData().equals("[]")) {
                         RadioList_Model.DataBean oneData = radioModel.getData().get(0);
-                        AddOneLocaInfo(oneData,0);//保存数据
+
+//                        AddOneLocaInfo(oneData,0);//保存数据
+
                         if (oneData.getRadio_Icon() != null) {
                             Uri radioUri = Uri.parse(oneData.getRadio_Icon());
                             radio_simple.setImageURI(radioUri);
@@ -435,6 +591,8 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
 //            mySimple.setScaleType(ImageView.ScaleType.FIT_XY);
             StaticData.ViewScale(mySimple, 190, 88);
             if (myBean.get(i).getFilePath() != null) {
+
+//                StaticData.addPlace(mySimple, getActivity());
                 Uri imgUri = Uri.parse(myBean.get(i).getFilePath());
                 mySimple.setImageURI(imgUri);
             }
@@ -471,6 +629,8 @@ public class Fragment3_Find extends Fragment implements XRecyclerView.LoadingLis
             imgview.setScaleType(ImageView.ScaleType.CENTER_CROP);
             FindBanner_Model.DataBean oneData = listModel.get(i);
             if (oneData.getFilePath() != null) {
+
+//                StaticData.addPlace(imgview, getActivity());
                 Uri imgurl = Uri.parse(oneData.getFilePath());
                 imgview.setImageURI(imgurl);
             }

@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/popupwhite_bg"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:elevation="2dp">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/pk_img"

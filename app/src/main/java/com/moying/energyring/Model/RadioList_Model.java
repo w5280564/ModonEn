@@ -1,13 +1,18 @@
 package com.moying.energyring.Model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by waylen on 2017/6/6.
  */
 
-public class RadioList_Model implements Serializable{
+public class RadioList_Model implements Parcelable {
+
+
 
     private static final long serialVersionUID = 8565198351058235015L;
 
@@ -55,7 +60,8 @@ public class RadioList_Model implements Serializable{
         this.Data = Data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Parcelable {
+
         /**
          * RadioID : 1
          * RadioName : BBC
@@ -79,6 +85,16 @@ public class RadioList_Model implements Serializable{
         private String Radio_Bg;
         private int FileID_Bg_Dim;
         private String Radio_Bg_Dim;
+        private boolean isPlay = false;
+
+        public boolean getIsPlay() {
+            return isPlay;
+        }
+
+        public void setIsPlay(boolean isPlay) {
+            this.isPlay = isPlay;
+        }
+
 
         public int getRadioID() {
             return RadioID;
@@ -159,5 +175,90 @@ public class RadioList_Model implements Serializable{
         public void setRadio_Bg_Dim(String Radio_Bg_Dim) {
             this.Radio_Bg_Dim = Radio_Bg_Dim;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.RadioID);
+            dest.writeString(this.RadioName);
+            dest.writeString(this.RadioUrl);
+            dest.writeByte(this.Is_Disabled ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.FileID_Icon);
+            dest.writeInt(this.FileID_Bg);
+            dest.writeString(this.Radio_Icon);
+            dest.writeString(this.Radio_Bg);
+            dest.writeInt(this.FileID_Bg_Dim);
+            dest.writeString(this.Radio_Bg_Dim);
+            dest.writeByte(this.isPlay ? (byte) 1 : (byte) 0);
+        }
+
+        public DataBean() {
+        }
+
+        protected DataBean(Parcel in) {
+            this.RadioID = in.readInt();
+            this.RadioName = in.readString();
+            this.RadioUrl = in.readString();
+            this.Is_Disabled = in.readByte() != 0;
+            this.FileID_Icon = in.readInt();
+            this.FileID_Bg = in.readInt();
+            this.Radio_Icon = in.readString();
+            this.Radio_Bg = in.readString();
+            this.FileID_Bg_Dim = in.readInt();
+            this.Radio_Bg_Dim = in.readString();
+            this.isPlay = in.readByte() != 0;
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel source) {
+                return new DataBean(source);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte(this.IsSuccess ? (byte) 1 : (byte) 0);
+        dest.writeString(this.Msg);
+        dest.writeInt(this.Status);
+        dest.writeList(this.Data);
+    }
+
+    public RadioList_Model() {
+    }
+
+    protected RadioList_Model(Parcel in) {
+        this.IsSuccess = in.readByte() != 0;
+        this.Msg = in.readString();
+        this.Status = in.readInt();
+        this.Data = new ArrayList<DataBean>();
+        in.readList(this.Data, DataBean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<RadioList_Model> CREATOR = new Parcelable.Creator<RadioList_Model>() {
+        @Override
+        public RadioList_Model createFromParcel(Parcel source) {
+            return new RadioList_Model(source);
+        }
+
+        @Override
+        public RadioList_Model[] newArray(int size) {
+            return new RadioList_Model[size];
+        }
+    };
 }

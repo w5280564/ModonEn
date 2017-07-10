@@ -29,7 +29,7 @@ import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAcativity.Person.Person_Set;
 import com.moying.energyring.myAcativity.Person.Person_Shop;
 import com.moying.energyring.network.saveFile;
-import com.moying.energyring.waylenBaseView.MyActivityManager;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -93,6 +93,10 @@ public class Fragment4_Person extends Fragment {
         ImageView set_arrow = (ImageView) view.findViewById(R.id.set_arrow);
         ImageView gui_arrow = (ImageView) view.findViewById(R.id.gui_arrow);
         ImageView che_arrow = (ImageView) view.findViewById(R.id.che_arrow);
+        TextView neng_Txt = (TextView) view.findViewById(R.id.neng_Txt);
+
+        String InviteCode = saveFile.getShareData("InviteCode",getActivity());
+        neng_Txt.setText(InviteCode);
 
         StaticData.ViewScale(personBg_simple, 0, 480);
         StaticData.ViewScale(user_simple, 148, 148);
@@ -178,12 +182,13 @@ public class Fragment4_Person extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), Person_Notice.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
             startActivity(intent);
         }
     }
 
 
-  //我的资料
+    //我的资料
     private class person_data_icon implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -191,7 +196,8 @@ public class Fragment4_Person extends Fragment {
             startActivity(intent);
         }
     }
-     //草稿箱
+
+    //草稿箱
     private class person_cao_icon implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -215,10 +221,12 @@ public class Fragment4_Person extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), Person_Set.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
             startActivity(intent);
 
         }
     }
+
     //积分排行榜
     private class bang_Rel implements View.OnClickListener {
         @Override
@@ -234,6 +242,7 @@ public class Fragment4_Person extends Fragment {
     private class gui_Rel implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            MobclickAgent.onEvent(getActivity(), "guiClick");//统计页签
             Intent intent = new Intent(getActivity(), Person_Relus.class);
             startActivity(intent);
         }
@@ -244,7 +253,9 @@ public class Fragment4_Person extends Fragment {
     private class che_Rel implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            MobclickAgent.onEvent(getActivity(), "person_Shop");//统计页签
             Intent intent = new Intent(getActivity(), Person_Shop.class);
+            intent.putExtra("Integral",userModel.getData().getIntegral()+"");
 //            intent.putExtra("rankIng", 5 + "");
 //            intent.putExtra("rankIngCount", 5 + "");//赞个数
             startActivity(intent);
@@ -252,25 +263,12 @@ public class Fragment4_Person extends Fragment {
     }
 
     private String userId = "0";
+
     private void initData() {
         UserData(getActivity(), saveFile.BaseUrl + saveFile.UserInfo_Url + "?UserID=" + userId);
     }
 
-    public class quit_Btn implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            saveFile.clearShareData("islogin", getActivity());
-            saveFile.clearShareData("role", getActivity());
-            saveFile.clearShareData("JSESSIONID", getActivity());
-            Intent i = new Intent(getActivity(), LoginRegister.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-
-            MyActivityManager.getInstance().finishAllActivity();
-//            mam.finishAllActivity();
-        }
-    }
-
+    UserInfo_Model userModel;
 
     public void UserData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
@@ -281,16 +279,20 @@ public class Fragment4_Person extends Fragment {
             @Override
             public void onSuccess(String resultString) {
                 if (resultString != null) {
-                    UserInfo_Model userModel = new Gson().fromJson(resultString, UserInfo_Model.class);
+                    userModel = new Gson().fromJson(resultString, UserInfo_Model.class);
                     if (userModel.isIsSuccess() && !userModel.getData().equals("[]")) {
                         UserInfo_Model.DataBean oneData = userModel.getData();
+
                         if (oneData.getCoverImg() != null) {
+//                            StaticData.addPlace(personBg_simple, getActivity());//占位图
                             Uri bgUri = Uri.parse(String.valueOf(oneData.getCoverImg()));
                             personBg_simple.setImageURI(bgUri);
                         } else {
                             StaticData.PersonBg(personBg_simple);
                         }
+
                         if (oneData.getProfilePicture() != null) {
+//                            StaticData.addPlaceRound(user_simple, getActivity());//占位图
                             Uri imgUri = Uri.parse(oneData.getProfilePicture());
                             user_simple.setImageURI(imgUri);
 //                            addSimplePath(user_simple, oneData.getProfilePicture());
@@ -299,7 +301,7 @@ public class Fragment4_Person extends Fragment {
                         }
 
                         userName_Txt.setText(oneData.getNickName());
-                        userCount_Txt.setText(oneData.getIntegral());
+                        userCount_Txt.setText(oneData.getIntegral()+"");
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
                     }

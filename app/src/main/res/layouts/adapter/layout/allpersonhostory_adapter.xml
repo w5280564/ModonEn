@@ -28,7 +28,8 @@
                 android:id="@+id/my_simpleview"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                fresco:roundAsCircle="true" />
+                fresco:roundAsCircle="true"
+                />
 
             <TextView
                 android:id="@+id/name_Txt"

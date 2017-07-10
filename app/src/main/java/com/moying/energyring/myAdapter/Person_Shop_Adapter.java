@@ -1,11 +1,13 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.moying.energyring.Model.Person_ShopList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Person.Person_ShopDetails;
 
 import java.util.List;
 
@@ -65,7 +68,7 @@ public class Person_Shop_Adapter extends RecyclerView.Adapter<Person_Shop_Adapte
         }
 //        position = position -1;
 
-        Person_ShopList_Model.DataBean oneData = otherList.get(position);
+        final Person_ShopList_Model.DataBean oneData = otherList.get(position);
         if (oneData.getFilePath() != null) {
             Uri uri = Uri.parse(oneData.getFilePath());
             holder.content_simple.setImageURI(uri);
@@ -77,6 +80,14 @@ public class Person_Shop_Adapter extends RecyclerView.Adapter<Person_Shop_Adapte
         holder.fen_Txt.setText(String.valueOf(oneData.getIntegral())+"积分");
 //        holder.rank_Txt.setText(oneData.getRanking() + ".");
 //        holder.all_Txt.setText(oneData.getLikes() + "天");
+        holder.exchange_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(context, Person_ShopDetails.class);
+                intent.putExtra("ProductID",oneData.getProductID() + "");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -92,6 +103,7 @@ public class Person_Shop_Adapter extends RecyclerView.Adapter<Person_Shop_Adapte
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  Button exchange_Btn;
         private  SimpleDraweeView content_simple;
         private TextView price_Txt, name_Txt, fen_Txt;
         private RelativeLayout shop_Rel;
@@ -103,8 +115,10 @@ public class Person_Shop_Adapter extends RecyclerView.Adapter<Person_Shop_Adapte
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
             price_Txt = (TextView) itemView.findViewById(R.id.price_Txt);
             fen_Txt = (TextView) itemView.findViewById(R.id.fen_Txt);
+            exchange_Btn = (Button) itemView.findViewById(R.id.exchange_Btn);
             StaticData.ViewScale(shop_Rel, 355, 480);
             StaticData.ViewScale(content_simple, 290, 290);
+            StaticData.ViewScale(exchange_Btn, 140, 80);
         }
     }
 

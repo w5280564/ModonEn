@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -28,7 +28,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                app:roundAsCircle="true" />
+                fresco:roundAsCircle="true" />
 
             <TextView
                 android:id="@+id/name_Txt"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_Lin"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/content_Txt"
@@ -73,11 +73,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/content_Txt"
-            android:visibility="invisible"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/energy_img"
@@ -96,21 +96,21 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@drawable/dash_line"
-            android:layerType="software"
             android:layout_below="@id/hero_Lin"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:background="@drawable/dash_line"
+            android:layerType="software" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_below="@id/hero_Lin"
+            android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
-            android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
             <ImageView
@@ -128,19 +128,28 @@
                 android:textColor="#aeaeae"
                 android:textSize="9sp" />
 
-            <ImageView
-                android:id="@+id/energy_like"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/like_Lin"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/energy_like" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/like_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="#aeaeae"
-                android:textSize="9sp" />
+                <ImageView
+                    android:id="@+id/energy_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/energy_like" />
+
+                <TextView
+                    android:id="@+id/like_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#aeaeae"
+                    android:textSize="9sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
 

@@ -144,7 +144,11 @@ public class Pk_Gui extends Activity {
                     int tag = (Integer) v.getTag();
 //                    myBadgeData(saveFile.BaseUrl + saveFile.MyBadge,tag);
                     if (model.getData().get(tag).getFilePath() != null) {
-                        new badge_Popup(Pk_Gui.this, count_Txt, model.getData().get(tag).getBadgeDays(), 0, model.getData().get(tag).getFilePath().toString());
+                        String name = model.getData().get(tag).getBadgeName();
+                        int day = model.getData().get(tag).getBadgeDays();
+                        int haveper = model.getData().get(tag).getHaveNum();
+                        String url = model.getData().get(tag).getFilePath().toString();
+                        new badge_Popup(Pk_Gui.this, count_Txt, name,day , haveper, url);
                     }
                 }
             });
@@ -161,7 +165,7 @@ public class Pk_Gui extends Activity {
 
 
     public class badge_Popup extends BasePopupWindow {
-        public badge_Popup(final Context mContext, View parent, int day, int per, String url) {
+        public badge_Popup(final Context mContext, View parent,String name , int day, int per, String url) {
             super(mContext);
             View contentView = View.inflate(mContext, R.layout.popup_badge, null);
             setTouchable(true);
@@ -173,11 +177,10 @@ public class Pk_Gui extends Activity {
             TextView per_Txt = (TextView) contentView.findViewById(R.id.per_Txt);
             StaticData.ViewScale(badge_Img, 214, 252);
             badge_Img.setImageURI(url);
+            day_Txt.setText(name);
             per_Txt.setText("已有" + per + "人获得");
         }
     }
-
-
 
 
 }

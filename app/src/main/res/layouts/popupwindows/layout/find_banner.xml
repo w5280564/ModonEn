@@ -109,25 +109,61 @@
                     android:src="@drawable/radio_play" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/radio_Name"
+
+            <LinearLayout
+                android:id="@+id/radiomore_Lin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/play_Rel"
-                android:maxLength="4"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/radio_moreimg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_more" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="#5b5b5b"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/timeColockPush_Lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/radiomore_Lin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/timeColock_pushimg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_timecolock_push" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="定时停止"
+                    android:textColor="#5b5b5b"
+                    android:textSize="8sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/timeColockPlay_Lin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/radio_Name"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/timeColockPush_Lin"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -146,55 +182,21 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/timeColockPush_Lin"
+            <TextView
+                android:id="@+id/radio_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/timeColockPlay_Lin"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_toRightOf="@id/play_Rel"
+                android:layout_toLeftOf="@id/timeColockPlay_Lin"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="14sp" />
 
-                <ImageView
-                    android:id="@+id/timeColock_pushimg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_timecolock_push" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="定时停止"
-                    android:textColor="#5b5b5b"
-                    android:textSize="8sp" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/radiomore_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/timeColockPush_Lin"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/radio_moreimg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/radio_more" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="更多"
-                    android:textColor="#5b5b5b"
-                    android:textSize="8sp" />
-
-            </LinearLayout>
         </RelativeLayout>
 
     </RelativeLayout>

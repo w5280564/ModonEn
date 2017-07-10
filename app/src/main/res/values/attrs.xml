@@ -38,4 +38,5 @@
         <attr name="switcherImageRatio" format="float" />
     </declare-styleable>
 
+
 </resources>

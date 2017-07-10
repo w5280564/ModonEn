@@ -14,11 +14,12 @@ import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
-import com.moying.energyring.Model.Base_Model;
+import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Recommend_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -109,6 +110,15 @@ public class HeadAfter_Adapter extends RecyclerView.Adapter<HeadAfter_Adapter.My
             }
         });
 
+        holder.my_Head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                intent.putExtra("UserID",oneData.getUserID()+"");
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -168,7 +178,7 @@ public class HeadAfter_Adapter extends RecyclerView.Adapter<HeadAfter_Adapter.My
             @Override
             public void onSuccess(String resultString) {
                 if (resultString != null) {
-                    Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
+                    BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                     if (model.isIsSuccess()) {
                         Recommend_Model.DataBean oneData = otherList.get(pos);
                         if (oneData.isIs_Attention()) {
@@ -176,7 +186,8 @@ public class HeadAfter_Adapter extends RecyclerView.Adapter<HeadAfter_Adapter.My
                         } else {
                             oneData.setIs_Attention(true);
                         }
-                        notifyDataSetChanged();
+//                        notifyDataSetChanged();
+                        notifyItemChanged(pos); //刷新一个item
 
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();

@@ -16,11 +16,13 @@ import com.moying.energyring.Model.Committed_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPersonDetails;
 import com.moying.energyring.myAdapter.CommHead_Adapter;
 import com.moying.energyring.myAdapter.CommittedFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
 import com.moying.energyring.xrecycle.XRecyclerView;
+import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -72,7 +74,8 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
         other_recycle = (XRecyclerView) parentView.findViewById(R.id.other_recycle);
 //        other_recycle.setLoadingMoreEnabled(false);//底部不加载
         other_recycle.setLoadingListener(this);//添加事件
-        StaticData.changeXRecycleHeadGif(other_recycle,R.drawable.gif_bird_icon,750,200);
+        other_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
+        StaticData.changeXRecycleHeadGif(other_recycle, R.drawable.gif_bird_icon, 750, 200);
         addRecycleHead(other_recycle, getActivity(), parentView);
 
         isPrepared = true;
@@ -80,6 +83,17 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
 
         return parentView;
     }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("CommittedFragment"); //统计页面，"CommittedFragment"为页面名称，可自定义
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("CommittedFragment");
+    }
+
 
     /**
      * 标志位，标志已经初始化完成
@@ -95,8 +109,8 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
     }
 
 
-
     RecyclerView head_recy;
+
     private void addRecycleHead(XRecyclerView recyview, Context context, View view) {
         View header = LayoutInflater.from(context).inflate(R.layout.commfragment_head, (ViewGroup) view.findViewById(android.R.id.content), false);
         head_recy = (RecyclerView) header.findViewById(R.id.head_recy);
@@ -126,15 +140,15 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        addHeadData();
-//        my_recycle.refresState(2);
-//        tableData(saveFile.BaseUrl+"/Study/Search");
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        addHeadData();
+////        my_recycle.refresState(2);
+////        tableData(saveFile.BaseUrl+"/Study/Search");
+//    }
 
-    public void inithead(final Context context, AllPerson_Model allModel) {
+    public void inithead(final Context context, final AllPerson_Model allModel) {
         LinearLayoutManager headMangaer = new LinearLayoutManager(context);
         headMangaer.setOrientation(LinearLayoutManager.HORIZONTAL);
         head_recy.setLayoutManager(headMangaer);
@@ -145,9 +159,9 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
         headAdapter.setOnItemClickLitener(new CommHead_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
-//                startActivity(intent);
+                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
+                intent.putExtra("TargetID", allModel.getData().get(position).getTargetID() + "");
+                startActivity(intent);
             }
 
             @Override
@@ -158,6 +172,7 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
 
 
     CommittedFragment_Adapter mAdapter;
+
     public void initlist(final Context context) {
         LinearLayoutManager mMangaer = new LinearLayoutManager(context);
         other_recycle.setLayoutManager(mMangaer);
@@ -169,8 +184,16 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
             @Override
             public void onItemClick(View view, int position) {
 //                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
+//                intent.putExtra("TargetID", baseModel.get(position).getPostID() + "");
 //                startActivity(intent);
+                String content = baseModel.get(position).getPostContent();
+                String postId = baseModel.get(position).getPostID() + "";
+                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
+                Intent intent = new Intent(context, Energy_WebDetail.class);
+                intent.putExtra("content", content);
+                intent.putExtra("postId", postId);
+                intent.putExtra("url", url);
+                startActivity(intent);
             }
 
             @Override
@@ -178,7 +201,9 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
             }
         });
     }
+
     AllPerson_Model allModel;
+
     public void noCommData(String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", getActivity()) != null) {
@@ -224,7 +249,6 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
     }
 
 
-
     private List<Committed_Model.DataBean> baseModel;
     Committed_Model listModel;
 
@@ -242,13 +266,13 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
                     }
                     listModel = new Gson().fromJson(resultString, Committed_Model.class);
                     if (listModel.isIsSuccess() && !listModel.getData().equals("[]")) {
-                        baseModel.addAll(listModel.getData());
                         if (PageIndex == 1) {
+                            baseModel.addAll(listModel.getData());
                             other_recycle.refreshComplete();
                             initlist(getActivity());
                         } else {
                             other_recycle.loadMoreComplete();
-                            mAdapter.addMoreData(baseModel);
+                            mAdapter.addMoreData(listModel);
                         }
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -14,10 +13,6 @@
         android:layout_centerInParent="true"
         android:text="" />
 
-    <FrameLayout
-        android:id="@+id/main_content_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 
     <RadioGroup
@@ -25,9 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#ffffff"
         android:elevation="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#ffffff">
 
         <RadioButton
             android:id="@+id/tab_energy"
@@ -47,7 +42,6 @@
             android:id="@+id/tab_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
             android:button="@null"
             android:clickable="false" />
 
@@ -66,6 +60,13 @@
             android:background="@drawable/tab_selector_person"
             android:button="@null" />
     </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/main_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tab_group"/>
+
 
     <com.moying.energyring.waylenBaseView.MyArcMenu
         android:id="@+id/id_arcmenu"
