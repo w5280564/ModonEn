@@ -1,1 +1,1 @@
-include ':app', ':selectorphotolibrary'
+include ':app', ':selectorphotolibrary','hellocharts-library'

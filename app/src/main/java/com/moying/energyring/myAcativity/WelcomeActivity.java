@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -31,6 +32,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.GestureListener;
+import com.moying.energyring.waylenBaseView.MyAnimationDrawable;
 import com.moying.energyring.waylenBaseView.ViewPager;
 
 import java.util.ArrayList;
@@ -52,6 +54,18 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
     SimpleDraweeView webg;
     int index = 0;
     Button startBtn;
+    private ImageView annim_img;
+
+//    private  final int[] weimg_threeanimlist = {
+//            R.drawable.we_three1,R.drawable.we_three2,R.drawable.we_three3,R.drawable.we_three4,R.drawable.we_three5, R.drawable.we_three6,R.drawable.we_three7,R.drawable.we_three8,R.drawable.we_three9,R.drawable.we_three10,
+//            R.drawable.we_three11,R.drawable.we_three12,R.drawable.we_three13,R.drawable.we_three14,R.drawable.we_three15, R.drawable.we_three16,R.drawable.we_three17,R.drawable.we_three18,R.drawable.we_three19,R.drawable.we_three20,
+//            R.drawable.we_three21,R.drawable.we_three22,R.drawable.we_three23,R.drawable.we_three24,R.drawable.we_three25, R.drawable.we_three26,R.drawable.we_three27,R.drawable.we_three28,R.drawable.we_three29,R.drawable.we_three30,
+//            R.drawable.we_three31,R.drawable.we_three32,R.drawable.we_three33,R.drawable.we_three34,R.drawable.we_three35, R.drawable.we_three36,R.drawable.we_three37,R.drawable.we_three38,R.drawable.we_three39,R.drawable.we_three40,
+//            R.drawable.we_three41,R.drawable.we_three42,R.drawable.we_three43,R.drawable.we_three44,R.drawable.we_three45, R.drawable.we_three46,R.drawable.we_three47,R.drawable.we_three48,R.drawable.we_three49,R.drawable.we_three50,
+//            R.drawable.we_three51,R.drawable.we_three52,R.drawable.we_three53,R.drawable.we_three54,R.drawable.we_three55, R.drawable.we_three56,R.drawable.we_three57,R.drawable.we_three58,R.drawable.we_three59,R.drawable.we_three60,
+//            R.drawable.we_three61,R.drawable.we_three62,R.drawable.we_three63,R.drawable.we_three64,R.drawable.we_three65, R.drawable.we_three66,R.drawable.we_three67,R.drawable.we_three68,R.drawable.we_three69,R.drawable.we_three70,
+//            R.drawable.we_three71,R.drawable.we_three72,R.drawable.we_three73,R.drawable.we_three74,R.drawable.we_three75, R.drawable.we_three76 };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,25 +73,43 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
 //        initViewPager();
 //        initDot();
         webg = (SimpleDraweeView) findViewById(R.id.webg);
-        Uri imgurl = Uri.parse("res:///" + iconArr[0]);
-        addPla(webg, iconArrpla[0]);
-        addGif(imgurl, webg);
-        //setLongClickable是必须的
-        webg.setLongClickable(true);
-        webg.setOnTouchListener(new MyGestureListener(this));
+        annim_img = (ImageView) findViewById(R.id.annim_img);
+        annim_img.setScaleType(ImageView.ScaleType.FIT_XY);
 
-         startBtn = (Button)findViewById(R.id.startBtn);
+//        Uri imgurl = Uri.parse("res:///" + iconArr[0]);
+//        addPla(webg, iconArrpla[0]);
+//        addGif(imgurl, webg);
+        //setLongClickable是必须的
+//        webg.setLongClickable(true);
+//        webg.setOnTouchListener(new MyGestureListener(this));
+
+        annim_img.setLongClickable(true);//LongClickable 必要条件
+        annim_img.setOnTouchListener(new MyGestureListener(this));
+
+        MyAnimationDrawable.animateRawManuallyFromXML(animlist_Arr[0], annim_img,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                }, new Runnable() {
+                    @Override
+                    public void run() {
+                    }
+                });
+
+
+        startBtn = (Button) findViewById(R.id.startBtn);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        StaticData.layoutParamsScale(params,417,97);
-        int padd =  (int)(Float.parseFloat(saveFile.getShareData("scale", WelcomeActivity.this))*152);
-        params.setMargins(0,0,0,padd);
+        StaticData.layoutParamsScale(params, 417, 97);
+        int padd = (int) (Float.parseFloat(saveFile.getShareData("scale", WelcomeActivity.this)) * 152);
+        params.setMargins(0, 0, 0, padd);
         startBtn.setLayoutParams(params);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(WelcomeActivity.this,MainActivity.class);
+                Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -95,12 +127,22 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
         @Override
         public boolean left() {
 //            Log.e("test", "向左滑");
-            if (index < iconArr.length - 1) {
+            if (index < animlist_Arr.length - 1) {
                 index += 1;
-                addPla(webg, iconArrpla[index]);
-                Uri imgurl = Uri.parse("res:///" + iconArr[index]);
-                addGif(imgurl, webg);
-                if (index == iconArr.length -1){
+//                addPla(webg, iconArrpla[index]);
+//                Uri imgurl = Uri.parse("res:///" + iconArr[index]);
+//                addGif(imgurl, webg);
+                MyAnimationDrawable.animateRawManuallyFromXML(animlist_Arr[index], annim_img,
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                            }
+                        }, new Runnable() {
+                            @Override
+                            public void run() {
+                            }
+                        });
+                if (index == animlist_Arr.length - 1) {
                     startBtn.setVisibility(View.VISIBLE);
                 }
             }
@@ -112,11 +154,24 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
 //            Log.e("test", "向右滑");
             if (index > 0) {
                 index -= 1;
-                addPla(webg, iconArrpla[index]);
-                Uri imgurl = Uri.parse("res:///" + iconArr[index]);
-                addGif(imgurl, webg);
+//                addPla(webg, iconArrpla[index]);
+//                Uri imgurl = Uri.parse("res:///" + iconArr[index]);
+//                addGif(imgurl, webg);
+                MyAnimationDrawable.animateRawManuallyFromXML(animlist_Arr[index], annim_img,
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                            }
+                        }, new Runnable() {
+                            @Override
+                            public void run() {
+                            }
+                        });
+
                 startBtn.setVisibility(View.GONE);
             }
+
+
             return super.right();
         }
     }
@@ -134,8 +189,9 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
         myDraw.setHierarchy(hierarchy);
     }
 
-    private int[] iconArrpla = {R.drawable.we_onepla, R.drawable.we_onepla, R.drawable.we_two_pla, R.drawable.we_three_pla};
-    private int[] iconArr = {R.drawable.we_one, R.drawable.we_two, R.drawable.we_three, R.drawable.we_foue};
+//    private int[] iconArrpla = {R.drawable.we_onepla, R.drawable.we_onepla, R.drawable.we_two_pla, R.drawable.we_three_pla};
+//    private int[] iconArr = {R.drawable.we_one, R.drawable.we_two, R.drawable.we_three, R.drawable.we_foue};
+    private int[] animlist_Arr = {R.drawable.animlist_we_one, R.drawable.animlist_we_two, R.drawable.animlist_we_three, R.drawable.animlist_we_four};
 
     //滑动页面
     private void initViewPager() {
@@ -147,36 +203,37 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
         }
         views = new ArrayList<LinearLayout>();
         LayoutInflater mInflater = LayoutInflater.from(this);
-        int length = iconArr.length;
-        for (int i = 0; i < length; i++) {
-            view1 = (LinearLayout) mInflater.inflate(R.layout.welcomeactivity_style, null);
-            wel_onetop = (SimpleDraweeView) view1.findViewById(R.id.wel_onetop);
-            Button wel_login = (Button) view1.findViewById(R.id.wel_login);
-            LinearLayout wellin = (LinearLayout) view1.findViewById(R.id.wellin);
+//        int length = iconArr.length;
 
-            StaticData.ViewScale(wel_onetop, 750, 1334);
-            Uri imgurl = Uri.parse("res:///" + iconArr[i]);
-//            wel_onetop.setImageURI(imgurl);
-//            addGif(this, wel_onetop, imgurl);
-            addGif(imgurl, wel_onetop);
-
-//            wel_login.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent i = new Intent(WelcomeActivity.this,LoginActivity.class);
-////                    i.putExtra("regtype", "2");
-//                    startActivity(i);
-//                    WelcomeActivity.this.finish();
-//                }
-//            });
-
-
-            views.add(view1);
-        }
-        mPager.setAdapter(new myPagerAdapter());
-        mPager.setCurrentItem(0);
-        mPager.setOnPageChangeListener(this);
-//        mPager.setPageTransformer(true, new DepthPageTransformer());
+//        for (int i = 0; i < length; i++) {
+//            view1 = (LinearLayout) mInflater.inflate(R.layout.welcomeactivity_style, null);
+//            wel_onetop = (SimpleDraweeView) view1.findViewById(R.id.wel_onetop);
+//            Button wel_login = (Button) view1.findViewById(R.id.wel_login);
+//            LinearLayout wellin = (LinearLayout) view1.findViewById(R.id.wellin);
+//
+//            StaticData.ViewScale(wel_onetop, 750, 1334);
+//            Uri imgurl = Uri.parse("res:///" + iconArr[i]);
+////            wel_onetop.setImageURI(imgurl);
+////            addGif(this, wel_onetop, imgurl);
+//            addGif(imgurl, wel_onetop);
+//
+////            wel_login.setOnClickListener(new View.OnClickListener() {
+////                @Override
+////                public void onClick(View v) {
+////                    Intent i = new Intent(WelcomeActivity.this,LoginActivity.class);
+//////                    i.putExtra("regtype", "2");
+////                    startActivity(i);
+////                    WelcomeActivity.this.finish();
+////                }
+////            });
+//
+//
+//            views.add(view1);
+//        }
+//        mPager.setAdapter(new myPagerAdapter());
+//        mPager.setCurrentItem(0);
+//        mPager.setOnPageChangeListener(this);
+////        mPager.setPageTransformer(true, new DepthPageTransformer());
 
     }
 

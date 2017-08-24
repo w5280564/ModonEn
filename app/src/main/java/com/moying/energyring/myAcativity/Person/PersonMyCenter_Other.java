@@ -12,11 +12,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +29,12 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.UserInfo_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.AppBarStateChangeListener;
+import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 
 import org.xutils.common.Callback;
@@ -112,6 +117,7 @@ public class PersonMyCenter_Other extends FragmentActivity {
         fans_Lin.setOnClickListener(new fans_Lin());
         person_mes_Img.setOnClickListener(new person_mes_Img());
         person_focus_Img.setOnClickListener(new person_focus_Img());
+        user_simple.setOnClickListener(new user_simple());
 
         AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.mAppBarLayout);
 
@@ -122,11 +128,11 @@ public class PersonMyCenter_Other extends FragmentActivity {
                 if (state == State.EXPANDED) {
 
                     //展开状态
-
+                    return_Btn.setBackgroundResource(R.drawable.return_icon);
                 } else if (state == State.COLLAPSED) {
 
                     //折叠状态
-                    return_Btn.setVisibility(View.VISIBLE);
+                    return_Btn.setBackgroundResource(R.drawable.return_black);
                 } else {
 
                     //中间状态
@@ -201,6 +207,13 @@ public class PersonMyCenter_Other extends FragmentActivity {
             focusData(PersonMyCenter_Other.this, saveFile.BaseUrl + saveFile.Friend_Add_User_Url + "?FriendUserID=" + FriendUserID);
         }
     }
+    private class user_simple extends NoDoubleClickListener {
+        @Override
+        protected void onNoDoubleClick(View v) {
+            showHead(PersonMyCenter_Other.this, user_simple);
+        }
+    }
+
 
 
     private void initAddData() {
@@ -282,6 +295,42 @@ public class PersonMyCenter_Other extends FragmentActivity {
             }
         }
     }
+
+
+    //放大头像
+    private void showHead(final Context mContext, View view) {
+        View contentView = View.inflate(mContext, R.layout.popup_myhead, null);
+        final PopupWindow headPopup = new BasePopupWindow(mContext);
+        headPopup.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+        headPopup.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
+        headPopup.setTouchable(true);
+        headPopup.setContentView(contentView);
+        headPopup.showAtLocation(view, Gravity.CENTER, 0, 0);
+        SimpleDraweeView popup_head = (SimpleDraweeView) contentView.findViewById(R.id.popup_head);
+        StaticData.ViewScale(popup_head, 750, 750);
+
+        UserInfo_Model.DataBean oneData = userModel.getData();
+        if (oneData.getProfilePicture() != null) {
+            Uri imgUri = Uri.parse(oneData.getProfilePicture());
+            popup_head.setImageURI(imgUri);
+        } else {
+            StaticData.lodingheadBg(popup_head);
+        }
+        popup_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                headPopup.dismiss();
+            }
+        });
+
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                headPopup.dismiss();
+            }
+        });
+    }
+
 
     UserInfo_Model userModel;
 

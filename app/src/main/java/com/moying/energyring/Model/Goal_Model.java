@@ -1,12 +1,13 @@
 package com.moying.energyring.Model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by waylen on 2017/4/5.
  */
 
-public class Goal_Model {
+public class Goal_Model implements Serializable{
 
     /**
      * IsSuccess : true

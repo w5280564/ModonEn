@@ -37,8 +37,15 @@ public class Person_StopVideo extends Activity {
         LinearLayout stopTime_Lin = (LinearLayout) findViewById(R.id.stopTime_Lin);
 
         timeInit(stopTime_Lin);
+        return_Btn.setOnClickListener(new return_Btn());
     }
 
+    public class return_Btn implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            finish();
+        }
+    }
     private String[] timeArr = {"关闭", "10分钟","20分钟","30分钟","40分钟","50分钟","60分钟"};
     List<ImageView> myImg = new ArrayList<>();
     public void timeInit(LinearLayout myLin) {

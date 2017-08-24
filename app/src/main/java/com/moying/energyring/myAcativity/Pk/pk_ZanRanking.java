@@ -1,5 +1,6 @@
 package com.moying.energyring.myAcativity.Pk;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,7 +27,6 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAdapter.pk_ZanRanking_Adapter;
 import com.moying.energyring.network.saveFile;
-import com.moying.energyring.waylenBaseView.myActivity;
 import com.moying.energyring.xrecycle.XRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -37,7 +37,7 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-public class pk_ZanRanking extends myActivity implements XRecyclerView.LoadingListener {
+public class pk_ZanRanking extends Activity implements XRecyclerView.LoadingListener {
     private XRecyclerView pk_xrecy;
 
     @Override
@@ -199,6 +199,9 @@ public class pk_ZanRanking extends myActivity implements XRecyclerView.LoadingLi
 
     public void ListData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {

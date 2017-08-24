@@ -40,11 +40,12 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.gson.Gson;
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.AddPhoto_Model;
-import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.PostAndPk_Add;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.database.ChildInfo;
+import com.moying.energyring.myAcativity.Pk.JiFenActivity;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.pinyin.SortModel;
 import com.moying.energyring.waylenBaseView.FlowLayout;
@@ -116,6 +117,8 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         super.onResume();
         MobclickAgent.onPageStart("PostingActivity"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
         MobclickAgent.onResume(this);          //统计时长
+
+
     }
 
     public void onPause() {
@@ -519,11 +522,12 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         });
     }
 
-
+    int ArticleCount = 0;
     public void AddPost_Data(final Context context, String baseUrl, String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+            params.setHeader("version", StaticData.getversionName(context));
         }
         JSONObject obj = new JSONObject();
         try {
@@ -541,11 +545,15 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             @Override
             public void onSuccess(String resultString) {
                 right_Btn.setEnabled(true);
-                BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
                 if (model.isIsSuccess()) {
+                    Toast.makeText(PostingActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
                     shareTitle = content_Edit.getText().toString();
                     shareContent = "我的能量源是" + saveFile.getShareData("InviteCode", PostingActivity.this);
-                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + model.getData();
+                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData();
+
+                    String data = model.getData();
+                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
 
                     isShare(shareIndex());//同步分享
                 } else {
@@ -673,8 +681,18 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             share_qq();
         } else if (pos == 4) {
             share_qzone();
+            if (ArticleCount != 0) { // 0是超过发帖上限
+                Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
+                intent.putExtra("jifen", ArticleCount);
+                startActivity(intent);
+            }
             finish();
         } else {
+            if (ArticleCount != 0) {
+                Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
+                intent.putExtra("jifen", ArticleCount);
+                startActivity(intent);
+            }
             finish();
         }
     }
@@ -1141,5 +1159,11 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        photoPaths.clear();
+        choiceModel.clear();
+        choiceId.clear();
+    }
 }

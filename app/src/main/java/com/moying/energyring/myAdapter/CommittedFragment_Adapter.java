@@ -88,7 +88,7 @@ public class CommittedFragment_Adapter extends RecyclerView.Adapter<CommittedFra
         }
 
         holder.name_Txt.setText(oneData.getNickName());
-        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
         if (oneData.isIs_Like()) {
             holder.energy_like.setImageResource(R.drawable.like_red_icon);
         } else {

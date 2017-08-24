@@ -179,5 +179,15 @@ public class PersonDayPkFragment extends lazyLoadFragment implements XRecyclerVi
         });
     }
 
+    public person_daypk_Model getModel() {
+        try {
+            return baseModel;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
 }

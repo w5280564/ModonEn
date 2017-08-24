@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/zan_Rel"
@@ -25,20 +26,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginRight="10dp"
-            android:layout_toRightOf="@id/rank_Txt"
             app:roundAsCircle="true" />
 
-        <TextView
-            android:id="@+id/name_Txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/head_simple"
-            android:textColor="#4d4d4d"
-            android:textSize="14sp"
-            />
 
         <TextView
             android:id="@+id/all_Txt"
@@ -47,6 +38,17 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
+            android:textColor="#4d4d4d"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/name_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/all_Txt"
+            android:layout_toRightOf="@id/head_simple"
+            android:lines="1"
             android:textColor="#4d4d4d"
             android:textSize="14sp" />
 
@@ -60,4 +62,4 @@
         android:layout_alignRight="@id/zan_Rel"
         android:background="#ffecec" />
 
-</RelativeLayout>
+</LinearLayout>

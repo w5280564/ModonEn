@@ -10,8 +10,7 @@
         android:id="@+id/personBg_simple"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-         />
+        android:scaleType="centerCrop" />
 
 
     <RelativeLayout
@@ -209,6 +208,46 @@
 
             <ImageView
                 android:id="@+id/set_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/person_set_icon"
+                android:background="#cfcfcf" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:id="@+id/person_line_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/person_line_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/person_line_icon"
+                android:text="数据曲线"
+                android:textColor="#7b7b7b"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/line_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

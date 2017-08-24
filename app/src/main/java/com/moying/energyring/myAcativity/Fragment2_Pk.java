@@ -40,6 +40,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
+import com.moying.energyring.myAcativity.Pk.JiFenActivity;
 import com.moying.energyring.myAcativity.Pk.Pk_CheckIn;
 import com.moying.energyring.myAcativity.Pk.Pk_Daypk;
 import com.moying.energyring.myAcativity.Pk.Pk_Gui;
@@ -62,6 +63,7 @@ public class Fragment2_Pk extends Fragment {
     private FlexboxLayout myflexbox;
     public SimpleDraweeView pk_check_gif;
     private ImageView pk_check_simple;
+    private LinearLayout pk_check_Lin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,9 +101,10 @@ public class Fragment2_Pk extends Fragment {
     }
 
 
+    View title_Include;
 
     public void initView(View view) {
-        View title_Include = view.findViewById(R.id.title_Include);
+        title_Include = view.findViewById(R.id.title_Include);
         title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            title_Include.setElevation(2f);//阴影
@@ -115,7 +118,7 @@ public class Fragment2_Pk extends Fragment {
         myflexbox = (FlexboxLayout) view.findViewById(R.id.myflexbox);
         Button pk_day_btn = (Button) view.findViewById(R.id.pk_day_btn);
         Button pk_comm_btn = (Button) view.findViewById(R.id.pk_comm_btn);
-        LinearLayout pk_check_Lin = (LinearLayout) view.findViewById(R.id.pk_check_Lin);
+        pk_check_Lin = (LinearLayout) view.findViewById(R.id.pk_check_Lin);
         int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 70);
         pk_check_Lin.setPadding(0, 0, pad, 0);
         RelativeLayout icon_Rel = (RelativeLayout) view.findViewById(R.id.icon_Rel);
@@ -157,15 +160,23 @@ public class Fragment2_Pk extends Fragment {
     public class pk_check_Lin implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), Pk_CheckIn.class);
-            startActivity(intent);
+            if (check_Model.isData()) {
+                Intent intent = new Intent(getActivity(), Pk_CheckIn.class);
+                startActivity(intent);
+            } else {
+                pk_check_Lin.setEnabled(false);
+                pk_check_gif.setVisibility(View.VISIBLE);
+                Uri gifuri = Uri.parse("res:///" + R.drawable.pk_check_gif);
+                addGif(getActivity(), pk_check_gif, gifuri);
+                AddData(saveFile.BaseUrl + saveFile.CheckAdd_Url);//签到
+            }
         }
     }
 
     private class pk_check_simple implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            MobclickAgent.onEvent(getActivity(),"pkCheck");//簽到點擊統計
+            MobclickAgent.onEvent(getActivity(), "pkCheck");//簽到點擊統計
             pk_check_simple.setEnabled(false);
             pk_check_gif.setVisibility(View.VISIBLE);
             Uri gifuri = Uri.parse("res:///" + R.drawable.pk_check_gif);
@@ -236,10 +247,10 @@ public class Fragment2_Pk extends Fragment {
                     } else if (tagData.getProjectName().equals("徽章规则")) {
                         Intent intent = new Intent(getActivity(), Pk_Gui.class);
                         startActivity(intent);
-                    }else if (tagData.getProjectName().equals("总汇报次数")||tagData.getProjectName().equals("累计天数")||tagData.getProjectName().equals("获赞个数")){
+                    } else if (tagData.getProjectName().equals("总汇报次数") || tagData.getProjectName().equals("累计天数") || tagData.getProjectName().equals("获赞个数")) {
                         Intent intent = new Intent(getActivity(), PersonMyCenter.class);
-                        intent.putExtra("UserID","0");
-                        intent.putExtra("tabType","2");
+                        intent.putExtra("UserID", "0");
+                        intent.putExtra("tabType", "2");
                         startActivity(intent);
                     }
                 }
@@ -345,6 +356,8 @@ public class Fragment2_Pk extends Fragment {
         });
     }
 
+    Base_Model check_Model;
+
     public void checkData(String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", getActivity()) != null) {
@@ -354,8 +367,8 @@ public class Fragment2_Pk extends Fragment {
             @Override
             public void onSuccess(String resultString) {
                 if (resultString != null) {
-                    Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
-                    if (model.isData()) {
+                    check_Model = new Gson().fromJson(resultString, Base_Model.class);
+                    if (check_Model.isData()) {
                         pk_check_simple.setEnabled(false);
                         pk_check_simple.setImageResource(R.drawable.pk_check_after);
                     } else {
@@ -399,14 +412,19 @@ public class Fragment2_Pk extends Fragment {
                 if (resultString != null) {
                     BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                     if (model.isIsSuccess()) {
-                        Toast.makeText(getActivity(),"签到成功",Toast.LENGTH_SHORT);
+                        pk_check_Lin.setEnabled(true);
+                        Intent intent = new Intent(getActivity(), JiFenActivity.class);
+                        intent.putExtra("jifen", model.getData());
+                        startActivity(intent);
+                        Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT);
                     } else {
-                        Toast.makeText(getActivity(),"无法签到请检查网络",Toast.LENGTH_SHORT);
+                        Toast.makeText(getActivity(), "无法签到请检查网络", Toast.LENGTH_SHORT);
                     }
                 } else {
                     Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();

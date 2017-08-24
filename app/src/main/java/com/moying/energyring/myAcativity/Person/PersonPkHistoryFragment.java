@@ -125,9 +125,9 @@ public class PersonPkHistoryFragment extends lazyLoadFragment implements XRecycl
         mAdapter.setOnItemClickLitener(new Person_PkHistoryFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
-//                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
-//                startActivity(intent);
+                Intent intent = new Intent(context, PersonPkHistoryLineView.class);
+                intent.putExtra("ProjectID", baseModel.getData().get(position).getProjectID() + "");
+                startActivity(intent);
             }
 
             @Override

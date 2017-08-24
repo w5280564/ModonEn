@@ -13,9 +13,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppThemeprice" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeprice" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimaryDark">#00000000</item>
+        <item name="colorPrimaryDark">#1A000000</item>
     </style>
 
     <style name="AppThemeAppCompat" parent="Theme.AppCompat.NoActionBar">

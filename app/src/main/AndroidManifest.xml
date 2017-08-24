@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moying.energyring">
 
-    <!-- service权限-->
+    <!-- service权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 在SDCard中创建与删除文件权限 -->
@@ -27,11 +25,12 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <meta-data android:name="android.webkit.WebView.EnableSafeBrowding"
+    <meta-data
+        android:name="android.webkit.WebView.EnableSafeBrowding"
         android:value="true" />
 
-    <!-- 6.0忽略电池优化-->
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <!-- 6.0忽略电池优化 -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:name=".waylenBaseView.MyApplication"
@@ -255,21 +254,27 @@
         <activity
             android:name=".myAcativity.Energy.myShareActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDialog"></activity>
+            android:theme="@style/MyDialog" />
         <activity
             android:name=".myAcativity.Find.ShareFindActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDialog"></activity>
-
+            android:theme="@style/MyDialogStyle" />
+        <activity
+            android:name=".myAcativity.Pk.JiFenActivity"
+            android:theme="@style/MyDialog" />
         <activity
             android:name=".myAcativity.Find.Find_BannerDetail"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkAdd_More"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkAdd_Project_More"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".myAcativity.Person.Service.JobSchedulerService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name=".myAcativity.Person.Service.DaemonService"
             android:exported="true"
@@ -292,6 +297,8 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
+        <activity android:name=".myAcativity.Person.PersonPkHistoryLineView" />
+        <activity android:name=".myAcativity.Person.Person_LineView"></activity>
     </application>
 
 </manifest>

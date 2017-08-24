@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.R;
-import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
@@ -29,6 +28,8 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.util.List;
+
+import static com.moying.energyring.StaticData.FrescoStatic.addGif;
 
 /**
  * Created by Admin on 2016/3/29.
@@ -88,16 +89,17 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
         final EnergyList_Model.DataBean oneData = otherList.get(position);
 
-        if (oneData.getProfilePicture() != null) {
-//            StaticData.addPlaceRound(holder.myhead_simple, context);
-            Uri headUri = Uri.parse(oneData.getProfilePicture());
-            holder.myhead_simple.setImageURI(headUri);
+//        if (oneData.getProfilePicture() != null) {
+////            StaticData.addPlaceRound(holder.myhead_simple, context);
+//            Uri headUri = Uri.parse(oneData.getProfilePicture());
+//            holder.myhead_simple.setImageURI(headUri);
+//
+//        }
 
-        }
-
-        holder.name_Txt.setText(oneData.getNickName());
-        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
-        holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
+//        holder.name_Txt.setText(oneData.getNickName());
+//        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+//        holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
+        holder.name_Txt.setText(oneData.getPostTitle());
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");
         if (oneData.isIs_Like()) {
@@ -122,7 +124,8 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 //            StaticData.addPlace(holder.content_simple, context);
             StaticData.ViewScale(holder.content_simple, 710, 440);
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
-            holder.content_simple.setImageURI(contentUri);
+//            holder.content_simple.setImageURI(contentUri);
+            addGif(holder.content_simple,contentUri);
         }
 
 
@@ -169,10 +172,13 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             mu_Rel = (RelativeLayout) itemView.findViewById(R.id.mu_Rel);
             hero_Lin = (LinearLayout) itemView.findViewById(R.id.hero_Lin);
             myhead_simple = (SimpleDraweeView) itemView.findViewById(R.id.myhead_simple);
+            myhead_simple.setVisibility(View.GONE);
             content_simple = (SimpleDraweeView) itemView.findViewById(R.id.content_simple);
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
+            name_Txt.setLines(1);
             time_Txt = (TextView) itemView.findViewById(R.id.time_Txt);
             content_Txt = (TextView) itemView.findViewById(R.id.content_Txt);
+            content_Txt.setVisibility(View.GONE);
             energy_img = (ImageView) itemView.findViewById(R.id.energy_img);
             ImageView energy_talk = (ImageView) itemView.findViewById(R.id.energy_talk);
              energy_like = (ImageView) itemView.findViewById(R.id.energy_like);
@@ -180,7 +186,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
             like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
             StaticData.ViewScale(mu_Rel, 710, 0);
-            StaticData.ViewScale(myhead_simple, 100, 100);
+//            StaticData.ViewScale(myhead_simple, 100, 100);
 
             StaticData.ViewScale(energy_img, 40, 40);
             StaticData.ViewScale(energy_talk, 40, 40);
@@ -252,7 +258,6 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             }
         });
     }
-
 
 
 }

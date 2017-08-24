@@ -38,6 +38,7 @@ public class HtmlToText {
         // 过滤html标签
 //        htmlStr = htmlStr.replace("<br>", "\n");
 //        htmlStr = htmlStr.replaceAll("\\<br[^>]*>(?i)", "\n");
+//        htmlStr = htmlStr.replace("&nbsp;", " ");
         Pattern p_html = Pattern.compile(REGEX_HTML, Pattern.CASE_INSENSITIVE);
         Matcher m_html = p_html.matcher(htmlStr);
         htmlStr = m_html.replaceAll("");
@@ -46,5 +47,18 @@ public class HtmlToText {
         Matcher m_space = p_space.matcher(htmlStr);
         htmlStr = m_space.replaceAll("");
         return htmlStr.trim(); // 返回文本字符串
+    }
+
+    public static String delHtml(String content){
+        content = content.replace("<em>", "");
+        content = content.replace("</em>", "");
+        content = content.replace("<br>", "\n");
+        content = content.replace("</br>", "");
+        content = content.replace("&nbsp;", " ");
+        content = content.replace("<div>", "\n");
+        content = content.replace("</div>", "");
+        content = content.replace("<p>", "");
+        content = content.replace("</p>", "");
+        return content;
     }
 }

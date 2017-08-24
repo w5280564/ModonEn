@@ -146,6 +146,7 @@ public class Person_Set extends Activity {
 
 
     public class idea_Rel implements View.OnClickListener {
+
         @Override
         public void onClick(View v) {
             Intent i = new Intent(Person_Set.this, Person_Notice_Idea.class);

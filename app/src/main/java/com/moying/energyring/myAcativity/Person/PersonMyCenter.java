@@ -8,17 +8,21 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +44,7 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.AppBarStateChangeListener;
+import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 
 import org.xutils.common.Callback;
@@ -61,12 +66,11 @@ import static com.moying.energyring.myAcativity.Pk.DayPkListFragment.REQUEST_COD
  * Created by waylen on 2017/6/13.
  */
 
-public class PersonMyCenter extends FragmentActivity {
-
-
+public class PersonMyCenter extends AppCompatActivity {
     private SimpleDraweeView person_bg_simple, user_simple;
     private ImageView gender_img;
-    private TextView atten_Txt, fans_Txt, intr_Txt, userName_Txt;
+    private TextView atten_Txt, fans_Txt, intr_Txt, userName_Txt, title_Txt, rete_Txt;
+    private LinearLayout fen_Lin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +85,6 @@ public class PersonMyCenter extends FragmentActivity {
         initView();
         initAddData();
 //        initLocaData();
-
     }
 
     private int currentItem = 1;
@@ -97,11 +100,15 @@ public class PersonMyCenter extends FragmentActivity {
         StaticData.ViewScale(tablayout, 0, 200);
         Slideviewpager = (ViewPager) findViewById(R.id.Slideviewpager);
         final Button return_Btn = (Button) findViewById(R.id.return_Btn);
+        title_Txt = (TextView) findViewById(R.id.title_Txt);
+        rete_Txt = (TextView) findViewById(R.id.rete_Txt);
+
         person_bg_simple = (SimpleDraweeView) findViewById(R.id.person_bg_simple);
         user_simple = (SimpleDraweeView) findViewById(R.id.user_simple);
         layoutmarginTop(this, user_simple);
         gender_img = (ImageView) findViewById(R.id.gender_img);
         userName_Txt = (TextView) findViewById(R.id.userName_Txt);
+        fen_Lin = (LinearLayout) findViewById(R.id.fen_Lin);
         LinearLayout atten_Lin = (LinearLayout) findViewById(R.id.atten_Lin);
         LinearLayout fans_Lin = (LinearLayout) findViewById(R.id.fans_Lin);
         atten_Txt = (TextView) findViewById(R.id.atten_Txt);
@@ -118,6 +125,7 @@ public class PersonMyCenter extends FragmentActivity {
         user_simple.setOnClickListener(new user_simple());
         atten_Lin.setOnClickListener(new atten_Lin());
         fans_Lin.setOnClickListener(new fans_Lin());
+        rete_Txt.setOnClickListener(new rete_Txt());
 
         AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.mAppBarLayout);
 
@@ -126,20 +134,23 @@ public class PersonMyCenter extends FragmentActivity {
             public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
                 Log.d("STATE", state.name());
                 if (state == State.EXPANDED) {
-
                     //展开状态
-
+                    title_Txt.setVisibility(View.GONE);
+                    rete_Txt.setVisibility(View.GONE);
+                    return_Btn.setBackgroundResource(R.drawable.return_icon);
                 } else if (state == State.COLLAPSED) {
-
                     //折叠状态
-                    return_Btn.setVisibility(View.VISIBLE);
+                    title_Txt.setVisibility(View.VISIBLE);
+                    rete_Txt.setVisibility(View.VISIBLE);
+                    return_Btn.setBackgroundResource(R.drawable.return_black);
                 } else {
-
                     //中间状态
-
                 }
             }
         });
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
     }
 
@@ -166,13 +177,11 @@ public class PersonMyCenter extends FragmentActivity {
         }
     }
 
-    public static final int REQUEST_CODE_IMAGE_PICK_PERSONHEAD = 35;
 
     private class user_simple extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
-            Intent intentimagepic = new Intent(PersonMyCenter.this, ImagePickerActivity.class);
-            startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+            showHead(PersonMyCenter.this, user_simple);
         }
     }
 
@@ -197,6 +206,15 @@ public class PersonMyCenter extends FragmentActivity {
             intent.putExtra("titleName", "粉丝");
             intent.putExtra("Type", "2");
             startActivity(intent);
+        }
+    }
+
+
+    private class rete_Txt implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            rete_Txt.setEnabled(false);
+            isReteDayPk(PersonMyCenter.this, saveFile.BaseUrl + saveFile.Report_Status_Url);
         }
     }
 
@@ -256,6 +274,7 @@ public class PersonMyCenter extends FragmentActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+
             }
         });
     }
@@ -300,6 +319,50 @@ public class PersonMyCenter extends FragmentActivity {
         }
     }
 
+    public static final int REQUEST_CODE_IMAGE_PICK_PERSONHEAD = 35;
+
+    //放大头像
+    private void showHead(final Context mContext, View view) {
+        View contentView = View.inflate(mContext, R.layout.popup_myhead, null);
+        final PopupWindow headPopup = new BasePopupWindow(mContext);
+        headPopup.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+        headPopup.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
+        headPopup.setTouchable(true);
+        headPopup.setContentView(contentView);
+        headPopup.showAtLocation(view, Gravity.CENTER, 0, 0);
+        SimpleDraweeView popup_head = (SimpleDraweeView) contentView.findViewById(R.id.popup_head);
+        StaticData.ViewScale(popup_head, 750, 750);
+
+        UserInfo_Model.DataBean oneData = userModel.getData();
+        if (oneData.getProfilePicture() != null) {
+            Uri imgUri = Uri.parse(oneData.getProfilePicture());
+            popup_head.setImageURI(imgUri);
+        } else {
+            StaticData.lodingheadBg(popup_head);
+        }
+        popup_head.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intentimagepic = new Intent(PersonMyCenter.this, ImagePickerActivity.class);
+                startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+                return false;
+            }
+        });
+        popup_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                headPopup.dismiss();
+            }
+        });
+
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                headPopup.dismiss();
+            }
+        });
+    }
+
     UserInfo_Model userModel;
 
     public void UserData(final Context context, String baseUrl) {
@@ -328,6 +391,7 @@ public class PersonMyCenter extends FragmentActivity {
                         }
 
                         userName_Txt.setText(oneData.getNickName());
+                        title_Txt.setText(oneData.getNickName());
                         atten_Txt.setText(oneData.getAttention() + "");
                         fans_Txt.setText(oneData.getAttention_Me() + "");
                         if (StaticData.isSpace(oneData.getBrief())) {
@@ -570,6 +634,52 @@ public class PersonMyCenter extends FragmentActivity {
             }
         });
     }
+
+
+    public void isReteDayPk(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    rete_Txt.setEnabled(true);
+                    Base_Model reteModel = new Gson().fromJson(resultString, Base_Model.class);
+                    if (reteModel.isData()) {
+                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                rete_Txt.setEnabled(true);
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+                rete_Txt.setEnabled(true);
+            }
+
+            @Override
+            public void onFinished() {
+                rete_Txt.setEnabled(true);
+            }
+        });
+    }
+
 
 
     @Override

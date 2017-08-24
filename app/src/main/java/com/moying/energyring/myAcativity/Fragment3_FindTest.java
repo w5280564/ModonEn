@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (parentView == null) {
             parentView = inflater.inflate(R.layout.fragment3_find, null);
+            setStatusBar();
 
             initView(parentView);
 
@@ -319,7 +321,7 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
     FindSeek_GrowthLogFragment_Adapter mAdapter;
 
     public void initlist(final Context context) {
-        LinearLayoutManager mMangaer = new LinearLayoutManager(context);
+        final LinearLayoutManager mMangaer = new LinearLayoutManager(context);
         find_recy.setLayoutManager(mMangaer);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         find_recy.setHasFixedSize(true);
@@ -330,7 +332,7 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
             public void onItemClick(View view, int position) {
                 String imgpath = "";
                 if (baseModel.get(position).getFilePath() != null) {
-                     imgpath = String.valueOf(baseModel.get(position).getFilePath());
+                    imgpath = String.valueOf(baseModel.get(position).getFilePath());
                 }
                 String content = baseModel.get(position).getPostContent();
                 String postId = baseModel.get(position).getPostID() + "";
@@ -345,6 +347,17 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
 
             @Override
             public void onItemLongClick(View view, int position) {
+            }
+        });
+
+        find_recy.addOnScrollListener(new XRecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (find_recy.isOnTop()) {
+                    seek_Btn.setBackgroundResource(R.drawable.find_seekbg);
+                } else {
+                    seek_Btn.setBackgroundResource(R.drawable.find_seekbg_white);
+                }
             }
         });
     }
@@ -532,7 +545,7 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
                 public void onClick(View v) {
                     int tag = (int) v.getTag();
 //                    String url = myBean.get(tag).getBannerContent();
-                    MobclickAgent.onEvent(getActivity(),"bannerList");
+                    MobclickAgent.onEvent(getActivity(), "bannerList");
                     String content = myBean.get(tag).getBannerName();
                     String url = myBean.get(tag).getBannerContent();
                     Intent intent = new Intent(getActivity(), Find_BannerDetail.class);
@@ -685,6 +698,13 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
 
     @Override
     public void onPageScrolled(int arg0, float arg1, int arg2) {
+    }
+
+
+    protected void setStatusBar() {
+//        StatusBarUtil.setColor(getActivity(), Color.parseColor("#f3f3f3"));
+//        StatusBarUtil.setTranslucent(this);
+//        StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(),0,seek_Btn);
     }
 
 

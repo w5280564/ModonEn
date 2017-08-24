@@ -16,7 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/annim_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <Button
         android:id="@+id/startBtn"

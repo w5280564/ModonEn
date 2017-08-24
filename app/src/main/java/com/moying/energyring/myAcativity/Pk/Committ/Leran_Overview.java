@@ -444,26 +444,10 @@ public class Leran_Overview extends Activity implements GestureDetector.OnGestur
         if (saveFile.getShareData("JSESSIONID", this) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", this));
         }
-//        params.addBodyParameter("UserID", LoginSession.getSession().getUserInfo().getUse_id()+"");
-//        params.addBodyParameter("Token", LoginSession.getSession().getUserInfo().getToken());
         params.addBodyParameter("ReportNum", count);
         params.addBodyParameter("ProjectID", ProjectID);
         params.addBodyParameter("StartDate", startTime);
         params.addBodyParameter("EndDate", endTime);
-
-//        JSONObject obj = new JSONObject();
-//        try {
-//            obj.put("UserID", LoginSession.getSession().getUserInfo().getUse_id()+"");
-//            obj.put("Token", LoginSession.getSession().getUserInfo().getToken());
-//            obj.put("ReportNum", count);
-//            obj.put("ProjectID", ProjectID);
-//            obj.put("StartDate", startTime);
-//            obj.put("EndDate", endTime);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        params.setAsJsonContent(true);
-//        params.setBodyContent(obj.toString());
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {

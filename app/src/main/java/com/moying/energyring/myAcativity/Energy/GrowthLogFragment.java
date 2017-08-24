@@ -161,6 +161,9 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
 
     public void ListData(String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", getActivity()) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", getActivity()));
+        }
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {
@@ -181,6 +184,7 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
                             other_recycle.loadMoreComplete();
                             mAdapter.addMoreData(listModel);
                         }
+
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
                     }

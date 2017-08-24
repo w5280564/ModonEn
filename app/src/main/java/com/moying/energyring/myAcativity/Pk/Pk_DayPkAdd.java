@@ -37,7 +37,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.gson.Gson;
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.AddPhoto_Model;
-import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.PostAndPk_Add;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
@@ -166,12 +166,12 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         MobclickAgent.onPageStart("PostingActivity"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
         MobclickAgent.onResume(this);          //统计时长
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("PostingActivity"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
         MobclickAgent.onPause(this);
     }
-
 
 
     private class return_Btn implements View.OnClickListener {
@@ -245,6 +245,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
 
     //压缩图片
     private List<File> mFileList;
+
     private void compressMultiListener(int gear) {
         if (mFileList.isEmpty()) {
             return;
@@ -266,7 +267,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
 //                        Log.e("图片尺寸1111111111111111111",filesList.get(0).length() / 1024 + "k");
                         }
 //                        upload_PhotoData(Pk_DayPkAdd.this, saveFile.BaseUrl + saveFile.uploadPhoto_Url,filesList);
-                        upload_PhotoData(Pk_DayPkAdd.this, saveFile.BaseUrl + saveFile.uploadPhoto_Url,filesList);
+                        upload_PhotoData(Pk_DayPkAdd.this, saveFile.BaseUrl + saveFile.uploadPhoto_Url, filesList);
                     }
 
                     @Override
@@ -376,7 +377,8 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
     }
 
     //按index 对应分享
-    public void isShare(int pos) {
+    public void
+    isShare(int pos) {
         if (pos == 0) {
             shareWechatQuan();
         } else if (pos == 1) {
@@ -385,23 +387,21 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
             shareSina();
         } else if (pos == 3) {
             share_qq();
-//            if (ArticleCount < 6){
-//                Intent intent = new Intent(ReleaseImgPicActivity.this,JiFenActivity.class);
-//                intent.putExtra("jifen",jifen);
-//                startActivity(intent);
-//            }
-//            finish();
         } else if (pos == 4) {
             share_qzone();
+            if (ArticleCount != 0) {
+                Intent intent = new Intent(Pk_DayPkAdd.this, JiFenActivity.class);
+                intent.putExtra("jifen", ArticleCount);
+                startActivity(intent);
+            }
             finish();
         } else {
+            if (ArticleCount != 0) {
+                Intent intent = new Intent(Pk_DayPkAdd.this, JiFenActivity.class);
+                intent.putExtra("jifen", ArticleCount);
+                startActivity(intent);
+            }
             finish();
-//            if (ArticleCount < 6){ //无分享
-//                Intent intent = new Intent(ReleaseImgPicActivity.this,JiFenActivity.class);
-//                intent.putExtra("jifen",jifen);
-//                startActivity(intent);
-//            }
-//            finish();
         }
     }
 
@@ -495,7 +495,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CODE) {
+        if (resultCode == RESULT_CODE && data != null) {
             String unit = data.getStringExtra("unit");
             String titleName = data.getStringExtra("titleName");
             ProjectID = data.getStringExtra("ProjectID");
@@ -603,7 +603,7 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
     //上传图片
     private AddPhoto_Model model;
 
-    public void upload_PhotoData(final Context context, String baseUrl,List<File> filesList) {
+    public void upload_PhotoData(final Context context, String baseUrl, List<File> filesList) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -651,18 +651,17 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         });
     }
 
+    int ArticleCount = 0;
 
     public void AddPk_Data(final Context context, String baseUrl, String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+            params.setHeader("version", StaticData.getversionName(context));
         }
         JSONObject obj = new JSONObject();
         try {
-
-
             obj.put("ProjectID", ProjectID);
-
             obj.put("ReportNum", count_Edit.getText());
             obj.put("FileIDs", files);
             boolean sync = false;
@@ -678,19 +677,20 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {
-                BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
                 if (model.isIsSuccess()) {
-//                    StringBuffer sbf = new StringBuffer();
-//                    sbf.append();
-                    String sbf = centent_Txt.getText().toString()+count_Edit.getText().toString()+unit_Txt.getText().toString()+"，";
-//                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
+                    Toast.makeText(Pk_DayPkAdd.this,"发布成功",Toast.LENGTH_SHORT).show();
 
+                    String sbf = centent_Txt.getText().toString() + count_Edit.getText().toString() + unit_Txt.getText().toString() + "，";
+//                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
                     shareTitle = "我今天" + sbf + "(根据实际的汇报内容)，加入能量圈，和我一起PK吧！";
 //                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode",Pk_DayPkAdd.this);
                     shareContent = "";
-                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + model.getData();
+                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData();
+
+                    String data = model.getData();
+                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
                     isShare(shareIndex());//同步分享
-//                    finish();
                 } else {
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
                 }

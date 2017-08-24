@@ -27,7 +27,7 @@ import com.moying.energyring.myAcativity.Person.Service.BindService;
 import com.moying.energyring.myAcativity.Person.Service.DaemonService;
 import com.moying.energyring.myAcativity.Person.Service.JobSchedulerService;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
-import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd;
+import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd_More;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BaseActivity;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -40,6 +40,8 @@ import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
@@ -58,6 +60,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         MyActivityManager mam = MyActivityManager.getInstance();
         mam.pushOneActivity(this);//把当前activity压入了栈中
 //        setContentView(R.layout.activity_main);
@@ -202,7 +205,8 @@ public class MainActivity extends BaseActivity {
                     switch (pos) {
                         case 0:
                             MobclickAgent.onEvent(MainActivity.this, "Pk_DayPkAdd");//统计页签
-                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd.class);
+//                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd.class);
+                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd_More.class);
                             startActivity(intent1);
                             break;
                         case 1:
@@ -329,7 +333,6 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
     }
-
 
 
 

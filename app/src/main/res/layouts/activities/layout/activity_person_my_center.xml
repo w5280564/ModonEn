@@ -4,175 +4,212 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f3f3f3">
 
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/mAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f3f3f3"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        app:elevation="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-
-        <RelativeLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/person_bg_simple"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/person_bg_simple"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/user_simple"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:scaleType="centerCrop"
-                fresco:roundAsCircle="true"
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/user_simple"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop"
+                    fresco:roundAsCircle="true" />
 
-                />
+                <TextView
+                    android:id="@+id/userName_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_simple"
+                    android:layout_centerHorizontal="true"
+                    android:text=""
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/userName_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/user_simple"
-                android:layout_centerHorizontal="true"
-                android:text=""
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/gender_img"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_alignBottom="@id/userName_Txt"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/user_simple" />
 
-            <ImageView
-                android:id="@+id/gender_img"
-                android:layout_width="6dp"
-                android:layout_height="6dp"
-                android:layout_alignBottom="@id/userName_Txt"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/user_simple" />
+                <LinearLayout
+                    android:id="@+id/fen_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/userName_Txt"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/fen_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/userName_Txt"
-                android:layout_centerHorizontal="true"
+                    <LinearLayout
+                        android:id="@+id/atten_Lin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:lines="1"
+                            android:text="关注"
+                            android:textColor="#9c9c9c"
+                            android:textSize="10sp" />
+
+
+                        <TextView
+                            android:id="@+id/atten_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:lines="1"
+                            android:textColor="#ffffff"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fans_Lin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:lines="1"
+                            android:text="粉丝"
+                            android:textColor="#9c9c9c"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/fans_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lines="1"
+                            android:textColor="#ffffff"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/other_Mes_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/intr_Txt"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/person_mes_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/person_mes_icon" />
+
+
+                    <TextView
+                        android:id="@+id/person_focus_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/person_focus_icon" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/intr_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fen_Lin"
+                    android:layout_centerHorizontal="true"
+                    android:lines="1"
+                    android:textColor="#9c9c9c"
+                    android:textSize="11sp" />
+
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
                 android:gravity="center"
-                android:orientation="horizontal">
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin">
 
-                <LinearLayout
-                    android:id="@+id/atten_Lin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <TextView
+                    <Button
+                        android:id="@+id/return_Btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:lines="1"
-                        android:text="关注"
-                        android:textColor="#9c9c9c"
-                        android:textSize="10sp" />
-
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/return_icon"
+                        app:layout_collapseMode="pin" />
 
                     <TextView
-                        android:id="@+id/atten_Txt"
+                        android:id="@+id/title_Txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:lines="1"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/fans_Lin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                        android:layout_centerInParent="true"
+                        android:textSize="14sp"
+                        android:textColor="#676767"
+                        android:visibility="gone" />
 
                     <TextView
+                        android:id="@+id/rete_Txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:lines="1"
-                        android:text="粉丝"
-                        android:textColor="#9c9c9c"
-                        android:textSize="10sp" />
+                        android:textSize="14sp"
+                        android:textColor="#676767"
+                        android:visibility="gone"
+                        android:text="每日汇总"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"/>
 
-                    <TextView
-                        android:id="@+id/fans_Txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:lines="1"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp" />
-                </LinearLayout>
-            </LinearLayout>
+                </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/user_simple"
-                android:layout_centerHorizontal="true"
-                android:text="nihao" />
+            </android.support.v7.widget.Toolbar>
 
-            <Button
-                android:id="@+id/return_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/return_icon"
-                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-
-
-            <LinearLayout
-                android:id="@+id/other_Mes_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/intr_Txt"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/person_mes_Img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_mes_icon" />
-
-
-                <TextView
-                    android:id="@+id/person_focus_Img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/person_focus_icon" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/intr_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fen_Lin"
-                android:layout_centerHorizontal="true"
-                android:lines="1"
-                android:textColor="#9c9c9c"
-                android:textSize="11sp" />
-
-        </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>
 

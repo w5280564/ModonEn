@@ -74,7 +74,7 @@ public class pk_ZanRanking_Adapter extends RecyclerView.Adapter<pk_ZanRanking_Ad
         }
         holder.rank_Txt.setText(oneData.getRanking() + ".");
         holder.name_Txt.setText(oneData.getNickName());
-        holder.all_Txt.setText(oneData.getLikes() + "天");
+        holder.all_Txt.setText(oneData.getLikes() + "赞");
     }
 
     @Override

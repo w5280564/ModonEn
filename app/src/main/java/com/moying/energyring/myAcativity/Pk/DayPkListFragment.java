@@ -30,6 +30,7 @@ import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.myAdapter.DayPkFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
@@ -56,7 +57,7 @@ import me.shaohui.advancedluban.OnCompressListener;
  * Created by Admin on 2016/4/18.
  * 每日pk
  */
-public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
+public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
     private String defaultHello = "default value";
     private String stringtype;
     private String ProjectID;
@@ -159,6 +160,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         return parentView;
     }
 
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("DayPkListFragment");
@@ -242,7 +244,8 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         @Override
         public void onClick(View view) {
             MobclickAgent.onEvent(getActivity(), "DayPkListAdd");//统计页签
-            Intent intent = new Intent(getActivity(), Pk_DayPkAdd.class);
+//            Intent intent = new Intent(getActivity(), Pk_DayPkAdd.class);
+            Intent intent = new Intent(getActivity(), Pk_DayPkAdd_More.class);
             startActivity(intent);
         }
     }
@@ -262,6 +265,9 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 //                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
 //                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
 //                startActivity(intent);
+                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
+                context.startActivity(intent);
             }
 
             @Override

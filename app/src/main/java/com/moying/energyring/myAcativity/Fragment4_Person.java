@@ -23,6 +23,7 @@ import com.moying.energyring.myAcativity.Person.PersonDeaft;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAcativity.Person.Person_Data;
 import com.moying.energyring.myAcativity.Person.Person_Integral;
+import com.moying.energyring.myAcativity.Person.Person_LineView;
 import com.moying.energyring.myAcativity.Person.Person_Notice;
 import com.moying.energyring.myAcativity.Person.Person_PiontsList;
 import com.moying.energyring.myAcativity.Person.Person_Relus;
@@ -85,17 +86,20 @@ public class Fragment4_Person extends Fragment {
         RelativeLayout bang_Rel = (RelativeLayout) view.findViewById(R.id.bang_Rel);
         RelativeLayout gui_Rel = (RelativeLayout) view.findViewById(R.id.gui_Rel);
         RelativeLayout che_Rel = (RelativeLayout) view.findViewById(R.id.che_Rel);
+        RelativeLayout line_Rel = (RelativeLayout) view.findViewById(R.id.line_Rel);
         ImageView person_neng_icon = (ImageView) view.findViewById(R.id.person_neng_icon);
         ImageView person_set_icon = (ImageView) view.findViewById(R.id.person_set_icon);
         ImageView person_bang_icon = (ImageView) view.findViewById(R.id.person_bang_icon);
         ImageView person_gui_icon = (ImageView) view.findViewById(R.id.person_gui_icon);
         ImageView person_che_icon = (ImageView) view.findViewById(R.id.person_che_icon);
+        ImageView person_line_icon = (ImageView) view.findViewById(R.id.person_line_icon);
         ImageView set_arrow = (ImageView) view.findViewById(R.id.set_arrow);
         ImageView gui_arrow = (ImageView) view.findViewById(R.id.gui_arrow);
         ImageView che_arrow = (ImageView) view.findViewById(R.id.che_arrow);
+        ImageView line_arrow = (ImageView) view.findViewById(R.id.line_arrow);
         TextView neng_Txt = (TextView) view.findViewById(R.id.neng_Txt);
 
-        String InviteCode = saveFile.getShareData("InviteCode",getActivity());
+        String InviteCode = saveFile.getShareData("InviteCode", getActivity());
         neng_Txt.setText(InviteCode);
 
         StaticData.ViewScale(personBg_simple, 0, 480);
@@ -105,19 +109,22 @@ public class Fragment4_Person extends Fragment {
         StaticData.ViewScale(person_data_icon, 84, 96);
         StaticData.ViewScale(person_cao_icon, 84, 96);
         StaticData.ViewScale(person_fen_icon, 84, 96);
-        StaticData.ViewScale(neng_Rel, 0, 120);
-        StaticData.ViewScale(set_Rel, 0, 120);
-        StaticData.ViewScale(bang_Rel, 0, 120);
-        StaticData.ViewScale(gui_Rel, 0, 120);
-        StaticData.ViewScale(che_Rel, 0, 120);
+        StaticData.ViewScale(neng_Rel, 0, 100);
+        StaticData.ViewScale(set_Rel, 0, 100);
+        StaticData.ViewScale(line_Rel, 0, 100);
+        StaticData.ViewScale(bang_Rel, 0, 100);
+        StaticData.ViewScale(gui_Rel, 0, 100);
+        StaticData.ViewScale(che_Rel, 0, 100);
         StaticData.ViewScale(person_neng_icon, 64, 64);
         StaticData.ViewScale(person_set_icon, 64, 64);
         StaticData.ViewScale(person_bang_icon, 64, 64);
         StaticData.ViewScale(person_gui_icon, 64, 64);
         StaticData.ViewScale(person_che_icon, 64, 64);
+        StaticData.ViewScale(person_line_icon, 64, 64);
         StaticData.ViewScale(set_arrow, 16, 30);
         StaticData.ViewScale(gui_arrow, 16, 30);
         StaticData.ViewScale(che_arrow, 16, 30);
+        StaticData.ViewScale(line_arrow, 16, 30);
 
 
         layoutmarginTop(getActivity(), usericon_Rel);
@@ -132,6 +139,7 @@ public class Fragment4_Person extends Fragment {
         bang_Rel.setOnClickListener(new bang_Rel());
         che_Rel.setOnClickListener(new che_Rel());
         gui_Rel.setOnClickListener(new gui_Rel());
+        line_Rel.setOnClickListener(new line_Rel());
 //        RoundingParams roundingParams = RoundingParams.asCircle();
 //        roundingParams.setRoundAsCircle(true);
 //        user_simple.getHierarchy().setRoundingParams(roundingParams);
@@ -221,7 +229,19 @@ public class Fragment4_Person extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), Person_Set.class);
-            intent.putExtra("UserID", userModel.getData().getUserID() + "");
+            if (userModel != null) {
+                intent.putExtra("UserID", userModel.getData().getUserID() + "");
+            }
+            startActivity(intent);
+
+        }
+    }
+
+    //数据曲线
+    private class line_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), Person_LineView.class);
             startActivity(intent);
 
         }
@@ -255,7 +275,7 @@ public class Fragment4_Person extends Fragment {
         public void onClick(View view) {
             MobclickAgent.onEvent(getActivity(), "person_Shop");//统计页签
             Intent intent = new Intent(getActivity(), Person_Shop.class);
-            intent.putExtra("Integral",userModel.getData().getIntegral()+"");
+            intent.putExtra("Integral", userModel.getData().getIntegral() + "");
 //            intent.putExtra("rankIng", 5 + "");
 //            intent.putExtra("rankIngCount", 5 + "");//赞个数
             startActivity(intent);
@@ -301,7 +321,7 @@ public class Fragment4_Person extends Fragment {
                         }
 
                         userName_Txt.setText(oneData.getNickName());
-                        userCount_Txt.setText(oneData.getIntegral()+"");
+                        userCount_Txt.setText(oneData.getIntegral() + "积分");
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
                     }

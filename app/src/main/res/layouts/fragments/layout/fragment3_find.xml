@@ -4,25 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/findbg_gradient"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <com.moying.energyring.xrecycle.XRecyclerView
         android:id="@+id/find_recy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"/>
+        android:overScrollMode="never" />
 
     <Button
         android:id="@+id/seek_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@drawable/find_seekbg"
-        android:textColor="#5b5b5b"
-        android:text="搜索 用户/成长日志"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:textSize="10sp"/>
+        android:background="@drawable/find_seekbg"
+        android:text="搜索 用户/成长日志"
+        android:textColor="#5b5b5b"
+        android:textSize="10sp"
+        />
 </RelativeLayout>

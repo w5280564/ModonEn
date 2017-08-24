@@ -59,9 +59,17 @@ public class Person_ShopDetails extends Activity {
 
         StaticData.ViewScale(content_simple, 0, 772);
         StaticData.ViewScale(dui_Txt, 108, 40);
-        StaticData.ViewScale(return_Btn, 40, 40);
+        StaticData.ViewScale(return_Btn, 48, 48);
         StaticData.ViewScale(dui_Btn, 0, 98);
+        return_Btn.setOnClickListener(new return_Btn());
         dui_Btn.setOnClickListener(new dui_Btn());
+    }
+
+    public class return_Btn implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            finish();
+        }
     }
 
     private class dui_Btn implements View.OnClickListener {
@@ -117,11 +125,11 @@ public class Person_ShopDetails extends Activity {
                         price_Txt.setText("市场参考价：" + oneData.getRefPrice() + "元");
                         rankCountTextsColor(oneData.getIntegral() + "积分", fen_Txt);
 
-//                        content_Txt.setText(oneData.getBrief());
+
                         CharSequence charSequence = Html.fromHtml(oneData.getBrief());
                         content_Txt.setText(HtmlToText.delHTMLTag(charSequence.toString()));
                         content_Txt.setMovementMethod(LinkMovementMethod.getInstance());
-                    } else {
+                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
                     }
 

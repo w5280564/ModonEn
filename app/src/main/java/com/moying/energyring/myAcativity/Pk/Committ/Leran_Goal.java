@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -22,14 +23,13 @@ import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAdapter.Goal_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
-import com.moying.energyring.xrecycle.XRecyclerView;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 public class Leran_Goal extends Activity {
-    XRecyclerView All_XRecy;
+    RecyclerView All_XRecy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +51,9 @@ public class Leran_Goal extends Activity {
         StaticData.ViewScale(return_Btn, 48, 48);
         StaticData.ViewScale(title_Include, 0, 88);
 
-        All_XRecy = (XRecyclerView) findViewById(R.id.All_XRecy);
-        All_XRecy.setPullRefreshEnabled(false);
-        All_XRecy.setLoadingMoreEnabled(false);
+        All_XRecy = (RecyclerView) findViewById(R.id.All_XRecy);
+//        All_XRecy.setPullRefreshEnabled(false);
+//        All_XRecy.setLoadingMoreEnabled(false);
 
         return_Btn.setOnClickListener(new return_Btn());
     }

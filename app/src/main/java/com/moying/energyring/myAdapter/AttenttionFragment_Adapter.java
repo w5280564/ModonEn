@@ -100,7 +100,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
             }
 
             holder.name_Txt.setText(oneData.getNickName());
-            holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+            holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
 
 
             if (oneData.getFilePath() != null) {
@@ -123,7 +123,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
             Uri headUri = Uri.parse(oneData.getProfilePicture());
             holder.myhead_simple.setImageURI(headUri);
             holder.name_Txt.setText(oneData.getNickName());
-            holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+            holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
             holder.content_Txt.setText(oneData.getPostContent());
             holder.talk_Txt.setText(oneData.getCommentNum() + "");
             holder.like_Txt.setText(oneData.getLikes() + "");

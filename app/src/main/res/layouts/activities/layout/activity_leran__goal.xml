@@ -13,7 +13,7 @@
         android:layout_height="wrap_content" />
 
 
-    <com.moying.energyring.xrecycle.XRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/All_XRecy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

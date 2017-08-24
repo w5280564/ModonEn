@@ -98,7 +98,9 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         }
 
         holder.name_Txt.setText(oneData.getNickName());
-        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+//        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+
         holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
 
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
