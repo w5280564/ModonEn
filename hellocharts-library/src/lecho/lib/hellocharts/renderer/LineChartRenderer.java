@@ -48,6 +48,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
     private Bitmap softwareBitmap;
     private Canvas softwareCanvas = new Canvas();
     private Viewport tempMaximumViewport = new Viewport();
+    boolean isfrist = false;
 
     public LineChartRenderer(Context context, Chart chart, LineChartDataProvider dataProvider) {
         super(context, chart);
@@ -373,29 +374,25 @@ public class LineChartRenderer extends AbstractChartRenderer {
         pointPaint.setColor(line.getPointColor());
         int valueIndex = 0;
         for (PointValue pointValue : line.getValues()) {
-            int pointRadius = ChartUtils.dp2px(density, line.getPointRadius());
             final float rawX = computator.computeRawX(pointValue.getX());
             final float rawY = computator.computeRawY(pointValue.getY());
+            int pointRadius = ChartUtils.dp2px(density, line.getPointRadius());
             if (computator.isWithinContentRect(rawX, rawY, checkPrecision)) {
                 // Draw points only if they are within contentRectMinusAllMargins, using contentRectMinusAllMargins
                 // instead of viewport to avoid some
                 // float rounding problems.
                 if (MODE_DRAW == mode) {
                     drawPoint(canvas, line, pointValue, rawX, rawY, pointRadius);
-//                    if (line.hasLabels()) {//默认展示数据
-                        drawText(canvas, line, pointValue, rawX, rawY, pointRadius + labelOffset);
-//                    }
-//                    for (int i = 0; i < mDataSize; ++i) {
-//                        canvas.drawText(mDf.format(mSpeedList.get(mLeftPosition + i)), mLength + mSpaceLength + i * (mSpaceLength + mDataLength) + mDataLength / 2, mAreaHeight + mSpaceHeight + mTextHeight + mTextHeight * 0.15f, mPaint);//展示数据
-//                    }
-//                    canvas.drawText(pointValue.getY()+"",rawX,rawY,mPaint);
 
                 } else if (MODE_HIGHLIGHT == mode) {
+
                     highlightPoint(canvas, line, pointValue, rawX, rawY, lineIndex, valueIndex);
+
                 } else {
                     throw new IllegalStateException("Cannot process points in mode: " + mode);
                 }
             }
+
             ++valueIndex;
         }
     }
@@ -403,17 +400,15 @@ public class LineChartRenderer extends AbstractChartRenderer {
     private void drawPoint(Canvas canvas, Line line, PointValue pointValue, float rawX, float rawY,
                            float pointRadius) {
         if (ValueShape.SQUARE.equals(line.getShape())) {
-            canvas.drawRect(rawX - pointRadius, rawY - pointRadius, rawX + pointRadius, rawY + pointRadius,
-                    pointPaint);
+            canvas.drawRect(rawX - pointRadius, rawY - pointRadius, rawX + pointRadius, rawY + pointRadius, pointPaint);
         } else if (ValueShape.CIRCLE.equals(line.getShape())) {
             canvas.drawCircle(rawX, rawY, pointRadius, pointPaint);
             HollowPaint.setColor(Color.parseColor("#ffffff"));
-            canvas.drawCircle(rawX, rawY, pointRadius/2, HollowPaint);
+            canvas.drawCircle(rawX, rawY, pointRadius / 2, HollowPaint);
         } else if (ValueShape.DIAMOND.equals(line.getShape())) {
             canvas.save();
             canvas.rotate(45, rawX, rawY);
-            canvas.drawRect(rawX - pointRadius, rawY - pointRadius, rawX + pointRadius, rawY + pointRadius,
-                    pointPaint);
+            canvas.drawRect(rawX - pointRadius, rawY - pointRadius, rawX + pointRadius, rawY + pointRadius, pointPaint);
             canvas.restore();
         } else {
             throw new IllegalArgumentException("Invalid point shape: " + line.getShape());
@@ -482,7 +477,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
         labelBackgroundRect.set(left, top, right, bottom);
 //        drawLabelTextAndBackground(canvas, labelBuffer, labelBuffer.length - numChars, numChars,  line.getDarkenColor());
 
-        drawLabelText(canvas, labelBuffer, labelBuffer.length - numChars, numChars,  Color.parseColor("#00ffffff"));
+        drawLabelText(canvas, labelBuffer, labelBuffer.length - numChars, numChars, Color.parseColor("#00ffffff"));
     }
 
     private void drawLabel(Canvas canvas, Line line, PointValue pointValue, float rawX, float rawY, float offset) {
@@ -501,9 +496,13 @@ public class LineChartRenderer extends AbstractChartRenderer {
         float top;
         float bottom;
 
+        int status = 0;
         if (pointValue.getY() >= baseValue) {
             top = rawY - offset - labelHeight - labelMargin * 2;
             bottom = rawY - offset;
+//            top = top - 10;
+//            bottom = bottom - 10;
+            status = 0;
         } else {
             top = rawY + offset;
             bottom = rawY + offset + labelHeight + labelMargin * 2;
@@ -512,10 +511,16 @@ public class LineChartRenderer extends AbstractChartRenderer {
         if (top < contentRect.top) {
             top = rawY + offset;
             bottom = rawY + offset + labelHeight + labelMargin * 2;
+//            top = top - 50;
+//            bottom = bottom - 50;
+            status = 1;
         }
         if (bottom > contentRect.bottom) {
             top = rawY - offset - labelHeight - labelMargin * 2;
             bottom = rawY - offset;
+//            top = top + 50;
+//            bottom = bottom + 50   ;
+            status = 1;
         }
         if (left < contentRect.left) {
             left = rawX;
@@ -526,8 +531,19 @@ public class LineChartRenderer extends AbstractChartRenderer {
             right = rawX;
         }
 
+
+
+//        Path path = new Path();
+//        path.moveTo(labelBackgroundRect.left + 10, labelBackgroundRect.bottom - 1);
+//        path.lineTo(labelBackgroundRect.centerX(), labelBackgroundRect.centerY() + 50);
+//        path.lineTo(labelBackgroundRect.right - 10, labelBackgroundRect.bottom - 1);
+//        Log.e("label", labelBackgroundRect.toString());
+//        path.close(); //闭环
+//        canvas.drawPath(path, labelBackgroundPaint);
+
+
         labelBackgroundRect.set(left, top, right, bottom);//背景框
-        drawLabelTextAndBackground(canvas, labelBuffer, labelBuffer.length - numChars, numChars,  line.getDarkenColor());
+        drawLabelTextAndBackground(canvas, labelBuffer, labelBuffer.length - numChars, numChars, line.getDarkenColor(),status);
 //        final LineChartData data = dataProvider.getLineChartData();
     }
 
@@ -554,7 +570,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
         linePaint.setAlpha(line.getAreaTransparency());
 //        new LinearGradient(0,0,0,canvas.getHeight(),line.getColor(),Color.parseColor("#f24d4d"), Shader.TileMode.MIRROR);
         linePaint.setShader(line.getGradientToTransparent() ? new LinearGradient(0, 0, 0, canvas.getHeight(), line.getColor(),
-                        line.getColor() & 0x00ffffff, Shader.TileMode.MIRROR) : null);
+                line.getColor() & 0x00ffffff, Shader.TileMode.MIRROR) : null);
         canvas.drawPath(path, linePaint);
         linePaint.setStyle(Paint.Style.STROKE);
     }

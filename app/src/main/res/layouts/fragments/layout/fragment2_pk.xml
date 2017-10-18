@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f3f3f3"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#f3f3f3">
+
 
     <include
         android:id="@+id/title_Include"
@@ -13,58 +13,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/myflexbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:flexDirection="row"
-        app:flexWrap="wrap"
-        app:justifyContent="flex_start" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/pk_day_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/pk_day_bg" />
-
-    <Button
-        android:id="@+id/pk_comm_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/pk_comm_bg" />
-
-    <LinearLayout
-        android:id="@+id/pk_check_Lin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/pk_check"
-        android:gravity="center_vertical|right"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/icon_Rel"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/pk_check_simple"
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/pk_check_gif"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/myflexbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:visibility="gone" />
-        </RelativeLayout>
+                app:flexDirection="row"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/pk_day_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/pk_day_bg" />
+
+            <Button
+                android:id="@+id/pk_comm_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/pk_comm_bg" />
+
+            <LinearLayout
+                android:id="@+id/pk_check_Lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/pk_check"
+                android:gravity="center_vertical|right"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/icon_Rel"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/pk_check_simple"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/pk_check_gif"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

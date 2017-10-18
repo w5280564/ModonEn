@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/popupgray_bg">
+
+
+        <!--<ImageView-->
+            <!--android:id="@+id/popup_Img"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/popup_roundbg_big" />-->
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/aci_simple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/popupwhite_bg"
+            fresco:roundedCornerRadius="10dp" />
+
+        <LinearLayout
+            android:id="@+id/cha_Lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/detail_btn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/round_rectangle"
+                android:text="查看详情"
+                android:textColor="#f14d4c"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/cancel_btn"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/round_rectangle"
+                android:text="取消"
+                android:textColor="#9d9d9d"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

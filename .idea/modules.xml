@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hellocharts-library/hellocharts-library.iml" filepath="$PROJECT_DIR$/hellocharts-library/hellocharts-library.iml" />
       <module fileurl="file://$PROJECT_DIR$/selectorphotolibrary/selectorphotolibrary.iml" filepath="$PROJECT_DIR$/selectorphotolibrary/selectorphotolibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/todaystepcounterlib/todaystepcounterlib.iml" filepath="$PROJECT_DIR$/todaystepcounterlib/todaystepcounterlib.iml" />
     </modules>
   </component>
 </project>

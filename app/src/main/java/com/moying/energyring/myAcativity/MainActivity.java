@@ -6,23 +6,27 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.moying.energyring.R;
-import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.basePopup.popupFour;
 import com.moying.energyring.myAcativity.Person.Service.BindService;
 import com.moying.energyring.myAcativity.Person.Service.DaemonService;
 import com.moying.energyring.myAcativity.Person.Service.JobSchedulerService;
@@ -32,18 +36,17 @@ import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BaseActivity;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 import com.moying.energyring.waylenBaseView.MyArcMenu;
+import com.today.step.lib.ISportStepInterface;
+import com.today.step.lib.StepAlertManagerUtils;
+import com.today.step.lib.VitalityStepService;
 import com.umeng.analytics.MobclickAgent;
 
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
-
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 
-
-@ContentView(R.layout.activity_main)
+//@ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
     private static final int[] ITEM_DRAWABLES = {R.drawable.arcmenu_add, R.drawable.arcmenu_pk, R.drawable.arcmenu_growing,
             R.drawable.arcmenu_goal};
@@ -51,8 +54,14 @@ public class MainActivity extends BaseActivity {
     RadioGroup tab_group;
     private RadioButton tab_energy, tab_pk, tab_find, tab_person;
     public List<Fragment> fragments;
-    @ViewInject(R.id.popup_Txt)
-    TextView popup_Txt;
+
+
+    private static final int REFRESH_STEP_WHAT = 0;
+    //循环取当前时刻的步数中间的间隔时间
+    private long TIME_INTERVAL_REFRESH = 500;
+    private int mStepSum;
+    private Handler mDelayHandler = new Handler(new TodayStepCounterCall());
+    private ISportStepInterface iSportStepInterface;
 
 
 //   public static Activity mainActivitySta;
@@ -60,37 +69,38 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         MyActivityManager mam = MyActivityManager.getInstance();
         mam.pushOneActivity(this);//把当前activity压入了栈中
-//        setContentView(R.layout.activity_main);
 
 
-        x.view().inject(this);
+//        x.view().inject(this);
         initView();
 
         MyArcMenu mArcMenu = (MyArcMenu) findViewById(R.id.id_arcmenu);
         initArcMenu(mArcMenu, ITEM_DRAWABLES);
 
-        popup_Txt.setOnClickListener(new NoDoubleClickListener() {
-            @Override
-            protected void onNoDoubleClick(View v) {
-
-            }
-        });
+//        popup_Txt.setOnClickListener(new NoDoubleClickListener() {
+//            @Override
+//            protected void onNoDoubleClick(View v) {
+//
+//            }
+//        });
 
 //        SelfStarting_Manage.jumpStartInterface(this);
 
 //        startService(new Intent(this, DaemonService.class));
 //        initJobScheduler();
-
+        stepCount();//计步服务
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        initAlarmService();
+
+//        initAlarmService();
         MobclickAgent.onResume(this); //统计时长
     }
 
@@ -113,12 +123,13 @@ public class MainActivity extends BaseActivity {
     }
 
     private JobScheduler mJobScheduler;
-    private void  initJobScheduler(){
+
+    private void initJobScheduler() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mJobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
             JobInfo.Builder builder = new JobInfo.Builder(1, new ComponentName(getPackageName(), JobSchedulerService.class.getName()));
 
-            builder.setPeriodic(60*1000); //每隔60秒运行一次
+            builder.setPeriodic(60 * 1000); //每隔60秒运行一次
 //            builder.setPeriodic(30000); //每隔30秒运行一次
 //            Log.e("tttttttttt","30秒重新注册");
             builder.setRequiresCharging(true);// 设置是否充电的条件,默认false
@@ -131,6 +142,7 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
+
 
     @Override
     protected void onDestroy() {
@@ -154,12 +166,16 @@ public class MainActivity extends BaseActivity {
 //                }
 //
 //            }
-            unbindService(mConnection); //解除绑定服务。
+
+//            unbindService(mConnection); //解除绑定服务。
 //        } catch (Exception e) {
 //
 //        }
     }
-    /** Called when the activity is first created. */
+
+    /**
+     * Called when the activity is first created.
+     */
     private BindService myService;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -176,7 +192,6 @@ public class MainActivity extends BaseActivity {
             myService.excute();
         }
     };
-
 
 
     private void initArcMenu(final MyArcMenu menu, int[] itemDrawables) {
@@ -221,7 +236,7 @@ public class MainActivity extends BaseActivity {
                             break;
                     }
                 }
- //                Toast.makeText(MainActivity.this, view.getTag() + "; position :" + pos, Toast.LENGTH_SHORT).show();
+                //                Toast.makeText(MainActivity.this, view.getTag() + "; position :" + pos, Toast.LENGTH_SHORT).show();
             }
         });
         menu.setStatusChange(new MyArcMenu.StatusChange() {
@@ -231,9 +246,6 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
-
-
 
 
     private void initView() {
@@ -264,7 +276,6 @@ public class MainActivity extends BaseActivity {
     public class tab_group implements RadioGroup.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-
             switch (i) {
                 case R.id.tab_energy:
                     addFragmentStack(fragments, R.id.main_content_layout, 0);//加载不同的fragment
@@ -308,7 +319,7 @@ public class MainActivity extends BaseActivity {
         addFragmentStack(fragments, R.id.main_content_layout, pos);//加载不同的fragment
     }
 
-    public Fragment3_FindTest getFragmentFindTest(){
+    public Fragment3_FindTest getFragmentFindTest() {
         return (Fragment3_FindTest) fragments.get(2);
     }
 
@@ -323,7 +334,7 @@ public class MainActivity extends BaseActivity {
 //         popupOne popup = new popupOne(MainActivity.this, popup_Txt,"内容");
 //        final popupTwo popup = new popupTwo(MainActivity.this, popup_Txt,"标题","内容");
 //        popupThree popup = new popupThree(MainActivity.this, popup_Txt,"标题","内容");
-        popupFour popup = new popupFour(MainActivity.this, popup_Txt, "标题", "内容");
+//        popupFour popup = new popupFour(MainActivity.this, popup_Txt, "标题", "内容");
 //        TextView content_Txt = (TextView) popup.getContentView().findViewById(R.id.content_Txt);
 //        content_Txt.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -333,6 +344,148 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
     }
+
+    public void setTabChange(int pos) {
+        ((RadioButton) tab_group.getChildAt(pos)).setChecked(true);
+//        tab_person.setChecked(true);
+    }
+
+
+    //计步定时服务 计步服务
+    public void stepCount() {
+        StepAlertManagerUtils.set0SeparateAlertManager(getApplication());
+        final Intent intent = new Intent(this, VitalityStepService.class);
+        startService(intent);
+        bindService(intent, new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                iSportStepInterface = ISportStepInterface.Stub.asInterface(service);
+                try {
+                    mStepSum = iSportStepInterface.getCurrTimeSportStep();
+                    saveFile.saveShareData("myStep", mStepSum + "", MainActivity.this);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                mDelayHandler.sendEmptyMessageDelayed(REFRESH_STEP_WHAT, TIME_INTERVAL_REFRESH);
+
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        }, Context.BIND_AUTO_CREATE);
+    }
+
+    class TodayStepCounterCall implements Handler.Callback {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case REFRESH_STEP_WHAT: {
+
+                    if (null != iSportStepInterface) {
+                        int step = 0;
+                        try {
+                            step = iSportStepInterface.getCurrTimeSportStep();
+
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                        if (mStepSum != step && step != 0) {
+                            mStepSum = step;
+                            saveFile.saveShareData("myStep", mStepSum + "", MainActivity.this);
+//                            updateStepCount();
+                        }
+                    }
+                    mDelayHandler.sendEmptyMessageDelayed(REFRESH_STEP_WHAT, TIME_INTERVAL_REFRESH);
+
+                    break;
+                }
+
+            }
+            return false;
+        }
+    }
+
+    // 获取是否存在NavigationBar
+
+    private boolean checkDeviceHasNavigationBar(Context context) {
+
+        boolean hasNavigationBar = false;
+
+        Resources rs = context.getResources();
+
+        int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+
+        if (id > 0) {
+
+            hasNavigationBar = rs.getBoolean(id);
+
+        }
+
+        try {
+
+            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+
+            if ("1".equals(navBarOverride)) {
+
+                hasNavigationBar = false;
+
+            } else if ("0".equals(navBarOverride)) {
+
+                hasNavigationBar = true;
+
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        return hasNavigationBar;
+
+    }
+
+    /** 获取虚拟功能键高度 */
+
+    public int getVirtualBarHeigh() {
+
+        int vh = 0;
+
+        WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+
+        Display display = windowManager.getDefaultDisplay();
+
+        DisplayMetrics dm = new DisplayMetrics();
+
+        try {
+
+            @SuppressWarnings("rawtypes")
+
+            Class c = Class.forName("android.view.Display");
+
+            @SuppressWarnings("unchecked")
+
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+
+            method.invoke(display, dm);
+
+            vh = dm.heightPixels - windowManager.getDefaultDisplay().getHeight();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        return vh;
+
+    }
+
 
 
 

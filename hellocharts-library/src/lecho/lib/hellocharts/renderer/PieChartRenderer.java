@@ -396,7 +396,7 @@ public class PieChartRenderer extends AbstractChartRenderer {
 
         labelBackgroundRect.set(left, top, right, bottom);
         drawLabelTextAndBackground(canvas, labelBuffer, labelBuffer.length - numChars, numChars,
-                sliceValue.getDarkenColor());
+                sliceValue.getDarkenColor(),0);
     }
 
     private void normalizeVector(PointF point) {

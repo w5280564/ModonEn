@@ -81,7 +81,7 @@ public class PersonMyCenter_Other extends FragmentActivity {
     public List<String> userArr;
     public List<Fragment> fragments;
     public MyFragmentPagerAdapter myAdapter;
-    private int iconImg[] = {R.drawable.person_selector_log, R.drawable.person_selector_goal, R.drawable.person_selector_pkhistory, R.drawable.person_selector_daypk};
+    private int iconImg[] = {R.drawable.person_selector_goal,R.drawable.person_selector_daypk,  R.drawable.person_selector_pkhistory,R.drawable.person_selector_log };
 
     public void initView() {
         tablayout = (TabLayout) findViewById(R.id.ac_tab_layout);
@@ -222,10 +222,10 @@ public class PersonMyCenter_Other extends FragmentActivity {
 
     private void initLocaData() {
         userArr = new ArrayList<>();
-        userArr.add("成长日志");
         userArr.add("公众承诺");
-        userArr.add("Pk记录");
         userArr.add("每日PK");
+        userArr.add("Pk记录");
+        userArr.add("成长日志");
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
         tablayout.setSelectedTabIndicatorHeight(0);//去掉下导航条
         //添加页卡标题
@@ -236,10 +236,10 @@ public class PersonMyCenter_Other extends FragmentActivity {
         int length = userArr.size();
 //        for (int i = 0; i < length; i++) {
 //        }
-        fragments.add(PersonGrowthLogFragment.newInstance(7 + "", userModel.getData().getUserID() + ""));
         fragments.add(PersonCommittedFragment.newInstance(8 + "", userModel.getData().getUserID() + ""));
-        fragments.add(PersonPkHistoryFragment.newInstance(userArr.get(2), userModel.getData().getUserID() + ""));
         fragments.add(PersonDayPkFragment.newInstance(userArr.get(3), userModel.getData().getUserID() + ""));
+        fragments.add(PersonPkHistoryFragment.newInstance(userArr.get(2), userModel.getData().getUserID() + ""));
+        fragments.add(PersonGrowthLogFragment.newInstance(7 + "", userModel.getData().getUserID() + ""));
     }
 
     private void tabViewSetView() {
@@ -247,7 +247,7 @@ public class PersonMyCenter_Other extends FragmentActivity {
         Slideviewpager.setAdapter(myAdapter);
         //将TabLayout和ViewPager关联。
         tablayout.setupWithViewPager(Slideviewpager);
-//        Slideviewpager.setCurrentItem(1);
+//        Slideviewpager.setCurrentItem(2,true);
 //        Slideviewpager.addOnPageChangeListener(this);
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -286,14 +286,16 @@ public class PersonMyCenter_Other extends FragmentActivity {
             TabLayout.Tab tab = tablayout.getTabAt(postion);
             if (tab != null) {
                 tab.setCustomView(myAdapter.getTabView(postion));
-                if (i == 0) {
-                    LinearLayout tab_Lin = (LinearLayout) tab.getCustomView().findViewById(R.id.tab_Lin);
-                    StaticData.ViewScale(tab_Lin, 260, 140);
-                    tab_Lin.setSelected(true);
-//                    tab.getCustomView().findViewById(R.id.tab_Img).setSelected(true);//第一个tab被选中
-                }
+//                if (i == 0) {
+//                    LinearLayout tab_Lin = (LinearLayout) tab.getCustomView().findViewById(R.id.tab_Lin);
+//                    StaticData.ViewScale(tab_Lin, 260, 140);
+//                    tab_Lin.setSelected(true);
+////                    tab.getCustomView().findViewById(R.id.tab_Img).setSelected(true);//第一个tab被选中
+//                }
             }
         }
+        Slideviewpager.setCurrentItem(1,true);
+
     }
 
 

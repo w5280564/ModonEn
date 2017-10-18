@@ -127,6 +127,7 @@ public class PersonPkHistoryFragment extends lazyLoadFragment implements XRecycl
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, PersonPkHistoryLineView.class);
                 intent.putExtra("ProjectID", baseModel.getData().get(position).getProjectID() + "");
+                intent.putExtra("userId",UserID);
                 startActivity(intent);
             }
 

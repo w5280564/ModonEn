@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff">
+        android:background="#f3f3f3">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
             android:lines="1"
             android:text=""
             android:textColor="#4d4d4d"

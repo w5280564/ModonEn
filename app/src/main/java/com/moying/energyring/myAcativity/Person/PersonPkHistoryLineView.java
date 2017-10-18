@@ -42,6 +42,7 @@ import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SelectedValue;
 import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
@@ -62,7 +63,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
     private final int initAddScro = 0;
     private final int leftScro = 1;
     private final int rightScro = 2;
-    String ProjectID;
+    String ProjectID,userId;
     Calendar lineCalLeft = Calendar.getInstance();//最左日期
     Calendar lineCalRight = Calendar.getInstance();//最右日期
     private XRecyclerView my_recycle;
@@ -87,6 +88,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
 
         Intent intent = getIntent();
         ProjectID = intent.getStringExtra("ProjectID");
+        userId = intent.getStringExtra("userId");
 
         initTitle();
         initData(initAddScro);
@@ -118,7 +120,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
     private void initListData() {
         PageIndex = 1;
         pageSize = 10;
-        listData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_List_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize+"&ProjectID="+ProjectID);
+        listData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_List_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize+"&ProjectID="+ProjectID+"&UserID="+userId);
     }
 
     @Override
@@ -130,7 +132,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
     public void onLoadMore() {
         PageIndex += 1;
         pageSize = 10;
-        listData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_List_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize+"&ProjectID="+ProjectID);
+        listData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_List_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize+"&ProjectID="+ProjectID+"&UserID="+userId);
     }
 
     private void initData(int direction) {
@@ -145,7 +147,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
 
         String StartDate = format.format(lineCalLeft.getTime());
         String EndDate = format.format(calNow.getTime());
-        lineData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate, direction, calNow);
+        lineData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate+"&UserID="+userId, direction, calNow);
     }
 
     private void initLeftData(int direction) {
@@ -158,7 +160,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
 
         String StartDate = format.format(lineCalLeft.getTime());
         String EndDate = format.format(calNow.getTime());
-        lineData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate, direction, calNow);
+        lineData(PersonPkHistoryLineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate+"&UserID="+userId, direction, calNow);
     }
 
 //    private void initRightData(int direction) {
@@ -421,8 +423,8 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
             }
         });
 
-//        mAxisXValues.clear();
-//        values.clear();
+
+        chart.getSelectedValue().set(0, 0, SelectedValue.SelectedValueType.LINE);//默认第一个选中
 
     }
 

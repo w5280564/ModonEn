@@ -17,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.moying.energyring.Model.BaseDataString_Model;
 import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.Login_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.MD5;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.network.saveFile;
@@ -82,6 +84,7 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
     MyActivityManager mam;
     private Handler handler;
     private int LoginType;
+    String digestStr = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,7 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
         share_sina.setOnClickListener(new share_sina());
         share_qq.setOnClickListener(new share_qq());
         initData();
+        codeHashCode(saveFile.BaseUrl + "ec/Account/HashCode_Get");
     }
 
     private void initData (){
@@ -186,7 +190,7 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
             Toast.makeText(LoginRegister.this, "请输入正确手机号码", Toast.LENGTH_SHORT).show();
             return;
         }
-        codeMethod(saveFile.BaseUrl + saveFile.CodeUrl + "?PhoneNo=" + phone_edit.getText() + "&Type=2");
+        codeMethod(saveFile.BaseUrl + saveFile.CodeUrl + "?PhoneNo=" + phone_edit.getText() + "&Type=2"+"&VerificationCode=" + digestStr);
         time = new TimeCount(60000, 1000);
         time.start();
     }
@@ -225,6 +229,38 @@ public class LoginRegister extends Activity implements PlatformActionListener,Ha
             code_Btn.setClickable(true);
         }
     }
+
+    public void codeHashCode(String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    BaseDataString_Model baseModel = new Gson().fromJson(resultString, BaseDataString_Model.class);
+
+                    digestStr = MD5.MessageDigest(MD5.MessageDigest(baseModel.getData().getBytes()).getBytes());
+//                    if (baseModel.isIsSuccess()) {
+//                        Toast.makeText(LoginRegister.this, baseModel.getMsg(), Toast.LENGTH_SHORT).show();
+//                    }
+                } else {
+                    Toast.makeText(LoginRegister.this, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
 
     //发送验证码
     public void codeMethod(String baseUrl) {

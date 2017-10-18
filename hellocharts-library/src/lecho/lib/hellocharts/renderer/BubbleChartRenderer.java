@@ -296,7 +296,7 @@ public class BubbleChartRenderer extends AbstractChartRenderer {
 
         labelBackgroundRect.set(left, top, right, bottom);
         drawLabelTextAndBackground(canvas, labelBuffer, labelBuffer.length - numChars, numChars,
-                bubbleValue.getDarkenColor());
+                bubbleValue.getDarkenColor(),0);
 
     }
 

@@ -415,7 +415,7 @@ public class ColumnChartRenderer extends AbstractChartRenderer {
 
         labelBackgroundRect.set(left, top, right, bottom);
         drawLabelTextAndBackground(canvas, labelBuffer, labelBuffer.length - numChars, numChars,
-                columnValue.getDarkenColor());
+                columnValue.getDarkenColor(),0);
 
     }
 

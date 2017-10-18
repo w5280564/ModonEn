@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.DayPkList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
 
@@ -103,19 +105,29 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
 //        }
         NumberFormat nf = new DecimalFormat("#.#");//# 0不显示
         if (oneData.getReportNum() >= oneData.getLimit()) {
-            holder.all_Txt.setText(nf.format(oneData.getLimit()) + "+");
+            if (oneData.getReportNum() == 1) {
+                holder.all_Txt.setText(nf.format(oneData.getLimit()));
+            } else {
+                holder.all_Txt.setText(nf.format(oneData.getLimit()) + "+");
+            }
         } else {
             holder.all_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
         }
-
         holder.zan_Txt.setText(oneData.getLikes() + "");
-        if (oneData.isIs_Like()) {
-            holder.zan_img.setImageResource(R.drawable.like_red_icon);
+
+
+        if (saveFile.getShareData("userId", context).equals(oneData.getUserID() + "")) {
+            holder.zan_Lin.setVisibility(View.INVISIBLE);
+//            holder.zan_img.setVisibility(View.INVISIBLE);
         } else {
-            holder.zan_img.setImageResource(R.drawable.energy_like);
+            if (oneData.isIs_Like()) {
+                holder.zan_img.setImageResource(R.drawable.like_red_icon);
+            } else {
+                holder.zan_img.setImageResource(R.drawable.energy_like);
+            }
         }
 
-        holder.zan_img.setOnClickListener(new View.OnClickListener() {
+        holder.zan_Lin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int ReportID = oneData.getReportID();
@@ -138,7 +150,8 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private  View line;
+        private LinearLayout zan_Lin;
+        private View line;
         private ImageView zan_img;
         private SimpleDraweeView head_simple;
         private TextView rank_Txt, name_Txt, all_Txt, zan_Txt;
@@ -153,10 +166,13 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
             all_Txt = (TextView) itemView.findViewById(R.id.all_Txt);
             zan_Txt = (TextView) itemView.findViewById(R.id.zan_Txt);
             zan_img = (ImageView) itemView.findViewById(R.id.zan_img);
+            zan_Lin = (LinearLayout) itemView.findViewById(R.id.zan_Lin);
+            viewTouchDelegate.expandViewTouchDelegate(zan_Lin, 100, 100, 200, 200);
             line = (View) itemView.findViewById(R.id.line);
             StaticData.ViewScale(my_Rel, 710, 120);
             StaticData.ViewScale(head_simple, 80, 80);
             StaticData.ViewScale(zan_img, 40, 40);
+
         }
     }
 

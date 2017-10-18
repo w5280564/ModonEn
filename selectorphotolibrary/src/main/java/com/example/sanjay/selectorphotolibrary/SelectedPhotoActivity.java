@@ -121,7 +121,8 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
 
     private void setActionBar() {
 
-        findViewById(R.id.ab_back_btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ab_back_btn).setOnClickListener(
+                 new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setResult(RESULT_CANCELED);
@@ -142,7 +143,6 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
     }
 
     private void findView() {
-
 
         maskView = findViewById(R.id.catalog_mask_view);
         mPopupAnchorView = findViewById(R.id.footer);
@@ -333,9 +333,7 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             if (id == LOADER_ALL) {
-                return new CursorLoader(mContext,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
-                        null, null, IMAGE_PROJECTION[2] + " DESC");
+                return new CursorLoader(mContext,MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,  null, null, IMAGE_PROJECTION[2] + " DESC");
             } else if (id == LOADER_CATEGORY) {
                 return new CursorLoader(mContext,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,

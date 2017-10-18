@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/my_Rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#99000000"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#99000000">
 
 
         <TextView
@@ -34,18 +34,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/rank_Txt"
-            app:roundAsCircle="true"
-            />
-
-        <TextView
-            android:id="@+id/name_Txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/head_simple"
-            android:text="没有名字"
-            android:textColor="#ffffff"
-            android:textSize="14sp" />
+            app:roundAsCircle="true" />
 
 
         <LinearLayout
@@ -55,8 +44,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/zan_Txt"
@@ -69,9 +58,10 @@
                 android:id="@+id/zan_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/like_red_icon"/>
+                android:src="@drawable/like_red_icon" />
 
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/all_Txt"
@@ -81,6 +71,18 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/zan_Lin"
             android:text=""
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/name_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/head_simple"
+            android:layout_toLeftOf="@id/all_Txt"
+            android:lines="1"
+            android:text="没有名字"
             android:textColor="#ffffff"
             android:textSize="14sp" />
     </RelativeLayout>

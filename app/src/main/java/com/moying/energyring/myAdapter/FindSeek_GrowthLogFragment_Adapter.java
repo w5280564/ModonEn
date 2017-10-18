@@ -99,7 +99,9 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 //        holder.name_Txt.setText(oneData.getNickName());
 //        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
 //        holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
-        holder.name_Txt.setText(oneData.getPostTitle());
+        if (oneData.getPostTitle() != null) {
+            holder.name_Txt.setText(oneData.getPostTitle().toString());
+        }
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");
         if (oneData.isIs_Like()) {
@@ -113,7 +115,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
         } else if (oneData.getPostType() == 5) {
             if (oneData.getPostTitle() != null) {
                 holder.content_Txt.setText(String.valueOf(oneData.getPostTitle()));
-            }else{
+            } else {
                 holder.content_Txt.setVisibility(View.INVISIBLE);
             }
         }
@@ -125,9 +127,13 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             StaticData.ViewScale(holder.content_simple, 710, 440);
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
 //            holder.content_simple.setImageURI(contentUri);
-            addGif(holder.content_simple,contentUri);
+            addGif(holder.content_simple, contentUri);
         }
 
+        if (oneData.getTagName() != null) {//原type改为 tag标签
+            holder.hero_Lin.setVisibility(View.VISIBLE);
+            holder.hero_Txt.setText(oneData.getTagName());
+        }
 
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +148,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             @Override
             public void onClick(View view) {
                 int PostID = oneData.getPostID();
-                zanData(context, saveFile.BaseUrl + saveFile.PostLike_Url + "?PostID=" + PostID,position);
+                zanData(context, saveFile.BaseUrl + saveFile.PostLike_Url + "?PostID=" + PostID, position);
             }
         });
     }
@@ -161,9 +167,9 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout hero_Lin,like_Lin;
-        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt;
-        private ImageView energy_img,energy_like;
+        private LinearLayout hero_Lin, like_Lin;
+        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt,hero_Txt;
+        private ImageView energy_img, energy_like;
         private SimpleDraweeView myhead_simple, content_simple;
         private RelativeLayout mu_Rel;
 
@@ -181,10 +187,11 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             content_Txt.setVisibility(View.GONE);
             energy_img = (ImageView) itemView.findViewById(R.id.energy_img);
             ImageView energy_talk = (ImageView) itemView.findViewById(R.id.energy_talk);
-             energy_like = (ImageView) itemView.findViewById(R.id.energy_like);
+            energy_like = (ImageView) itemView.findViewById(R.id.energy_like);
             talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
             like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
+            hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
             StaticData.ViewScale(mu_Rel, 710, 0);
 //            StaticData.ViewScale(myhead_simple, 100, 100);
 
@@ -205,6 +212,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
     public void setOnItemClickLitener(OnItemClickLitener listener) {
         mOnItemClickLitener = listener;
     }
+
     public void zanData(final Context context, String baseUrl, final int pos) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -217,14 +225,14 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
                     BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                     if (model.isIsSuccess()) {
                         EnergyList_Model.DataBean oneData = otherList.get(pos);
-                        if (oneData.isIs_Like()){
+                        if (oneData.isIs_Like()) {
                             oneData.setIs_Like(false);
                             if (oneData.getLikes() == 0) {
                                 oneData.setLikes(0);
                             } else {
                                 oneData.setLikes(oneData.getLikes() - 1);
                             }
-                        }else{
+                        } else {
                             oneData.setIs_Like(true);
                             oneData.setLikes(oneData.getLikes() + 1);
                         }

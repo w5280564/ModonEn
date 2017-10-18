@@ -41,6 +41,7 @@ import com.google.gson.Gson;
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.AddPhoto_Model;
 import com.moying.energyring.Model.PostAndPk_Add;
+import com.moying.energyring.Model.postTagList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
@@ -99,6 +100,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     int postType;
     private boolean isrole;
     private String dbId;
+    int TagID;//活动标签
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +161,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         choiceId = new ArrayList<>();
         setShareFlag();
         postType = 1;
+        TagID = 0;
         if (!saveFile.getShareData("role", PostingActivity.this).equals("false")) {
             int role = Integer.parseInt(saveFile.getShareData("role", PostingActivity.this));
             if (role < 3) {
@@ -173,6 +176,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             dbFind(dbId);//数据库
         }
 
+        tagListData(saveFile.BaseUrl + saveFile.Tag_List_Url, PostingActivity.this);//签到
     }
 
     private save_Popup savePop;
@@ -523,6 +527,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     }
 
     int ArticleCount = 0;
+
     public void AddPost_Data(final Context context, String baseUrl, String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -536,6 +541,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             obj.put("FileIDs", files);
             String choiceIds = choiceId.toString().replace("[", "").replace("]", "");
             obj.put("ToUsers", choiceIds);
+            obj.put("TagID", TagID);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -547,7 +553,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 right_Btn.setEnabled(true);
                 PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
                 if (model.isIsSuccess()) {
-                    Toast.makeText(PostingActivity.this,"发布成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostingActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
                     shareTitle = content_Edit.getText().toString();
                     shareContent = "我的能量源是" + saveFile.getShareData("InviteCode", PostingActivity.this);
                     shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData();
@@ -582,6 +588,87 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             }
         });
     }
+
+    public void tagListData(String baseUrl, final Context context) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    postTagList_Model model = new Gson().fromJson(resultString, postTagList_Model.class);
+                    if (model.isIsSuccess()) {
+
+                        tag_ListLin(hero_Lin, model.getData());
+                    } else {
+                        Toast.makeText(context, "请检查网络", Toast.LENGTH_SHORT);
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
+    public void tag_ListLin(LinearLayout tagLin, final List<postTagList_Model.DataBean> tagModel) {
+        if (tagLin != null) {
+            tagLin.removeAllViews();
+        }
+        final List<TextView> TagTxtArr = new ArrayList<>();
+        final int size = tagModel.size();
+        for (int i = 0; i < size; i++) {
+            RadioGroup.LayoutParams itemParams = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
+            int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", this)) * 10);
+            itemParams.setMargins(pad, 0, pad, 0);
+            TextView tagTxt = new TextView(this);
+            tagTxt.setTextColor(Color.parseColor("#b9b9b9"));
+            tagTxt.setText(tagModel.get(i).getTagName());
+            tagTxt.setLayoutParams(itemParams);
+            tagTxt.setTag(i);
+            TagTxtArr.add(tagTxt);
+            tagLin.addView(tagTxt);
+            tagTxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int tag = (Integer) view.getTag();
+                    if ( TagTxtArr.get(tag).isSelected()) {
+                        TagTxtArr.get(tag).setTextColor(Color.parseColor("#b9b9b9"));
+                        TagTxtArr.get(tag).setSelected(false);
+                        TagID = 0;
+                    } else {
+                        for (int j = 0; j < size; j++) {
+                            TagTxtArr.get(j).setTextColor(Color.parseColor("#b9b9b9"));
+                            TagTxtArr.get(j).setSelected(false);
+                        }
+                        TagTxtArr.get(tag).setTextColor(Color.parseColor("#F3DB23"));
+                        TagTxtArr.get(tag).setSelected(true);
+                        TagID = tagModel.get(tag).getTagID();
+                    }
+                }
+            });
+        }
+    }
+
 
     public class share_friend implements View.OnClickListener {
         @Override

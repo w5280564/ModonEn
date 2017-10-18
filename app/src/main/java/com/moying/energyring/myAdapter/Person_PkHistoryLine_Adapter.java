@@ -111,7 +111,7 @@ public class Person_PkHistoryLine_Adapter extends RecyclerView.Adapter<Person_Pk
             content_Txt = (TextView) itemView.findViewById(R.id.content_Txt);
 //            line_img = (View) itemView.findViewById(R.id.line_img);
 
-            StaticData.ViewScale(my_Rel, 710, 122);
+            StaticData.ViewScale(my_Rel, 0, 122);
             StaticData.ViewScale(my_Head, 108, 108);
         }
     }

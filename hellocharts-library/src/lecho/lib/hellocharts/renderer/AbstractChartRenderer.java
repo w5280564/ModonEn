@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetricsInt;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.util.Log;
 
 import lecho.lib.hellocharts.computator.ChartComputator;
 import lecho.lib.hellocharts.model.ChartData;
@@ -110,8 +112,10 @@ public abstract class AbstractChartRenderer implements ChartRenderer {
     /**
      * Draws label text and label background if isValueLabelBackgroundEnabled is true.
      */
-    protected void drawLabelTextAndBackground(Canvas canvas, char[] labelBuffer, int startIndex, int numChars,
-                                              int autoBackgroundColor) {
+    protected void drawLabelTextAndBackground(Canvas canvas, char[] labelBuffer, int startIndex, int numChars, int autoBackgroundColor
+            , int status
+    ) {
+//        float trianStartX,float endStartX,float pathY,float pathCenterX,float pathCenterY
         final float textX;
         final float textY;
 
@@ -121,7 +125,40 @@ public abstract class AbstractChartRenderer implements ChartRenderer {
                 labelBackgroundPaint.setColor(autoBackgroundColor);
             }
 
-            canvas.drawRect(labelBackgroundRect, labelBackgroundPaint);//画背景
+
+            Path path = new Path();
+            if (status == 0) {
+                labelBackgroundRect.top = labelBackgroundRect.top - 10;
+                labelBackgroundRect.bottom = labelBackgroundRect.bottom - 10;
+
+                path.moveTo(labelBackgroundRect.left + 10, labelBackgroundRect.bottom - 1);
+                path.lineTo(labelBackgroundRect.centerX(), labelBackgroundRect.centerY() + 50);
+                path.lineTo(labelBackgroundRect.right - 10, labelBackgroundRect.bottom - 1);
+                Log.e("label", labelBackgroundRect.toString());
+                path.close(); //闭环
+                canvas.drawPath(path, labelBackgroundPaint);
+
+            } else if (status == 1) {
+                labelBackgroundRect.top = labelBackgroundRect.top + 10;
+                labelBackgroundRect.bottom = labelBackgroundRect.bottom + 10;
+
+                path.moveTo(labelBackgroundRect.left + 10, labelBackgroundRect.top + 1);
+                path.lineTo(labelBackgroundRect.centerX(), labelBackgroundRect.centerY() - 50);
+                path.lineTo(labelBackgroundRect.right - 10, labelBackgroundRect.top + 1);
+                Log.e("label", labelBackgroundRect.toString());
+                path.close(); //闭环
+                canvas.drawPath(path, labelBackgroundPaint);
+
+
+            }
+
+//            canvas.drawRect(labelBackgroundRect, labelBackgroundPaint);//画背景
+//            labelBackgroundRect.top = labelBackgroundRect.top - 50;
+//            labelBackgroundRect.bottom = labelBackgroundRect.bottom - 50;
+            canvas.drawRoundRect(labelBackgroundRect, 10, 10, labelBackgroundPaint);
+            //画三角形（这里是基于path路径的绘制）
+            // dPaint);
+
 
             textX = labelBackgroundRect.left + labelMargin;
             textY = labelBackgroundRect.bottom - labelMargin;
@@ -133,6 +170,7 @@ public abstract class AbstractChartRenderer implements ChartRenderer {
 
         canvas.drawText(labelBuffer, startIndex, numChars, textX, textY, labelPaint);
     }
+
     protected void drawLabelText(Canvas canvas, char[] labelBuffer, int startIndex, int numChars, int autoBackgroundColor) {
         final float textX;
         final float textY;
@@ -142,10 +180,8 @@ public abstract class AbstractChartRenderer implements ChartRenderer {
             if (isValueLabelBackgroundAuto) {
                 labelBackgroundPaint.setColor(autoBackgroundColor);
             }
-
 //            canvas.drawRect(labelBackgroundRect, labelBackgroundPaint);//画背景
-
-            textX = labelBackgroundRect.left + labelMargin ;
+            textX = labelBackgroundRect.left + labelMargin;
             textY = labelBackgroundRect.bottom - labelMargin;
         } else {
             textX = labelBackgroundRect.left;

@@ -1,1 +1,1 @@
-include ':app', ':selectorphotolibrary','hellocharts-library'
+include ':app', ':selectorphotolibrary','hellocharts-library','todaystepcounterlib'

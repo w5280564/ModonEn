@@ -5,16 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.DayPkProject_Model;
 import com.moying.energyring.Model.Line_Model;
@@ -23,6 +25,7 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAdapter.Person_LineView_Adapter;
 import com.moying.energyring.network.saveFile;
+import com.moying.energyring.waylenBaseView.StickTopRecyclerView;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -42,11 +45,14 @@ import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SelectedValue;
 import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class Person_LineView extends Activity  {
+import static com.moying.energyring.R.id.my_Head;
+
+public class Person_LineView extends Activity {
 
     private static final String TAG = "PersonPkHistoryLineView";
     private LineChartView chart;
@@ -65,9 +71,11 @@ public class Person_LineView extends Activity  {
     String ProjectID;
     Calendar lineCalLeft = Calendar.getInstance();//最左日期
     Calendar lineCalRight = Calendar.getInstance();//最右日期
-    private RecyclerView my_recycle;
+    private StickTopRecyclerView mRecycler;
     Person_LineView_Adapter mAdapter;
     private TextView cententtxt;
+    private StickTopRecyclerView.SetTopParams mParams;
+    private FrameLayout mContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +87,23 @@ public class Person_LineView extends Activity  {
         chart.setVisibility(View.INVISIBLE);
         chart.setValueSelectionEnabled(true);//点击选中
 
-        my_recycle = (RecyclerView) findViewById(R.id.my_recycle);
+        mContainer = (FrameLayout) findViewById(R.id.top_container);
+        mRecycler = (StickTopRecyclerView) findViewById(R.id.top_recycler_view);
 //        my_recycle.setPullRefreshEnabled(false);
 //        my_recycle.setLoadingMoreEnabled(false);//底部不加载
 //        my_recycle.setPullRefreshEnabled(false);
-        my_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
+//        my_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
+        addRecyTop();//置顶距离
 //        int inx = my_recycle.getChildAt(0).getVerticalScrollbarPosition();
-
         initTitle();
-
         initListData();
         ProjectID = "0";
+    }
+
+    private void addRecyTop() {
+        mParams = new StickTopRecyclerView.SetTopParams();
+        mParams.marginTopHeight = 0;
+//        my_recycle.updateSetTopParams(mParams);
     }
 
     private void initTitle() {
@@ -129,9 +143,10 @@ public class Person_LineView extends Activity  {
 
         lineCalRight.setTime(nowDate);
 
+        String UserID = saveFile.getShareData("userId", this);
         String StartDate = format.format(lineCalLeft.getTime());
         String EndDate = format.format(calNow.getTime());
-        lineData(Person_LineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate, direction, calNow);
+        lineData(Person_LineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate+ "&UserID=" + UserID, direction, calNow);
     }
 
     private void initLeftData(int direction) {
@@ -141,9 +156,10 @@ public class Person_LineView extends Activity  {
         calNow.setTime(lineCalLeft.getTime());
         lineCalLeft.add(Calendar.DATE, -29);//30天以前
 
+        String UserID = saveFile.getShareData("userId", this);
         String StartDate = format.format(lineCalLeft.getTime());
         String EndDate = format.format(calNow.getTime());
-        lineData(Person_LineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate, direction, calNow);
+        lineData(Person_LineView.this, saveFile.BaseUrl + saveFile.HistoryPk_Url + "?ProjectID=" + ProjectID + "&StartDate=" + StartDate + "&EndDate=" + EndDate+ "?&UserID=" + UserID, direction, calNow);
     }
 
 //    private void initRightData(int direction) {
@@ -269,6 +285,7 @@ public class Person_LineView extends Activity  {
                 int num = oneData.getReport_List().get(dataj).getReportNum();
                 values.add(new PointValue(newIndex, num));//坐标轴数据
 
+
                 String str;
                 if (j == 0) {
                     str = "今天";
@@ -282,6 +299,7 @@ public class Person_LineView extends Activity  {
             }
             Line line = new Line(values);
             line.setColor(Color.parseColor("#f24d4d"));
+
             line.setShape(ValueShape.CIRCLE);
             line.setStrokeWidth(1);
             line.setCubic(false);//曲线是否平滑，即是曲线还是折线
@@ -322,6 +340,7 @@ public class Person_LineView extends Activity  {
         }
         data.setBaseValue(Float.NEGATIVE_INFINITY);
         chart.setLineChartData(data);
+
 //        List<Float> maxList = new ArrayList<>();
 //        for (int k = 0; k < numberOfPoints; k++) {
 //            maxList.add(values.get(k).getY());
@@ -422,6 +441,7 @@ public class Person_LineView extends Activity  {
         });
 
 
+        chart.getSelectedValue().set(0, 0, SelectedValue.SelectedValueType.LINE);//默认第一个选中
     }
 
 
@@ -585,31 +605,43 @@ public class Person_LineView extends Activity  {
         });
     }
 
-
     public void initlist(final Context context) {
-        LinearLayoutManager mMangaer = new LinearLayoutManager(context);
-        my_recycle.setLayoutManager(mMangaer);
+        LinearLayoutManager mMangaer = new LinearLayoutManager(Person_LineView.this);
+        mMangaer.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycler.setLayoutManager(mMangaer);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
-        my_recycle.setHasFixedSize(true);
-//        mAdapter = new Person_PkHistoryFragment_Adapter(context, baseModel);
-        mAdapter = new Person_LineView_Adapter(context, baseModel);
-        my_recycle.setAdapter(mAdapter);
+        mRecycler.setHasFixedSize(true);
+        mAdapter = new Person_LineView_Adapter(context, baseModel, mContainer, mRecycler, mParams);
+        mRecycler.setAdapter(mAdapter);
+
         mAdapter.setOnItemClickLitener(new Person_LineView_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                //拖动的 item 的下标
-//                int fromPosition = viewHolder.getAdapterPosition();
-//                //目标 item 的下标，目标 item 就是当拖曳过程中，不断和拖动的 item 做位置交换的条目。
-//                int toPosition = target.getAdapterPosition();
-                cententtxt.setText(baseModel.getData().get(position).getProjectName());
-                ProjectID = baseModel.getData().get(position).getProjectID() + "";//先获取项目ID
-                Collections.swap(baseModel.getData(), position, 0); //做数据的交换
-//                mAdapter.notifyItemMoved(position, 0);//置顶加动效
-                mAdapter.notifyDataSetChanged();
-//                my_recycle.scrollToPosition(0);
+                DayPkProject_Model.DataBean oneData = baseModel.getData().get(position);
 
+                mRecycler.getTopView().findViewById(my_Head);
+                TextView nameTxt = (TextView) mRecycler.getTopView().findViewById(R.id.name_Txt);
+                SimpleDraweeView my_Head = (SimpleDraweeView)mRecycler.getTopView().findViewById(R.id.my_Head);
+                TextView content_Txt = (TextView)mRecycler.getTopView().findViewById(R.id.content_Txt);
+                nameTxt.setText(oneData.getProjectName());
+                content_Txt.setText(oneData.getReportNum()+oneData.getProjectUnit());
+                if (oneData.getFilePath() != null) {
+                    Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
+                    my_Head.setImageURI(contentUri);
+                } else {
+                    StaticData.lodingheadBg(my_Head);
+                }
+
+                cententtxt.setText(oneData.getProjectName());
+                ProjectID = oneData.getProjectID() + "";//先获取项目ID
+                Collections.swap(baseModel.getData(), position, 0); //做数据的交换
+                mAdapter.notifyDataSetChanged();
+//                mAdapter.notifyItemMoved(position, 0);//置顶加动效
+//                my_recycle.scrollToPosition(0);
+//                smoothMoveToPosition(position);
+//                moveToPosition(position);
                 isBiss = true;//点击时不可加载更多
-                initData(initAddScro, ProjectID);
+                initData(initAddScro, ProjectID);//加载曲线
 
             }
 

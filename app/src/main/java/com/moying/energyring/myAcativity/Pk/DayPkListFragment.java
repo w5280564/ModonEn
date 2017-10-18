@@ -29,7 +29,9 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.myAdapter.DayPkFragment_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -57,7 +59,7 @@ import me.shaohui.advancedluban.OnCompressListener;
  * Created by Admin on 2016/4/18.
  * 每日pk
  */
-public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
+public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView.LoadingListener {
     private String defaultHello = "default value";
     private String stringtype;
     private String ProjectID;
@@ -69,7 +71,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
     private int pageSize;
     private SimpleDraweeView my_simple, zhan_simple;
     private ImageView zan_img;
-    private TextView zan_Txt, zhanTxt, myhui_count_Txt;
+    private TextView zan_Txt, zhanTxt, myhui_count_Txt,myrank_Txt;
     private SimpleDraweeView pkbg_simple;
     private LinearLayout zhan_Lin, zan_Lin;
     private Button daypk_pen;
@@ -127,6 +129,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
         Button set_Btn = (Button) header.findViewById(R.id.set_Btn);
         daypk_pen = (Button) header.findViewById(R.id.daypk_pen);
         zan_Lin = (LinearLayout) header.findViewById(R.id.zan_Lin);
+        viewTouchDelegate.expandViewTouchDelegate(zan_Lin,100,100,200,0);
         zan_img = (ImageView) header.findViewById(R.id.zan_img);
         zan_Txt = (TextView) header.findViewById(R.id.zan_Txt);
         myhui_count_Txt = (TextView) header.findViewById(R.id.myhui_count_Txt);
@@ -134,6 +137,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
         zhan_simple = (SimpleDraweeView) header.findViewById(R.id.zhan_simple);
         zhanTxt = (TextView) header.findViewById(R.id.zhanTxt);
         my_simple = (SimpleDraweeView) header.findViewById(R.id.my_simple);
+        myrank_Txt = (TextView) header.findViewById(R.id.myrank_Txt);
 //        StaticData.ViewScale(head_Rel, 710, 240);
         StaticData.ViewScale(head_Rel, 710, 0);
         StaticData.ViewScale(my_Rel, 580, 120);
@@ -157,6 +161,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
         daypk_pen.setOnClickListener(new daypk_pen());
         zan_Lin.setOnClickListener(new zan_Lin());
         set_Btn.setOnClickListener(new set_Btn());
+        my_Rel.setOnClickListener(new my_Rel());
         return parentView;
     }
 
@@ -250,6 +255,16 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
         }
     }
 
+    private class my_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), PersonMyCenter.class);
+            intent.putExtra("UserID", "0");
+//            intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
+            startActivity(intent);
+        }
+    }
+
     DayPkFragment_Adapter mAdapter;
 
     public void initlist(final Context context) {
@@ -265,6 +280,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
 //                Intent intent = new Intent(context, Leran_AllPersonDetails.class);
 //                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
 //                startActivity(intent);
+
                 Intent intent = new Intent(context, PersonMyCenter_Other.class);
                 intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
                 context.startActivity(intent);
@@ -511,6 +527,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
         } else {
 //            daypk_pen.setVisibility(View.GONE);
             zan_Txt.setText(perdata.getLikes() + "");
+            myrank_Txt.setText(perdata.getRanking()+".");
 //            perdata.setIs_Like(true);
             if (perdata.isIs_Like()) {
                 zan_img.setImageResource(R.drawable.like_red_icon);
@@ -541,7 +558,7 @@ public class    DayPkListFragment extends lazyLoadFragment implements XRecyclerV
             }
             if (oneData.getNickName() != null) {
                 zhanTxt.setText(String.valueOf(oneData.getNickName()));
-            }else{
+            } else {
                 zhanTxt.setText("没有名字");
             }
             if (oneData.getPKCoverImg() != null) {

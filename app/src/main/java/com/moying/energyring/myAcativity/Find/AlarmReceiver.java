@@ -35,7 +35,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String stopString = saveFile.getShareData("stopString", context);
         if (stopString.equals("关闭") || stopString.equals("false")) {
 //                stopCount = "关闭";
-            stopCount = 10 * 60 * 1000 + "";
+            stopCount = 10 * 60 * 1000 * 60 + "";//默认一小时
         } else {
             stopCount = Long.parseLong(saveFile.getShareData("stopString", context).substring(0, 2)) * 60 * 1000 + "";
         }

@@ -12,7 +12,7 @@ public class EnergyList_Model {
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : [{"PostID":25830,"PostTitle":"现代物理惊人发现：宇宙里一直存在着主宰一切的神秘力量！","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-31 16:15:01","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-31/9eeb58c1-9b75-4183-953a-ecc254352ebf.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25829,"PostTitle":"为什么我们明明已经吃得很饱了，却还能再吃下甜点？","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-31 16:14:15","CommentNum":0,"Likes":1,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-31/bfdf9443-690c-40f9-8c8f-8fe780a73b73.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25828,"PostTitle":"这些玩具让你的生活更有情趣！","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-31 16:13:39","CommentNum":0,"Likes":1,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-31/634a562c-1356-4e5f-87be-c543dd2a5fc0.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25370,"PostTitle":"喜茶\u201c无糖\u201d奶茶含糖量偏高！一点点、贡茶等质量如何，看这份报告","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 20:09:49","CommentNum":0,"Likes":1,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/01117f39-b118-4b27-90a3-37c8f58ecec5.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25369,"PostTitle":"无糖饮料能减肥？不增肥就不错了","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 20:08:52","CommentNum":0,"Likes":1,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/8b4be52a-2f09-47a9-b006-93715a6668da.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25368,"PostTitle":"徐嘉余豪气夺金！中国游泳新偶像诞生！","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 20:08:14","CommentNum":0,"Likes":1,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/833dbe33-efdb-429d-b2c0-79ec18fdf08c.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25367,"PostTitle":"他只是晒了张腹肌照，却被网友们玩坏了","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 20:07:25","CommentNum":0,"Likes":3,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/c5cd231b-5762-4438-83ac-d8fe97a25d0e.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25347,"PostTitle":"点滴 | 你的记忆衰退症有\u201c药\u201d可治","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 14:38:23","CommentNum":0,"Likes":1,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/7e5cd4bd-9a7f-44f5-98ec-7cf8a6603fa8.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25346,"PostTitle":"听歌学英语∣ Two Fux","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 14:37:39","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/c417ae7a-a94c-4d40-8980-786a6e78f836.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"},{"PostID":25345,"PostTitle":"健身房的逗逼瞬间，第1个是不是你教练！","PostContent":"<!--headTrap<body><\/body><head><\/head><html><\/html>-->                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta na","PostType":5,"UserID":1,"CreateTime":"2017-07-28 14:36:39","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":"http://120.26.218.68:1111/Uploads/2017-07-28/df294053-1db0-459f-803f-3b8d54561c83.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"深度好文","ProfilePicture":"http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg"}]
+     * Data : [{"PostID":23047,"PostTitle":null,"PostContent":"123","PostType":1,"UserID":50,"CreateTime":"2017-09-30 15:58:28","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"摩英教育海哥","ProfilePicture":"http://172.16.0.111/Uploads/2017-09-30/ab82bd06-529a-4fa6-9a40-eaf5d2587c77.jpg","TagID":11,"TagName":"早起签到"},{"PostID":23046,"PostTitle":null,"PostContent":"ni","PostType":1,"UserID":2066,"CreateTime":"2017-09-30 15:50:32","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":0,"TagName":null},{"PostID":23045,"PostTitle":null,"PostContent":"hahaha","PostType":1,"UserID":2066,"CreateTime":"2017-09-30 15:50:04","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":11,"TagName":"早起签到"},{"PostID":23044,"PostTitle":null,"PostContent":"hhh","PostType":1,"UserID":2066,"CreateTime":"2017-09-30 15:47:44","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":11,"TagName":"早起签到"},{"PostID":23043,"PostTitle":null,"PostContent":"【Waylen蜕变之旅2017-09-26】我今天完成了俯卧撑120个，卷腹26个，平板撑15秒，今日背诵30遍，欢迎到每日pk来挑战我！","PostType":1,"UserID":2066,"CreateTime":"2017-09-26 14:29:20","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":"http://172.16.0.111/Uploads/2017-09-26/6ba23bee-092b-4667-a405-c5d52a24c4dd.jpg","Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":0,"TagName":null},{"PostID":23042,"PostTitle":null,"PostContent":"【Waylen蜕变之旅2017-09-26】我今天完成了俯卧撑120个，卷腹26个，平板撑15秒，欢迎到每日pk来挑战我！","PostType":1,"UserID":2066,"CreateTime":"2017-09-26 14:24:14","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":0,"TagName":null},{"PostID":23041,"PostTitle":null,"PostContent":"【Waylen蜕变之旅2017-09-26】我今天完成了俯卧撑120个，卷腹26个，平板撑15秒，欢迎到每日pk来挑战我！","PostType":1,"UserID":2066,"CreateTime":"2017-09-26 14:23:47","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":0,"TagName":null},{"PostID":23040,"PostTitle":null,"PostContent":"【Waylen蜕变之旅2017-09-25】我今天完成了俯卧撑190个，卷腹56个，健康走0步，欢迎到每日pk来挑战我！","PostType":1,"UserID":2066,"CreateTime":"2017-09-25 16:50:37","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"Waylen","ProfilePicture":"http://172.16.0.111/Uploads/2017-08-01/a4f5123d-a5f3-48a9-9714-c1bc19be5199.jpg","TagID":0,"TagName":null},{"PostID":23039,"PostTitle":null,"PostContent":"【系统管理员蜕变之旅2017-09-19】我今天完成了站桩22分钟，瑜伽22小时，游泳25分钟，今日背诵25遍，深蹲842个，欢迎到每日pk来挑战我！","PostType":1,"UserID":1384,"CreateTime":"2017-09-19 10:34:06","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"系统管理员","ProfilePicture":"http://q.qlogo.cn/qqapp/1104987324/2C9D455E5C2BF6FF5B6CEF5D4C34F3CA/100","TagID":0,"TagName":null},{"PostID":23038,"PostTitle":null,"PostContent":"【系统管理员蜕变之旅2017-09-19】我刚才完成了深蹲10个,欢迎到每日PK来挑战我！","PostType":2,"UserID":1384,"CreateTime":"2017-09-19 10:34:04","CommentNum":0,"Likes":0,"Is_Choice":false,"Is_Del":false,"FilePath":null,"Is_Like":false,"SourceID":0,"SourceName":null,"FileIDs":null,"ToUsers":null,"NickName":"系统管理员","ProfilePicture":"http://q.qlogo.cn/qqapp/1104987324/2C9D455E5C2BF6FF5B6CEF5D4C34F3CA/100","TagID":0,"TagName":null}]
      */
 
     private boolean IsSuccess;
@@ -54,28 +54,30 @@ public class EnergyList_Model {
 
     public static class DataBean {
         /**
-         * PostID : 25830
-         * PostTitle : 现代物理惊人发现：宇宙里一直存在着主宰一切的神秘力量！
-         * PostContent : <!--headTrap<body></body><head></head><html></html>-->                <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta na
-         * PostType : 5
-         * UserID : 1
-         * CreateTime : 2017-07-31 16:15:01
+         * PostID : 23047
+         * PostTitle : null
+         * PostContent : 123
+         * PostType : 1
+         * UserID : 50
+         * CreateTime : 2017-09-30 15:58:28
          * CommentNum : 0
          * Likes : 0
          * Is_Choice : false
          * Is_Del : false
-         * FilePath : http://120.26.218.68:1111/Uploads/2017-07-31/9eeb58c1-9b75-4183-953a-ecc254352ebf.jpg
+         * FilePath : null
          * Is_Like : false
          * SourceID : 0
          * SourceName : null
          * FileIDs : null
          * ToUsers : null
-         * NickName : 深度好文
-         * ProfilePicture : http://120.26.218.68:1111/Uploads/2017-07-07/a195fc72-7aef-4c49-830d-b96778c16265.jpg
+         * NickName : 摩英教育海哥
+         * ProfilePicture : http://172.16.0.111/Uploads/2017-09-30/ab82bd06-529a-4fa6-9a40-eaf5d2587c77.jpg
+         * TagID : 11
+         * TagName : 早起签到
          */
 
         private int PostID;
-        private String PostTitle;
+        private Object PostTitle;
         private String PostContent;
         private int PostType;
         private int UserID;
@@ -84,7 +86,7 @@ public class EnergyList_Model {
         private int Likes;
         private boolean Is_Choice;
         private boolean Is_Del;
-        private String FilePath;
+        private Object FilePath;
         private boolean Is_Like;
         private int SourceID;
         private Object SourceName;
@@ -92,6 +94,8 @@ public class EnergyList_Model {
         private Object ToUsers;
         private String NickName;
         private String ProfilePicture;
+        private int TagID;
+        private String TagName;
 
         public int getPostID() {
             return PostID;
@@ -101,11 +105,11 @@ public class EnergyList_Model {
             this.PostID = PostID;
         }
 
-        public String getPostTitle() {
+        public Object getPostTitle() {
             return PostTitle;
         }
 
-        public void setPostTitle(String PostTitle) {
+        public void setPostTitle(Object PostTitle) {
             this.PostTitle = PostTitle;
         }
 
@@ -173,11 +177,11 @@ public class EnergyList_Model {
             this.Is_Del = Is_Del;
         }
 
-        public String getFilePath() {
+        public Object getFilePath() {
             return FilePath;
         }
 
-        public void setFilePath(String FilePath) {
+        public void setFilePath(Object FilePath) {
             this.FilePath = FilePath;
         }
 
@@ -235,6 +239,22 @@ public class EnergyList_Model {
 
         public void setProfilePicture(String ProfilePicture) {
             this.ProfilePicture = ProfilePicture;
+        }
+
+        public int getTagID() {
+            return TagID;
+        }
+
+        public void setTagID(int TagID) {
+            this.TagID = TagID;
+        }
+
+        public String getTagName() {
+            return TagName;
+        }
+
+        public void setTagName(String TagName) {
+            this.TagName = TagName;
         }
     }
 }

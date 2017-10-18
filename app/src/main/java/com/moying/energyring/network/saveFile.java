@@ -31,8 +31,10 @@ public class saveFile {
     public static String Post_Add_Url = "ec/v2/Post/Post_Add";
 
     public static String AddPk_Url = "ec/v3/PK/Report_Add";
+    public static String Report_Status_Url = "ec/v2/Post/Report_Post_Add";
 
-    public static String CodeUrl = "ec/Account/PhoneCode_Get";
+//    public static String CodeUrl = "ec/Account/PhoneCode_Get";
+    public static String CodeUrl = "ec/Account/SendPhoneVerificationCode";
     public static String LoginUrl = "ec/Account/Login";
     public static String EnergyListUrl = "ec/Post/Post_List";
     public static String pkUrl = "ec/PK/PK_Statistics_List";
@@ -83,9 +85,15 @@ public class saveFile {
     public static String Fans_Url = "ec/User/Attention_Me_List";
     public static String AtMe_Url = "ec/Notice/Notice_MenTion_List";
     public static String PostLike_Url = "ec/Post/Likes_Add";
-    public static String Report_Status_Url = "ec/Post/Report_Post_Add";
+
     public static String HistoryPk_Url = "ec/PK/Report_Sta_ByPID";
     public static String HistoryPk_List_Url = "ec/PK/Report_List_Record";
+    public static String NoticeHasMes_Url = "ec/Notice/Notice_NotReadCount_Num";
+    public static String Version_Url = "ec/SysConfig/Version_Last_Get";
+    public static String Sys_Notice_Url = "ec/Notice/Sys_Notice_List";
+    public static String DayPk_ProjectNotWalk = "ec/PK/Project_List_NotHaveWalk";
+    public static String Tag_List_Url = "ec/Post/Post_Tag_List";
+    public static String Phone_ChangeUrl = "ec//Account/Phone_Change";
 
 
     private static SharedPreferences mShared = null;

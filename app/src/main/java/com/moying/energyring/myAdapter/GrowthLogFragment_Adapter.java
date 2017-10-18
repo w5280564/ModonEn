@@ -16,10 +16,13 @@ import android.widget.Toast;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
+import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.network.saveFile;
@@ -29,6 +32,8 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.util.List;
+
+import static com.moying.energyring.network.saveFile.getShareData;
 
 /**
  * Created by Admin on 2016/3/29.
@@ -49,7 +54,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
     public void addMoreData(EnergyList_Model list) {
         int lastIndex = this.otherList.size();
         if (this.otherList.addAll(list.getData())) {
-            notifyItemRangeInserted(lastIndex+1, list.getData().size());
+            notifyItemRangeInserted(lastIndex + 1, list.getData().size());
         }
     }
 
@@ -81,28 +86,32 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             });
         }
 
-//        String headStr = otherList.get(position).getProfilePicture();
-//        if (!headStr.isEmpty()) {
-//            if (!headStr.substring(0, 4).equals("http")) {
-//                headStr = "http://" + headStr;
-//            }
-//        }
+        if (getShareData("role", context).equals("false")) {
+
+            holder.remove_Txt.setVisibility(View.INVISIBLE);
+        }else{
+            int role = Integer.parseInt(getShareData("role", context));
+            int UserId = Integer.parseInt(getShareData("userId", context));
+            if (otherList.get(position).getUserID() == UserId || role < 3) {
+                holder.remove_Txt.setVisibility(View.VISIBLE);
+            } else {
+                holder.remove_Txt.setVisibility(View.INVISIBLE);
+            }
+        }
+
 
         final EnergyList_Model.DataBean oneData = otherList.get(position);
-
         if (oneData.getProfilePicture() != null) {
 //            StaticData.addPlaceRound(holder.myhead_simple, context);
             Uri headUri = Uri.parse(oneData.getProfilePicture());
             holder.myhead_simple.setImageURI(headUri);
-
+        } else {
+            StaticData.lodingheadBg(holder.myhead_simple);
         }
-
         holder.name_Txt.setText(oneData.getNickName());
 //        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
         holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
-
         holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
-
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");
         if (oneData.isIs_Like()) {
@@ -129,7 +138,10 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
             holder.content_simple.setImageURI(contentUri);
         }
-
+        if (oneData.getTagName() != null) {//原type改为 tag标签
+            holder.hero_Lin.setVisibility(View.VISIBLE);
+            holder.hero_Txt.setText(oneData.getTagName());
+        }
 
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +157,15 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             public void onClick(View view) {
                 int PostID = oneData.getPostID();
                 zanData(context, saveFile.BaseUrl + saveFile.PostLike_Url + "?PostID=" + PostID, position);
+            }
+        });
+
+        holder.remove_Txt.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                holder.remove_Txt.setEnabled(false);
+                int postID = oneData.getPostID();
+                deleData(context, saveFile.BaseUrl + saveFile.DelePost_Url, postID, position, holder.remove_Txt);
             }
         });
     }
@@ -164,7 +185,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout hero_Lin, like_Lin;
-        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt;
+        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt, hero_Txt, remove_Txt;
         private ImageView energy_img, energy_like;
         private SimpleDraweeView myhead_simple, content_simple;
         private RelativeLayout mu_Rel;
@@ -184,6 +205,10 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
             like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
+            viewTouchDelegate.expandViewTouchDelegate(like_Lin, 100, 100, 100, 100);
+            hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
+            remove_Txt = (TextView) itemView.findViewById(R.id.remove_Txt);
+            viewTouchDelegate.expandViewTouchDelegate(remove_Txt, 100, 100, 100, 100);
             StaticData.ViewScale(mu_Rel, 710, 0);
             StaticData.ViewScale(myhead_simple, 100, 100);
 
@@ -207,8 +232,8 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 
     public void zanData(final Context context, String baseUrl, final int pos) {
         RequestParams params = new RequestParams(baseUrl);
-        if (saveFile.getShareData("JSESSIONID", context) != null) {
-            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        if (getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", getShareData("JSESSIONID", context));
         }
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -259,6 +284,51 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         });
     }
 
+    //删帖
+    public void deleData(final Context context, String baseUrl, int postID, final int pos, final TextView mytext) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", getShareData("JSESSIONID", context));
+        }
+        params.addBodyParameter("PostID", postID + "");
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
+                    if (model.isIsSuccess()) {
+                        mytext.setEnabled(true);
+                        otherList.remove(pos);
+                        notifyItemRemoved(pos + 1);//加1是有头部
+//                        notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    context.startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
 
 
 }

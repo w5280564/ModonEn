@@ -91,11 +91,19 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
     }
 
     private void initView(View view) {
+        int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 88);
         find_recy = (XRecyclerView) view.findViewById(R.id.find_recy);
+        find_recy.setPadding(0,pad,0,0);
         find_recy.setLoadingListener(this);
         find_recy.getItemAnimator().setChangeDuration(0);
         initAddListHead(find_recy);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        params.getRule(RelativeLayout.CENTER_IN_PARENT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        int padTop = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 18);
+        params.setMargins(0,padTop,0,0);
         seek_Btn = (Button) view.findViewById(R.id.seek_Btn);
+        seek_Btn.setLayoutParams(params);
         StaticData.ViewScale(seek_Btn, 646, 52);
         seek_Btn.setOnClickListener(new seek_Btn());
 //        StaticData.changeXRecycleHeadGif(find_recy,R.drawable.gif_sun_icon,500,200);

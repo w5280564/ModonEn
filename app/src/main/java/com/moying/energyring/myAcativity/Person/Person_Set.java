@@ -23,7 +23,7 @@ import cn.jpush.android.api.JPushInterface;
 
 public class Person_Set extends Activity {
 
-    private RelativeLayout cache_Rel;
+    private RelativeLayout cache_Rel,change_Rel;
     private TextView cache_Txt;
     private SwitchButton push_switch;
 
@@ -61,10 +61,12 @@ public class Person_Set extends Activity {
         RelativeLayout push_Rel = (RelativeLayout) findViewById(R.id.push_Rel);
         push_switch = (SwitchButton) findViewById(R.id.push_switch);
         cache_Rel = (RelativeLayout) findViewById(R.id.cache_Rel);
+        change_Rel = (RelativeLayout) findViewById(R.id.change_Rel);
         cache_Txt = (TextView) findViewById(R.id.cache_Txt);
         RelativeLayout idea_Rel = (RelativeLayout) findViewById(R.id.idea_Rel);
         RelativeLayout about_Rel = (RelativeLayout) findViewById(R.id.about_Rel);
         ImageView cache_arrow = (ImageView) findViewById(R.id.cache_arrow);
+        ImageView change_arrow = (ImageView) findViewById(R.id.change_arrow);
         ImageView idea_arrow = (ImageView) findViewById(R.id.idea_arrow);
         ImageView about_arrow = (ImageView) findViewById(R.id.about_arrow);
 
@@ -73,15 +75,18 @@ public class Person_Set extends Activity {
 
         StaticData.ViewScale(push_Rel, 710, 120);
         StaticData.ViewScale(cache_Rel, 710, 120);
+        StaticData.ViewScale(change_Rel, 710, 120);
         StaticData.ViewScale(idea_Rel, 710, 120);
         StaticData.ViewScale(about_Rel, 710, 120);
         StaticData.ViewScale(quit_Btn, 710, 120);
         StaticData.ViewScale(cache_arrow, 16, 30);
+        StaticData.ViewScale(change_arrow, 16, 30);
         StaticData.ViewScale(idea_arrow, 16, 30);
         StaticData.ViewScale(about_arrow, 16, 30);
 
         quit_Btn.setOnClickListener(new quit_Btn());
         cache_Rel.setOnClickListener(new cache_Rel());
+        change_Rel.setOnClickListener(new change_Rel());
         idea_Rel.setOnClickListener(new idea_Rel());
         about_Rel.setOnClickListener(new about_Rel());
         push_switch.setOnClickListener(new push_switch());
@@ -145,8 +150,15 @@ public class Person_Set extends Activity {
     }
 
 
-    public class idea_Rel implements View.OnClickListener {
+    public class change_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(Person_Set.this, Person_ChangePhone.class);
+            startActivity(i);
+        }
+    }
 
+    public class idea_Rel implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             Intent i = new Intent(Person_Set.this, Person_Notice_Idea.class);

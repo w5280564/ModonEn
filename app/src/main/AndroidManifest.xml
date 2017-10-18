@@ -297,8 +297,16 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity android:name=".myAcativity.Person.PersonPkHistoryLineView" />
-        <activity android:name=".myAcativity.Person.Person_LineView"></activity>
+        <activity
+            android:name=".myAcativity.Person.PersonPkHistoryLineView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_LineView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Energy.SysNotice_Web"
+            android:screenOrientation="portrait" />
+        <activity android:name=".myAcativity.Person.Person_ChangePhone"></activity>
     </application>
 
 </manifest>

@@ -52,6 +52,12 @@ public class Fragment1_Energy extends Fragment {
         return parentView;
     }
 
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+
+    }
+
     public List<String> userArr;
     private TabLayout tablayout;
     public List<Fragment> fragments;
@@ -149,6 +155,5 @@ public class Fragment1_Energy extends Fragment {
 //        }
 
     }
-
 
 }

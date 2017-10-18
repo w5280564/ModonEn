@@ -165,6 +165,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         share_qq.setOnClickListener(new share_qq());
         share_qzone.setOnClickListener(new share_qzone());
 
+
         photoPaths = new ArrayList<>();
         setShareFlag();
         projectModel = new ArrayList<>();
@@ -243,9 +244,10 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 //                Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
 //                return;
 //            }
-
+            mu_Btn.setEnabled(false);
             for (int i = 0; i < projectModel.size(); i++) {
                 if (StaticData.isSpace(projectModel.get(i).getReportNum())) {
+                    mu_Btn.setEnabled(true);
                     Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -532,6 +534,8 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     }
 
     //
+    private EditText project_Edit;
+
     public void projectList(LinearLayout myFlow, final List<ProjectModel> myBean) {
         if (myFlow != null) {
             myFlow.removeAllViews();
@@ -543,30 +547,38 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             RadioGroup.LayoutParams itemParams = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
             StaticData.layoutParamsScale(itemParams, 0, 100);
             myview.setLayoutParams(itemParams);
+            SimpleDraweeView project_Simple = (SimpleDraweeView) myview.findViewById(R.id.project_Simple);
             TextView project_Name = (TextView) myview.findViewById(R.id.project_Name);
-            TextView project_Unit = (TextView) myview.findViewById(R.id.project_Unit);
-            final EditText project_Edit = (EditText) myview.findViewById(R.id.project_Edit);
+            final TextView project_Unit = (TextView) myview.findViewById(R.id.project_Unit);
+            project_Edit = (EditText) myview.findViewById(R.id.project_Edit);
+            StaticData.ViewScale(project_Simple,80,80);
+            if (myBean.get(i).getName().equals("健康走")) {
+//                myBean.remove(i);
+                saveFile.removeGsonOne(Pk_DayPkAdd_More.this, "moreModel", myBean.get(i).getProjectId());
+                continue;
+//                project_Edit.setEnabled(false);
+//                myBean.get(i).setReportNum(saveFile.getShareData("myStep", this) + "");
+            }
             project_Name.setText(myBean.get(i).getName() + ":");
             project_Unit.setText(myBean.get(i).getUnit());
             project_Edit.setText(myBean.get(i).getReportNum() + "");
-
-            project_Edit.setTag(i);
+            if (myBean.get(i).getImgUrl()!= null) {
+                Uri simUri = Uri.parse(String.valueOf(myBean.get(i).getImgUrl()));
+                project_Simple.setImageURI(simUri);
+            }
+            project_Unit.setTag(i);
             project_Edit.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 }
-
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
                 }
-
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    int tag = (Integer) project_Edit.getTag();
+                    int tag = (Integer)project_Unit.getTag();
                     myBean.get(tag).setReportNum(editable.toString());
-                    saveFile.putClass(Pk_DayPkAdd_More.this, "moreModel", projectModel);
+//                    saveFile.putClass(Pk_DayPkAdd_More.this, "moreModel", projectModel);
                     mu_Btn.setBackgroundResource(R.drawable.allperson_btn);
                     mu_Btn.setTextColor(Color.parseColor("#ffffff"));
                     mu_Btn.setEnabled(true);
@@ -575,6 +587,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 
             myFlow.addView(myview);
         }
+
     }
 
 
@@ -659,6 +672,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 .setImageRequest(request).build();
         simple.setController(controller);
     }
+
 
     //上传图片
     private AddPhoto_Model model;
@@ -745,6 +759,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         x.http().post(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String resultString) {
+                mu_Btn.setEnabled(true);
                 PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
                 if (model.isIsSuccess()) {
                     Toast.makeText(Pk_DayPkAdd_More.this, "发布成功", Toast.LENGTH_SHORT).show();
@@ -767,6 +782,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 
             @Override
             public void onError(Throwable throwable, boolean b) {
+                mu_Btn.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
                     Intent intent = new Intent(context, LoginRegister.class);
@@ -776,6 +792,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 
             @Override
             public void onCancelled(CancelledException e) {
+                mu_Btn.setEnabled(true);
             }
 
             @Override

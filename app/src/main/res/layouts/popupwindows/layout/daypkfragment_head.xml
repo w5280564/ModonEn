@@ -31,6 +31,8 @@
                 android:id="@+id/zhanTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLength="15"
                 android:layout_marginRight="10dp"
                 android:text=""
                 android:textColor="#ffd800"
@@ -76,13 +78,23 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/round_blacktran">
 
+                <TextView
+                    android:id="@+id/myrank_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp" />
+
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/my_simple"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/myrank_Txt"
                     app:roundAsCircle="true" />
 
 
@@ -107,7 +119,7 @@
                         android:id="@+id/zan_Lin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="15dp"
+                        android:padding="15dp"
                         android:gravity="center"
                         android:orientation="vertical">
 

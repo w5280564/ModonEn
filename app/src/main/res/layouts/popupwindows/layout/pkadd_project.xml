@@ -4,11 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/project_Simple"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"/>
+
     <TextView
         android:id="@+id/project_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/project_Simple"
         android:layout_marginLeft="10dp"
         android:textSize="14sp" />
 

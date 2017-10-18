@@ -1,23 +1,33 @@
 package com.moying.energyring.myAcativity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
+import com.moying.energyring.Model.AddPhoto_Model;
+import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.UserInfo_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.Person.PersonDeaft;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
@@ -30,11 +40,21 @@ import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAcativity.Person.Person_Set;
 import com.moying.energyring.myAcativity.Person.Person_Shop;
 import com.moying.energyring.network.saveFile;
+import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import me.shaohui.advancedluban.Luban;
+import me.shaohui.advancedluban.OnCompressListener;
+
+import static com.moying.energyring.myAcativity.Person.PersonMyCenter.REQUEST_CODE_IMAGE_PICK_PERSONHEAD;
 
 /**
  * Created by Admin on 2016/3/25.
@@ -42,8 +62,7 @@ import org.xutils.x;
 public class Fragment4_Person extends Fragment {
     private View parentView;
     private SimpleDraweeView personBg_simple, user_simple;
-    private TextView userName_Txt, userCount_Txt;
-
+    private TextView userName_Txt, userCount_Txt, nommunrend_Txt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +97,7 @@ public class Fragment4_Person extends Fragment {
         ImageView fen_icon = (ImageView) view.findViewById(R.id.fen_icon);
         LinearLayout data_Lin = (LinearLayout) view.findViewById(R.id.data_Lin);
         ImageView person_nom_icon = (ImageView) view.findViewById(R.id.person_nom_icon);
+        nommunrend_Txt = (TextView) view.findViewById(R.id.nommunrend_Txt);
         ImageView person_data_icon = (ImageView) view.findViewById(R.id.person_data_icon);
         ImageView person_cao_icon = (ImageView) view.findViewById(R.id.person_cao_icon);
         ImageView person_fen_icon = (ImageView) view.findViewById(R.id.person_fen_icon);
@@ -125,11 +145,13 @@ public class Fragment4_Person extends Fragment {
         StaticData.ViewScale(gui_arrow, 16, 30);
         StaticData.ViewScale(che_arrow, 16, 30);
         StaticData.ViewScale(line_arrow, 16, 30);
+        StaticData.ViewScale(nommunrend_Txt, 20, 20);
 
 
         layoutmarginTop(getActivity(), usericon_Rel);
         layoutmarginLinTop(getActivity(), data_Lin);
 
+        user_simple.setOnClickListener(new user_simple());
         personBg_simple.setOnClickListener(new personBg_simple());
         person_nom_icon.setOnClickListener(new person_nom_icon());
         person_cao_icon.setOnClickListener(new person_cao_icon());
@@ -175,6 +197,17 @@ public class Fragment4_Person extends Fragment {
     public void onResume() {
         super.onResume();
         initData();
+    }
+
+    private class user_simple implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+//            Intent intent = new Intent(getActivity(), PersonMyCenter.class);
+//            startActivity(intent);
+//            showHead(getActivity(), user_simple);
+            Intent intentimagepic = new Intent(getActivity(), ImagePickerActivity.class);
+            startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+        }
     }
 
     private class personBg_simple implements View.OnClickListener {
@@ -286,6 +319,7 @@ public class Fragment4_Person extends Fragment {
 
     private void initData() {
         UserData(getActivity(), saveFile.BaseUrl + saveFile.UserInfo_Url + "?UserID=" + userId);
+        hasMesData(getActivity(), saveFile.BaseUrl + saveFile.NoticeHasMes_Url);
     }
 
     UserInfo_Model userModel;
@@ -345,6 +379,231 @@ public class Fragment4_Person extends Fragment {
 
             @Override
             public void onFinished() {
+            }
+        });
+    }
+
+    public void hasMesData(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    BaseDataInt_Model baseModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                    if (baseModel.isIsSuccess()) {
+                        if (baseModel.getData() != 0) {
+                            nommunrend_Txt.setVisibility(View.VISIBLE);
+                        } else {
+                            nommunrend_Txt.setVisibility(View.INVISIBLE);
+                        }
+
+                    } else {
+                        Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            String path = data.getStringExtra("path");
+//            Uri imgUri = Uri.parse(path);
+            if (!TextUtils.isEmpty(path)) {
+
+
+                if (requestCode == REQUEST_CODE_IMAGE_PICK_PERSONHEAD) {
+                    compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+                }
+
+
+            }
+        }
+    }
+
+    //压缩图片
+    private void compressSingleListener(File file, int gear, final int type) {
+//        if (file.isEmpty()) {
+//            return;
+//        }
+
+        Luban.compress(file, getActivity().getFilesDir())
+                .putGear(gear)
+                .launch(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+//                        Log.i(TAG, "start");
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        Log.i("TAG", file.getAbsolutePath());
+//                        mImageViews.get(0).setImageURI(Uri.fromFile(file));
+//                        Log.e("图片尺寸1111111111111111111",file.length() / 1024 + "k");
+                        Uri imgUri = Uri.fromFile(file);
+                        user_simple.setImageURI(imgUri);
+//                            addSimplePath(user_simple, path);
+                        upload_PhotoData(type, getActivity(), saveFile.BaseUrl + saveFile.uploadPhoto_Url, file);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    //上传图片
+    public void upload_PhotoData(final int type, final Context context, String baseUrl, File file) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        params.setMultipart(true);//表单格式
+        params.setCancelFast(true);//支持断点续传
+        try {
+            FileInputStream fileStream = new FileInputStream(file);
+            params.addBodyParameter("file", fileStream, null, file.getName());
+            //最后fileName InputStream参数获取不到文件名, 最好设置, 除非服务端不关心这个参数.
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                AddPhoto_Model model = new Gson().fromJson(resultString, AddPhoto_Model.class);
+                if (model.isIsSuccess()) {
+                    String files = model.getData().toString().replace("[", "").replace("]", "");
+                     if (type == REQUEST_CODE_IMAGE_PICK_PERSONHEAD) {
+                        //上传头像ID
+                        AddPersonBg_AndHead(context, saveFile.BaseUrl + saveFile.PersonHead_Url + "?FileID=" + files, files);
+                    }
+                } else {
+//                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+
+    public void AddPersonBg_AndHead(final Context context, String baseUrl, String fileId) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+//        params.addParameter("FileID", fileId);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
+                if (model.isIsSuccess()) {
+//                    finish();
+                } else {
+//                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+
+
+
+    //放大头像
+    private void showHead(final Context mContext, View view) {
+        View contentView = View.inflate(mContext, R.layout.popup_myhead, null);
+        final PopupWindow headPopup = new BasePopupWindow(mContext);
+        headPopup.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
+        headPopup.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
+        headPopup.setTouchable(true);
+        headPopup.setContentView(contentView);
+        headPopup.showAtLocation(view, Gravity.CENTER, 0, 0);
+        SimpleDraweeView popup_head = (SimpleDraweeView) contentView.findViewById(R.id.popup_head);
+        StaticData.ViewScale(popup_head, 750, 750);
+
+        UserInfo_Model.DataBean oneData = userModel.getData();
+        if (oneData.getProfilePicture() != null) {
+            Uri imgUri = Uri.parse(oneData.getProfilePicture());
+            popup_head.setImageURI(imgUri);
+        } else {
+            StaticData.lodingheadBg(popup_head);
+        }
+//        popup_head.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                Intent intentimagepic = new Intent(PersonMyCenter.this, ImagePickerActivity.class);
+//                startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+//                return false;
+//            }
+//        });
+        popup_head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                headPopup.dismiss();
+            }
+        });
+
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                headPopup.dismiss();
             }
         });
     }

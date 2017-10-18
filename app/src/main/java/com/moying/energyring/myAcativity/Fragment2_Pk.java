@@ -64,7 +64,6 @@ public class Fragment2_Pk extends Fragment {
     public SimpleDraweeView pk_check_gif;
     private ImageView pk_check_simple;
     private LinearLayout pk_check_Lin;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +76,7 @@ public class Fragment2_Pk extends Fragment {
 //                ((MainActivity) getActivity()).backFragment(0);
 //            }
             parentView = inflater.inflate(R.layout.fragment2_pk, null);
+            initTitle(parentView);
             initView(parentView);
         }
         ViewGroup parent = (ViewGroup) parentView.getParent();
@@ -100,10 +100,8 @@ public class Fragment2_Pk extends Fragment {
         MobclickAgent.onPageEnd("Fragment2_Pk");
     }
 
-
     View title_Include;
-
-    public void initView(View view) {
+    private void initTitle(View view){
         title_Include = view.findViewById(R.id.title_Include);
         title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -115,6 +113,16 @@ public class Fragment2_Pk extends Fragment {
         cententtxt.setTextColor(Color.parseColor("#000000"));
         cententtxt.setText("PK");
         StaticData.ViewScale(title_Include, 0, 88);
+//         right_Btn = (Button)title_Include.findViewById(R.id.right_Btn);
+//        right_Btn.setVisibility(View.VISIBLE);
+//        right_Btn.setTextColor(Color.parseColor("#676767"));
+//        right_Btn.setText("每日汇总");
+//        right_Btn.setOnClickListener(new right_Btn());
+    }
+
+
+    public void initView(View view) {
+
         myflexbox = (FlexboxLayout) view.findViewById(R.id.myflexbox);
         Button pk_day_btn = (Button) view.findViewById(R.id.pk_day_btn);
         Button pk_comm_btn = (Button) view.findViewById(R.id.pk_comm_btn);
@@ -148,6 +156,14 @@ public class Fragment2_Pk extends Fragment {
         pk_check_simple.setOnClickListener(new pk_check_simple());
         pk_comm_btn.setOnClickListener(new pk_comm_btn());
     }
+
+//    private class right_Btn implements View.OnClickListener {
+//        @Override
+//        public void onClick(View view) {
+//            right_Btn.setEnabled(false);
+//            isReteDayPk(getActivity(), saveFile.BaseUrl + saveFile.Report_Status_Url);
+//        }
+//    }
 
     public class pk_day_btn implements View.OnClickListener {
         @Override
@@ -194,7 +210,7 @@ public class Fragment2_Pk extends Fragment {
     }
 
 
-    private int[] badgeArr = {R.drawable.pk_report, R.drawable.pk_allday, R.drawable.pk_zan, R.drawable.pk_zanranking, R.drawable.pk_rule};
+    private int[] badgeArr = {R.drawable.pk_report, R.drawable.pk_allday, R.drawable.pk_zan, R.drawable.pk_zanranking, R.drawable.pk_rule,R.drawable.pk_rete_icon};
     private String[] nameArr = {"次", "天", "个", "名", "徽章规则"};
     private String[] tagArr = {"总汇报次数", "累计天数", "获赞个数", "获赞排名", ""};
 
@@ -218,7 +234,10 @@ public class Fragment2_Pk extends Fragment {
             if (oneData.getProjectName().equals("徽章规则")) {
                 content_Txt.setText(oneData.getProjectName());
                 tag_Txt.setVisibility(View.GONE);
-            } else {
+            } else if (oneData.getProjectName().equals("一键汇总")){
+                content_Txt.setText(oneData.getProjectName());
+                tag_Txt.setVisibility(View.GONE);
+            }else{
                 tag_Txt.setText(oneData.getProjectName());
                 int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 30);
                 int pad2 = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 14);
@@ -250,8 +269,11 @@ public class Fragment2_Pk extends Fragment {
                     } else if (tagData.getProjectName().equals("总汇报次数") || tagData.getProjectName().equals("累计天数") || tagData.getProjectName().equals("获赞个数")) {
                         Intent intent = new Intent(getActivity(), PersonMyCenter.class);
                         intent.putExtra("UserID", "0");
-                        intent.putExtra("tabType", "2");
+                        intent.putExtra("tabType", "1");
                         startActivity(intent);
+                    }else if (tagData.getProjectName().equals("一键汇总")){
+                        v.setEnabled(false);
+                        isReteDayPk(v,getActivity(), saveFile.BaseUrl + saveFile.Report_Status_Url);
                     }
                 }
             });
@@ -441,6 +463,57 @@ public class Fragment2_Pk extends Fragment {
             @Override
             public void onFinished() {
 
+            }
+        });
+    }
+
+    public void isReteDayPk(final View view, final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    view.setEnabled(true);
+                    BaseDataInt_Model reteModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                    int integral = reteModel.getData();
+                    if (integral == -1){
+                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
+                    }else if (integral == 0){
+                        //汇报达到上限没分
+                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+                    }else if (integral > 0){
+                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), JiFenActivity.class);
+                        intent.putExtra("jifen", integral);
+                        startActivity(intent);
+                    }
+
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                view.setEnabled(true);
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+                view.setEnabled(true);
+            }
+
+            @Override
+            public void onFinished() {
+                view.setEnabled(true);
             }
         });
     }

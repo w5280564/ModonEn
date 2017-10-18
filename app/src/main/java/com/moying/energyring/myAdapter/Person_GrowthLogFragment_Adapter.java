@@ -22,6 +22,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
 
@@ -132,6 +133,10 @@ public class Person_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Perso
             }
         }
 
+        if (oneData.getTagName() != null) {
+            holder.hero_Lin.setVisibility(View.VISIBLE);
+            holder.hero_Txt.setText(oneData.getTagName());
+        }
 
         holder.remove_Txt.setOnClickListener(new NoDoubleClickListener() {
             @Override
@@ -166,7 +171,7 @@ public class Person_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Perso
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout hero_Lin,like_Lin;
-        private TextView time_Txt, content_Txt, talk_Txt, like_Txt, remove_Txt;
+        private TextView time_Txt, content_Txt, talk_Txt, like_Txt, remove_Txt,hero_Txt;
         private ImageView energy_img,energy_like;
         private SimpleDraweeView myhead_simple, content_simple;
         private RelativeLayout mu_Rel;
@@ -186,7 +191,10 @@ public class Person_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Perso
             talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
             remove_Txt = (TextView) itemView.findViewById(R.id.remove_Txt);
+            viewTouchDelegate.expandViewTouchDelegate(remove_Txt,100,100,100,100);
             like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
+            viewTouchDelegate.expandViewTouchDelegate(like_Lin,100,100,100,100);
+            hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
             StaticData.ViewScale(mu_Rel, 710, 0);
 //            StaticData.ViewScale(myhead_simple, 100, 100);
 

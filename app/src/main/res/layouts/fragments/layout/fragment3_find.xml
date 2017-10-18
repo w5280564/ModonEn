@@ -10,8 +10,7 @@
     <com.moying.energyring.xrecycle.XRecyclerView
         android:id="@+id/find_recy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never" />
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/seek_Btn"
@@ -19,10 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
         android:background="@drawable/find_seekbg"
         android:text="搜索 用户/成长日志"
         android:textColor="#5b5b5b"
-        android:textSize="10sp"
-        />
+        android:textSize="10sp" />
 </RelativeLayout>

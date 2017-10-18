@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,7 +16,10 @@ import com.moying.energyring.Model.DayPkProject_Model;
 import com.moying.energyring.Model.PkHistoryLineList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.waylenBaseView.StickTopRecyclerView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -26,10 +30,20 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
     Context context;
     private int myposition;
     final int POST_TYPE = 4;
+    private final int TOP_VIEW_TYPE = 1;
+    private final int ORIGIN_VIEW_TYPE = 0;
+    StickTopRecyclerView mRecyclerView;
+    StickTopRecyclerView.SetTopParams mParams;
+    FrameLayout mContainer;
 
-    public Person_LineView_Adapter(Context context, DayPkProject_Model listModel) {
+    public Person_LineView_Adapter(Context context, DayPkProject_Model listModel, FrameLayout mContainer, StickTopRecyclerView mRecyclerView, StickTopRecyclerView.SetTopParams mParams) {
+//        super(new ArrayList<DayPkProject_Model>());
         this.context = context;
         this.listModel = listModel;
+        this.mRecyclerView = mRecyclerView;
+        this.mParams = mParams;
+        this.mContainer = mContainer;
+
     }
 
     public void addMoreData(List<PkHistoryLineList_Model.DataBean> otherList) {
@@ -39,7 +53,14 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.person_pkhistoryline_adapter, null));
+        MyViewHolder myview;
+        if (viewType == TOP_VIEW_TYPE) {
+            View layoutView = LayoutInflater.from(context).inflate(R.layout.person_pkhistoryline_adapter, null);
+            View emptyView = mRecyclerView.setTopView(mContainer, layoutView, mParams);
+            myview = new MyViewHolder(emptyView);
+        } else {
+            myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.person_pkhistoryline_adapter, null));
+        }
         return myview;
     }
 
@@ -66,9 +87,11 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
         }
 
         final DayPkProject_Model.DataBean oneData = listModel.getData().get(position);
-        if (position == 0){
+        if (position == 0) {
+            holder.my_Rel.setBackgroundColor(Color.parseColor("#ffffff"));
             holder.content_Txt.setTextColor(Color.parseColor("#f24d4d"));
-        }else{
+        } else {
+//            holder.my_Rel.setBackgroundColor(Color.parseColor("#f3f3f3"));
             holder.content_Txt.setTextColor(Color.parseColor("#4d4d4d"));
         }
         if (oneData.getFilePath() != null) {
@@ -78,10 +101,9 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
             StaticData.lodingheadBg(holder.my_Head);
         }
         holder.name_Txt.setText(oneData.getProjectName());
-        holder.content_Txt.setText(oneData.getReportFre() + "条记录");
-
+        NumberFormat nf = new DecimalFormat("#.#");//# 0不显示
+        holder.content_Txt.setText(nf.format( oneData.getReportNum()) + oneData.getProjectUnit());
     }
-
 
     @Override
     public int getItemCount() {
@@ -91,7 +113,8 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
 
     @Override
     public int getItemViewType(int position) {
-        return myposition = position;
+        return position == 0 ? TOP_VIEW_TYPE : ORIGIN_VIEW_TYPE;
+//        return myposition = position;
     }
 
 
@@ -108,7 +131,7 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
             content_Txt = (TextView) itemView.findViewById(R.id.content_Txt);
 //            line_img = (View) itemView.findViewById(R.id.line_img);
 
-            StaticData.ViewScale(my_Rel, 710, 122);
+            StaticData.ViewScale(my_Rel, 0, 122);
             StaticData.ViewScale(my_Head, 108, 108);
         }
     }

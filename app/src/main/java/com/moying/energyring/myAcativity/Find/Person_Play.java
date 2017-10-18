@@ -226,7 +226,7 @@ public class Person_Play extends Activity {
         String stopString = saveFile.getShareData("stopString", Person_Play.this);
         if (stopString.equals("关闭") || stopString.equals("false")) {
 //            stopCount = "关闭";
-            stopCount = 10 * 60 * 1000 + "";
+            stopCount = 10 * 60 * 1000 * 60 + "";//默认一小时
         } else {
 //            stopCount = Long.parseLong(saveFile.getShareData("stopString", Person_Play.this).substring(0, 2)) * 3000 + "";
             stopCount = Long.parseLong(saveFile.getShareData("stopString", Person_Play.this).substring(0, 2)) * 60 * 1000 + "";

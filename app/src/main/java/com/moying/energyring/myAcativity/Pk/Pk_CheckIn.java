@@ -1,5 +1,6 @@
 package com.moying.energyring.myAcativity.Pk;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,7 +30,6 @@ import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAdapter.pk_CheckIn_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
-import com.moying.energyring.waylenBaseView.myActivity;
 import com.moying.energyring.xrecycle.XRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Pk_CheckIn extends myActivity implements XRecyclerView.LoadingListener {
+public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListener {
 
     private XRecyclerView pk_xrecy;
     private TextView allday_Txt,con_Txt,rank_Txt,rankCount_Txt;

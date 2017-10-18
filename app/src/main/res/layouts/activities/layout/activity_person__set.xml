@@ -57,6 +57,36 @@
             android:background="#f6eaea" />
 
         <RelativeLayout
+            android:id="@+id/change_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/change_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:text="更换手机号"
+                android:textColor="#4b4b4b"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/change_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#f6eaea" />
+
+        <RelativeLayout
             android:id="@+id/cache_Rel"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -157,12 +187,6 @@
                 android:layout_marginRight="10dp"
                 android:background="@drawable/right_arrow" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_alignLeft="@id/neng_Txt"
-                android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
         </RelativeLayout>
 
     </LinearLayout>

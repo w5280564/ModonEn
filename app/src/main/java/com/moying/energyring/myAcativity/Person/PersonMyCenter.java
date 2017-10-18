@@ -15,14 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +41,6 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.AppBarStateChangeListener;
-import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 
 import org.xutils.common.Callback;
@@ -93,7 +89,7 @@ public class PersonMyCenter extends AppCompatActivity {
     public List<String> userArr;
     public List<Fragment> fragments;
     public MyFragmentPagerAdapter myAdapter;
-    private int iconImg[] = {R.drawable.person_selector_log, R.drawable.person_selector_goal, R.drawable.person_selector_pkhistory, R.drawable.person_selector_daypk};
+    private int iconImg[] = {R.drawable.person_selector_goal,R.drawable.person_selector_daypk,  R.drawable.person_selector_pkhistory,R.drawable.person_selector_log };
 
     public void initView() {
         tablayout = (TabLayout) findViewById(R.id.ac_tab_layout);
@@ -141,7 +137,7 @@ public class PersonMyCenter extends AppCompatActivity {
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
                     title_Txt.setVisibility(View.VISIBLE);
-                    rete_Txt.setVisibility(View.VISIBLE);
+                    rete_Txt.setVisibility(View.GONE);
                     return_Btn.setBackgroundResource(R.drawable.return_black);
                 } else {
                     //中间状态
@@ -181,7 +177,8 @@ public class PersonMyCenter extends AppCompatActivity {
     private class user_simple extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
-            showHead(PersonMyCenter.this, user_simple);
+            Intent intentimagepic = new Intent(PersonMyCenter.this, ImagePickerActivity.class);
+            startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
         }
     }
 
@@ -220,17 +217,16 @@ public class PersonMyCenter extends AppCompatActivity {
 
 
     private String userId = "0";
-
     private void initAddData() {
         UserData(PersonMyCenter.this, saveFile.BaseUrl + saveFile.UserInfo_Url + "?UserID=" + userId);
     }
 
     private void initLocaData() {
         userArr = new ArrayList<>();
-        userArr.add("成长日志");
         userArr.add("公众承诺");
-        userArr.add("Pk记录");
         userArr.add("每日PK");
+        userArr.add("Pk记录");
+        userArr.add("成长日志");
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
         tablayout.setSelectedTabIndicatorHeight(0);//去掉下导航条
         //添加页卡标题
@@ -241,10 +237,10 @@ public class PersonMyCenter extends AppCompatActivity {
         int length = userArr.size();
 //        for (int i = 0; i < length; i++) {
 //        }
-        fragments.add(PersonGrowthLogFragment.newInstance(7 + "", userModel.getData().getUserID() + ""));
         fragments.add(PersonCommittedFragment.newInstance(8 + "", userModel.getData().getUserID() + ""));
-        fragments.add(PersonPkHistoryFragment.newInstance(userArr.get(2), userModel.getData().getUserID() + ""));
         fragments.add(PersonDayPkFragment.newInstance(userArr.get(3), userModel.getData().getUserID() + ""));
+        fragments.add(PersonPkHistoryFragment.newInstance(userArr.get(2), userModel.getData().getUserID() + ""));
+        fragments.add(PersonGrowthLogFragment.newInstance(7 + "", userModel.getData().getUserID() + ""));
     }
 
     private void tabViewSetView() {
@@ -312,56 +308,15 @@ public class PersonMyCenter extends AppCompatActivity {
 //            TypeLin.setSelected(true);
             Slideviewpager.setCurrentItem(Integer.parseInt(tabType), true);
         } else {
-            TabLayout.Tab tabnow = tablayout.getTabAt(0);
-            LinearLayout TypeLin = (LinearLayout) tabnow.getCustomView().findViewById(R.id.tab_Lin);
-            StaticData.ViewScale(TypeLin, 260, 140);
-            TypeLin.setSelected(true);
+            Slideviewpager.setCurrentItem(1,true);
+//            TabLayout.Tab tabnow = tablayout.getTabAt(3);
+//            LinearLayout TypeLin = (LinearLayout) tabnow.getCustomView().findViewById(R.id.tab_Lin);
+//            StaticData.ViewScale(TypeLin, 260, 140);
+//            TypeLin.setSelected(true);
         }
     }
 
     public static final int REQUEST_CODE_IMAGE_PICK_PERSONHEAD = 35;
-
-    //放大头像
-    private void showHead(final Context mContext, View view) {
-        View contentView = View.inflate(mContext, R.layout.popup_myhead, null);
-        final PopupWindow headPopup = new BasePopupWindow(mContext);
-        headPopup.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
-        headPopup.setHeight(RadioGroup.LayoutParams.WRAP_CONTENT);
-        headPopup.setTouchable(true);
-        headPopup.setContentView(contentView);
-        headPopup.showAtLocation(view, Gravity.CENTER, 0, 0);
-        SimpleDraweeView popup_head = (SimpleDraweeView) contentView.findViewById(R.id.popup_head);
-        StaticData.ViewScale(popup_head, 750, 750);
-
-        UserInfo_Model.DataBean oneData = userModel.getData();
-        if (oneData.getProfilePicture() != null) {
-            Uri imgUri = Uri.parse(oneData.getProfilePicture());
-            popup_head.setImageURI(imgUri);
-        } else {
-            StaticData.lodingheadBg(popup_head);
-        }
-        popup_head.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent intentimagepic = new Intent(PersonMyCenter.this, ImagePickerActivity.class);
-                startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
-                return false;
-            }
-        });
-        popup_head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                headPopup.dismiss();
-            }
-        });
-
-        contentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                headPopup.dismiss();
-            }
-        });
-    }
 
     UserInfo_Model userModel;
 

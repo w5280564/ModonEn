@@ -53,14 +53,19 @@ public class Pk_DayPkAdd_Project_More extends Activity {
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
         cententtxt.setTextColor(Color.parseColor("#909090"));
         cententtxt.setText("项目");
+        Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
+        right_Btn.setVisibility(View.VISIBLE);
+        right_Btn.setText("完成");
         StaticData.ViewScale(return_Btn, 48, 48);
         StaticData.ViewScale(title_Include, 0, 88);
+        StaticData.ViewScale(right_Btn, 100, 80);
 
         All_XRecy = (RecyclerView) findViewById(R.id.All_XRecy);
 //        All_XRecy.setPullRefreshEnabled(false);
 //        All_XRecy.setLoadingMoreEnabled(false);
 
         return_Btn.setOnClickListener(new return_Btn());
+        right_Btn.setOnClickListener(new right_Btn());
 
         projectModel = (List<ProjectModel>) getIntent().getSerializableExtra("baseModel");
 //        choiceModel = baseModel;
@@ -70,7 +75,7 @@ public class Pk_DayPkAdd_Project_More extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        personData(saveFile.BaseUrl + saveFile.dayPkProjectUrl);
+        personData(saveFile.BaseUrl + saveFile.DayPk_ProjectNotWalk);
 //        personData(saveFile.BaseUrl + "/pk/GetProject");
     }
 
@@ -83,7 +88,14 @@ public class Pk_DayPkAdd_Project_More extends Activity {
         }
     }
 
-    private void resultString(){
+    public class right_Btn implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            resultString();
+        }
+    }
+
+    private void resultString() {
         Intent intent = new Intent();
         intent.putExtra("projectModel", (Serializable) projectModel);
         setResult(CODE_MORE, intent);
@@ -131,7 +143,7 @@ public class Pk_DayPkAdd_Project_More extends Activity {
                     moreModel.setUnit(model.getProjectUnit());
                     moreModel.setReportNum("");
                     projectModel.add(moreModel);
-                   saveFile.putClass(Pk_DayPkAdd_Project_More.this, "moreModel", projectModel);
+                    saveFile.putClass(Pk_DayPkAdd_Project_More.this, "moreModel", projectModel);
                 } else {
                     removeData(position);
                     saveFile.removeGsonOne(Pk_DayPkAdd_Project_More.this, "moreModel", baseModel.getData().get(position).getProjectID());

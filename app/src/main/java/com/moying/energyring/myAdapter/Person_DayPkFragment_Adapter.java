@@ -69,8 +69,9 @@ public class Person_DayPkFragment_Adapter extends RecyclerView.Adapter<Person_Da
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
             holder.content_simple.setImageURI(contentUri);
         }
+
         holder.name_Txt.setText(oneData.getProjectName());
-        holder.hostory_Txt.setText(oneData.getReportNum()+oneData.getProjectUnit());
+        holder.hostory_Txt.setText((int) oneData.getReportNum()+oneData.getProjectUnit());
     }
 
     @Override
