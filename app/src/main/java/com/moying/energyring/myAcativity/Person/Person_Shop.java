@@ -55,7 +55,7 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
         initData(Person_Shop.this);
 
         Intent intent = getIntent();
-         Integral = intent.getStringExtra("Integral");
+        Integral = intent.getStringExtra("Integral");
         rankCountTextsColor(72, Integral + "", rankCount_Txt);
     }
 
@@ -70,8 +70,13 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
         cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("积分商城");
+        Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
+        right_Btn.setVisibility(View.VISIBLE);
+        right_Btn.setTextColor(Color.parseColor("#ffffff"));
+        right_Btn.setText("积分记录");
         StaticData.ViewScale(return_Btn, 48, 48);
         StaticData.ViewScale(title_Include, 0, 88);
+        StaticData.ViewScale(right_Btn, 0, 88);
 
         View pink_view = (View) findViewById(R.id.pink_view);
         StaticData.ViewScale(pink_view, 0, 176);
@@ -80,6 +85,7 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
 
 
         return_Btn.setOnClickListener(new return_Btn());
+        right_Btn.setOnClickListener(new right_Btn());
     }
 
     public void initHead(Context context) {
@@ -160,6 +166,14 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
         }
     }
 
+    public class right_Btn implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Person_Shop.this, Person_Integral.class);
+            startActivity(intent);
+        }
+    }
+
     Person_Shop_Adapter mAdapter;
 
     public void initlist(final Context context) {
@@ -175,7 +189,7 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, Person_ShopDetails.class);
                 intent.putExtra("ProductID", baseModel.get(position).getProductID() + "");
-                intent.putExtra("Integral",Integral);
+                intent.putExtra("Integral", Integral);
                 startActivity(intent);
             }
 

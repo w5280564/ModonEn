@@ -71,18 +71,17 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
     private int pageSize;
     private SimpleDraweeView my_simple, zhan_simple;
     private ImageView zan_img;
-    private TextView zan_Txt, zhanTxt, myhui_count_Txt,myrank_Txt;
-    private SimpleDraweeView pkbg_simple;
+    private TextView zan_Txt, zhanTxt, myhui_count_Txt, myrank_Txt;
     private LinearLayout zhan_Lin, zan_Lin;
     private Button daypk_pen;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof Pk_Daypk) {
-            Pk_Daypk pkActivity = (Pk_Daypk) context;
-            pkbg_simple = (SimpleDraweeView) pkActivity.findViewById(R.id.pkbg_simple);
-        }
+//        if (context instanceof Pk_Daypk) {
+//            Pk_Daypk pkActivity = (Pk_Daypk) context;
+//            pkbg_simple = (SimpleDraweeView) pkActivity.findViewById(R.id.pkbg_simple);
+//        }
     }
 
     public static DayPkListFragment newInstance(String stringtype, String projectId) {
@@ -101,6 +100,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         super.onCreate(savedInstanceState);
     }
 
+
     private View parentView;
 
     @Override
@@ -110,6 +110,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         stringtype = args != null ? args.getString("stringtype") : defaultHello;
         ProjectID = args != null ? args.getString("projectId") : defaultHello;
 
+//        pkbg_simple = (SimpleDraweeView) parentView.findViewById(R.id.pkbg_simple);
         other_recycle = (XRecyclerView) parentView.findViewById(R.id.other_recycle);
 
         RelativeLayout.LayoutParams headParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -129,7 +130,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         Button set_Btn = (Button) header.findViewById(R.id.set_Btn);
         daypk_pen = (Button) header.findViewById(R.id.daypk_pen);
         zan_Lin = (LinearLayout) header.findViewById(R.id.zan_Lin);
-        viewTouchDelegate.expandViewTouchDelegate(zan_Lin,100,100,200,0);
+        viewTouchDelegate.expandViewTouchDelegate(zan_Lin, 100, 100, 200, 0);
         zan_img = (ImageView) header.findViewById(R.id.zan_img);
         zan_Txt = (TextView) header.findViewById(R.id.zan_Txt);
         myhui_count_Txt = (TextView) header.findViewById(R.id.myhui_count_Txt);
@@ -165,7 +166,6 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         return parentView;
     }
 
-
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("DayPkListFragment");
@@ -178,6 +178,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 
         isPrepared = true;
         lazyLoad();
+
 //        onRefresh();
 //        PageIndex = 1;
 //        pageSize = 10;
@@ -185,7 +186,6 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 //        other_recycle.refresState(2);
 //        tableData(saveFile.BaseUrl+"/Study/Search");
     }
-
 
     /**
      * 标志位，标志已经初始化完成
@@ -203,14 +203,13 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         personData(getActivity(), saveFile.BaseUrl + saveFile.PersonData_Url + "?ProjectID=" + ProjectID);
     }
 
-
     @Override
     public void onRefresh() {//刷新
 //        PageIndex = 1;
 //        pageSize = 10;
 //        ListData(getActivity(), saveFile.BaseUrl + saveFile.ReportRankUrl + "?ProjectID=" + ProjectID + "&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
 //        ListData(getActivity(), saveFile.BaseUrl + saveFile.ReportRankUrl + "?ProjectID=" + ProjectID + "&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
-        lazyLoad();
+//        lazyLoad();
     }
 
     @Override
@@ -327,7 +326,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
                     public void onSuccess(File file) {
 //                        Log.e("图片尺寸1111111111111111111",file.length() / 1024 + "k");
                         Uri imgUri = Uri.fromFile(file);
-                        pkbg_simple.setImageURI(imgUri);
+//                        pkbg_simple.setImageURI(imgUri);
                         //上传每日PK背景图
                         upload_PhotoData(getActivity(), saveFile.BaseUrl + saveFile.uploadPhoto_Url, file);
                     }
@@ -374,8 +373,8 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
                             }
 
 //                            myheadData();//列表头部数据
-
                             fragmentbg(baseModel);//背景图
+
 
                             other_recycle.refreshComplete();
                             initlist(getActivity());
@@ -527,7 +526,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
         } else {
 //            daypk_pen.setVisibility(View.GONE);
             zan_Txt.setText(perdata.getLikes() + "");
-            myrank_Txt.setText(perdata.getRanking()+".");
+            myrank_Txt.setText(perdata.getRanking() + ".");
 //            perdata.setIs_Like(true);
             if (perdata.isIs_Like()) {
                 zan_img.setImageResource(R.drawable.like_red_icon);
@@ -544,38 +543,43 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 
     }
 
+
     //背景图占领封面item
     private void fragmentbg(List<DayPkList_Model.DataBean> Model) {
-//        if (getUserVisibleHint()) {
-        if (Model.size() != 0) {
-            int pos = 0;
-            DayPkList_Model.DataBean oneData = Model.get(pos);
-            zhan_Lin.setVisibility(View.VISIBLE);//占领封面item
-            if (oneData.getProfilePicture() != null) {
-//                StaticData.addPlaceRound(zhan_simple,getActivity());//占位图
-                Uri imgUri = Uri.parse(String.valueOf(oneData.getProfilePicture()));
-                zhan_simple.setImageURI(imgUri);
-            }
-            if (oneData.getNickName() != null) {
-                zhanTxt.setText(String.valueOf(oneData.getNickName()));
-            } else {
-                zhanTxt.setText("没有名字");
-            }
-            if (oneData.getPKCoverImg() != null) {
-//                StaticData.addPlace(pkbg_simple,getActivity());//占位图
-                Uri imgUri = Uri.parse(String.valueOf(oneData.getPKCoverImg()));
-                pkbg_simple.setImageURI(imgUri);
-            } else {
-                StaticData.PkBg(pkbg_simple);
-//                Uri uri = Uri.parse("res:///" + R.drawable.loading_icon);
-//                pkbg_simple.setImageURI(uri);
-            }
-        } else {
-            StaticData.PkBg(pkbg_simple);
 
+
+        if (Model.size() != 0) {
+                int pos = 0;
+                DayPkList_Model.DataBean oneData = Model.get(pos);
+                zhan_Lin.setVisibility(View.VISIBLE);//占领封面item
+                if (oneData.getProfilePicture() != null) {
+//                StaticData.addPlaceRound(zhan_simple,getActivity());//占位图
+                    Uri imgUri = Uri.parse(String.valueOf(oneData.getProfilePicture()));
+                    zhan_simple.setImageURI(imgUri);
+                }
+                if (oneData.getNickName() != null) {
+                    zhanTxt.setText(String.valueOf(oneData.getNickName()));
+                } else {
+                    zhanTxt.setText("没有名字");
+                }
+
+//            ((Pk_Daypk) (getActivity())).setPkbg_simple(oneData.getPKCoverImg());
+//            if (oneData.getPKCoverImg() != null) {
+////                StaticData.addPlace(pkbg_simple,getActivity());//占位图
+//                Uri imgUri = Uri.parse(String.valueOf(oneData.getPKCoverImg()));
+//                pkbg_simple.setImageURI(imgUri);
+//            } else {
+//                StaticData.PkBg(pkbg_simple);
+////                Uri uri = Uri.parse("res:///" + R.drawable.loading_icon);
+////                pkbg_simple.setImageURI(uri);
+//            }
+        }
+//        else {
+//            ((Pk_Daypk) (getActivity())).setPkbg_simple(null);
+//            StaticData.PkBg(pkbg_simple);
 //            Uri uri = Uri.parse("res:///" + R.drawable.loading_icon);
 //            pkbg_simple.setImageURI(uri);
-        }
+//        }
 //        }
     }
 

@@ -2,6 +2,7 @@ package com.moying.energyring.StaticData;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -817,7 +818,8 @@ public class StaticData {
 
     /**
      * 将时间戳转为代表"距现在多久之前"的字符串
-     * @param timeStr   时间戳
+     *
+     * @param timeStr 时间戳
      * @return
      */
     public static String getStandardDate(String timeStr) {
@@ -825,20 +827,20 @@ public class StaticData {
 
 //        long t = Long.parseLong(timeStr);
         long t = Long.parseLong(getTime(timeStr));
-        long time = System.currentTimeMillis() - (t*1000);
+        long time = System.currentTimeMillis() - (t * 1000);
 //        long mill = (long) Math.ceil(time /1000);//秒前
 //        long minute = (long) Math.ceil(time/60/1000.0f);// 分钟前
 //        long hour = (long) Math.ceil(time/60/60/1000.0f);// 小时
 //        long day = (long) Math.ceil(time/24/60/60/1000.0f);// 天前
-        long mill = (long) (time /1000);//秒前
-        long minute = (long) (time/60/1000.0f);// 分钟前
-        long hour = (long) (time/60/60/1000.0f);// 小时
-        long day = (long) (time/24/60/60/1000.0f);// 天前
+        long mill = (long) (time / 1000);//秒前
+        long minute = (long) (time / 60 / 1000.0f);// 分钟前
+        long hour = (long) (time / 60 / 60 / 1000.0f);// 小时
+        long day = (long) (time / 24 / 60 / 60 / 1000.0f);// 天前
 
         if (day - 1 > 0) {
-            if (day -1 >= 30){
+            if (day - 1 >= 30) {
                 sb.append(Datatypetwo(timeStr));
-            }else{
+            } else {
                 sb.append(day + "天");
             }
         } else if (hour - 1 > 0) {
@@ -862,7 +864,7 @@ public class StaticData {
         } else {
             sb.append("刚刚");
         }
-        if (!sb.toString().equals("刚刚") && day -1 < 30) {
+        if (!sb.toString().equals("刚刚") && day - 1 < 30) {
             sb.append("前");
         }
         return sb.toString();
@@ -878,7 +880,7 @@ public class StaticData {
             long l = d.getTime();
             String str = String.valueOf(l);
             re_time = str.substring(0, 10);
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             // TODO Auto-generated catch block e.printStackTrace();
         }
         return re_time;
@@ -912,7 +914,17 @@ public class StaticData {
 //        myDraw.setHierarchy(hierarchy);
 //    }
 
-
+    /**
+     * 实现文本复制功能
+     * add by wangqianzhou
+     *
+     * @param content
+     */
+    public static void copy(String content, Context context) {
+        // 得到剪贴板管理器
+        ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setText(content.trim());
+    }
 
 
 }

@@ -133,6 +133,7 @@
             android:id="@+id/add_Rel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_below="@id/mu_Btn">
 
             <com.moying.energyring.waylenBaseView.FlowLayout
@@ -158,6 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignBottom="@id/add_Rel"
+            android:visibility="gone"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="#545454" />
@@ -166,6 +168,7 @@
             android:id="@+id/energy_Rel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:visibility="gone"
             android:layout_below="@id/add_Rel">
 
             <TextView
@@ -195,6 +198,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignBottom="@id/energy_Rel"
+            android:visibility="gone"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="#545454" />
@@ -203,6 +207,7 @@
             android:id="@+id/share_Lin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_below="@id/energy_Rel"
             android:gravity="center_vertical"
             android:orientation="horizontal">

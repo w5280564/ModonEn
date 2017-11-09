@@ -190,6 +190,9 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     private class return_Btn implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            Intent intent = new Intent();
+            intent.putExtra("guideId", "0");
+            setResult(RESULT_OK, intent);
             finish();
         }
     }
@@ -418,6 +421,9 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 intent.putExtra("jifen", ArticleCount);
                 startActivity(intent);
             }
+            Intent intent = new Intent();
+            intent.putExtra("guideId", "1");
+            setResult(RESULT_OK, intent);
             finish();
         } else {
             if (ArticleCount != 0) {
@@ -425,6 +431,9 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 intent.putExtra("jifen", ArticleCount);
                 startActivity(intent);
             }
+            Intent intent = new Intent();
+            intent.putExtra("guideId", "1");
+            setResult(RESULT_OK, intent);
             finish();
         }
     }
@@ -552,12 +561,16 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             final TextView project_Unit = (TextView) myview.findViewById(R.id.project_Unit);
             project_Edit = (EditText) myview.findViewById(R.id.project_Edit);
             StaticData.ViewScale(project_Simple,80,80);
+
             if (myBean.get(i).getName().equals("健康走")) {
 //                myBean.remove(i);
                 saveFile.removeGsonOne(Pk_DayPkAdd_More.this, "moreModel", myBean.get(i).getProjectId());
                 continue;
 //                project_Edit.setEnabled(false);
 //                myBean.get(i).setReportNum(saveFile.getShareData("myStep", this) + "");
+            }else if (myBean.get(i).getName().equals("戒网络小说")||myBean.get(i).getName().equals("戒游戏")){
+                project_Edit.setEnabled(false);
+                myBean.get(i).setReportNum("1");
             }
             project_Name.setText(myBean.get(i).getName() + ":");
             project_Unit.setText(myBean.get(i).getUnit());
@@ -775,6 +788,10 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 //                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
                     ArticleCount = Integer.parseInt(data.split("\\*")[1]);
                     isShare(shareIndex());//同步分享
+
+                    Intent intent = new Intent(Pk_DayPkAdd_More.this,Pk_AddSuccess.class);
+                    startActivity(intent);
+
                 } else {
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
                 }

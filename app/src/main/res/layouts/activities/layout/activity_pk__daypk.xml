@@ -9,9 +9,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/pkbg_simple"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        />
+        android:layout_height="match_parent"/>
 
     <RelativeLayout
         android:id="@+id/title_Rel"

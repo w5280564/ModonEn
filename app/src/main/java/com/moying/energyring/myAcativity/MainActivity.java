@@ -24,7 +24,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.Person.Service.BindService;
@@ -40,6 +46,10 @@ import com.today.step.lib.ISportStepInterface;
 import com.today.step.lib.StepAlertManagerUtils;
 import com.today.step.lib.VitalityStepService;
 import com.umeng.analytics.MobclickAgent;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -62,6 +72,7 @@ public class MainActivity extends BaseActivity {
     private int mStepSum;
     private Handler mDelayHandler = new Handler(new TodayStepCounterCall());
     private ISportStepInterface iSportStepInterface;
+    private TextView unrend_Txt;
 
 
 //   public static Activity mainActivitySta;
@@ -92,6 +103,8 @@ public class MainActivity extends BaseActivity {
 
 //        startService(new Intent(this, DaemonService.class));
 //        initJobScheduler();
+
+        initData();
         stepCount();//计步服务
     }
 
@@ -102,6 +115,7 @@ public class MainActivity extends BaseActivity {
 
 //        initAlarmService();
         MobclickAgent.onResume(this); //统计时长
+
     }
 
     public void onPause() {
@@ -143,6 +157,10 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void initData() {
+        guideFristData(this, saveFile.BaseUrl + saveFile.GuidePerFirst_Url);
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -172,6 +190,95 @@ public class MainActivity extends BaseActivity {
 //
 //        }
     }
+
+   public isFristSee_Model isFristModel;
+    public void guideFristData(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    isFristModel = new Gson().fromJson(resultString, isFristSee_Model.class);
+                    if (isFristModel.isIsSuccess()) {
+
+                        hasMesData(context, saveFile.BaseUrl + saveFile.NoticeHasMes_Url);
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+public void hasMesData(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    BaseDataInt_Model baseModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                    if (baseModel.isIsSuccess()) {
+
+                        if (isFristModel.getData().isIs_FirstEditProfile_Remind() || saveFile.getShareData("isGuidePer", context).equals("false")) {
+                            unrend_Txt.setVisibility(View.VISIBLE);
+                        } else {
+                            unrend_Txt.setVisibility(View.INVISIBLE);
+                        }
+
+
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
 
     /**
      * Called when the activity is first created.
@@ -249,12 +356,18 @@ public class MainActivity extends BaseActivity {
 
 
     private void initView() {
+        unrend_Txt = (TextView) findViewById(R.id.unrend_Txt);
+
+//        StaticData.ViewScale(unrend_Txt,18,18);
+        unReadMargin(MainActivity.this, unrend_Txt);
+
         fragments = new ArrayList<>();
+//        fragments.add(new Fragment2_Pk());
+        fragments.add(new FragmentNew_Pk());
         fragments.add(new Fragment1_Energy());
-        fragments.add(new Fragment2_Pk());
 //        fragments.add(new Fragment3_Find());
         fragments.add(new Fragment3_FindTest());
-        fragments.add(new Fragment4_Person());
+        fragments.add(new Fragment4_PersonNew());
 
         tab_group = (RadioGroup) findViewById(R.id.tab_group);
         StaticData.ViewScale(tab_group, 0, 98);
@@ -270,30 +383,45 @@ public class MainActivity extends BaseActivity {
         StaticData.ViewScale(tab_person, 150, 98);
 
         tab_group.setOnCheckedChangeListener(new tab_group());
-        tab_energy.setChecked(true);
+        tab_pk.setChecked(true);
+    }
+
+    private void unReadMargin(Context context, View view) {
+        RelativeLayout.LayoutParams Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        StaticData.layoutParamsScale(Params, 18, 18);
+        Params.addRule(RelativeLayout.ALIGN_TOP, R.id.tab_group);
+        Params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 30);
+        Params.setMargins(0, 0, pad, 0);
+        view.setLayoutParams(Params);
     }
 
     public class tab_group implements RadioGroup.OnCheckedChangeListener {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
             switch (i) {
-                case R.id.tab_energy:
-                    addFragmentStack(fragments, R.id.main_content_layout, 0);//加载不同的fragment
-                    break;
                 case R.id.tab_pk:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
                         Intent intent = new Intent(MainActivity.this, LoginRegister.class);
                         startActivity(intent);
-                        tab_energy.setChecked(true);
+                        tab_pk.setChecked(true);
                     } else {
-                        addFragmentStack(fragments, R.id.main_content_layout, 1);
+                        addFragmentStack(fragments, R.id.main_content_layout, 0);
+                    }
+                    break;
+                case R.id.tab_energy:
+                    if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
+                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                        startActivity(intent);
+                    } else {
+                        addFragmentStack(fragments, R.id.main_content_layout, 1);//加载不同的fragment
                     }
                     break;
                 case R.id.tab_find:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
                         Intent intent = new Intent(MainActivity.this, LoginRegister.class);
                         startActivity(intent);
-                        tab_energy.setChecked(true);
+                        tab_pk.setChecked(true);
                     } else {
                         addFragmentStack(fragments, R.id.main_content_layout, 2);
                     }
@@ -302,7 +430,7 @@ public class MainActivity extends BaseActivity {
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
                         Intent intent = new Intent(MainActivity.this, LoginRegister.class);
                         startActivity(intent);
-                        tab_energy.setChecked(true);
+                        tab_pk.setChecked(true);
                     } else {
                         addFragmentStack(fragments, R.id.main_content_layout, 3);
                     }
@@ -348,6 +476,14 @@ public class MainActivity extends BaseActivity {
     public void setTabChange(int pos) {
         ((RadioButton) tab_group.getChildAt(pos)).setChecked(true);
 //        tab_person.setChecked(true);
+    }
+
+    public void setVisi(int setID) {
+        if (setID == 0) {
+            unrend_Txt.setVisibility(View.VISIBLE);
+        } else {
+            unrend_Txt.setVisibility(View.GONE);
+        }
     }
 
 
@@ -450,7 +586,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    /** 获取虚拟功能键高度 */
+    /**
+     * 获取虚拟功能键高度
+     */
 
     public int getVirtualBarHeigh() {
 
@@ -485,8 +623,6 @@ public class MainActivity extends BaseActivity {
         return vh;
 
     }
-
-
 
 
 }

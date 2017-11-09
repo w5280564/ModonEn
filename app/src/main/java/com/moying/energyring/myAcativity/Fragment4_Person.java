@@ -39,6 +39,7 @@ import com.moying.energyring.myAcativity.Person.Person_PiontsList;
 import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAcativity.Person.Person_Set;
 import com.moying.energyring.myAcativity.Person.Person_Shop;
+import com.moying.energyring.myAcativity.Pk.Pk_Guide;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.umeng.analytics.MobclickAgent;
@@ -76,7 +77,7 @@ public class Fragment4_Person extends Fragment {
 
 
             initView(parentView);
-
+            initGuide();
 
         }
         ViewGroup parent = (ViewGroup) parentView.getParent();
@@ -84,6 +85,15 @@ public class Fragment4_Person extends Fragment {
             parent.removeView(parentView);
         }
         return parentView;
+    }
+
+    private void initGuide(){
+        if (saveFile.getShareData("isGuidePer",getActivity()).equals("false")){
+            Intent intent = new Intent(getActivity(), Pk_Guide.class);
+            intent.putExtra("guideId","3");
+            startActivity(intent);
+        }
+        saveFile.saveShareData("isGuidePer","true",getActivity());
     }
 
 

@@ -81,8 +81,10 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
         if (position == 0) {
             holder.my_Rel.setBackgroundResource(R.drawable.ban_round_top);
         } else if (position == otherList.size() - 1) {
-            holder.my_Rel.setBackgroundResource(R.drawable.ban_round_below);
-            holder.line.setVisibility(View.GONE);
+//            holder.my_Rel.setBackgroundResource(R.drawable.ban_round_below);
+//            holder.line.setVisibility(View.GONE);
+        }else{
+
         }
 
         final DayPkList_Model.DataBean oneData = otherList.get(position);
@@ -116,16 +118,16 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
         holder.zan_Txt.setText(oneData.getLikes() + "");
 
 
-        if (saveFile.getShareData("userId", context).equals(oneData.getUserID() + "")) {
-            holder.zan_Lin.setVisibility(View.INVISIBLE);
-//            holder.zan_img.setVisibility(View.INVISIBLE);
-        } else {
+//        if (saveFile.getShareData("userId", context).equals(oneData.getUserID() + "")) {
+//            holder.zan_Lin.setVisibility(View.INVISIBLE);
+////            holder.zan_img.setVisibility(View.INVISIBLE);
+//        } else {
             if (oneData.isIs_Like()) {
                 holder.zan_img.setImageResource(R.drawable.like_red_icon);
             } else {
                 holder.zan_img.setImageResource(R.drawable.energy_like);
             }
-        }
+//        }
 
         holder.zan_Lin.setOnClickListener(new View.OnClickListener() {
             @Override

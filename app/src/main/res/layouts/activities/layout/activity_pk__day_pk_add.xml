@@ -118,7 +118,8 @@
         android:id="@+id/add_Rel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mu_Btn">
+        android:layout_below="@id/mu_Btn"
+        android:visibility="invisible">
 
         <com.moying.energyring.waylenBaseView.FlowLayout
             android:id="@+id/photoLayout"

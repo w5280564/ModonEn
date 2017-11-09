@@ -12,7 +12,7 @@ public class person_daypk_Model {
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : [{"ProjectName":"俯卧撑","FilePath":"http://172.16.0.111/Uploads/2017-05-23/719cc3a5-2714-442f-bf9c-18d41f9f21ac.png","ProjectUnit":"个","Ranking":1,"ReportID":46,"UserID":0,"ProjectID":12,"ReportNum":50}]
+     * Data : [{"ReportID":50097,"ProjectID":1,"ProjectName":"俯卧撑","ProjectUnit":"个","Ranking":1,"ReportNum":50,"Report_Days":183,"FilePath":"http://120.26.218.68:8040/uploads/i/2017/03/7a539a33-309b-491e-8ac4-a8630b9bf477.png"}]
      */
 
     private boolean IsSuccess;
@@ -54,24 +54,40 @@ public class person_daypk_Model {
 
     public static class DataBean {
         /**
+         * ReportID : 50097
+         * ProjectID : 1
          * ProjectName : 俯卧撑
-         * FilePath : http://172.16.0.111/Uploads/2017-05-23/719cc3a5-2714-442f-bf9c-18d41f9f21ac.png
          * ProjectUnit : 个
          * Ranking : 1
-         * ReportID : 46
-         * UserID : 0
-         * ProjectID : 12
          * ReportNum : 50.0
+         * Report_Days : 183
+         * FilePath : http://120.26.218.68:8040/uploads/i/2017/03/7a539a33-309b-491e-8ac4-a8630b9bf477.png
          */
 
+        private int ReportID;
+        private int ProjectID;
         private String ProjectName;
-        private String FilePath;
         private String ProjectUnit;
         private int Ranking;
-        private int ReportID;
-        private int UserID;
-        private int ProjectID;
         private double ReportNum;
+        private int Report_Days;
+        private String FilePath;
+
+        public int getReportID() {
+            return ReportID;
+        }
+
+        public void setReportID(int ReportID) {
+            this.ReportID = ReportID;
+        }
+
+        public int getProjectID() {
+            return ProjectID;
+        }
+
+        public void setProjectID(int ProjectID) {
+            this.ProjectID = ProjectID;
+        }
 
         public String getProjectName() {
             return ProjectName;
@@ -79,14 +95,6 @@ public class person_daypk_Model {
 
         public void setProjectName(String ProjectName) {
             this.ProjectName = ProjectName;
-        }
-
-        public String getFilePath() {
-            return FilePath;
-        }
-
-        public void setFilePath(String FilePath) {
-            this.FilePath = FilePath;
         }
 
         public String getProjectUnit() {
@@ -105,36 +113,28 @@ public class person_daypk_Model {
             this.Ranking = Ranking;
         }
 
-        public int getReportID() {
-            return ReportID;
-        }
-
-        public void setReportID(int ReportID) {
-            this.ReportID = ReportID;
-        }
-
-        public int getUserID() {
-            return UserID;
-        }
-
-        public void setUserID(int UserID) {
-            this.UserID = UserID;
-        }
-
-        public int getProjectID() {
-            return ProjectID;
-        }
-
-        public void setProjectID(int ProjectID) {
-            this.ProjectID = ProjectID;
-        }
-
         public double getReportNum() {
             return ReportNum;
         }
 
         public void setReportNum(double ReportNum) {
             this.ReportNum = ReportNum;
+        }
+
+        public int getReport_Days() {
+            return Report_Days;
+        }
+
+        public void setReport_Days(int Report_Days) {
+            this.Report_Days = Report_Days;
+        }
+
+        public String getFilePath() {
+            return FilePath;
+        }
+
+        public void setFilePath(String FilePath) {
+            this.FilePath = FilePath;
         }
     }
 }

@@ -36,7 +36,7 @@ import java.util.List;
 public class Person_Notice extends Activity implements XRecyclerView.LoadingListener {
 
     private RelativeLayout choice_Rel;
-    private TextView remind_Txt, mes_Txt;
+    private TextView remind_Txt, mes_Txt,mesunrend_Txt;
     private LinearLayout noticecontent_Lin;
     private TextView fansunrend_Txt, nommunrend_Txt, likeunrend_Txt, noticeunrend_Txt, atmeunrend_Txt;
     private XRecyclerView All_XRecy;
@@ -86,6 +86,8 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
         RelativeLayout nomm_Rel = (RelativeLayout) findViewById(R.id.nomm_Rel);
         RelativeLayout like_Rel = (RelativeLayout) findViewById(R.id.like_Rel);
         RelativeLayout atme_Rel = (RelativeLayout) findViewById(R.id.atme_Rel);
+         mesunrend_Txt = (TextView) findViewById(R.id.mesunrend_Txt);
+        unReadMargin(Person_Notice.this, mesunrend_Txt);
 
         All_XRecy = (XRecyclerView) findViewById(R.id.All_XRecy);
         All_XRecy.setLoadingListener(this);//添加事件
@@ -162,6 +164,16 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
         PageIndex += 1;
         pageSize = 10;
         ListData(Person_Notice.this, saveFile.BaseUrl + saveFile.Mess_UserList_Url + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
+    }
+
+    private void unReadMargin(Context context, View view) {
+        RelativeLayout.LayoutParams Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        StaticData.layoutParamsScale(Params, 18, 18);
+        Params.addRule(RelativeLayout.ALIGN_TOP, R.id.tab_group);
+        Params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 30);
+        Params.setMargins(0, 0, pad, 0);
+        view.setLayoutParams(Params);
     }
 
     public class return_Btn implements View.OnClickListener {
@@ -313,6 +325,12 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
                             noticeunrend_Txt.setText(oneData.getNotice() + "");
                         } else {
                             noticeunrend_Txt.setVisibility(View.INVISIBLE);
+                        }
+
+                        if (oneData.getMsg() > 0){
+                            mesunrend_Txt.setVisibility(View.VISIBLE);
+                        }else{
+                            mesunrend_Txt.setVisibility(View.INVISIBLE);
                         }
 
 

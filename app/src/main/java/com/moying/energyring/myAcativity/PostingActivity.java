@@ -162,14 +162,14 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         setShareFlag();
         postType = 1;
         TagID = 0;
-        if (!saveFile.getShareData("role", PostingActivity.this).equals("false")) {
-            int role = Integer.parseInt(saveFile.getShareData("role", PostingActivity.this));
-            if (role < 3) {
+//        if (!saveFile.getShareData("role", PostingActivity.this).equals("false")) {
+//            int role = Integer.parseInt(saveFile.getShareData("role", PostingActivity.this));
+//            if (role < 3) {
                 isrole = false;
                 hero_Lin.setVisibility(View.VISIBLE);
                 hero_Txt.setTextColor(Color.parseColor("#b9b9b9"));
-            }
-        }
+//            }
+//        }
         initDb();//初始化数据库
         dbId = getIntent().getStringExtra("dbId");
         if (dbId != null) {
@@ -320,6 +320,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     private class add_photo_Img implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+
             int choice = 9 - photoPaths.size();
             ImgOptions options = new ImgOptions(choice, 1, true);
             startActivityForResult(SelectedPhotoActivity.makeIntent(PostingActivity.this, options), REQUEST_IMAGE);

@@ -32,6 +32,7 @@ public class saveFile {
 
     public static String AddPk_Url = "ec/v3/PK/Report_Add";
     public static String Report_Status_Url = "ec/v2/Post/Report_Post_Add";
+    public static String EditInfo_Url = "ec/v2/User/UserInfo_Edit";
 
 //    public static String CodeUrl = "ec/Account/PhoneCode_Get";
     public static String CodeUrl = "ec/Account/SendPhoneVerificationCode";
@@ -68,7 +69,6 @@ public class saveFile {
     public static String PersonHead_Url = "ec/User/User_ProfilePicture_Edit";
     public static String DelePost_Url = "ec/Post/Post_Del";
     public static String PersonRank_List_Url = "ec/User/Integral_Rank_List";
-    public static String EditInfo_Url = "ec/User/UserInfo_Edit";
     public static String Product_List_Url = "ec/Product/Product_List";
     public static String Notice_Like_Url = "ec/Notice/Notice_Like_List";
     public static String Notice_Comment_Url = "ec/Notice/Notice_Comment_List";
@@ -93,7 +93,11 @@ public class saveFile {
     public static String Sys_Notice_Url = "ec/Notice/Sys_Notice_List";
     public static String DayPk_ProjectNotWalk = "ec/PK/Project_List_NotHaveWalk";
     public static String Tag_List_Url = "ec/Post/Post_Tag_List";
-    public static String Phone_ChangeUrl = "ec//Account/Phone_Change";
+    public static String Phone_ChangeUrl = "ec/Account/Phone_Change";
+    public static String MyCheckIn_Url = "ec/CheckIn/MyCheckIn_Get";
+    public static String Likes_Url = "ec/user/Likes_Sta_Get";
+    public static String GuidePerFirst_Url = "ec/user/FirstEnter_Get";
+    public static String upd_guidePerFirst_Url = "ec/user/FirstEnter_Upd";
 
 
     private static SharedPreferences mShared = null;

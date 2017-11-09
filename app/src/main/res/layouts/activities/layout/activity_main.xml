@@ -25,18 +25,19 @@
         android:background="#ffffff">
 
         <RadioButton
+            android:id="@+id/tab_pk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_selector_pk"
+            android:button="@null" />
+
+        <RadioButton
             android:id="@+id/tab_energy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_selector_energy"
             android:button="@null" />
 
-        <RadioButton
-            android:id="@+id/tab_pk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_selector_pk"
-            android:button="@null" />
 
         <RadioButton
             android:id="@+id/tab_add"
@@ -60,6 +61,19 @@
             android:background="@drawable/tab_selector_person"
             android:button="@null" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/unrend_Txt"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_alignTop="@id/tab_group"
+        android:elevation="5dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/calendar_item_red"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="10sp"
+        android:visibility="gone"/>
 
     <FrameLayout
         android:id="@+id/main_content_layout"

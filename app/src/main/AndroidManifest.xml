@@ -306,7 +306,24 @@
         <activity
             android:name=".myAcativity.Energy.SysNotice_Web"
             android:screenOrientation="portrait" />
-        <activity android:name=".myAcativity.Person.Person_ChangePhone"></activity>
+        <activity
+            android:name=".myAcativity.Person.Person_ChangePhone"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_AddSuccess"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_Guide"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity android:name=".myAcativity.Energy.HasNewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentTheme"></activity>
+
+        <activity
+            android:name=".myAcativity.Person.setDataActivity"
+            android:theme="@style/MyDialog"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -26,6 +26,7 @@ public class Person_Set extends Activity {
     private RelativeLayout cache_Rel,change_Rel;
     private TextView cache_Txt;
     private SwitchButton push_switch;
+    static Activity person_Set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class Person_Set extends Activity {
         initTitle();
         initView();
         initData();
+        person_Set = this;
     }
 
     private void initTitle() {
@@ -58,32 +60,45 @@ public class Person_Set extends Activity {
     }
 
     private void initView() {
+        RelativeLayout personData_Rel = (RelativeLayout) findViewById(R.id.personData_Rel);
+        ImageView personset_Img = (ImageView) findViewById(R.id.personset_Img);
+        ImageView data_arrow = (ImageView) findViewById(R.id.data_arrow);
+        change_Rel = (RelativeLayout) findViewById(R.id.change_Rel);
+        ImageView phone_Img = (ImageView) findViewById(R.id.phone_Img);
+        ImageView change_arrow = (ImageView) findViewById(R.id.change_arrow);
+        RelativeLayout idea_Rel = (RelativeLayout) findViewById(R.id.idea_Rel);
+        ImageView ideal_Img = (ImageView) findViewById(R.id.ideal_Img);
+        ImageView idea_arrow = (ImageView) findViewById(R.id.idea_arrow);
+        cache_Rel = (RelativeLayout) findViewById(R.id.cache_Rel);
+        cache_Txt = (TextView) findViewById(R.id.cache_Txt);
+        ImageView cache_Img = (ImageView) findViewById(R.id.cache_Img);
+        ImageView mes_Img = (ImageView) findViewById(R.id.mes_Img);
         RelativeLayout push_Rel = (RelativeLayout) findViewById(R.id.push_Rel);
         push_switch = (SwitchButton) findViewById(R.id.push_switch);
-        cache_Rel = (RelativeLayout) findViewById(R.id.cache_Rel);
-        change_Rel = (RelativeLayout) findViewById(R.id.change_Rel);
-        cache_Txt = (TextView) findViewById(R.id.cache_Txt);
-        RelativeLayout idea_Rel = (RelativeLayout) findViewById(R.id.idea_Rel);
         RelativeLayout about_Rel = (RelativeLayout) findViewById(R.id.about_Rel);
-        ImageView cache_arrow = (ImageView) findViewById(R.id.cache_arrow);
-        ImageView change_arrow = (ImageView) findViewById(R.id.change_arrow);
-        ImageView idea_arrow = (ImageView) findViewById(R.id.idea_arrow);
+        ImageView about_Img = (ImageView) findViewById(R.id.about_Img);
         ImageView about_arrow = (ImageView) findViewById(R.id.about_arrow);
-
         Button quit_Btn = (Button) findViewById(R.id.quit_Btn);
 
+        StaticData.ViewScale(personData_Rel, 710, 160);
+        StaticData.ViewScale(change_Rel, 710, 160);
+        StaticData.ViewScale(idea_Rel, 710, 160);
+        StaticData.ViewScale(cache_Rel, 710, 160);
+        StaticData.ViewScale(push_Rel, 710, 160);
+        StaticData.ViewScale(about_Rel, 710, 160);
+        StaticData.ViewScale(personset_Img, 44, 44);
+        StaticData.ViewScale(phone_Img, 44, 44);
+        StaticData.ViewScale(ideal_Img, 44, 44);
+        StaticData.ViewScale(cache_Img, 44, 44);
+        StaticData.ViewScale(mes_Img, 44, 44);
+        StaticData.ViewScale(about_Img, 44, 44);
+        StaticData.ViewScale(data_arrow, 48, 56);
+        StaticData.ViewScale(change_arrow, 48, 56);
+        StaticData.ViewScale(idea_arrow,  48, 56);
+        StaticData.ViewScale(about_arrow, 48, 56);
+        StaticData.ViewScale(quit_Btn, 690, 90);
 
-        StaticData.ViewScale(push_Rel, 710, 120);
-        StaticData.ViewScale(cache_Rel, 710, 120);
-        StaticData.ViewScale(change_Rel, 710, 120);
-        StaticData.ViewScale(idea_Rel, 710, 120);
-        StaticData.ViewScale(about_Rel, 710, 120);
-        StaticData.ViewScale(quit_Btn, 710, 120);
-        StaticData.ViewScale(cache_arrow, 16, 30);
-        StaticData.ViewScale(change_arrow, 16, 30);
-        StaticData.ViewScale(idea_arrow, 16, 30);
-        StaticData.ViewScale(about_arrow, 16, 30);
-
+        personData_Rel.setOnClickListener(new personData_Rel());
         quit_Btn.setOnClickListener(new quit_Btn());
         cache_Rel.setOnClickListener(new cache_Rel());
         change_Rel.setOnClickListener(new change_Rel());
@@ -134,6 +149,15 @@ public class Person_Set extends Activity {
         }
     }
 
+
+    //我的资料
+    private class personData_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Person_Set.this, Person_Data.class);
+            startActivity(intent);
+        }
+    }
 
 
     //清除缓存

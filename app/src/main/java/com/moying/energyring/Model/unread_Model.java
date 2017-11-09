@@ -11,7 +11,7 @@ public class unread_Model {
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : {"NewFriend":0,"Post_Comment":1,"Post_Like":1,"Post_MenTion":0,"Notice":1}
+     * Data : {"NewFriend":0,"Post_Comment":0,"Post_Like":1,"Post_MenTion":0,"Notice":3,"Msg":0}
      */
 
     private boolean IsSuccess;
@@ -54,10 +54,11 @@ public class unread_Model {
     public static class DataBean {
         /**
          * NewFriend : 0
-         * Post_Comment : 1
+         * Post_Comment : 0
          * Post_Like : 1
          * Post_MenTion : 0
-         * Notice : 1
+         * Notice : 3
+         * Msg : 0
          */
 
         private int NewFriend;
@@ -65,6 +66,7 @@ public class unread_Model {
         private int Post_Like;
         private int Post_MenTion;
         private int Notice;
+        private int Msg;
 
         public int getNewFriend() {
             return NewFriend;
@@ -104,6 +106,14 @@ public class unread_Model {
 
         public void setNotice(int Notice) {
             this.Notice = Notice;
+        }
+
+        public int getMsg() {
+            return Msg;
+        }
+
+        public void setMsg(int Msg) {
+            this.Msg = Msg;
         }
     }
 }
