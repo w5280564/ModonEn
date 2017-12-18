@@ -33,7 +33,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/phoneadress_img"
                 android:text="邀请通讯录好友"
-                android:textColor="#4d4d4d"
+                android:textColor="#e3e7eb"
                 android:textSize="14sp" />
 
             <ImageView
@@ -74,7 +74,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/friend_img"
                 android:text="邀请朋友圈好友"
-                android:textColor="#4d4d4d"
+                android:textColor="#e3e7eb"
                 android:textSize="14sp" />
 
             <ImageView
@@ -83,16 +83,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/right_arrow" />
+                android:background="@drawable/right_arrow_black" />
 
             <ImageView
-
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/friend_Txt"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -116,7 +114,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/wechat_img"
                 android:text="邀请微信好友"
-                android:textColor="#4d4d4d"
+                android:textColor="#e3e7eb"
                 android:textSize="14sp" />
 
             <ImageView
@@ -125,15 +123,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/right_arrow" />
+                android:background="@drawable/right_arrow_black" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/wechat_Txt"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -157,7 +154,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/sina_img"
                 android:text="邀请微博好友"
-                android:textColor="#4d4d4d"
+                android:textColor="#e3e7eb"
                 android:textSize="14sp" />
 
             <ImageView
@@ -166,15 +163,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/right_arrow" />
+                android:background="@drawable/right_arrow_black" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/sina_Txt"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -198,7 +194,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/qq_img"
                 android:text="邀请qq好友"
-                android:textColor="#4d4d4d"
+                android:textColor="#e3e7eb"
                 android:textSize="14sp" />
 
             <ImageView
@@ -207,15 +203,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/right_arrow" />
+                android:background="@drawable/right_arrow_black" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/qq_Txt"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -239,7 +234,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/qzone_img"
                 android:text="邀请qq空间好友"
-                android:textColor="#4d4d4d"
+                android:textColor="#e3e7eb"
                 android:textSize="14sp" />
 
             <ImageView
@@ -249,7 +244,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/right_arrow" />
+                android:background="@drawable/right_arrow_black" />
 
             <ImageView
 
@@ -257,7 +252,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/qzone_Txt"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
     </LinearLayout>
 

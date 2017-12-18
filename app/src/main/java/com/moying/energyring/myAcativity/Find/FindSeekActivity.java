@@ -143,12 +143,12 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
         StaticData.ViewScale(sina_img, 96, 96);
         StaticData.ViewScale(qq_img, 96, 96);
         StaticData.ViewScale(qzone_img, 96, 96);
-        StaticData.ViewScale(phoneadress_arrow, 16, 30);
-        StaticData.ViewScale(friend_arrow, 16, 30);
-        StaticData.ViewScale(wechat_arrow, 16, 30);
-        StaticData.ViewScale(sina_arrow, 16, 30);
-        StaticData.ViewScale(qq_arrow, 16, 30);
-        StaticData.ViewScale(qzone_arrow, 16, 30);
+        StaticData.ViewScale(phoneadress_arrow, 60, 60);
+        StaticData.ViewScale(friend_arrow, 60, 60);
+        StaticData.ViewScale(wechat_arrow, 60, 60);
+        StaticData.ViewScale(sina_arrow, 60, 60);
+        StaticData.ViewScale(qq_arrow, 60, 60);
+        StaticData.ViewScale(qzone_arrow, 60, 60);
         myView.addHeaderView(header);
 
         friend_Rel.setOnClickListener(new share_friend());

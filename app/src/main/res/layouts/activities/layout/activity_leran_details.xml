@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_Include"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
         <TextView
             android:id="@+id/title_Name"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="目标时长"
-                    android:textColor="#9f9f9f"
+                    android:textColor="#989797"
                     android:textSize="15sp" />
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名称"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="每日目标"
-                    android:textColor="#9f9f9f"
+                    android:textColor="#989797"
                     android:textSize="15sp" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名称"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
@@ -103,42 +103,30 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:text="" />
+            android:textColor="#ffffff"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/finsh_Txt"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_below="@id/timeLin"
-            android:textColor="#9f9f9f"
-            android:text="完成"/>
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/finsh_Txt"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_below="@id/timeLin"
-            android:textColor="#9f9f9f"
-            android:text="完成"/>
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@id/finsh_Txt"
+            android:text="完成"
+            android:textColor="#989797" />
+
 
 
         <ProgressBar
             android:id="@+id/mypross"
             style="?android:progressBarStyleHorizontal"
-            android:layout_below="@id/start_Txt"
             android:layout_width="match_parent"
             android:layout_height="7dp"
-            android:layout_centerVertical="true"
-            android:progressDrawable="@drawable/myprogress"
+            android:layout_below="@id/start_Txt"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"/>
-
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:progressDrawable="@drawable/myprogress" />
 
 
         <TextView
@@ -146,11 +134,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/mypross"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="2014年5月6日"
             android:textColor="#f24d4d"
-            android:textSize="15sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="15sp" />
 
 
         <LinearLayout
@@ -158,8 +146,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_date"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
@@ -167,8 +155,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="日"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -176,8 +164,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="一"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -185,8 +173,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="二"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -194,8 +182,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="三"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -203,8 +191,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="四"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -212,8 +200,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="五"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -221,21 +209,21 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="六"
-                android:textColor="#9f9f9f"
-                android:textSize="10sp"/>
+                android:textColor="#989797"
+                android:textSize="10sp" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_above="@id/ll_week"
-            android:background="#9f9f9f" />
+            android:background="#343434" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@id/ll_week"
-            android:background="#9f9f9f" />
+            android:background="#343434" />
 
 
         <ViewFlipper
@@ -246,8 +234,6 @@
 
 
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

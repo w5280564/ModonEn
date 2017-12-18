@@ -47,7 +47,7 @@ public class LaunchActivity extends Activity {
             public void run() {
                 if (getFirstInit()) {
                     saveFirstInit(false);
-                    Intent i = new Intent(LaunchActivity.this, WelcomeActivity.class);
+                    Intent i = new Intent(LaunchActivity.this, WelcomeNew.class);
                     startActivity(i);
                     finish();
                 } else {

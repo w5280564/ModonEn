@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:background="#f6f6f6">
+    android:background="#232121">
 
     <include
         android:id="@+id/title_Include"
@@ -19,7 +19,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="25dp"
-        android:background="#ffffff"
+        android:background="#2b2a2a"
         android:layout_below="@+id/title_Include"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="开始日期"
-            android:textColor="#f24d4d"
+            android:textColor="#95a0ab"
             android:textSize="15sp" />
 
         <View
@@ -36,7 +36,8 @@
             android:layout_height="40dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="50dp"
-            android:background="#9f9f9f" />
+            android:visibility="invisible"
+            android:background="#343434" />
 
         <TextView
             android:id="@+id/start_Txt"
@@ -44,7 +45,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="2017-04-06"
-            android:textColor="#9f9f9f"
+            android:textColor="#989797"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -54,7 +55,7 @@
         android:layout_alignBottom="@id/start_Lin"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:background="#9f9f9f" />
+        android:background="#343434" />
 
     <LinearLayout
         android:id="@+id/end_Lin"
@@ -64,13 +65,13 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="25dp"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="结束日期"
-            android:textColor="#f24d4d"
+            android:textColor="#95a0ab"
             android:textSize="15sp" />
 
         <View
@@ -78,7 +79,8 @@
             android:layout_height="40dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="50dp"
-            android:background="#9f9f9f" />
+            android:background="#343434"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/end_Txt"
@@ -86,7 +88,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="2017-04-06"
-            android:textColor="#9f9f9f"
+            android:textColor="#989797"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -96,7 +98,7 @@
         android:layout_alignBottom="@id/end_Lin"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:background="#9f9f9f" />
+        android:background="#343434" />
 
     <RelativeLayout
         android:id="@+id/goal_Rel"
@@ -105,7 +107,7 @@
         android:layout_below="@id/end_Lin"
         android:orientation="horizontal"
         android:paddingLeft="25dp"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
         <TextView
             android:id="@+id/goal_Txt"
@@ -113,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="每日目标"
-            android:textColor="#f24d4d"
+            android:textColor="#95a0ab"
             android:textSize="15sp" />
 
         <View
@@ -124,7 +126,8 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="50dp"
             android:layout_toRightOf="@id/goal_Txt"
-            android:background="#9f9f9f" />
+            android:background="#343434"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/unit_Txt"
@@ -133,6 +136,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
+            android:textColor="#ffffff"
             android:text="单位"
             android:textSize="15sp"/>
 
@@ -147,7 +151,7 @@
             android:gravity="center_vertical"
             android:phoneNumber="true"
             android:lines="1"
-            android:textColor="#9f9f9f"
+            android:textColor="#989797"
             android:textSize="14sp" />
     </RelativeLayout>
 

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -12,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -36,7 +35,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/content_simple"
             android:lines="3"
-            android:textColor="#676767"
+            android:textColor="#e3e7eb"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -71,7 +70,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:textColor="#6b6b6b"
+                    android:textColor="#989797"
                     android:textSize="12sp" />
 
                 <TextView
@@ -81,7 +80,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
-                    android:textColor="#aeaeae"
+                    android:textColor="#989797"
                     android:textSize="9sp" />
                 <ImageView
                     android:id="@+id/energy_like"
@@ -99,7 +98,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@id/energy_like"
-                    android:textColor="#aeaeae"
+                    android:textColor="#989797"
                     android:layout_centerVertical="true"
                     android:textSize="9sp" />
 

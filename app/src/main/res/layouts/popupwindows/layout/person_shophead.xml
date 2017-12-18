@@ -9,7 +9,7 @@
         android:id="@+id/top_Rel"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <TextView
             android:id="@+id/zan_Txt"
@@ -18,7 +18,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="我的积分"
-            android:textColor="#4d4d4d"
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
         <!--<TextView-->
@@ -53,9 +53,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/top_Rel"
         android:background="@drawable/ban_round"
-        android:gravity="center"
-        android:textColor="#4d4d4d"
-        android:textSize="14sp" />
+        android:gravity="center" />
 
     <!--<View-->
         <!--android:id="@+id/ban_view"-->

@@ -140,7 +140,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         }
         if (oneData.getTagName() != null) {//原type改为 tag标签
             holder.hero_Lin.setVisibility(View.VISIBLE);
-            holder.hero_Txt.setText(oneData.getTagName());
+            holder.hero_Txt.setText(oneData.getTagName()+"");
         }
 
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
@@ -253,7 +253,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
                             oneData.setIs_Like(true);
                             oneData.setLikes(oneData.getLikes() + 1);
                         }
-                        notifyItemChanged(pos + 1);//刷新一个item +1有一个刷新头部
+                        notifyItemChanged(pos + 2);//刷新一个item +1有一个刷新头部 +2 添加了关注列表
 
 
                     } else {
@@ -299,7 +299,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
                     if (model.isIsSuccess()) {
                         mytext.setEnabled(true);
                         otherList.remove(pos);
-                        notifyItemRemoved(pos + 1);//加1是有头部
+                        notifyItemRemoved(pos + 2);//加1是有头部 +2 添加了关注列表
 //                        notifyDataSetChanged();
 
                     } else {

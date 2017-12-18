@@ -190,8 +190,9 @@ public class WelcomeActivity extends Activity implements ViewPager.OnPageChangeL
     }
 
 //    private int[] iconArrpla = {R.drawable.we_onepla, R.drawable.we_onepla, R.drawable.we_two_pla, R.drawable.we_three_pla};
-//    private int[] iconArr = {R.drawable.we_one, R.drawable.we_two, R.drawable.we_three, R.drawable.we_foue};
+//    private int[] animlist_Arr = {R.drawable.animlist_we_one, R.drawable.animlist_we_two, R.drawable.animlist_we_three, R.drawable.animlist_we_four};
     private int[] animlist_Arr = {R.drawable.animlist_we_one, R.drawable.animlist_we_two, R.drawable.animlist_we_three, R.drawable.animlist_we_four};
+    private int[] iconArr = {R.drawable.we_one, R.drawable.we_two, R.drawable.we_three};
 
     //滑动页面
     private void initViewPager() {

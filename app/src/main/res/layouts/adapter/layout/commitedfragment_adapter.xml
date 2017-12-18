@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -13,7 +12,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <LinearLayout
             android:id="@+id/title_Lin"
@@ -29,26 +28,24 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                app:roundAsCircle="true"
-
-                />
+                app:roundAsCircle="true"/>
 
             <TextView
                 android:id="@+id/name_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textColor="#e3e7eb"/>
 
             <TextView
                 android:id="@+id/time_Txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-
                 android:gravity="right"
                 android:paddingRight="15dp"
-                android:textColor="#6b6b6b"
+                android:textColor="#989797"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -60,9 +57,7 @@
             android:layout_height="100dp"
             android:layout_below="@id/title_Lin"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-
-            />
+            android:layout_marginLeft="10dp" />
 
 
         <TextView
@@ -74,7 +69,7 @@
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/content_simple"
             android:lines="3"
-            android:textColor="#676767"
+            android:textColor="#e3e7eb"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -112,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#aeaeae"
+                    android:textColor="#e3e7eb"
                     android:textSize="9sp" />
 
                 <LinearLayout
@@ -133,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="#aeaeae"
+                        android:textColor="#989797"
                         android:textSize="9sp" />
                 </LinearLayout>
             </LinearLayout>

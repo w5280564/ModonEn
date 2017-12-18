@@ -10,7 +10,7 @@
         android:id="@+id/toal_Lin"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -26,7 +26,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="999天"
-                android:textColor="#4d4d4d"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:text="累计签到"
-                android:textColor="#4d4d4d"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -46,7 +46,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="#ffecec" />
+            android:background="#343434" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -62,7 +62,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:text="999天"
-                android:textColor="#4d4d4d"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:text="连续签到"
-                android:textColor="#4d4d4d"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_below="@id/toal_Lin"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <TextView
             android:id="@+id/zan_Txt"
@@ -94,7 +94,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="早起签到"
-            android:textColor="#4d4d4d"
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
         <TextView
@@ -105,7 +105,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="15dp"
             android:text="第999名"
-            android:textColor="#4d4d4d"
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
         <TextView
@@ -117,7 +117,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="获赞"
-            android:textColor="#4d4d4d"
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
 
@@ -131,7 +131,7 @@
         android:background="@drawable/ban_round"
         android:gravity="center"
         android:text="排行"
-        android:textColor="#4d4d4d"
+        android:textColor="#ffffff"
         android:textSize="14sp" />
 
     <TextView
@@ -139,11 +139,11 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_below="@id/below_Txt"
-        android:background="#ffecec"
+        android:background="#343434"
         android:text="早晨5:00-6:30累计签到有效"
         android:textSize="10sp"
         android:gravity="center"
-        android:textColor="#878787"/>
+        android:textColor="#989797"/>
 
     <ImageView
         android:id="@+id/round_one"

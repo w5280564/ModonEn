@@ -133,8 +133,8 @@ public class AllPerson_Adapter extends RecyclerView.Adapter<AllPerson_Adapter.My
 
     public void TextsColor(int start, int end, int allSize, String allText, TextView myTxt) {
         SpannableStringBuilder styledText = new SpannableStringBuilder(allText);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#9f9f9f")), 0, allSize , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#000000")),start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#989797")), 0, allSize , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")),start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         myTxt.setText(styledText);
     }
 

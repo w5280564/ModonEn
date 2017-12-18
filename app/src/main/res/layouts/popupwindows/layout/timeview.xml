@@ -21,7 +21,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="时间"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textColor="#989797"/>
 
         <ImageView
             android:id="@+id/gou_Img"
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#c0c0c0" />
+            android:background="#343434" />
 
     </RelativeLayout>
 </LinearLayout>

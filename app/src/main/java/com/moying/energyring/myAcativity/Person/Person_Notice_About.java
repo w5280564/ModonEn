@@ -37,16 +37,16 @@ public class Person_Notice_About extends Activity {
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(Color.parseColor("#2a2b2b"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#909090"));
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("关于能量圈");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
 
         return_Btn.setOnClickListener(new return_Btn());
@@ -72,8 +72,8 @@ public class Person_Notice_About extends Activity {
         StaticData.ViewScale(aboutphone_Rel, 0, 100);
         StaticData.ViewScale(aboutfen_Rel, 0, 100);
         StaticData.ViewScale(aboutjie_Rel, 0, 100);
-        StaticData.ViewScale(fen_Img, 16, 30);
-        StaticData.ViewScale(jie_Img, 16, 30);
+        StaticData.ViewScale(fen_Img, 60, 60);
+        StaticData.ViewScale(jie_Img, 60, 60);
         aboutphone_Rel.setOnClickListener(new aboutphone_Rel());
         aboutfen_Rel.setOnClickListener(new aboutfen_Rel());
         aboutjie_Rel.setOnClickListener(new aboutjie_Rel());

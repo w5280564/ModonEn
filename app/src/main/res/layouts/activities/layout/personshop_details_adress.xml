@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
@@ -19,7 +19,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg"
+        android:background="@drawable/popupblack_bg"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="收货人"
-                android:textColor="#000000"
+                android:textColor="#95a0ab"
                 android:textSize="16sp" />
 
             <EditText
@@ -47,14 +47,15 @@
                 android:layout_toRightOf="@id/adressName_Txt"
                 android:background="@null"
                 android:text=""
-                android:textColor="#000000"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
                 android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -70,7 +71,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="联系电话"
-                android:textColor="#000000"
+                android:textColor="#95a0ab"
                 android:textSize="16sp" />
 
             <EditText
@@ -82,14 +83,15 @@
                 android:layout_toRightOf="@id/adressPhone_Txt"
                 android:background="@null"
                 android:text=""
-                android:textColor="#000000"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
                 android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -105,7 +107,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="收货地址"
-                android:textColor="#000000"
+                android:textColor="#95a0ab"
                 android:textSize="16sp" />
 
             <EditText
@@ -116,14 +118,16 @@
                 android:layout_toRightOf="@id/adress_Txt"
                 android:background="@null"
                 android:text=""
-                android:textColor="#000000"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
                 android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434"
+                android:visibility="gone"/>
         </RelativeLayout>
 
     </LinearLayout>

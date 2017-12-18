@@ -55,16 +55,16 @@ public class Person_Notice_Nomm extends Activity implements XRecyclerView.Loadin
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#909090"));
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("评论");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
 
         return_Btn.setOnClickListener(new return_Btn());

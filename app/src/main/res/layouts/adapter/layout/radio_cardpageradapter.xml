@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffffff">
+        android:background="#2b2a2a">
 
 
         <com.facebook.drawee.view.SimpleDraweeView

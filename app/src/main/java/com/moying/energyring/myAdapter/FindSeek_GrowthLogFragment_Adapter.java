@@ -104,6 +104,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
         }
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");
+        holder.yue_Txt.setText("阅读量："+oneData.getReadCount());
         if (oneData.isIs_Like()) {
             holder.energy_like.setImageResource(R.drawable.like_red_icon);
         } else {
@@ -132,7 +133,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
         if (oneData.getTagName() != null) {//原type改为 tag标签
             holder.hero_Lin.setVisibility(View.VISIBLE);
-            holder.hero_Txt.setText(oneData.getTagName());
+            holder.hero_Txt.setText(oneData.getTagName()+"");
         }
 
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +169,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout hero_Lin, like_Lin;
-        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt,hero_Txt;
+        private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt,hero_Txt,yue_Txt;
         private ImageView energy_img, energy_like;
         private SimpleDraweeView myhead_simple, content_simple;
         private RelativeLayout mu_Rel;
@@ -192,6 +193,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
             like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
             hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
+            yue_Txt = (TextView) itemView.findViewById(R.id.yue_Txt);
             StaticData.ViewScale(mu_Rel, 710, 0);
 //            StaticData.ViewScale(myhead_simple, 100, 100);
 

@@ -76,6 +76,7 @@ public class SortAdapter extends BaseAdapter implements  AbsListView.OnScrollLis
         if (needTitle(position)) {
             // 显示标题并设置内容
             viewHolder.tagtxt.setText(list.get(position).getSortLetters());
+//            viewHolder.tagtxt.setBackgroundColor(Color.parseColor("#3e3d3d"));
             viewHolder.tagtxt.setVisibility(View.VISIBLE);
         } else {
             // 内容项隐藏标题

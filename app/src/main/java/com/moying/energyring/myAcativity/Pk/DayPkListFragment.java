@@ -533,11 +533,22 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
             } else {
                 zan_img.setImageResource(R.drawable.energy_like);
             }
-            NumberFormat nf = new DecimalFormat("#.#");//# 0 不显示
-            if (perdata.getReportNum() >= perdata.getLimit()) {
-                myhui_count_Txt.setText(nf.format(perdata.getLimit()) + "+");
-            } else {
-                myhui_count_Txt.setText(nf.format(perdata.getReportNum()) + perdata.getProjectUnit());
+//            NumberFormat nf = new DecimalFormat("#.#");//# 0 不显示
+//            if (perdata.getReportNum() >= perdata.getLimit()) {
+//                myhui_count_Txt.setText(nf.format(perdata.getLimit()) + "+");
+//            } else {
+//                myhui_count_Txt.setText(nf.format(perdata.getReportNum()) + perdata.getProjectUnit());
+//            }
+
+            NumberFormat nf = new DecimalFormat("#.#");//# 0不显示
+            if (perdata.getLimit() == 1){
+                myhui_count_Txt.setText(perdata.getReport_Days() + perdata.getProjectUnit());
+            }else{
+                if (perdata.getReportNum() >= perdata.getLimit()){
+                    myhui_count_Txt.setText(nf.format(perdata.getLimit()) + "+");
+                }else{
+                    myhui_count_Txt.setText(nf.format(perdata.getReportNum()) + perdata.getProjectUnit());
+                }
             }
         }
 

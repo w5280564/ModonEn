@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3">
+    android:background="#232121">
 
     <Button
         android:id="@+id/dui_Btn"
@@ -32,7 +31,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#f3f3f3">
+                android:background="#2b2a2a">
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/content_simple"
@@ -47,7 +46,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:lines="1"
-                    android:textColor="#000000" />
+                    android:textColor="#ffffff" />
 
 
                 <TextView
@@ -57,8 +56,7 @@
                     android:layout_below="@id/name_Txt"
                     android:layout_margin="10dp"
                     android:lines="1"
-
-                    android:textColor="#000000" />
+                    android:textColor="#989797" />
 
                 <View
                     android:id="@+id/line"
@@ -66,7 +64,7 @@
                     android:layout_height="1px"
                     android:layout_alignLeft="@id/price_Txt"
                     android:layout_below="@id/price_Txt"
-                    android:background="#dedede" />
+                    android:background="#343434" />
 
                 <TextView
                     android:id="@+id/dui_Txt"
@@ -101,7 +99,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:text=""
-                    android:textColor="#4d4d4d"
+                    android:textColor="#989797"
                     android:textSize="12sp" />
 
 
@@ -114,9 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/return_icon" />
+        android:background="@drawable/return_black" />
 
 
 

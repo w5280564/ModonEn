@@ -403,7 +403,7 @@ public class LineChartRenderer extends AbstractChartRenderer {
             canvas.drawRect(rawX - pointRadius, rawY - pointRadius, rawX + pointRadius, rawY + pointRadius, pointPaint);
         } else if (ValueShape.CIRCLE.equals(line.getShape())) {
             canvas.drawCircle(rawX, rawY, pointRadius, pointPaint);
-            HollowPaint.setColor(Color.parseColor("#ffffff"));
+            HollowPaint.setColor(Color.parseColor("#232121"));
             canvas.drawCircle(rawX, rawY, pointRadius / 2, HollowPaint);
         } else if (ValueShape.DIAMOND.equals(line.getShape())) {
             canvas.save();

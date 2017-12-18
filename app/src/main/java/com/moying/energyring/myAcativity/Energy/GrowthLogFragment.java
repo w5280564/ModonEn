@@ -8,13 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.moying.energyring.Model.EnergyList_Model;
+import com.moying.energyring.Model.headListModel;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.myAdapter.GrowthLogFragment_Adapter;
+import com.moying.energyring.myAdapter.GrowthLogHead_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
 import com.moying.energyring.xrecycle.XRecyclerView;
@@ -43,6 +48,7 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
     private View parentView;
     private int PageIndex;
     private int pageSize;
+    private RecyclerView head_recycle;
 
     public static GrowthLogFragment newInstance(String stringtype, String workType) {
         GrowthLogFragment newFragment = new GrowthLogFragment();
@@ -72,11 +78,24 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
 //        other_recycle.setLoadingMoreEnabled(false);//底部不加载
         other_recycle.setLoadingListener(this);//添加事件
         StaticData.changeXRecycleHeadGif(other_recycle, R.drawable.gif_bird_icon, 750, 200);
+        initAddHeadView(other_recycle, getActivity(), parentView);
         isPrepared = true;
         lazyLoad();
 
 
         return parentView;
+    }
+
+    private void initAddHeadView(XRecyclerView myView, Context context, View view) {
+        View header = LayoutInflater.from(context).inflate(R.layout.growthlogfragment_headview, null);
+        TextView tui_Txt = (TextView) header.findViewById(R.id.tui_Txt);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        int mag = (int)(Float.parseFloat(saveFile.getShareData("scale",getActivity())) *10);
+        params.setMargins(mag,mag,0,0);
+        tui_Txt.setLayoutParams(params);
+        head_recycle = (RecyclerView) header.findViewById(R.id.head_recycle);
+        head_recycle.setFocusable(false);
+        myView.addHeaderView(header);
     }
 
 
@@ -90,10 +109,10 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
         if (!isPrepared || !isVisible) {
             return;
         }
+        userListData(saveFile.BaseUrl + saveFile.user_hot_Url);
         PageIndex = 1;
         pageSize = 10;
         ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
-
     }
 
 
@@ -129,6 +148,28 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
         MobclickAgent.onPageEnd("GrowthLogFragment");
     }
 
+    public void inithead(final Context context, final headListModel headModel) {
+        LinearLayoutManager headMangaer = new LinearLayoutManager(context);
+        headMangaer.setOrientation(LinearLayoutManager.HORIZONTAL);
+        head_recycle.setLayoutManager(headMangaer);
+        //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
+//        head_recy.setHasFixedSize(true);
+        GrowthLogHead_Adapter headAdapter = new GrowthLogHead_Adapter(context, headModel);
+        head_recycle.setAdapter(headAdapter);
+        headAdapter.setOnItemClickLitener(new GrowthLogHead_Adapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                intent.putExtra("UserID", headModel.getData().get(position).getUserID() + "");
+                context.startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+            }
+        });
+    }
+
     GrowthLogFragment_Adapter mAdapter;
 
     public void initlist(final Context context) {
@@ -149,6 +190,7 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
                 intent.putExtra("content", content);
                 intent.putExtra("postId", postId);
                 intent.putExtra("url", url);
+                intent.putExtra("imgUrl", baseModel.get(position).getFilePath());
                 startActivity(intent);
 
             }
@@ -212,6 +254,41 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
         });
     }
 
+    public void userListData(String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", getActivity()) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", getActivity()));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    headListModel headModel = new Gson().fromJson(resultString, headListModel.class);
+                    if (headModel.isIsSuccess() && !headModel.getData().equals("[]")) {
+//                        head_recycle.refreshComplete();
+                        inithead(getActivity(), headModel);
+                    } else {
+                        Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
 
 
     protected void setStatusBar() {
@@ -219,7 +296,6 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
 //        StatusBarUtil.setTranslucent(this);
 //        StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(),0,seek_Btn);
     }
-
 
 
 }

@@ -26,6 +26,7 @@ import com.moying.energyring.Model.AddPhoto_Model;
 import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.UserInfo_Model;
+import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.likes_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.ImagePickerActivity;
@@ -33,14 +34,16 @@ import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
+import com.moying.energyring.myAcativity.Person.Person_Badge;
 import com.moying.energyring.myAcativity.Person.Person_LineView;
 import com.moying.energyring.myAcativity.Person.Person_Notice;
+import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAcativity.Person.Person_Set;
 import com.moying.energyring.myAcativity.Person.Person_Shop;
 import com.moying.energyring.myAcativity.Pk.Pk_Daypk;
-import com.moying.energyring.myAcativity.Pk.Pk_Gui;
 import com.moying.energyring.myAcativity.Pk.Pk_Guide;
 import com.moying.energyring.network.saveFile;
+import com.moying.energyring.waylenBaseView.AutoScaleTextView;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.umeng.analytics.MobclickAgent;
 
@@ -63,9 +66,10 @@ import static com.moying.energyring.myAcativity.Person.PersonMyCenter.REQUEST_CO
 public class Fragment4_PersonNew extends Fragment {
     private View parentView;
     private SimpleDraweeView personBg_simple, user_simple;
-    private TextView userName_Txt, userCount_Txt, nommunrend_Txt, myInto_Txt,zanCount_Txt,zanRank_Txt;
+    private TextView userName_Txt, userCount_Txt, myInto_Txt, zanCount_Txt, zanRank_Txt,guirend_Txt;
     private ImageView personnew_sex_Img;
     private String InviteCode;
+    private AutoScaleTextView nommunrend_Txt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +83,6 @@ public class Fragment4_PersonNew extends Fragment {
 
             initView(parentView);
             initGuide();
-
         }
         ViewGroup parent = (ViewGroup) parentView.getParent();
         if (parent != null) {
@@ -89,20 +92,31 @@ public class Fragment4_PersonNew extends Fragment {
     }
 
     private void initGuide() {
-        if (saveFile.getShareData("isGuidePer", getActivity()).equals("false")) {
-            Intent intent = new Intent(getActivity(), Pk_Guide.class);
-            intent.putExtra("guideId", "2");
-            startActivity(intent);
-        }
-        saveFile.saveShareData("isGuidePer", "true", getActivity());
+//        if (saveFile.getShareData("isGuidePer", getActivity()).equals("false")) {
+//            Intent intent = new Intent(getActivity(), Pk_Guide.class);
+//            intent.putExtra("guideId", "2");
+//            startActivity(intent);
+//        }
+//        saveFile.saveShareData("isGuidePer", "true", getActivity());
+
+        guideFristData(getActivity(), saveFile.BaseUrl + saveFile.GuidePerFirst_Url, 0);//展示功能提醒页
     }
+
 
 
     private void initView(View view) {
 
         ImageView personnew_set_icon = (ImageView) view.findViewById(R.id.personnew_set_icon);
         ImageView personnew_nom_icon = (ImageView) view.findViewById(R.id.personnew_nom_icon);
-        nommunrend_Txt = (TextView) view.findViewById(R.id.nommunrend_Txt);
+        nommunrend_Txt = (AutoScaleTextView) view.findViewById(R.id.nommunrend_Txt);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        int padLeft= (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 30);
+        int padBot = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 40);
+        params.setMargins(padLeft,0,0,padBot);
+        StaticData.layoutParamsScale(params,40,40);
+        nommunrend_Txt.setLayoutParams(params);
+
+//        nommunrend_Txt.setText(1011+"");
         RelativeLayout usericon_Rel = (RelativeLayout) view.findViewById(R.id.usericon_Rel);
         personBg_simple = (SimpleDraweeView) view.findViewById(R.id.personBg_simple);
         user_simple = (SimpleDraweeView) view.findViewById(R.id.user_simple);
@@ -114,16 +128,16 @@ public class Fragment4_PersonNew extends Fragment {
         myInto_Txt = (TextView) view.findViewById(R.id.myInto_Txt);
         ImageView fen_icon = (ImageView) view.findViewById(R.id.fen_icon);
         LinearLayout zan_Lin = (LinearLayout) view.findViewById(R.id.zan_Lin);
-         zanCount_Txt = (TextView) view.findViewById(R.id.zanCount_Txt);
-         zanRank_Txt = (TextView) view.findViewById(R.id.zanRank_Txt);
+        zanCount_Txt = (TextView) view.findViewById(R.id.zanCount_Txt);
+        zanRank_Txt = (TextView) view.findViewById(R.id.zanRank_Txt);
         ImageView copy_Img = (ImageView) view.findViewById(R.id.copy_Img);
 
         LinearLayout data_Lin = (LinearLayout) view.findViewById(R.id.data_Lin);
-        StaticData.ViewScale(personnew_set_icon, 64, 64);
-        StaticData.ViewScale(personnew_nom_icon, 64, 64);
+        StaticData.ViewScale(personnew_set_icon, 50, 50);
+        StaticData.ViewScale(personnew_nom_icon, 50, 50);
         viewTouchDelegate.expandViewTouchDelegate(personnew_set_icon, 100, 100, 100, 100);
         viewTouchDelegate.expandViewTouchDelegate(personnew_nom_icon, 100, 100, 100, 100);
-        StaticData.ViewScale(nommunrend_Txt, 20, 20);
+//        StaticData.ViewScale(nommunrend_Txt, 40, 40);
         StaticData.ViewScale(personBg_simple, 0, 580);
         StaticData.ViewScale(user_simple, 170, 170);
         StaticData.ViewScale(personnew_sex_Img, 32, 32);
@@ -155,8 +169,10 @@ public class Fragment4_PersonNew extends Fragment {
         ImageView line_arrow = (ImageView) view.findViewById(R.id.line_arrow);
         ImageView bang_arrow = (ImageView) view.findViewById(R.id.bang_arrow);
         TextView neng_Txt = (TextView) view.findViewById(R.id.neng_Txt);
+         guirend_Txt = (TextView) view.findViewById(R.id.guirend_Txt);
 
-         InviteCode = saveFile.getShareData("InviteCode", getActivity());
+
+        InviteCode = saveFile.getShareData("InviteCode", getActivity());
         neng_Txt.setText(InviteCode);
 
 
@@ -176,11 +192,11 @@ public class Fragment4_PersonNew extends Fragment {
         StaticData.ViewScale(person_gui_icon, 64, 64);
         StaticData.ViewScale(person_che_icon, 64, 64);
         StaticData.ViewScale(person_line_icon, 64, 64);
-        StaticData.ViewScale(set_arrow, 16, 30);
-        StaticData.ViewScale(gui_arrow, 16, 30);
-        StaticData.ViewScale(che_arrow, 16, 30);
-        StaticData.ViewScale(line_arrow, 16, 30);
-        StaticData.ViewScale(bang_arrow, 16, 30);
+        StaticData.ViewScale(set_arrow, 60, 60);
+        StaticData.ViewScale(gui_arrow, 60, 60);
+        StaticData.ViewScale(che_arrow, 60, 60);
+        StaticData.ViewScale(line_arrow, 60, 60);
+        StaticData.ViewScale(bang_arrow, 60, 60);
 
 
         seximgMargin(getActivity(), personnew_sex_Img);
@@ -199,11 +215,19 @@ public class Fragment4_PersonNew extends Fragment {
         hui_Rel.setOnClickListener(new hui_Rel());
         bang_Rel.setOnClickListener(new bang_Rel());
         che_Rel.setOnClickListener(new che_Rel());
-//        gui_Rel.setOnClickListener(new gui_Rel());
+        gui_Rel.setOnClickListener(new gui_Rel());
         line_Rel.setOnClickListener(new line_Rel());
 //        RoundingParams roundingParams = RoundingParams.asCircle();
 //        roundingParams.setRoundAsCircle(true);
 //        user_simple.getHierarchy().setRoundingParams(roundingParams);
+    }
+
+    private void changeRedGui(TextView redTxt){
+        if (saveFile.getShareData("RedGui", getActivity()).equals("false")) {
+            redTxt.setVisibility(View.VISIBLE);
+        }else {
+            redTxt.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -252,6 +276,7 @@ public class Fragment4_PersonNew extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        changeRedGui(guirend_Txt);
         initData();
     }
 
@@ -275,14 +300,14 @@ public class Fragment4_PersonNew extends Fragment {
     }
 
 
-
     private class neng_Rel extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
-            StaticData.copy(InviteCode,getActivity());
-            Toast.makeText(getActivity(),"已复制",Toast.LENGTH_SHORT).show();
+            StaticData.copy(InviteCode, getActivity());
+            Toast.makeText(getActivity(), "已复制", Toast.LENGTH_SHORT).show();
         }
     }
+
     //设置
     private class personnew_set_icon implements View.OnClickListener {
         @Override
@@ -292,7 +317,6 @@ public class Fragment4_PersonNew extends Fragment {
                 intent.putExtra("UserID", userModel.getData().getUserID() + "");
             }
             startActivity(intent);
-
         }
     }
 
@@ -310,7 +334,9 @@ public class Fragment4_PersonNew extends Fragment {
     private class hui_Rel implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), Pk_Gui.class);
+//            Intent intent = new Intent(getActivity(), Pk_Gui.class);
+//            startActivity(intent);
+            Intent intent = new Intent(getActivity(), Person_Badge.class);
             startActivity(intent);
         }
     }
@@ -341,7 +367,6 @@ public class Fragment4_PersonNew extends Fragment {
             startActivity(intent);
         }
     }
-
 
 
     //数据曲线
@@ -377,15 +402,16 @@ public class Fragment4_PersonNew extends Fragment {
 //            startActivity(intent);
 //        }
 //    }
-//    //积分规则
-//    private class gui_Rel implements View.OnClickListener {
-//        @Override
-//        public void onClick(View view) {
-//            MobclickAgent.onEvent(getActivity(), "guiClick");//统计页签
-//            Intent intent = new Intent(getActivity(), Person_Relus.class);
-//            startActivity(intent);
-//        }
-//    }
+//    //积分攻略
+    private class gui_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            saveFile.saveShareData("RedGui","true",getActivity());
+            MobclickAgent.onEvent(getActivity(), "guiClick");//统计页签
+            Intent intent = new Intent(getActivity(), Person_Relus.class);
+            startActivity(intent);
+        }
+    }
 
 
     private String userId = "0";
@@ -396,7 +422,97 @@ public class Fragment4_PersonNew extends Fragment {
         likesData(getActivity(), saveFile.BaseUrl + saveFile.Likes_Url);
     }
 
+    public void guideFristData(final Context context, String baseUrl, final int type) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    isFristSee_Model isFristModel = new Gson().fromJson(resultString, isFristSee_Model.class);
+                    if (isFristModel.isIsSuccess()) {
+                        if (!isFristModel.getData().isIs_FirstEditProfile_Remind()) {
+
+//                            isFristSee();
+                            Intent intent = new Intent(getActivity(), Pk_Guide.class);
+                            intent.putExtra("guideId", "2");
+                            startActivity(intent);
+                            updguidePer_Data(getActivity(), saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstEditProfile_Remind");//展示功能提醒页
+                        }
+
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+    public void updguidePer_Data(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    Base_Model Model = new Gson().fromJson(resultString, Base_Model.class);
+                    if (Model.isIsSuccess()) {
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+
+
     UserInfo_Model userModel;
+
     public void UserData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -485,10 +601,11 @@ public class Fragment4_PersonNew extends Fragment {
                     if (baseModel.isIsSuccess()) {
                         if (baseModel.getData() != 0) {
                             nommunrend_Txt.setVisibility(View.VISIBLE);
-                            ((MainActivity)getActivity()).setVisi(0);
+                            nommunrend_Txt.setText(baseModel.getData() + "");
+                            ((MainActivity) getActivity()).setVisi(0);
                         } else {
                             nommunrend_Txt.setVisibility(View.INVISIBLE);
-                            ((MainActivity)getActivity()).setVisi(1);
+                            ((MainActivity) getActivity()).setVisi(1);
                         }
 
                     } else {
@@ -527,11 +644,11 @@ public class Fragment4_PersonNew extends Fragment {
             @Override
             public void onSuccess(String resultString) {
                 if (resultString != null) {
-                    likes_Model  likeModel = new Gson().fromJson(resultString, likes_Model.class);
+                    likes_Model likeModel = new Gson().fromJson(resultString, likes_Model.class);
                     if (userModel.isIsSuccess() && !userModel.getData().equals("[]")) {
 //                        UserInfo_Model.DataBean oneData = userModel.getData();
-                        zanCount_Txt.setText(likeModel.getData().getLikesNum()+"");
-                        zanRank_Txt.setText(likeModel.getData().getLikesRanking()+"");
+                        zanCount_Txt.setText(likeModel.getData().getLikesNum() + "");
+                        zanRank_Txt.setText(likeModel.getData().getLikesRanking() + "");
 
                     } else {
                         Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -559,7 +676,6 @@ public class Fragment4_PersonNew extends Fragment {
             }
         });
     }
-
 
 
     @Override

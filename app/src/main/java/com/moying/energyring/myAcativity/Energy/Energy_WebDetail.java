@@ -63,7 +63,7 @@ public class Energy_WebDetail extends Activity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.news_web);
         LinearLayout layoutRoot = new LinearLayout(this);//根布局
-        layoutRoot.setBackgroundColor(Color.parseColor("#f3f3f3"));
+        layoutRoot.setBackgroundColor(Color.parseColor("#232121"));
         layoutRoot.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
@@ -72,11 +72,12 @@ public class Energy_WebDetail extends Activity {
         final String url = intent.getStringExtra("url");
         final String postId = intent.getStringExtra("postId");
         final String content = intent.getStringExtra("content");
+        final String imgUrl = intent.getStringExtra("imgUrl");
 
         String shareTitle = HtmlToText.delHTMLTag(content);
         String shareConStr = "我的能量源是" + saveFile.getShareData("InviteCode", Energy_WebDetail.this);
         String shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + postId;
-        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr);
+        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr,imgUrl);
 
         myWebView = new WebView(this);
         myWebView.setLayoutParams(params);
@@ -122,7 +123,7 @@ public class Energy_WebDetail extends Activity {
 
     private void initTitle(LinearLayout mycontentView) {
         final View view = LayoutInflater.from(Energy_WebDetail.this).inflate(R.layout.base_titlebar, null);
-        view.setBackgroundColor(Color.parseColor("#ffffff"));
+        view.setBackgroundColor(Color.parseColor("#2b2a2a"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setElevation(2f);//阴影
         }
@@ -132,10 +133,10 @@ public class Energy_WebDetail extends Activity {
         Button return_Btn = (Button) view.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) view.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#909090"));
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
 //        cententtxt.setText(myWebView.getTitle());
         cententtxt.setText("能量帖");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         Button right_Btn = (Button) view.findViewById(R.id.right_Btn);
         right_Btn.setBackgroundResource(R.drawable.share_icon);
         StaticData.ViewScale(right_Btn, 40, 40);

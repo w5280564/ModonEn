@@ -72,13 +72,14 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
 
     public void initView() {
         View title_Include = findViewById(R.id.title_Include);
+//        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
-        return_Btn.setBackgroundResource(R.drawable.return_icon);
+        return_Btn.setBackgroundResource(R.drawable.return_black);
 //        return_Btn.setVisibility(View.GONE);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
         cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("签到");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
 
 

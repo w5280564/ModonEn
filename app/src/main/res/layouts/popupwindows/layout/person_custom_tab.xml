@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <!--android:background="@drawable/round_rectangle_pink"-->
     <LinearLayout
         android:id="@+id/tab_Lin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/person_tab_round"
+        android:background="@drawable/popupblack_bg"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center"

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -34,18 +34,18 @@
                 android:id="@+id/name_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#000000"
                 android:lines="1"
+                android:text=""
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/content_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="#4d4d4d"
                 android:lines="1"
+                android:text=""
+                android:textColor="#989797"
                 android:textSize="10sp" />
         </LinearLayout>
 
@@ -55,8 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:gravity="center"
             android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textColor="#4d4a4a"
             android:textSize="10sp" />
 
 
@@ -66,7 +67,7 @@
             android:layout_height="1px"
             android:layout_alignLeft="@id/content_Lin"
             android:layout_alignParentBottom="true"
-            android:background="#cfcfcf" />
+            android:background="#343434" />
     </RelativeLayout>
 
 

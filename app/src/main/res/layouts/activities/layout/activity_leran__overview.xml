@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6f6f6"
+    android:background="#232121"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_Include"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
         <TextView
             android:id="@+id/title_Name"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="目标时长"
-                    android:textColor="#9f9f9f"
+                    android:textColor="#989797"
                     android:textSize="15sp" />
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名称"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="每日目标"
-                    android:textColor="#9f9f9f"
+                    android:textColor="#989797"
                     android:textSize="15sp" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名称"
-                    android:textColor="#000000"
+                    android:textColor="#ffffff"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
@@ -110,7 +110,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="日"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
 
             <TextView
@@ -119,7 +119,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="一"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
 
             <TextView
@@ -128,7 +128,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="二"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
 
             <TextView
@@ -137,7 +137,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="三"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
 
             <TextView
@@ -146,7 +146,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="四"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
 
             <TextView
@@ -155,7 +155,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="五"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
 
             <TextView
@@ -164,7 +164,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="六"
-                android:textColor="#9f9f9f"
+                android:textColor="#989797"
                 android:textSize="10sp"/>
         </LinearLayout>
 
@@ -172,13 +172,13 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_above="@id/ll_week"
-            android:background="#9f9f9f" />
+            android:background="#343434" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@id/ll_week"
-            android:background="#9f9f9f" />
+            android:background="#343434" />
 
 
         <ViewFlipper
@@ -208,7 +208,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="制定完成后，不可更改 \n请在每日pk中汇报打卡 \n其余汇报途径无效"
-        android:textColor="#929292"
+        android:textColor="#989797"
         android:textSize="12sp" />
 
 

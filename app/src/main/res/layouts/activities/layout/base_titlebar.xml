@@ -24,11 +24,9 @@
 
     <TextView
         android:id="@+id/cententtxt"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_toLeftOf="@id/right_Btn"
-        android:layout_toRightOf="@id/return_Btn"
         android:gravity="center"
         android:lines="1"
         android:textColor="#ffffff"

@@ -12,11 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.moying.energyring.Model.JiFenAndBadge_Model;
 import com.moying.energyring.Model.person_daypk_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
-import com.moying.energyring.myAcativity.PostingActivity;
+import com.moying.energyring.myAcativity.Person.Person_BadgeHas;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.viewpagercards.PkSuccess_CardItem;
 import com.moying.energyring.waylenBaseView.viewpagercards.PkSuccess_CardPagerAdapter;
@@ -32,6 +33,7 @@ import java.text.NumberFormat;
 public class Pk_AddSuccess extends Activity {
     ViewPager viewPager;
     TextView gan_Txt;
+    private JiFenAndBadge_Model jiFenmodel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,25 @@ public class Pk_AddSuccess extends Activity {
 
         initView();
         initData();
+
+        Intent intent = getIntent();
+        if (intent.getParcelableExtra("jiFenmodel") != null) {
+            jiFenmodel = intent.getParcelableExtra("jiFenmodel");
+            if (jiFenmodel.getData().getIntegral() == 0){
+                if (!jiFenmodel.getData().get_Badge().isEmpty()) {
+                    Intent intentSuccess = new Intent(Pk_AddSuccess.this, Person_BadgeHas.class);
+                    intentSuccess.putExtra("jiFenmodel", jiFenmodel);
+                    startActivity(intentSuccess);
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
+                }
+            }else{
+
+                Intent intentJiFen = new Intent(Pk_AddSuccess.this, JiFenActivity.class);
+                intentJiFen.putExtra("jifen", jiFenmodel.getData().getIntegral());
+                startActivityForResult(intentJiFen, 1002);
+
+            }
+        }
     }
 
     private void initView() {
@@ -50,26 +71,49 @@ public class Pk_AddSuccess extends Activity {
         gan_Txt = (TextView) findViewById(R.id.gan_Txt);
 //        StaticData.ViewScale(sure_Btn,100,80);
         StaticData.ViewScale(success_icon, 434, 352);
-        StaticData.ViewScale(viewPager, 0, 550);
+        StaticData.ViewScale(viewPager, 750, 550);
+//        int pad = (int)(Float.parseFloat(saveFile.getShareData("scale",this)) *40);
+//        viewPager.setPaddingRelative(padstart,0,padstart,0);
+//        viewPager.setPadding(pad,0,pad,0);
+
         StaticData.ViewScale(gan_Txt, 410, 100);
 
         sure_Btn.setOnClickListener(new sure_Btn());
         gan_Txt.setOnClickListener(new gan_Txt());
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1002) {
+            if (!jiFenmodel.getData().get_Badge().isEmpty()) {
+                Intent intent = new Intent(Pk_AddSuccess.this, Person_BadgeHas.class);
+                intent.putExtra("jiFenmodel", jiFenmodel);
+                startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
+            }
+        }
+    }
+
     private class sure_Btn implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             finish();
+
         }
     }
 
     private class gan_Txt implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Pk_AddSuccess.this, PostingActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(Pk_AddSuccess.this, PostingActivity.class);
+//            startActivity(intent);
+//            finish();
             finish();
+//            Intent intent = new Intent(Pk_AddSuccess.this, Person_BadgeHas.class);
+//            intent.putExtra("jiFenmodel", jiFenmodel);
+//            startActivity(intent);
+//            overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
         }
     }
 
@@ -82,16 +126,15 @@ public class Pk_AddSuccess extends Activity {
     private PkSuccess_ShadowTransformer mCardShadowTransformer;
 
     private void initList(Context context) {
-        
         mCardAdapter = new PkSuccess_CardPagerAdapter();
         int size = baseModel.getData().size();
         for (int i = 0; i < size; i++) {
             person_daypk_Model.DataBean oneData = baseModel.getData().get(i);
             NumberFormat nf = new DecimalFormat("#.#");//# 0 不显示
-            mCardAdapter.addCardItem(new PkSuccess_CardItem(oneData.getFilePath(), oneData.getProjectName(), nf.format(oneData.getReportNum()) + "", oneData.getRanking() + "",oneData.getProjectUnit()));
+            mCardAdapter.addCardItem(new PkSuccess_CardItem(oneData.getFilePath(), oneData.getProjectName(), nf.format(oneData.getReportNum()) + "", oneData.getRanking() + "", oneData.getProjectUnit()));
         }
         mCardShadowTransformer = new PkSuccess_ShadowTransformer(viewPager, mCardAdapter);
-        mCardShadowTransformer.enableScaling(false);
+        mCardShadowTransformer.enableScaling(false);//去阴影
         viewPager.setAdapter(mCardAdapter);
         viewPager.setPageTransformer(false, mCardShadowTransformer);
         viewPager.setOffscreenPageLimit(3);

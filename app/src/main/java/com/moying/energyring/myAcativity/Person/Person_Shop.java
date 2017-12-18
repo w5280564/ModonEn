@@ -65,18 +65,19 @@ public class Person_Shop extends Activity implements XRecyclerView.LoadingListen
     public void initView() {
         View title_Include = findViewById(R.id.title_Include);
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
-        return_Btn.setBackgroundResource(R.drawable.return_icon);
+        return_Btn.setBackgroundResource(R.drawable.return_black);
 //        return_Btn.setVisibility(View.GONE);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
         cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("积分商城");
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
-        right_Btn.setTextColor(Color.parseColor("#ffffff"));
-        right_Btn.setText("积分记录");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        right_Btn.setBackgroundResource(R.drawable.person_guigazy_icon);
+//        right_Btn.setTextColor(Color.parseColor("#ffffff"));
+//        right_Btn.setText("积分记录");
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
-        StaticData.ViewScale(right_Btn, 0, 88);
+        StaticData.ViewScale(right_Btn, 52, 42);
 
         View pink_view = (View) findViewById(R.id.pink_view);
         StaticData.ViewScale(pink_view, 0, 176);

@@ -6,11 +6,12 @@ package com.moying.energyring.Model;
 
 public class PersonData_Model {
 
+
     /**
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : {"ProjectUnit":"个","NickName":"Start丶小夏","ProfilePicture":"http://qlogo3.store.qq.com/qzone/214468358/214468358/100?1343713917","Likes":0,"Is_Like":false,"PKCoverImg":null,"Ranking":0,"Limit":150,"ReportID":27,"UserID":3,"ProjectID":11,"CreateTime":null,"ReportFre":0,"ReportNum":50,"FileIDs":null,"Is_Sync":false}
+     * Data : {"ProjectUnit":"天","ProjectName":"戒游戏","NickName":"摩英 王丰","ProfilePicture":"http://120.26.218.68:8038/Attachment/6652_66522066.jpg","Likes":0,"Is_Like":false,"PKCoverImg":"http://120.26.218.68:1111/Uploads/2017-10-10/84b252c9-6f15-49d4-8241-19d6edac544e.jpg","Ranking":2,"Limit":1,"Report_Days":2,"FilePath_List":null,"ReportID":49,"UserID":2066,"ProjectID":28,"CreateTime":null,"ReportFre":0,"ReportNum":1,"FileIDs":null,"Is_Sync":false}
      */
 
     private boolean IsSuccess;
@@ -52,32 +53,38 @@ public class PersonData_Model {
 
     public static class DataBean {
         /**
-         * ProjectUnit : 个
-         * NickName : Start丶小夏
-         * ProfilePicture : http://qlogo3.store.qq.com/qzone/214468358/214468358/100?1343713917
+         * ProjectUnit : 天
+         * ProjectName : 戒游戏
+         * NickName : 摩英 王丰
+         * ProfilePicture : http://120.26.218.68:8038/Attachment/6652_66522066.jpg
          * Likes : 0
          * Is_Like : false
-         * PKCoverImg : null
-         * Ranking : 0
-         * Limit : 150.0
-         * ReportID : 27
-         * UserID : 3
-         * ProjectID : 11
+         * PKCoverImg : http://120.26.218.68:1111/Uploads/2017-10-10/84b252c9-6f15-49d4-8241-19d6edac544e.jpg
+         * Ranking : 2
+         * Limit : 1.0
+         * Report_Days : 2
+         * FilePath_List : null
+         * ReportID : 49
+         * UserID : 2066
+         * ProjectID : 28
          * CreateTime : null
          * ReportFre : 0
-         * ReportNum : 50.0
+         * ReportNum : 1.0
          * FileIDs : null
          * Is_Sync : false
          */
 
         private String ProjectUnit;
+        private String ProjectName;
         private String NickName;
         private String ProfilePicture;
         private int Likes;
         private boolean Is_Like;
-        private Object PKCoverImg;
+        private String PKCoverImg;
         private int Ranking;
         private double Limit;
+        private int Report_Days;
+        private Object FilePath_List;
         private int ReportID;
         private int UserID;
         private int ProjectID;
@@ -93,6 +100,14 @@ public class PersonData_Model {
 
         public void setProjectUnit(String ProjectUnit) {
             this.ProjectUnit = ProjectUnit;
+        }
+
+        public String getProjectName() {
+            return ProjectName;
+        }
+
+        public void setProjectName(String ProjectName) {
+            this.ProjectName = ProjectName;
         }
 
         public String getNickName() {
@@ -127,11 +142,11 @@ public class PersonData_Model {
             this.Is_Like = Is_Like;
         }
 
-        public Object getPKCoverImg() {
+        public String getPKCoverImg() {
             return PKCoverImg;
         }
 
-        public void setPKCoverImg(Object PKCoverImg) {
+        public void setPKCoverImg(String PKCoverImg) {
             this.PKCoverImg = PKCoverImg;
         }
 
@@ -149,6 +164,22 @@ public class PersonData_Model {
 
         public void setLimit(double Limit) {
             this.Limit = Limit;
+        }
+
+        public int getReport_Days() {
+            return Report_Days;
+        }
+
+        public void setReport_Days(int Report_Days) {
+            this.Report_Days = Report_Days;
+        }
+
+        public Object getFilePath_List() {
+            return FilePath_List;
+        }
+
+        public void setFilePath_List(Object FilePath_List) {
+            this.FilePath_List = FilePath_List;
         }
 
         public int getReportID() {

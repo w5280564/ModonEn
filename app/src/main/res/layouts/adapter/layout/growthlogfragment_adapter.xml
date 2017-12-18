@@ -12,7 +12,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <LinearLayout
             android:id="@+id/title_Lin"
@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#ffffff"/>
 
             <TextView
                 android:id="@+id/time_Txt"
@@ -45,8 +46,9 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="left"
                 android:paddingRight="15dp"
-                android:textColor="#6b6b6b"
-                android:textSize="12sp" />
+                android:textColor="#e3e7eb"
+                android:textSize="12sp"
+                />
         </LinearLayout>
 
 
@@ -66,7 +68,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:lines="2"
-            android:textColor="#676767"
+            android:textColor="#e3e7eb"
             android:textSize="12sp" />
 
 
@@ -122,7 +124,7 @@
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:text="删除"
-                android:textColor="#6b6b6b"
+                android:textColor="#e3e7eb"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -134,6 +136,15 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/yue_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:textColor="#e3e7eb"
+                    android:layout_marginRight="5dp"/>
 
                 <ImageView
                     android:id="@+id/energy_talk"
@@ -147,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#aeaeae"
+                    android:textColor="#e3e7eb"
                     android:textSize="9sp" />
 
                 <LinearLayout
@@ -168,7 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="#aeaeae"
+                        android:textColor="#e3e7eb"
                         android:textSize="9sp" />
                 </LinearLayout>
 

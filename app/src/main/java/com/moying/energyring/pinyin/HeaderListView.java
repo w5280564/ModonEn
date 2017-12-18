@@ -100,13 +100,13 @@ public class HeaderListView extends ListView {
 			break;
 
 		case PinnedHeaderAdapter.PINNED_HEADER_VISIBLE:
-			mPinnedHeaderAdapter.configurePinnedHeader(mHeaderView, position, 0);
+			mPinnedHeaderAdapter.configurePinnedHeader(mHeaderView, position, 255);
 			mDrawFlag = true;
 			mHeaderView.layout(0, 0, mMeasuredWidth, mMeasuredHeight);
 			break;
 			
 		case PinnedHeaderAdapter.PINNED_HEADER_PUSHED_UP:
-			mPinnedHeaderAdapter.configurePinnedHeader(mHeaderView, position, 0);
+			mPinnedHeaderAdapter.configurePinnedHeader(mHeaderView, position, 255);
 			mDrawFlag = true;
 
 			// 移动位置

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff"
+        android:background="#2a2b2b"
         android:layout_marginTop="10dp">
 
 
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:text="名字"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_below="@id/name_Txt"
                 android:lines="1"
                 android:text="内容"
-                android:textColor="#4d4d4d"
+                android:textColor="#7b7b7b"
                 android:textSize="10sp" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_alignParentRight="true"
                 android:lines="1"
                 android:text="时间"
-                android:textColor="#7d7d7d"
+                android:textColor="#7b7b7b"
                 android:textSize="10sp" />
 
 

@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Base_Model;
+import com.moying.energyring.Model.JiFenAndBadge_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.myCheckData_Model;
 import com.moying.energyring.Model.newPk_Model;
@@ -26,11 +26,13 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Energy.HasNewActivity;
+import com.moying.energyring.myAcativity.Person.Person_BadgeHas;
 import com.moying.energyring.myAcativity.Pk.JiFenActivity;
 import com.moying.energyring.myAcativity.Pk.Pk_CheckIn;
 import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd_More;
 import com.moying.energyring.myAcativity.Pk.Pk_Daypk;
 import com.moying.energyring.myAcativity.Pk.Pk_Guide;
+import com.moying.energyring.myAcativity.Pk.Pk_HuiZong;
 import com.moying.energyring.myAdapter.newPk_Fragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.xrecycle.XRecyclerView;
@@ -58,6 +60,9 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     LinearLayout check_Lin;
     //    VerticalScrollTextView ScrollTextView;
     MarqueeView marqueeView;
+    public static int guideID = 1001;
+    public static int jifenID = 1002;
+    public static int TixingResult = 1003;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +79,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 //        tabViewSetView();
 
 
-        guideFristData(getActivity(), saveFile.BaseUrl + saveFile.GuidePerFirst_Url,0);//展示功能提醒页
+        guideFristData(getActivity(), saveFile.BaseUrl + saveFile.GuidePerFirst_Url, 0);//展示功能提醒页
         return parentView;
     }
 
@@ -117,19 +122,32 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (RESULT_OK == resultCode){
+        if (RESULT_OK == resultCode) {
             String guideId = data.getStringExtra("guideId");
-            guideFristData(getActivity(), saveFile.BaseUrl + saveFile.GuidePerFirst_Url,Integer.parseInt(guideId));//展示功能提醒页
+//            jiFenmodel = data.getParcelableExtra("jiFenmodel");
+            guideFristData(getActivity(), saveFile.BaseUrl + saveFile.GuidePerFirst_Url, Integer.parseInt(guideId));//展示功能提醒页
+        } else if (resultCode == 1002) {
+            if (!jiFenmodel.getData().get_Badge().isEmpty()) {
+                Intent intent = new Intent(getActivity(), Person_BadgeHas.class);
+                intent.putExtra("jiFenmodel", jiFenmodel);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
+            }
         }
+//        else if (resultCode == TixingResult) {
+//            Intent intent = new Intent(getActivity(), JiFenActivity.class);
+//            intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
+//            startActivityForResult(intent, 1002);
+//        }
 
     }
 
-    public static int guideID = 1001;
+
     private void initGuide(boolean isCheck) {
         if (!isCheck) {
             Intent intent = new Intent(getActivity(), Pk_Guide.class);
             intent.putExtra("guideId", "1");
-            startActivityForResult(intent,guideID);
+            startActivityForResult(intent, guideID);
 //            startActivity(intent);
         }
 //        if (saveFile.getShareData("isGuidepk", getActivity()).equals("false")) {
@@ -166,6 +184,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     private void isFristSee() {
         Intent intent = new Intent(getActivity(), Pk_Guide.class);
         intent.putExtra("guideId", "2");
+//        startActivityForResult(intent,TixingResult);
         startActivity(intent);
     }
 
@@ -213,7 +232,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         @Override
         public void onClick(View view) {
             Intent intent1 = new Intent(getActivity(), Pk_DayPkAdd_More.class);
-            startActivityForResult(intent1,guideID);
+            startActivityForResult(intent1, guideID);
         }
     }
 
@@ -222,6 +241,28 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         public void onItemClick(int position, TextView textView) {
             Intent intent = new Intent(getActivity(), Pk_CheckIn.class);
             startActivity(intent);
+
+//            String resultStr = "{\n" +
+//                    "  \"IsSuccess\": true,\n" +
+//                    "  \"Msg\": \"操作成功！\",\n" +
+//                    "  \"Status\": 200,\n" +
+//                    "  \"Data\": {\"Integral\":10,\"_Badge\":[{\"BadgeID\":16,\"BadgeName\":\"累计签到50天徽章\",\"BadgeDays\":50,\"BadgeType\":2,\"Is_Have\":false,\"HaveNum\":280,\"FileID\":0,\"FilePath\":\"http://172.16.0.111/Uploads/2017-11-27/4bc3c882-5115-4be9-99f0-84ef4a7a51ca.png\",\"FileID_Gray\":0,\"FilePath_Gray\":null},{\"BadgeID\":17,\"BadgeName\":\"累计签到100天徽章\",\"BadgeDays\":100,\"BadgeType\":3,\"Is_Have\":false,\"HaveNum\":380,\"FileID\":0,\"FilePath\":\"http://172.16.0.111/Uploads/2017-11-27/4bc3c882-5115-4be9-99f0-84ef4a7a51ca.png\",\"FileID_Gray\":0,\"FilePath_Gray\":null}]}\n" +
+//                    "}";
+//            String resultStr = "{\n" +
+//                    "  \"IsSuccess\": true,\n" +
+//                    "  \"Msg\": \"操作成功!\",\n" +
+//                    "  \"Status\": 200,\n" +
+//                    "  \"Data\": {\n" +
+//                    "    \"Integral\": 10,\n" +
+//                    "    \"_Badge\": []\n" +
+//                    "  }\n" +
+//                    "}";
+//            jiFenmodel = new Gson().fromJson(resultStr, JiFenAndBadge_Model.class);
+//
+//            Intent intent = new Intent(getActivity(), JiFenActivity.class);
+//            intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
+////            intent.putExtra("jifen", 10);
+//            startActivityForResult(intent, jifenID);
         }
     }
 
@@ -230,7 +271,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         @Override
         public void onClick(View view) {
             view.setEnabled(false);
-            isReteDayPk(view, getActivity(), saveFile.BaseUrl + saveFile.Report_Status_Url);
+            isReteDayPk(view, getActivity(), saveFile.BaseUrl + saveFile.haveNewRepost_Url);
         }
     }
 
@@ -238,7 +279,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     newPk_Fragment_Adapter mAdapter;
 
     public void initlist(final Context context) {
-        GridLayoutManager mGridMangaer = new GridLayoutManager(context, 3);
+        GridLayoutManager mGridMangaer = new GridLayoutManager(context, 2);
         pk_recy.setLayoutManager(mGridMangaer);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
 //        pk_recy.setHasFixedSize(true);
@@ -348,6 +389,8 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         });
     }
 
+    JiFenAndBadge_Model jiFenmodel;
+
     public void AddData(String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", getActivity()) != null) {
@@ -357,14 +400,16 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             @Override
             public void onSuccess(String resultString) {
                 if (resultString != null) {
-                    BaseDataInt_Model model = new Gson().fromJson(resultString, BaseDataInt_Model.class);
-                    if (model.isIsSuccess()) {
+                    jiFenmodel = new Gson().fromJson(resultString, JiFenAndBadge_Model.class);
+
+                    if (jiFenmodel.isIsSuccess()) {
                         check_Lin.setEnabled(true);
 //                        check_Lin.setVisibility(View.GONE);
 //                        ScrollTextView.setVisibility(View.VISIBLE);
                         Intent intent = new Intent(getActivity(), JiFenActivity.class);
-                        intent.putExtra("jifen", model.getData());
-                        startActivity(intent);
+                        intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
+                        startActivityForResult(intent, jifenID);
+//                        startActivity(intent);
                         Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT);
                         myCheckData(saveFile.BaseUrl + saveFile.MyCheckIn_Url);
                     } else {
@@ -452,19 +497,30 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onSuccess(String resultString) {
                 if (resultString != null) {
                     view.setEnabled(true);
-                    BaseDataInt_Model reteModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
-                    int integral = reteModel.getData();
-                    if (integral == -1) {
-                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
-                    } else if (integral == 0) {
-                        //汇报达到上限没分
-                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
-                    } else if (integral > 0) {
-                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), JiFenActivity.class);
-                        intent.putExtra("jifen", integral);
+                    Base_Model reteModel = new Gson().fromJson(resultString, Base_Model.class);
+                    if (reteModel.isData()) {
+                        Intent intent = new Intent(getActivity(), Pk_HuiZong.class);
                         startActivity(intent);
+                    } else {
+                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
                     }
+
+//                    int integral = reteModel.getData();
+//                    if (integral == -1) {
+//                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
+//                    }else if (integral >= 0){
+//                        Intent intent = new Intent(getActivity(), Pk_HuiZong.class);
+//                        startActivity(intent);
+//                    }
+//                    else if (integral == 0) {
+//                        //汇报达到上限没分
+//                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+//                    } else if (integral > 0) {
+//                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getActivity(), JiFenActivity.class);
+//                        intent.putExtra("jifen", integral);
+//                        startActivity(intent);
+//                    }
 
                 } else {
                     Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -514,7 +570,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                                 startActivity(intent1);
                             }
                         } else {
-                             if (!isFristModel.getData().isIs_FirstPool()) {
+                            if (!isFristModel.getData().isIs_FirstPool()) {
 //                            Field[] isFrist  =  isFristModel.getData().getClass().getDeclaredFields();
 //                            isFrist[0].getName()
 

@@ -169,19 +169,19 @@ public class Leran_AllPersonDetails extends Activity implements GestureDetector.
 
     private void initTitle(){
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#909090"));
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
         right_Btn.setBackgroundResource(R.drawable.persondetails_out);
         cententtxt.setText("目标详情");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
         StaticData.ViewScale(right_Btn, 44, 44);
 
@@ -579,8 +579,8 @@ public class Leran_AllPersonDetails extends Activity implements GestureDetector.
 
     public void TextsColor(int start, int end, int allSize, String allText, TextView myTxt) {
         SpannableStringBuilder styledText = new SpannableStringBuilder(allText);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#9f9f9f")), 0, allSize, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#000000")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#989797")), 0, allSize, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         myTxt.setText(styledText);
     }
 

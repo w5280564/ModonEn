@@ -43,7 +43,7 @@
             android:layout_height="1px"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#ffffff" />
+            android:background="#343434" />
 
         <LinearLayout
             android:id="@+id/hostoy_Lin"
@@ -73,7 +73,7 @@
             android:layout_height="1px"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#ffffff" />
+            android:background="#343434" />
 
         <LinearLayout
             android:id="@+id/hostoy_Lintwo"

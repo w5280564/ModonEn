@@ -19,14 +19,13 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/goal_btn_selector"
-            fresco:roundAsCircle="true"
-            />
+            fresco:roundAsCircle="true" />
 
         <TextView
             android:id="@+id/name_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
+            android:textColor="#989797"
             android:textSize="12sp" />
 
     </LinearLayout>

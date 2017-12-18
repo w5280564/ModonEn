@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/findbg_gradient"
     android:orientation="vertical">
+    <!--android:background="@drawable/findbg_gradient"-->
 
 
     <com.moying.energyring.xrecycle.XRecyclerView
@@ -19,7 +18,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/find_seekbg"
+        android:visibility="gone"
         android:text="搜索 用户/成长日志"
         android:textColor="#5b5b5b"
         android:textSize="10sp" />
+
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
 </RelativeLayout>

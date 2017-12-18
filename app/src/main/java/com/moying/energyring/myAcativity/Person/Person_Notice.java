@@ -59,7 +59,7 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
     private void initView() {
         RelativeLayout title_Rel = (RelativeLayout) findViewById(R.id.title_Rel);
         Button return_Btn = (Button) findViewById(R.id.return_Btn);
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Rel, 0, 88);
 
         choice_Rel = (RelativeLayout) findViewById(R.id.choice_Rel);
@@ -142,9 +142,9 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
 
     private void setinitbg() {
         remind_Txt.setBackgroundResource(0);
-        remind_Txt.setTextColor(Color.parseColor("#4d4d4d"));
+        remind_Txt.setTextColor(Color.parseColor("#ffffff"));
         mes_Txt.setBackgroundResource(0);
-        mes_Txt.setTextColor(Color.parseColor("#4d4d4d"));
+        mes_Txt.setTextColor(Color.parseColor("#ffffff"));
     }
 
     private void changebg(TextView myView) {
@@ -329,6 +329,10 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
 
                         if (oneData.getMsg() > 0){
                             mesunrend_Txt.setVisibility(View.VISIBLE);
+                            setinitbg();
+                            changebg(mes_Txt);
+                            noticecontent_Lin.setVisibility(View.GONE);
+                            All_XRecy.setVisibility(View.VISIBLE);
                         }else{
                             mesunrend_Txt.setVisibility(View.INVISIBLE);
                         }

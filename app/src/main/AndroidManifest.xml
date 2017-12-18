@@ -38,7 +38,8 @@
         android:icon="@mipmap/ring"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@style/AppThemeprice">
+        <!--android:theme="@android:style/Theme.NoTitleBar"-->
         <activity
             android:name=".myAcativity.LaunchActivity"
             android:screenOrientation="portrait"
@@ -316,14 +317,19 @@
             android:name=".myAcativity.Pk.Pk_Guide"
             android:screenOrientation="portrait"
             android:theme="@style/MyDialog" />
-        <activity android:name=".myAcativity.Energy.HasNewActivity"
+        <activity
+            android:name=".myAcativity.Energy.HasNewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/TranslucentTheme"></activity>
-
+            android:theme="@style/TranslucentTheme" />
         <activity
             android:name=".myAcativity.Person.setDataActivity"
-            android:theme="@style/MyDialog"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity android:name=".myAcativity.Pk.Pk_HuiZong" android:screenOrientation="portrait"/>
+        <activity android:name=".myAcativity.Person.Person_Badge" android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".myAcativity.WelcomeNew" android:screenOrientation="portrait" />
+        <activity android:name=".myAcativity.Person.Person_BadgeHas" android:screenOrientation="portrait"  android:theme="@style/MyDialog"/>
     </application>
 
 </manifest>

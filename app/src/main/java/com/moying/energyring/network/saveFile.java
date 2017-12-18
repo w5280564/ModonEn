@@ -30,8 +30,8 @@ public class saveFile {
 //        public static String BaseUrl = "http://120.26.218.68:1111/";
     public static String Post_Add_Url = "ec/v2/Post/Post_Add";
 
-    public static String AddPk_Url = "ec/v3/PK/Report_Add";
-    public static String Report_Status_Url = "ec/v2/Post/Report_Post_Add";
+    public static String AddPk_Url = "ec/v4/PK/Report_Add";
+    public static String Report_Status_Url = "ec/v3/Post/Report_Post_Add";
     public static String EditInfo_Url = "ec/v2/User/UserInfo_Edit";
 
 //    public static String CodeUrl = "ec/Account/PhoneCode_Get";
@@ -55,7 +55,7 @@ public class saveFile {
     public static String like_Url = "ec/PK/Likes_Add";
     public static String AddPkBg_Url = "ec/User/PKCoverImg_Upd";
     public static String Check_Url = "ec/CheckIn/CheckIn_IsExists";
-    public static String CheckAdd_Url = "ec/CheckIn/CheckIn_Add";
+    public static String CheckAdd_Url = "ec/v2/CheckIn/CheckIn_Add";
     public static String My_Friend_Url = "ec/User/My_Friend_List";
     public static String banner_Url = "ec/Banner/Banner_List";
     public static String seekUser_Url = "ec/User/Discover_UserInfo_List";
@@ -98,6 +98,10 @@ public class saveFile {
     public static String Likes_Url = "ec/user/Likes_Sta_Get";
     public static String GuidePerFirst_Url = "ec/user/FirstEnter_Get";
     public static String upd_guidePerFirst_Url = "ec/user/FirstEnter_Upd";
+    public static String reportImg_Url = "ec/pk/Today_Report_Img_List";
+    public static String haveNewRepost_Url = "ec/v3/post/Report_Post_IsHaveNewRepost";
+    public static String badge_List_Url = "ec/badge/User_Badge_List";
+    public static String user_hot_Url = "ec/user/User_Hot_List";
 
 
     private static SharedPreferences mShared = null;

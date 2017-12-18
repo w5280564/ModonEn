@@ -59,11 +59,12 @@ public class PkSuccess_CardPagerAdapter extends PagerAdapter implements PkSucces
         bind(mData.get(position), view);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
 
-        if (mBaseElevation == 0) {
-            mBaseElevation = cardView.getCardElevation();
-        }
 
-        cardView.setMaxCardElevation(mBaseElevation * MAX_ELEVATION_FACTOR);
+        //阴影效果
+//        if (mBaseElevation == 0) {
+//            mBaseElevation = cardView.getCardElevation();
+//        }
+//        cardView.setMaxCardElevation(mBaseElevation * MAX_ELEVATION_FACTOR);
         mViews.set(position, cardView);
         return view;
     }
@@ -76,7 +77,7 @@ public class PkSuccess_CardPagerAdapter extends PagerAdapter implements PkSucces
 
     private void bind(PkSuccess_CardItem item, View view) {
         RelativeLayout card_Rel = (RelativeLayout) view.findViewById(R.id.card_Rel);
-        StaticData.ViewScale(card_Rel,590,492);
+        StaticData.ViewScale(card_Rel,354,492);//413
         SimpleDraweeView content_simple = (SimpleDraweeView) view.findViewById(R.id.content_simple);
         TextView project_Txt = (TextView) view.findViewById(R.id.project_Txt);
         TextView lei_Txt = (TextView) view.findViewById(R.id.lei_Txt);

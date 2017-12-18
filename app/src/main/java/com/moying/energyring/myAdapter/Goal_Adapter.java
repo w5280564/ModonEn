@@ -63,7 +63,7 @@ public class Goal_Adapter extends RecyclerView.Adapter<Goal_Adapter.MyViewHolder
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
                     mOnItemClickLitener.onItemLongClick(holder.itemView, position);
-                    return false;
+                    return true;
                 }
             });
         }

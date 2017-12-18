@@ -148,7 +148,7 @@ public class Pk_Gui extends Activity {
                         int day = model.getData().get(tag).getBadgeDays();
                         int haveper = model.getData().get(tag).getHaveNum();
                         String url = model.getData().get(tag).getFilePath().toString();
-                        new badge_Popup(Pk_Gui.this, count_Txt, name,day , haveper, url);
+//                        new badge_Popup(Pk_Gui.this, count_Txt, name,day , haveper, url);
                     }
                 }
             });
@@ -172,13 +172,13 @@ public class Pk_Gui extends Activity {
             setContentView(contentView);
             showAtLocation(contentView, Gravity.CENTER, 0, 0);
 
-            SimpleDraweeView badge_Img = (SimpleDraweeView) contentView.findViewById(R.id.badge_Img);
-            TextView day_Txt = (TextView) contentView.findViewById(R.id.day_Txt);
-            TextView per_Txt = (TextView) contentView.findViewById(R.id.per_Txt);
-            StaticData.ViewScale(badge_Img, 214, 252);
-            badge_Img.setImageURI(url);
-            day_Txt.setText(name);
-            per_Txt.setText("已有" + per + "人获得");
+//            SimpleDraweeView badge_Img = (SimpleDraweeView) contentView.findViewById(R.id.badge_Img);
+//            TextView day_Txt = (TextView) contentView.findViewById(R.id.day_Txt);
+//            TextView per_Txt = (TextView) contentView.findViewById(R.id.per_Txt);
+//            StaticData.ViewScale(badge_Img, 214, 252);
+//            badge_Img.setImageURI(url);
+//            day_Txt.setText(name);
+//            per_Txt.setText("已有" + per + "人获得");
         }
     }
 

@@ -4,7 +4,7 @@
     android:layout_height="70dp"
     android:gravity="center"
     android:orientation="horizontal"
-    android:background="#ffffff">
+    android:background="#232121">
 
     <TextView
         android:id="@+id/tempValue"

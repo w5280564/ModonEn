@@ -82,7 +82,7 @@ public class Find_BannerDetail extends Activity {
 //        String shareTitle = "";
         String shareConStr = "我的能量源是" + saveFile.getShareData("InviteCode", Find_BannerDetail.this);
         String shareUrl = url;
-        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr);
+        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr,"");
         shareContent.setImgpath(imgpath);
 
         myWebView = new WebView(this);

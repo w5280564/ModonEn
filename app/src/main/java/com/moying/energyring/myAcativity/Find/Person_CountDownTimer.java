@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,22 +46,24 @@ public class Person_CountDownTimer extends Activity {
         setContentView(R.layout.activity_person__count_down_timer);
 
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
         cententtxt.setText("设置时间");
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
-        right_Btn.setTextColor(Color.parseColor("#000000"));
+        right_Btn.setTextColor(Color.parseColor("#ffffff"));
         right_Btn.setGravity(Gravity.CENTER);
         right_Btn.setText("保存");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
         StaticData.ViewScale(right_Btn, 100, 88);
 
         RelativeLayout week_Rel = (RelativeLayout) findViewById(R.id.week_Rel);
         week_Txt = (TextView) findViewById(R.id.week_Txt);
+        ImageView arrow_right = (ImageView) findViewById(R.id.arrow_right);
+        StaticData.ViewScale(arrow_right, 60, 60);
 
 
         if (saveFile.getShareData("timeTxt", Person_CountDownTimer.this).equals("false")) {

@@ -28,10 +28,11 @@ public class ShareContent implements Parcelable {
 
     public String imgpath;
 
-    public ShareContent(String url, String title, String content) {
+    public ShareContent(String url, String title, String content,String imgpath) {
         this.url = url;
         this.title = title;
         this.content = content;
+        this.imgpath = imgpath;
     }
 
     private ShareContent(Parcel in) {

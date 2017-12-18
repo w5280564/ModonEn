@@ -135,7 +135,7 @@ public class Person_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Perso
 
         if (oneData.getTagName() != null) {
             holder.hero_Lin.setVisibility(View.VISIBLE);
-            holder.hero_Txt.setText(oneData.getTagName());
+            holder.hero_Txt.setText(oneData.getTagName()+"");
         }
 
         holder.remove_Txt.setOnClickListener(new NoDoubleClickListener() {

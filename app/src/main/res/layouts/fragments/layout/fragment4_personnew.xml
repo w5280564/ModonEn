@@ -7,8 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#f3f3f3">
+        android:layout_height="match_parent">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/personBg_simple"
@@ -39,16 +38,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/personnew_nom_icon" />
 
-            <TextView
+            <com.moying.energyring.waylenBaseView.AutoScaleTextView
                 android:id="@+id/nommunrend_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@id/personnew_nom_icon"
-                android:layout_alignTop="@id/personnew_nom_icon"
+                android:layout_alignBottom="@id/personnew_nom_icon"
                 android:background="@drawable/calendar_item_red"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:textSize="10sp"
+                android:textSize="9sp"
                 android:visibility="invisible" />
         </RelativeLayout>
 
@@ -293,7 +292,7 @@
             android:layout_below="@id/usericon_Rel"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/popupwhite_bg"
+            android:background="@drawable/popupblack_bg"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -324,7 +323,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/person_neng_icon"
                     android:text="我的能量源"
-                    android:textColor="#7b7b7b"
+                    android:textColor="#e3e7eb"
                     android:textSize="12sp" />
 
                 <TextView
@@ -343,8 +342,57 @@
                     android:layout_height="1px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/person_neng_icon"
-                    android:background="#cfcfcf" />
+                    android:background="#343434" />
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/gui_Rel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/person_gui_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/person_relusicon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/person_gui_icon"
+                    android:text="积分攻略"
+                    android:textColor="#e3e7eb"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/gui_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/right_arrow_black" />
+
+                <TextView
+                    android:id="@+id/guirend_Txt"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/calendar_item_red"
+                    android:layout_toLeftOf="@id/gui_arrow"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/person_gui_icon"
+                    android:background="#343434" />
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/hui_Rel"
@@ -366,7 +414,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/personnew_hui_icon"
                     android:text="我的徽章"
-                    android:textColor="#7b7b7b"
+                    android:textColor="#e3e7eb"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -375,15 +423,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/right_arrow" />
+                    android:background="@drawable/right_arrow_black" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/personnew_hui_icon"
-                    android:background="#cfcfcf" />
+                    android:background="#343434" />
             </RelativeLayout>
 
 
@@ -408,7 +455,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/person_bang_icon"
                     android:text="排行榜"
-                    android:textColor="#7b7b7b"
+                    android:textColor="#e3e7eb"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -417,57 +464,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/right_arrow" />
+                    android:background="@drawable/right_arrow_black" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/person_bang_icon"
-                    android:background="#cfcfcf" />
+                    android:background="#343434" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/gui_Rel"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/person_gui_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_gui_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/person_gui_icon"
-                    android:text="积分规则"
-                    android:textColor="#7b7b7b"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/gui_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/right_arrow" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@id/person_gui_icon"
-                    android:background="#cfcfcf" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/che_Rel"
@@ -489,7 +495,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/person_che_icon"
                     android:text="积分商城"
-                    android:textColor="#7b7b7b"
+                    android:textColor="#e3e7eb"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -498,15 +504,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/right_arrow" />
+                    android:background="@drawable/right_arrow_black" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/person_che_icon"
-                    android:background="#cfcfcf" />
+                    android:background="#343434" />
 
             </RelativeLayout>
 
@@ -530,7 +535,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/person_line_icon"
                     android:text="数据曲线"
-                    android:textColor="#7b7b7b"
+                    android:textColor="#e3e7eb"
                     android:textSize="12sp" />
 
                 <ImageView
@@ -539,15 +544,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/right_arrow" />
+                    android:background="@drawable/right_arrow_black" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@id/person_line_icon"
-                    android:background="#cfcfcf" />
+                    android:background="#343434"
+                    android:visibility="gone"/>
 
 
             </RelativeLayout>

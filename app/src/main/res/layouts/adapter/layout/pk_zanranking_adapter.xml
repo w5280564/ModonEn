@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
         <TextView
             android:id="@+id/rank_Txt"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:textColor="#4d4d4d"
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -38,7 +38,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:textColor="#4d4d4d"
+            android:textColor="#f27b7b"
             android:textSize="14sp" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_toLeftOf="@id/all_Txt"
             android:layout_toRightOf="@id/head_simple"
             android:lines="1"
-            android:textColor="#4d4d4d"
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
     </RelativeLayout>
@@ -60,6 +60,6 @@
         android:layout_alignBottom="@id/zan_Rel"
         android:layout_alignLeft="@id/zan_Rel"
         android:layout_alignRight="@id/zan_Rel"
-        android:background="#ffecec" />
+        android:background="#343434" />
 
 </LinearLayout>

@@ -106,16 +106,27 @@ public class DayPkFragment_Adapter extends RecyclerView.Adapter<DayPkFragment_Ad
 //            holder.all_Txt.setText(oneData.getReportNum() + "个");
 //        }
         NumberFormat nf = new DecimalFormat("#.#");//# 0不显示
-        if (oneData.getReportNum() >= oneData.getLimit()) {
-            if (oneData.getReportNum() == 1) {
-                holder.all_Txt.setText(nf.format(oneData.getLimit()));
-            } else {
+        if (oneData.getLimit() == 1){
+            holder.all_Txt.setText(oneData.getReport_Days() + oneData.getProjectUnit());
+        }else{
+            if (oneData.getReportNum() >= oneData.getLimit()){
                 holder.all_Txt.setText(nf.format(oneData.getLimit()) + "+");
+            }else{
+                holder.all_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
             }
-        } else {
-            holder.all_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
         }
-        holder.zan_Txt.setText(oneData.getLikes() + "");
+
+
+//        if (oneData.getReportNum() >= oneData.getLimit()) {
+//            if (oneData.getReportNum() == 1) {
+//                holder.all_Txt.setText(nf.format(oneData.getLimit()));
+//            } else {
+//                holder.all_Txt.setText(nf.format(oneData.getLimit()) + "+");
+//            }
+//        } else {
+//            holder.all_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
+//        }
+//        holder.zan_Txt.setText(oneData.getLikes() + "");
 
 
 //        if (saveFile.getShareData("userId", context).equals(oneData.getUserID() + "")) {

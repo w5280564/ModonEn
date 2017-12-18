@@ -63,6 +63,8 @@ public class Pk_Guide extends Activity {
             guide_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+//                    Intent intent2 = new Intent();
+//                    setResult(1003,intent2);
                     finish();
                 }
             });

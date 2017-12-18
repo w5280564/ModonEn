@@ -45,8 +45,8 @@ import java.util.List;
  */
 public class WheelView extends View {
 
-	/** Top and bottom shadows colors */
-	private static final int[] SHADOWS_COLORS = new int[] { 0xeeffffff, 0xeaffffff, 0x33ffffff };
+	/** Top and bottom shadows colors 背景颜色*/
+	private static final int[] SHADOWS_COLORS = new int[] {232121, 232121, 232121 };
 
 	/** Top and bottom items offset (to hide that) */
 	private static final int ITEM_OFFSET_PERCENT = 10;
@@ -459,7 +459,7 @@ public class WheelView extends View {
 	 */
 	private void initResourcesIfNecessary() {
 		if (centerDrawable == null) {
-			centerDrawable = getContext().getResources().getDrawable(R.drawable.wheel_val);
+			centerDrawable = getContext().getResources().getDrawable(R.drawable.wheel_val);//选中的背景框与颜色
 		}
 
 		if (topShadow == null) {
@@ -470,7 +470,7 @@ public class WheelView extends View {
 			bottomShadow = new GradientDrawable(Orientation.BOTTOM_TOP, SHADOWS_COLORS);
 		}
 
-		setBackgroundResource(R.drawable.wheel_bg);
+		setBackgroundResource(R.drawable.wheel_bg); //背景色
 	}
 
 	/**

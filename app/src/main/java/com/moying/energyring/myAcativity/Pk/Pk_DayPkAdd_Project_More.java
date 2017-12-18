@@ -44,19 +44,20 @@ public class Pk_DayPkAdd_Project_More extends Activity {
         mam.pushOneActivity(this);//把当前activity压入了栈中
 
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#909090"));
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("项目");
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
+        right_Btn.setTextColor(Color.parseColor("#ffffff"));
         right_Btn.setText("完成");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
         StaticData.ViewScale(right_Btn, 100, 80);
 
@@ -155,6 +156,43 @@ public class Pk_DayPkAdd_Project_More extends Activity {
             public void onItemLongClick(View view, int position) {
             }
         });
+
+        //为RecycleView绑定触摸事件
+//        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+//            @Override
+//            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+//                //首先回调的方法 返回int表示是否监听该方向
+//                int dragFlags = ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT;//拖拽
+//                int swipeFlags = 0;//侧滑删除
+//                return makeMovementFlags(dragFlags,swipeFlags);
+////                int dragFlags = ItemTouchHelper.UP|ItemTouchHelper.DOWN;//拖拽
+////                int swipeFlags = ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT;//侧滑删除
+////                return makeMovementFlags(dragFlags,swipeFlags);
+//            }
+//
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                //滑动事件
+//                Collections.swap(baseModel.getData(),viewHolder.getAdapterPosition(),target.getAdapterPosition());
+//                mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(),target.getAdapterPosition());
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                //侧滑事件
+//                baseModel.getData().remove(viewHolder.getAdapterPosition());
+//                mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+//            }
+//
+//            @Override
+//            public boolean isLongPressDragEnabled() {
+//                //是否可拖拽
+//                return true;
+//            }
+//        });
+//        helper.attachToRecyclerView(All_XRecy);
+
     }
 
     //删除数据

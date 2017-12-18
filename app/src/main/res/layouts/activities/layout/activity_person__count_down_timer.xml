@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_person__count_down_timer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="#232121">
 
     <include
         android:id="@+id/title_Include"
@@ -28,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:background="#EFEFF4"
+            android:background="#232121"
             android:layout_marginLeft="10dp"/>
 
         <View
@@ -49,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:background="#EFEFF4"
+        android:background="#2b2a2a"
         android:paddingLeft="30dp"
         android:paddingRight="20dp"
         android:layout_alignParentBottom="true">
@@ -59,16 +58,16 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="重复"
-            android:textColor="#000000"
+            android:textColor="#989797"
             android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/arrow_right"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
+            android:src="@drawable/right_arrow_black" />
 
         <TextView
             android:id="@+id/week_Txt"
@@ -78,7 +77,7 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/arrow_right"
             android:text="   "
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
     </RelativeLayout>
 
 

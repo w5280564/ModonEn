@@ -74,6 +74,7 @@ public class PersonMyCenter extends AppCompatActivity {
 //        setTheme(R.style.AppThemeprice);
 //        setContentView(R.layout.fragment1_energy);
         setContentView(R.layout.activity_person_my_center);
+//        setContentView(R.layout.activity_person_my_center_black);
 
         MyActivityManager mam = MyActivityManager.getInstance();
         mam.pushOneActivity(this);//把当前activity压入了栈中
@@ -89,10 +90,12 @@ public class PersonMyCenter extends AppCompatActivity {
     public List<String> userArr;
     public List<Fragment> fragments;
     public MyFragmentPagerAdapter myAdapter;
-    private int iconImg[] = {R.drawable.person_selector_goal,R.drawable.person_selector_daypk,  R.drawable.person_selector_pkhistory,R.drawable.person_selector_log };
+    private int iconImg[] = {R.drawable.person_selector_goal, R.drawable.person_selector_daypk, R.drawable.person_selector_pkhistory, R.drawable.person_selector_log};
+    private String iconString[] = {"公众承诺", "每日PK", "PK记录", "成长日志",};
 
     public void initView() {
         tablayout = (TabLayout) findViewById(R.id.ac_tab_layout);
+//        StaticData.ViewScale(tablayout, 0, 100);
         StaticData.ViewScale(tablayout, 0, 200);
         Slideviewpager = (ViewPager) findViewById(R.id.Slideviewpager);
         final Button return_Btn = (Button) findViewById(R.id.return_Btn);
@@ -110,7 +113,7 @@ public class PersonMyCenter extends AppCompatActivity {
         atten_Txt = (TextView) findViewById(R.id.atten_Txt);
         fans_Txt = (TextView) findViewById(R.id.fans_Txt);
         intr_Txt = (TextView) findViewById(R.id.intr_Txt);
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(person_bg_simple, 0, 440);
         StaticData.ViewScale(user_simple, 180, 180);
         StaticData.ViewScale(gender_img, 24, 24);
@@ -123,6 +126,10 @@ public class PersonMyCenter extends AppCompatActivity {
         fans_Lin.setOnClickListener(new fans_Lin());
         rete_Txt.setOnClickListener(new rete_Txt());
 
+        final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        StaticData.ViewScale(mToolbar, 0, 188);
+        setSupportActionBar(mToolbar);
+
         AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.mAppBarLayout);
 
         mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
@@ -131,11 +138,13 @@ public class PersonMyCenter extends AppCompatActivity {
                 Log.d("STATE", state.name());
                 if (state == State.EXPANDED) {
                     //展开状态
+//                    mToolbar.setBackgroundColor(Color.parseColor("#00232121"));
                     title_Txt.setVisibility(View.GONE);
                     rete_Txt.setVisibility(View.GONE);
-                    return_Btn.setBackgroundResource(R.drawable.return_icon);
+                    return_Btn.setBackgroundResource(R.drawable.return_black);
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
+//                    mToolbar.setBackgroundColor(Color.parseColor("#232121"));
                     title_Txt.setVisibility(View.VISIBLE);
                     rete_Txt.setVisibility(View.GONE);
                     return_Btn.setBackgroundResource(R.drawable.return_black);
@@ -145,8 +154,7 @@ public class PersonMyCenter extends AppCompatActivity {
             }
         });
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+
 
     }
 
@@ -217,6 +225,7 @@ public class PersonMyCenter extends AppCompatActivity {
 
 
     private String userId = "0";
+
     private void initAddData() {
         UserData(PersonMyCenter.this, saveFile.BaseUrl + saveFile.UserInfo_Url + "?UserID=" + userId);
     }
@@ -257,6 +266,10 @@ public class PersonMyCenter extends AppCompatActivity {
                 StaticData.ViewScale(tab_Lin, 260, 140);
                 ImageView tab_Img = (ImageView) tab.getCustomView().findViewById(R.id.tab_Img);
                 StaticData.ViewScale(tab_Img, 100, 112);
+//                TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
+//                tab_Name.setTextColor(Color.parseColor("#ffd800"));
+//                ImageView tab_Img = (ImageView) tab.getCustomView().findViewById(R.id.tab_Img);
+//                tab_Img.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -265,6 +278,10 @@ public class PersonMyCenter extends AppCompatActivity {
                 StaticData.ViewScale(tab_Lin, 200, 110);
                 ImageView tab_Img = (ImageView) tab.getCustomView().findViewById(R.id.tab_Img);
                 StaticData.ViewScale(tab_Img, 80, 90);
+//                TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
+//                tab_Name.setTextColor(Color.parseColor("#b3000000"));
+//                ImageView tab_Img = (ImageView) tab.getCustomView().findViewById(R.id.tab_Img);
+//                tab_Img.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -308,7 +325,7 @@ public class PersonMyCenter extends AppCompatActivity {
 //            TypeLin.setSelected(true);
             Slideviewpager.setCurrentItem(Integer.parseInt(tabType), true);
         } else {
-            Slideviewpager.setCurrentItem(1,true);
+            Slideviewpager.setCurrentItem(1, true);
 //            TabLayout.Tab tabnow = tablayout.getTabAt(3);
 //            LinearLayout TypeLin = (LinearLayout) tabnow.getCustomView().findViewById(R.id.tab_Lin);
 //            StaticData.ViewScale(TypeLin, 260, 140);
@@ -406,6 +423,13 @@ public class PersonMyCenter extends AppCompatActivity {
         ImageView tab_Img;
 
         public View getTabView(int position) {
+//            View v = LayoutInflater.from(PersonMyCenter.this).inflate(R.layout.person_custom_tab_black, null);
+//            RelativeLayout tab_Rel = (RelativeLayout) v.findViewById(R.id.tab_Rel);
+//            StaticData.ViewScale(tab_Rel, 187, 100);
+//            tab_Img = (ImageView) v.findViewById(R.id.tab_Img);
+//            StaticData.ViewScale(tab_Img, 175, 3);
+//            TextView tab_Name = (TextView) v.findViewById(R.id.tab_Name);
+//            tab_Name.setText(iconString[position]);
             View v = LayoutInflater.from(PersonMyCenter.this).inflate(R.layout.person_custom_tab, null);
             LinearLayout tab_Lin = (LinearLayout) v.findViewById(R.id.tab_Lin);
             StaticData.ViewScale(tab_Lin, 200, 110);
@@ -634,7 +658,6 @@ public class PersonMyCenter extends AppCompatActivity {
             }
         });
     }
-
 
 
     @Override

@@ -132,21 +132,21 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
     private void initTitle() {
         View title_Include = findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+//        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundColor(Color.parseColor("#00000000"));
         return_Btn.setVisibility(View.VISIBLE);
-        return_Btn.setTextColor(Color.parseColor("#000000"));
+        return_Btn.setTextColor(Color.parseColor("#ffffff"));
         return_Btn.setText("取消");
         TextView cententTxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententTxt.setTextColor(Color.parseColor("#000000"));
+        cententTxt.setTextColor(Color.parseColor("#ffffff"));
         cententTxt.setText("成长日志");
         right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
-        right_Btn.setTextColor(Color.parseColor("#000000"));
+        right_Btn.setTextColor(Color.parseColor("#ffffff"));
         right_Btn.setText("发布");
         StaticData.ViewScale(return_Btn, 100, 100);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -613,6 +613,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
             @Override
             public void onError(Throwable throwable, boolean b) {
+
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
                     Intent intent = new Intent(context, LoginRegister.class);
@@ -642,7 +643,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", this)) * 10);
             itemParams.setMargins(pad, 0, pad, 0);
             TextView tagTxt = new TextView(this);
-            tagTxt.setTextColor(Color.parseColor("#b9b9b9"));
+            tagTxt.setTextColor(Color.parseColor("#989797"));
             tagTxt.setText(tagModel.get(i).getTagName());
             tagTxt.setLayoutParams(itemParams);
             tagTxt.setTag(i);
@@ -653,12 +654,12 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 public void onClick(View view) {
                     int tag = (Integer) view.getTag();
                     if ( TagTxtArr.get(tag).isSelected()) {
-                        TagTxtArr.get(tag).setTextColor(Color.parseColor("#b9b9b9"));
+                        TagTxtArr.get(tag).setTextColor(Color.parseColor("#989797"));
                         TagTxtArr.get(tag).setSelected(false);
                         TagID = 0;
                     } else {
                         for (int j = 0; j < size; j++) {
-                            TagTxtArr.get(j).setTextColor(Color.parseColor("#b9b9b9"));
+                            TagTxtArr.get(j).setTextColor(Color.parseColor("#989797"));
                             TagTxtArr.get(j).setSelected(false);
                         }
                         TagTxtArr.get(tag).setTextColor(Color.parseColor("#F3DB23"));

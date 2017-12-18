@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,9 +40,12 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.gson.Gson;
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.AddPhoto_Model;
-import com.moying.energyring.Model.PostAndPk_Add;
+import com.moying.energyring.Model.Base_Model;
+import com.moying.energyring.Model.JiFenAndBadge_Model;
 import com.moying.energyring.Model.ProjectModel;
+import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
@@ -75,7 +79,10 @@ import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.sharesdk.wechat.moments.WechatMoments;
 import me.shaohui.advancedluban.Luban;
+import me.shaohui.advancedluban.OnCompressListener;
 import me.shaohui.advancedluban.OnMultiCompressListener;
+
+import static com.moying.energyring.myAcativity.Person.PersonMyCenter.REQUEST_CODE_IMAGE_PICK_PERSONHEAD;
 
 public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener, Handler.Callback {
     RelativeLayout project_Rel;
@@ -94,6 +101,9 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     private ImageView share_friend, share_mom, share_sina, share_qq, share_qzone;
     private List<ProjectModel> projectModel;
     private LinearLayout project_Lin;
+    private SimpleDraweeView paadd_Simple;
+    EditText pkadd_Edit;
+    ImageView count_Img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +115,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         RelativeLayout title_Rel = (RelativeLayout) findViewById(R.id.title_Rel);
         Button return_Btn = (Button) findViewById(R.id.return_Btn);
         centent_Txt = (TextView) findViewById(R.id.centent_Txt);
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Rel, 0, 88);
 
 //        ImageView bg_img = (ImageView) findViewById(R.id.bg_img);
@@ -145,12 +155,23 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         share_qzone = (ImageView) findViewById(R.id.share_qzone);
         project_Lin = (LinearLayout) findViewById(R.id.project_Lin);
 
+        RelativeLayout pkadd_Rel = (RelativeLayout) findViewById(R.id.pkadd_Rel);
+        pkadd_Edit = (EditText) findViewById(R.id.pkadd_Edit);
+        paadd_Simple = (SimpleDraweeView) findViewById(R.id.paadd_Simple);
+        RelativeLayout count_Rel = (RelativeLayout) findViewById(R.id.count_Rel);
+        int padRight = (int) (Float.parseFloat(saveFile.getShareData("scale", this)) * 30);
+        count_Rel.setPadding(0, 0, padRight, 0);
+        count_Img = (ImageView) findViewById(R.id.count_Img);
+
         StaticData.ViewScale(share_Lin, 0, 90);
         StaticData.ViewScale(share_friend, 72, 72);
         StaticData.ViewScale(share_mom, 72, 72);
         StaticData.ViewScale(share_sina, 72, 72);
         StaticData.ViewScale(share_qq, 72, 72);
         StaticData.ViewScale(share_qzone, 72, 72);
+        StaticData.ViewScale(pkadd_Rel, 590, 0);
+        StaticData.ViewScale(paadd_Simple, 60, 60);
+        StaticData.ViewScale(count_Img, 244, 96);
 
         return_Btn.setOnClickListener(new return_Btn());
         add_Btn.setOnClickListener(new add_Btn());
@@ -164,7 +185,10 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         share_sina.setOnClickListener(new share_sina());
         share_qq.setOnClickListener(new share_qq());
         share_qzone.setOnClickListener(new share_qzone());
-
+        paadd_Simple.setOnClickListener(new paadd_Simple());
+        paadd_Simple.setOnLongClickListener(new paadd_SimpleOnLong());
+        setImgUri();
+        guideFristData(Pk_DayPkAdd_More.this, saveFile.BaseUrl + saveFile.GuidePerFirst_Url);//展示功能提醒页
 
         photoPaths = new ArrayList<>();
         setShareFlag();
@@ -186,6 +210,12 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         MobclickAgent.onPause(this);
     }
 
+    //默认图片
+    private void setImgUri() {
+        imgUri = Uri.parse("res:///" + R.drawable.pkadd_icon);
+        paadd_Simple.setImageURI(imgUri);
+    }
+
 
     private class return_Btn implements View.OnClickListener {
         @Override
@@ -194,6 +224,22 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             intent.putExtra("guideId", "0");
             setResult(RESULT_OK, intent);
             finish();
+        }
+    }
+
+    private class paadd_Simple implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intentimagepic = new Intent(Pk_DayPkAdd_More.this, ImagePickerActivity.class);
+            startActivityForResult(intentimagepic, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+        }
+    }
+
+    private class paadd_SimpleOnLong implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(View view) {
+            setImgUri();
+            return true;
         }
     }
 
@@ -247,28 +293,124 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 //                Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
 //                return;
 //            }
+//            if (StaticData.isSpace(pkadd_Edit.getText().toString())) {
+//                Toast.makeText(Pk_DayPkAdd_More.this, "请填写心得", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
             mu_Btn.setEnabled(false);
-            for (int i = 0; i < projectModel.size(); i++) {
-                if (StaticData.isSpace(projectModel.get(i).getReportNum())) {
-                    mu_Btn.setEnabled(true);
-                    Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
+//            for (int i = 0; i < projectModel.size(); i++) {
+//                if (StaticData.isSpace(projectModel.get(i).getReportNum())) {
+//                    mu_Btn.setEnabled(true);
+//                    Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//            }
+//
+//            MobclickAgent.onEvent(Pk_DayPkAdd_More.this, "releasePk");//统计页签
+//            if (photoPaths.size() == 0) {
+//                AddPk_Data(Pk_DayPkAdd_More.this, saveFile.BaseUrl + saveFile.AddPk_Url, "");
+//            } else {
+//                mFileList = new ArrayList<>();
+//                for (String photo : photoPaths) {
+//                    mFileList.add(new File(photo));
+//                }
+//                compressMultiListener(Luban.FIRST_GEAR);//THIRD_GEAR普通压缩,FIRST_GEAR快速压缩
+//
+//            }
 
-            MobclickAgent.onEvent(Pk_DayPkAdd_More.this, "releasePk");//统计页签
-            if (photoPaths.size() == 0) {
+
+            if (TextUtils.isEmpty(path)) {
                 AddPk_Data(Pk_DayPkAdd_More.this, saveFile.BaseUrl + saveFile.AddPk_Url, "");
             } else {
-                mFileList = new ArrayList<>();
-                for (String photo : photoPaths) {
-                    mFileList.add(new File(photo));
-                }
-                compressMultiListener(Luban.FIRST_GEAR);//THIRD_GEAR普通压缩,FIRST_GEAR快速压缩
-
+                compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
             }
         }
     }
+
+
+    public void guideFristData(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    isFristSee_Model isFristModel = new Gson().fromJson(resultString, isFristSee_Model.class);
+                    if (isFristModel.isIsSuccess()) {
+                        if (!isFristModel.getData().isIs_FirstPK_Pic()) {
+                            count_Img.setVisibility(View.VISIBLE);
+                            updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPK_Pic");//展示功能提醒页
+                        } else {
+                            count_Img.setVisibility(View.GONE);
+                        }
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+    public void updguidePer_Data(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    Base_Model Model = new Gson().fromJson(resultString, Base_Model.class);
+                    if (Model.isIsSuccess()) {
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
 
     //压缩图片
     private List<File> mFileList;
@@ -404,8 +546,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     }
 
     //按index 对应分享
-    public void
-    isShare(int pos) {
+    public void isShare(int pos) {
         if (pos == 0) {
             shareWechatQuan();
         } else if (pos == 1) {
@@ -524,6 +665,8 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 //        Toast.makeText(this, "qq空间分享成功", Toast.LENGTH_SHORT).show();
     }
 
+    Uri imgUri;
+    String path;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -538,6 +681,15 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 List<String> pathList = data.getStringArrayListExtra(EXTRA_DATA);
                 imgFlow(photoLayout, pathList);
             }
+        } else if (resultCode == Activity.RESULT_OK) {
+            path = data.getStringExtra("path");
+            imgUri = Uri.parse("file:///" + path);
+            paadd_Simple.setImageURI(imgUri);
+//            if (!TextUtils.isEmpty(path)) {
+//                if (requestCode == REQUEST_CODE_IMAGE_PICK_PERSONHEAD) {
+//                    compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+//                }
+//            }
         }
 
     }
@@ -560,7 +712,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             TextView project_Name = (TextView) myview.findViewById(R.id.project_Name);
             final TextView project_Unit = (TextView) myview.findViewById(R.id.project_Unit);
             project_Edit = (EditText) myview.findViewById(R.id.project_Edit);
-            StaticData.ViewScale(project_Simple,80,80);
+            StaticData.ViewScale(project_Simple, 80, 80);
 
             if (myBean.get(i).getName().equals("健康走")) {
 //                myBean.remove(i);
@@ -568,14 +720,14 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 continue;
 //                project_Edit.setEnabled(false);
 //                myBean.get(i).setReportNum(saveFile.getShareData("myStep", this) + "");
-            }else if (myBean.get(i).getName().equals("戒网络小说")||myBean.get(i).getName().equals("戒游戏")){
+            } else if (myBean.get(i).getName().equals("戒网络小说") || myBean.get(i).getName().equals("戒游戏")|| myBean.get(i).getName().equals("早起")) {
                 project_Edit.setEnabled(false);
                 myBean.get(i).setReportNum("1");
             }
             project_Name.setText(myBean.get(i).getName() + ":");
             project_Unit.setText(myBean.get(i).getUnit());
             project_Edit.setText(myBean.get(i).getReportNum() + "");
-            if (myBean.get(i).getImgUrl()!= null) {
+            if (myBean.get(i).getImgUrl() != null) {
                 Uri simUri = Uri.parse(String.valueOf(myBean.get(i).getImgUrl()));
                 project_Simple.setImageURI(simUri);
             }
@@ -584,12 +736,14 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 }
+
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 }
+
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    int tag = (Integer)project_Unit.getTag();
+                    int tag = (Integer) project_Unit.getTag();
                     myBean.get(tag).setReportNum(editable.toString());
 //                    saveFile.putClass(Pk_DayPkAdd_More.this, "moreModel", projectModel);
                     mu_Btn.setBackgroundResource(R.drawable.allperson_btn);
@@ -601,6 +755,88 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             myFlow.addView(myview);
         }
 
+    }
+
+    //压缩图片
+    private void compressSingleListener(File file, int gear, final int type) {
+//        if (file.isEmpty()) {
+//            return;
+//        }
+
+        Luban.compress(file, getFilesDir())
+                .putGear(gear)
+                .launch(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+//                        Log.i(TAG, "start");
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        Log.i("TAG", file.getAbsolutePath());
+//                        mImageViews.get(0).setImageURI(Uri.fromFile(file));
+//                        Log.e("图片尺寸1111111111111111111",file.length() / 1024 + "k");
+                        Uri imgUri = Uri.fromFile(file);
+                        paadd_Simple.setImageURI(imgUri);
+//                            addSimplePath(user_simple, path);
+                        upload_PhotoData(type, Pk_DayPkAdd_More.this, saveFile.BaseUrl + saveFile.uploadPhoto_Url, file);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
+
+    //上传图片
+    public void upload_PhotoData(final int type, final Context context, String baseUrl, final File file) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        params.setMultipart(true);//表单格式
+        params.setCancelFast(true);//支持断点续传
+        try {
+            FileInputStream fileStream = new FileInputStream(file);
+            params.addBodyParameter("file", fileStream, null, file.getName());
+            //最后fileName InputStream参数获取不到文件名, 最好设置, 除非服务端不关心这个参数.
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                AddPhoto_Model model = new Gson().fromJson(resultString, AddPhoto_Model.class);
+                if (model.isIsSuccess()) {
+                    String files = model.getData().toString().replace("[", "").replace("]", "");
+                    if (type == REQUEST_CODE_IMAGE_PICK_PERSONHEAD) {
+//                        //上传头像ID
+                        AddPk_Data(Pk_DayPkAdd_More.this, saveFile.BaseUrl + saveFile.AddPk_Url, files);
+//                        AddPersonBg_AndHead(context, saveFile.BaseUrl + saveFile.PersonHead_Url + "?FileID=" + files, files);
+                    }
+                } else {
+//                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
     }
 
 
@@ -757,6 +993,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             }
             allObj.put("Report_Items", jsonArray);
             allObj.put("FileIDs", files);
+            allObj.put("PostContent", pkadd_Edit.getText().toString());
             boolean sync = false;
             if (add_energy_Img.isChecked()) {
                 sync = true;
@@ -773,24 +1010,39 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             @Override
             public void onSuccess(String resultString) {
                 mu_Btn.setEnabled(true);
-                PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
+                JiFenAndBadge_Model model = new Gson().fromJson(resultString, JiFenAndBadge_Model.class);
                 if (model.isIsSuccess()) {
                     Toast.makeText(Pk_DayPkAdd_More.this, "发布成功", Toast.LENGTH_SHORT).show();
 
-                    String sbf = centent_Txt.getText().toString() + count_Edit.getText().toString() + unit_Txt.getText().toString() + "，";
-//                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
-                    shareTitle = "我今天" + sbf + "(根据实际的汇报内容)，加入能量圈，和我一起PK吧！";
-//                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode",Pk_DayPkAdd.this);
-                    shareContent = "";
-                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData().split("\\*")[0];
+//                    String sbf = centent_Txt.getText().toString() + count_Edit.getText().toString() + unit_Txt.getText().toString() + "，";
+////                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
+//                    shareTitle = "我今天" + sbf + "(根据实际的汇报内容)，加入能量圈，和我一起PK吧！";
+////                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode",Pk_DayPkAdd.this);
+//                    shareContent = "";
+//                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData().split("\\*")[0];
+//
+//                    String data = model.getData();
+////                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
+//                    ArticleCount = Integer.parseInt(data.split("\\*")[1]);
+//                    isShare(shareIndex());//同步分享
 
-                    String data = model.getData();
-//                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
-                    ArticleCount = Integer.parseInt(data.split("\\*")[1]);
-                    isShare(shareIndex());//同步分享
+//                    ArticleCount = model.getData().getIntegral();
+//                    if (ArticleCount != 0) {
+//                        Intent intent = new Intent(Pk_DayPkAdd_More.this, JiFenActivity.class);
+//                        intent.putExtra("jifen", ArticleCount);
+//                        startActivity(intent);
+//                    }
+                    Intent intent = new Intent();
+                    intent.putExtra("guideId", "1");
+//                    intent.putExtra("jiFenmodel",model);
+                    setResult(RESULT_OK, intent);
+                    finish();
 
-                    Intent intent = new Intent(Pk_DayPkAdd_More.this,Pk_AddSuccess.class);
-                    startActivity(intent);
+
+                    Intent intentsucc = new Intent(Pk_DayPkAdd_More.this, Pk_AddSuccess.class);
+                    intentsucc.putExtra("jiFenmodel", model);
+                    startActivity(intentsucc);
+
 
                 } else {
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();

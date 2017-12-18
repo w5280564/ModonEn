@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_person__play"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3">
+    android:background="#232121">
 
     <include
         android:id="@+id/title_Include"
@@ -19,7 +18,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/title_Include"
         android:layout_marginTop="30dp"
-        android:background="#ffffff"
+        android:background="#2b2a2a"
         android:paddingLeft="30dp"
         android:paddingRight="20dp">
 
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="功能开启"
-            android:textColor="#000000"
+            android:textColor="#95a0ab"
             android:textSize="18sp" />
 
         <com.kyleduo.switchbutton.SwitchButton
@@ -53,9 +52,8 @@
         android:layout_height="50dp"
         android:layout_below="@id/stop_Rel"
         android:layout_marginTop="30dp"
-        android:background="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="20dp">
+        android:background="#2b2a2a"
+        android:paddingLeft="30dp">
 
 
             <TextView
@@ -64,17 +62,17 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="时间"
-                android:textColor="#000000"
+                android:textColor="#95a0ab"
                 android:textSize="18sp" />
 
 
         <ImageView
             android:id="@+id/play_Img"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
+            android:src="@drawable/right_arrow_black" />
 
         <TextView
             android:id="@+id/clock_Time"
@@ -85,7 +83,7 @@
             android:layout_toLeftOf="@id/play_Img"
             android:gravity="right"
             android:text=""
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:textSize="10sp" />
 
     </RelativeLayout>
@@ -97,25 +95,24 @@
         android:layout_height="50dp"
         android:layout_below="@id/play_Rel"
         android:layout_marginTop="30dp"
-        android:background="#ffffff"
-        android:paddingLeft="30dp"
-        android:paddingRight="20dp">
+        android:background="#2b2a2a"
+        android:paddingLeft="30dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="电台"
-            android:textColor="#000000"
+            android:textColor="#95a0ab"
             android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/arrow_right"
-            android:layout_width="10dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/right_arrow" />
+            android:src="@drawable/right_arrow_black" />
 
         <TextView
             android:id="@+id/videoTxt"
@@ -125,7 +122,7 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/arrow_right"
             android:text=""
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
     </RelativeLayout>
 
 

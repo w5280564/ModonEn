@@ -11,12 +11,13 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+            <!--android:background="@drawable/round_rectangle_pink"-->
         <LinearLayout
             android:id="@+id/tab_Lin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_rectangle_pink"
             android:gravity="center"
+            android:background="#2b2a2a"
             android:orientation="horizontal">
 
             <ImageView

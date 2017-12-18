@@ -12,7 +12,7 @@ public class DayPkList_Model {
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : [{"ProjectUnit":"公里","NickName":"系统管理员","ProfilePicture":"http://q.qlogo.cn/qqapp/1104987324/2C9D455E5C2BF6FF5B6CEF5D4C34F3CA/100","Likes":2,"Is_Like":false,"PKCoverImg":"http://120.26.218.68:1111/Uploads/2017-07-04/5a240523-b863-44ae-b95e-326992be2c0c.jpg","Ranking":1,"Limit":5,"ReportID":49961,"UserID":1384,"ProjectID":2,"CreateTime":null,"ReportFre":0,"ReportNum":2.2,"FileIDs":null,"Is_Sync":false}]
+     * Data : [{"ProjectUnit":"个","ProjectName":null,"NickName":"摩英 王丰","ProfilePicture":"http://120.26.218.68:8038/Attachment/6652_66522066.jpg","Likes":1,"Is_Like":false,"PKCoverImg":"http://120.26.218.68:1111/Uploads/2017-10-10/84b252c9-6f15-49d4-8241-19d6edac544e.jpg","Ranking":1,"Limit":300,"Report_Days":0,"FilePath_List":null,"ReportID":43,"UserID":2066,"ProjectID":1,"CreateTime":null,"ReportFre":0,"ReportNum":10,"FileIDs":null,"Is_Sync":false}]
      */
 
     private boolean IsSuccess;
@@ -54,25 +54,29 @@ public class DayPkList_Model {
 
     public static class DataBean {
         /**
-         * ProjectUnit : 公里
-         * NickName : 系统管理员
-         * ProfilePicture : http://q.qlogo.cn/qqapp/1104987324/2C9D455E5C2BF6FF5B6CEF5D4C34F3CA/100
-         * Likes : 2
+         * ProjectUnit : 个
+         * ProjectName : null
+         * NickName : 摩英 王丰
+         * ProfilePicture : http://120.26.218.68:8038/Attachment/6652_66522066.jpg
+         * Likes : 1
          * Is_Like : false
-         * PKCoverImg : http://120.26.218.68:1111/Uploads/2017-07-04/5a240523-b863-44ae-b95e-326992be2c0c.jpg
+         * PKCoverImg : http://120.26.218.68:1111/Uploads/2017-10-10/84b252c9-6f15-49d4-8241-19d6edac544e.jpg
          * Ranking : 1
-         * Limit : 5.0
-         * ReportID : 49961
-         * UserID : 1384
-         * ProjectID : 2
+         * Limit : 300.0
+         * Report_Days : 0
+         * FilePath_List : null
+         * ReportID : 43
+         * UserID : 2066
+         * ProjectID : 1
          * CreateTime : null
          * ReportFre : 0
-         * ReportNum : 2.2
+         * ReportNum : 10.0
          * FileIDs : null
          * Is_Sync : false
          */
 
         private String ProjectUnit;
+        private Object ProjectName;
         private String NickName;
         private String ProfilePicture;
         private int Likes;
@@ -80,6 +84,8 @@ public class DayPkList_Model {
         private String PKCoverImg;
         private int Ranking;
         private double Limit;
+        private int Report_Days;
+        private Object FilePath_List;
         private int ReportID;
         private int UserID;
         private int ProjectID;
@@ -95,6 +101,14 @@ public class DayPkList_Model {
 
         public void setProjectUnit(String ProjectUnit) {
             this.ProjectUnit = ProjectUnit;
+        }
+
+        public Object getProjectName() {
+            return ProjectName;
+        }
+
+        public void setProjectName(Object ProjectName) {
+            this.ProjectName = ProjectName;
         }
 
         public String getNickName() {
@@ -151,6 +165,22 @@ public class DayPkList_Model {
 
         public void setLimit(double Limit) {
             this.Limit = Limit;
+        }
+
+        public int getReport_Days() {
+            return Report_Days;
+        }
+
+        public void setReport_Days(int Report_Days) {
+            this.Report_Days = Report_Days;
+        }
+
+        public Object getFilePath_List() {
+            return FilePath_List;
+        }
+
+        public void setFilePath_List(Object FilePath_List) {
+            this.FilePath_List = FilePath_List;
         }
 
         public int getReportID() {

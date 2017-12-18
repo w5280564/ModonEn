@@ -12,7 +12,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblacktwo_bg">
 
 
         <LinearLayout
@@ -28,14 +28,13 @@
                 android:id="@+id/my_simpleview"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                fresco:roundAsCircle="true"
-                />
+                fresco:roundAsCircle="true" />
 
             <TextView
                 android:id="@+id/name_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#F24d40"
+                android:textColor="#f24d4c"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -46,8 +45,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/my_Lin"
-            android:text="腻害"
-            android:textColor="#9f9f9f"
+            android:text=""
+            android:textColor="#989797"
             android:textSize="10sp" />
 
         <TextView
@@ -57,7 +56,7 @@
             android:layout_alignLeft="@id/time_Txt"
             android:layout_centerVertical="true"
             android:text="目标时长"
-            android:textColor="#9f9f9f"
+            android:textColor="#989797"
             android:textSize="12sp" />
 
         <TextView
@@ -67,8 +66,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/all_myTxt"
-            android:text="腻害"
-            android:textColor="#000000"
+            android:text=""
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
         <TextView
@@ -79,7 +78,7 @@
             android:layout_below="@id/all_myTxt"
             android:layout_centerVertical="true"
             android:text="每日目标"
-            android:textColor="#9f9f9f"
+            android:textColor="#989797"
             android:textSize="12sp" />
 
         <TextView
@@ -90,8 +89,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/oneday_myTxt"
-            android:text="腻害"
-            android:textColor="#000000"
+            android:text=""
+            android:textColor="#ffffff"
             android:textSize="14sp" />
 
         <com.facebook.drawee.view.SimpleDraweeView

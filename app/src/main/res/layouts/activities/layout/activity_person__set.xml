@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -19,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:background="#ffffff"
+        android:background="#2b2a2a"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -58,7 +57,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/personset_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -98,7 +97,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/phone_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
 
@@ -137,7 +136,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/ideal_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -170,14 +169,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:textColor="#ffffff"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/cache_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -221,7 +221,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/mes_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#cfcfcf" />
+                android:background="#343434" />
         </RelativeLayout>
 
 

@@ -23,7 +23,7 @@
         sothree:umanoScrollableView="@+id/list"
         sothree:umanoShadowHeight="4dp">
 
-        <!-- MAIN CONTENT -->
+        <!-- MAIN CONTENT 列表页 -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,17 +34,17 @@
                 android:id="@+id/All_XRecy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#f3f3f3"
+                android:background="#232121"
                 android:paddingBottom="20dp" />
 
         </FrameLayout>
 
-        <!-- SLIDING LAYOUT -->
+        <!-- SLIDING LAYOUT 滑出页 -->
         <LinearLayout
             android:id="@+id/dragView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#f3f3f3"
+            android:background="#232121"
             android:clickable="true"
             android:orientation="vertical">
 
@@ -52,7 +52,7 @@
                 android:id="@+id/title_Rel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff">
+                android:background="#2b2a2a">
 
                 <TextView
                     android:id="@+id/month_lineTxt"
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/current_Lin"
-                    android:background="#ffffff"
+                    android:background="#2b2a2a"
                     android:orientation="horizontal">
 
                     <TextView
@@ -104,7 +104,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="日"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
 
                     <TextView
@@ -113,7 +113,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="一"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
 
                     <TextView
@@ -122,7 +122,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="二"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
 
                     <TextView
@@ -131,7 +131,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="三"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
 
                     <TextView
@@ -140,7 +140,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="四"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
 
                     <TextView
@@ -149,7 +149,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="五"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
 
                     <TextView
@@ -158,7 +158,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="六"
-                        android:textColor="#9f9f9f"
+                        android:textColor="#989797"
                         android:textSize="10sp" />
                 </LinearLayout>
             </RelativeLayout>
@@ -166,7 +166,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="#9f9f9f" />
+                android:background="#343434" />
 
             <ViewFlipper
                 android:id="@+id/flipper"

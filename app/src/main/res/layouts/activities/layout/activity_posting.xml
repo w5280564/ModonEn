@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
@@ -31,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/popupwhite_bg">
+                android:background="@drawable/popupblack_bg">
 
                 <EditText
                     android:id="@+id/content_Edit"
@@ -42,8 +40,8 @@
                     android:layout_margin="10dp"
                     android:background="@null"
                     android:gravity="left"
-                    android:textColor="#000000"
-                    android:textColorHint="#b9b9b9"
+                    android:textColor="#989797"
+                    android:textColorHint="#989797"
                     android:textSize="16sp" />
 
                 <RelativeLayout
@@ -52,7 +50,6 @@
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="15dp"
-                    android:background="#ffffff"
                     android:orientation="horizontal"
                     android:paddingLeft="15dp"
                     android:paddingRight="10dp">
@@ -63,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="\@提醒谁看"
-                        android:textColor="#000000"
+                        android:textColor="#989797"
                         android:textSize="14sp" />
 
                     <ImageView
@@ -147,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:text="同步分享到"
-                    android:textColor="#545454"
+                    android:textColor="#e3e7eb"
                     android:textSize="13sp" />
 
                 <ImageView

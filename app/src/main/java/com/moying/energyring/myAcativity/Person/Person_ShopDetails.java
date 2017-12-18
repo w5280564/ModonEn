@@ -59,7 +59,7 @@ public class Person_ShopDetails extends Activity {
 
         StaticData.ViewScale(content_simple, 0, 772);
         StaticData.ViewScale(dui_Txt, 108, 40);
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(dui_Btn, 0, 98);
         return_Btn.setOnClickListener(new return_Btn());
         dui_Btn.setOnClickListener(new dui_Btn());
@@ -99,7 +99,7 @@ public class Person_ShopDetails extends Activity {
 
     public void rankCountTextsColor(String alltext, TextView myTxt) {
         SpannableStringBuilder styledText = new SpannableStringBuilder(alltext);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#4d4d4d")), alltext.length() - 2, alltext.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//修改颜色
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#989797")), alltext.length() - 2, alltext.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//修改颜色
         myTxt.setText(styledText);
     }
 

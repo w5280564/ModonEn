@@ -9,7 +9,8 @@
         android:id="@+id/titlebg_Rel"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/fragmentpk_titlebg_gradient">
+        android:background="#232121">
+        <!--android:background="@drawable/fragmentpk_titlebg_gradient"-->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@drawable/round_white"
+            android:background="@drawable/round_white_black"
             android:gravity="center">
 
             <LinearLayout
@@ -99,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/round_white"
+            android:background="@drawable/round_white_black"
             android:gravity="center"
             android:text="一键汇总"
             android:textColor="#ff7c79"

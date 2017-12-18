@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,16 +36,21 @@ public class Person_Play extends Activity {
 
 
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
         cententtxt.setText("定时播放电台");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
 
         RelativeLayout play_Rel = (RelativeLayout) findViewById(R.id.play_Rel);
         RelativeLayout video_Rel = (RelativeLayout) findViewById(R.id.video_Rel);
+        ImageView play_Img = (ImageView) findViewById(R.id.play_Img);
+        ImageView arrow_right = (ImageView) findViewById(R.id.arrow_right);
+        StaticData.ViewScale(play_Img,60,60);
+        StaticData.ViewScale(arrow_right,60,60);
         clock_Time = (TextView) findViewById(R.id.clock_Time);
         videoTxt = (TextView) findViewById(R.id.videoTxt);
         video_switch = (SwitchButton) findViewById(R.id.video_switch);

@@ -244,7 +244,7 @@ public class CalendarAdapter extends BaseAdapter {
         itemtxt.setText(d);
 
         if (position < daysOfMonth + dayOfWeek && position >= dayOfWeek) {//只显示当前月其他隐藏
-            itemtxt.setTextColor(android.graphics.Color.parseColor("#acacac"));
+            itemtxt.setTextColor(android.graphics.Color.parseColor("#989797"));
             itemtxt.setVisibility(TextView.VISIBLE);
 //
             if (sys_year.equals(currentYear) && sys_month.equals(currentMonth)) {//true是当前月份

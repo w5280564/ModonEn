@@ -5,13 +5,11 @@ package com.moying.energyring.Model;
  */
 
 public class isFristSee_Model {
-
-
     /**
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : {"UserID":2066,"Is_FirstEditProfile":true,"Is_FirstEditProfile_Remind":false,"Is_FirstPool":true,"Is_FirstPool_Pic":false,"Is_CheckIn_Remind":false}
+     * Data : {"UserID":2066,"Is_FirstEditProfile":true,"Is_FirstEditProfile_Remind":false,"Is_FirstPool":true,"Is_FirstPool_Pic":false,"Is_CheckIn_Remind":true,"Is_FirstPK_Pic":false}
      */
 
     private boolean IsSuccess;
@@ -58,7 +56,8 @@ public class isFristSee_Model {
          * Is_FirstEditProfile_Remind : false
          * Is_FirstPool : true
          * Is_FirstPool_Pic : false
-         * Is_CheckIn_Remind : false
+         * Is_CheckIn_Remind : true
+         * Is_FirstPK_Pic : false
          */
 
         private int UserID;
@@ -67,6 +66,7 @@ public class isFristSee_Model {
         private boolean Is_FirstPool;
         private boolean Is_FirstPool_Pic;
         private boolean Is_CheckIn_Remind;
+        private boolean Is_FirstPK_Pic;
 
         public int getUserID() {
             return UserID;
@@ -114,6 +114,14 @@ public class isFristSee_Model {
 
         public void setIs_CheckIn_Remind(boolean Is_CheckIn_Remind) {
             this.Is_CheckIn_Remind = Is_CheckIn_Remind;
+        }
+
+        public boolean isIs_FirstPK_Pic() {
+            return Is_FirstPK_Pic;
+        }
+
+        public void setIs_FirstPK_Pic(boolean Is_FirstPK_Pic) {
+            this.Is_FirstPK_Pic = Is_FirstPK_Pic;
         }
     }
 }

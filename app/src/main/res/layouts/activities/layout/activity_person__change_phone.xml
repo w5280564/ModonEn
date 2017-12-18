@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -22,7 +20,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg"
+        android:background="@drawable/popupblack_bg"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -51,8 +49,8 @@
                 android:background="@null"
                 android:hint="请输入手机号："
                 android:lines="1"
-                android:textColor="#000000"
-                android:textColorHint="#a6a6a6"
+                android:textColor="#989797"
+                android:textColorHint="#989797"
                 android:textSize="15sp" />
 
             <View
@@ -60,13 +58,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
-                android:background="#50ffffff" />
+                android:background="#232121" />
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#f3f3f3" />
+            android:background="#2b2a2a" />
 
         <RelativeLayout
             android:id="@+id/coderel"
@@ -124,8 +122,8 @@
                     android:background="@null"
                     android:hint="验证码："
                     android:lines="1"
-                    android:textColor="#000000"
-                    android:textColorHint="#a6a6a6"
+                    android:textColor="#989797"
+                    android:textColorHint="#989797"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -133,7 +131,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
-                android:background="#50ffffff" />
+                android:background="#50989797"
+                android:visibility="gone"/>
         </RelativeLayout>
     </LinearLayout>
 
@@ -145,7 +144,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/popupwhite_bg"
+        android:background="@drawable/popupblack_bg"
         android:text="确认更换"
         android:textColor="#f14d4c"
         android:textSize="14sp" />

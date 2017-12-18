@@ -88,11 +88,11 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
 
         final DayPkProject_Model.DataBean oneData = listModel.getData().get(position);
         if (position == 0) {
-            holder.my_Rel.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.my_Rel.setBackgroundColor(Color.parseColor("#232121"));
             holder.content_Txt.setTextColor(Color.parseColor("#f24d4d"));
         } else {
 //            holder.my_Rel.setBackgroundColor(Color.parseColor("#f3f3f3"));
-            holder.content_Txt.setTextColor(Color.parseColor("#4d4d4d"));
+            holder.content_Txt.setTextColor(Color.parseColor("#ffffff"));
         }
         if (oneData.getFilePath() != null) {
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));

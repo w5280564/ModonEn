@@ -51,7 +51,7 @@ import java.util.List;
 public class PersonMyCenter_Other extends FragmentActivity {
     private SimpleDraweeView person_bg_simple, user_simple;
     private ImageView gender_img;
-    private TextView atten_Txt, fans_Txt, intr_Txt, userName_Txt;
+    private TextView atten_Txt, fans_Txt, intr_Txt, userName_Txt,title_Txt;
     private String ToUserID;
     private String UserID;
     private TextView person_mes_Img, person_focus_Img;
@@ -88,6 +88,7 @@ public class PersonMyCenter_Other extends FragmentActivity {
         StaticData.ViewScale(tablayout, 0, 200);
         Slideviewpager = (ViewPager) findViewById(R.id.Slideviewpager);
         final Button return_Btn = (Button) findViewById(R.id.return_Btn);
+        title_Txt = (TextView) findViewById(R.id.title_Txt);
         person_bg_simple = (SimpleDraweeView) findViewById(R.id.person_bg_simple);
         user_simple = (SimpleDraweeView) findViewById(R.id.user_simple);
         layoutmarginTop(this, user_simple);
@@ -104,7 +105,7 @@ public class PersonMyCenter_Other extends FragmentActivity {
         LinearLayout other_Mes_Lin = (LinearLayout) findViewById(R.id.other_Mes_Lin);
         other_Mes_Lin.setVisibility(View.VISIBLE);
 
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(person_bg_simple, 750, 440);
         StaticData.ViewScale(user_simple, 180, 180);
         StaticData.ViewScale(gender_img, 24, 24);
@@ -126,12 +127,13 @@ public class PersonMyCenter_Other extends FragmentActivity {
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
                 Log.d("STATE", state.name());
                 if (state == State.EXPANDED) {
-
                     //展开状态
-                    return_Btn.setBackgroundResource(R.drawable.return_icon);
+                    title_Txt.setVisibility(View.GONE);
+                    return_Btn.setBackgroundResource(R.drawable.return_black);
                 } else if (state == State.COLLAPSED) {
 
                     //折叠状态
+                    title_Txt.setVisibility(View.VISIBLE);
                     return_Btn.setBackgroundResource(R.drawable.return_black);
                 } else {
 
@@ -362,6 +364,7 @@ public class PersonMyCenter_Other extends FragmentActivity {
                         }
 
                         userName_Txt.setText(oneData.getNickName());
+                        title_Txt.setText(oneData.getNickName());
                         atten_Txt.setText(oneData.getAttention() + "");
                         fans_Txt.setText(oneData.getAttention_Me() + "");
                         if (StaticData.isSpace(oneData.getBrief())) {

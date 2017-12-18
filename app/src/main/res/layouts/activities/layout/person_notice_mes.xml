@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -21,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
-        android:background="#f3f3f3"
+        android:background="#2b2a2a"
         android:elevation="2dp"
         android:orientation="horizontal">
 
@@ -34,7 +32,7 @@
             android:background="@null"
             android:gravity="center"
             android:text="发送"
-            android:textColor="#000000" />
+            android:textColor="#ffffff" />
 
 
         <EditText
@@ -44,10 +42,10 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toLeftOf="@id/send_Btn"
-            android:background="@drawable/popupwhite_bg"
+            android:background="@drawable/notice_editbg"
             android:lines="1"
             android:paddingLeft="5dp"
-            android:textColor="#787878" />
+            android:textColor="#95a0ab" />
 
     </RelativeLayout>
 

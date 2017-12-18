@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:focusableInTouchMode="true">
 
 
@@ -22,7 +20,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="取消"
-            android:textColor="#4d4d4d"
+            android:textColor="#595f65"
             android:textSize="14sp" />
 
         <EditText
@@ -36,7 +34,8 @@
             android:gravity="center"
             android:hint="搜索 用户/成长日志"
             android:lines="1"
-            android:textColorHint="#5b5b5b"
+            android:textColorHint="#595f65"
+            android:textColor="#ffffff"
             android:textSize="10sp" />
 
     </RelativeLayout>

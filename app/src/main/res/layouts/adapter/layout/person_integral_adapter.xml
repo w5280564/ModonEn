@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff">
+        android:background="#2b2a2a">
 
         <TextView
             android:id="@+id/name_Txt"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:textColor="#4b4b4b"
+            android:textColor="#e3e7eb"
             android:textSize="14sp" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#d8d8d8" />
+            android:background="#343434" />
     </RelativeLayout>
 
 

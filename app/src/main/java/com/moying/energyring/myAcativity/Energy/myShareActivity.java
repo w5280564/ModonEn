@@ -15,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.ShareContent;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+
 import java.util.HashMap;
+
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -42,6 +45,7 @@ public class myShareActivity extends Activity implements PlatformActionListener,
 
         initView();
     }
+
     /**
      * 设置对话框窗口位置和大小等
      */
@@ -56,25 +60,25 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         getWindow().setAttributes(layoutParams);
     }
 
-    private void initView(){
+    private void initView() {
         shareContent = getIntent().getParcelableExtra("shareContent");
-        RelativeLayout share_Rel = (RelativeLayout)findViewById(R.id.share_Rel);
-        StaticData.ViewScale(share_Rel,675,460);
-        LinearLayout share_friend_Lin = (LinearLayout)findViewById(R.id.share_friend_Lin);
-        LinearLayout share_wechat_Lin = (LinearLayout)findViewById(R.id.share_wechat_Lin);
-        LinearLayout share_sina_Lin = (LinearLayout)findViewById(R.id.share_sina_Lin);
-        LinearLayout share_qzone_Lin = (LinearLayout)findViewById(R.id.share_qzone_Lin);
-        ImageView share_friend_Img = (ImageView)findViewById(R.id.share_friend_Img);
-        ImageView share_wechat_Img = (ImageView)findViewById(R.id.share_wechat_Img);
-        ImageView share_sina_Img = (ImageView)findViewById(R.id.share_sina_Img);
-        ImageView share_qzone_Img = (ImageView)findViewById(R.id.share_qzone_Img);
-        LinearLayout cha_Lin = (LinearLayout)findViewById(R.id.cha_Lin);
+        RelativeLayout share_Rel = (RelativeLayout) findViewById(R.id.share_Rel);
+        StaticData.ViewScale(share_Rel, 675, 460);
+        LinearLayout share_friend_Lin = (LinearLayout) findViewById(R.id.share_friend_Lin);
+        LinearLayout share_wechat_Lin = (LinearLayout) findViewById(R.id.share_wechat_Lin);
+        LinearLayout share_sina_Lin = (LinearLayout) findViewById(R.id.share_sina_Lin);
+        LinearLayout share_qzone_Lin = (LinearLayout) findViewById(R.id.share_qzone_Lin);
+        ImageView share_friend_Img = (ImageView) findViewById(R.id.share_friend_Img);
+        ImageView share_wechat_Img = (ImageView) findViewById(R.id.share_wechat_Img);
+        ImageView share_sina_Img = (ImageView) findViewById(R.id.share_sina_Img);
+        ImageView share_qzone_Img = (ImageView) findViewById(R.id.share_qzone_Img);
+        LinearLayout cha_Lin = (LinearLayout) findViewById(R.id.cha_Lin);
 
 
-        StaticData.ViewScale(share_friend_Img,72,72);
-        StaticData.ViewScale(share_wechat_Img,72,72);
-        StaticData.ViewScale(share_sina_Img,72,72);
-        StaticData.ViewScale(share_qzone_Img,72,72);
+        StaticData.ViewScale(share_friend_Img, 72, 72);
+        StaticData.ViewScale(share_wechat_Img, 72, 72);
+        StaticData.ViewScale(share_sina_Img, 72, 72);
+        StaticData.ViewScale(share_qzone_Img, 72, 72);
         cha_Lin.setOnClickListener(new cha_Lin());
 
         share_friend_Lin.setOnClickListener(new share_friend());
@@ -83,7 +87,7 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         share_qzone_Lin.setOnClickListener(new share_qzone());
     }
 
-    private class cha_Lin implements View.OnClickListener{
+    private class cha_Lin implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             onBackPressed();
@@ -133,12 +137,17 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         Platform.ShareParams wechat = new Platform.ShareParams();
         wechat.setTitle(shareContent.title);
         wechat.setText(shareContent.content);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
+
+        wechat.setUrl(shareContent.url);
+        if (shareContent.imgpath  == null) {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
 //        msg.thumbData = Util.bmpToByteArray(bitmap, true);
 //        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
 //        Bitmap mBitmap = BitmapFactory.decodeStream(is);
-        wechat.setImageData(bitmap);
-        wechat.setUrl(shareContent.url);
+            wechat.setImageData(bitmap);
+        } else {
+            wechat.setImageUrl(shareContent.imgpath);//网络图用Url
+        }
 //        wechat.setImageData(wechatbit);
         wechat.setShareType(Platform.SHARE_WEBPAGE);
         Platform weixin = ShareSDK.getPlatform(this, Wechat.NAME);
@@ -153,11 +162,17 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         Platform.ShareParams wechat = new Platform.ShareParams();
         wechat.setTitle(shareContent.title);
         wechat.setText(shareContent.content);
-//        InputStream is = getResources().openRawResource(R.drawable.ring_icon);
-//        Bitmap mBitmap = BitmapFactory.decodeStream(is);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
-        wechat.setImageData(bitmap);
+
         wechat.setUrl(shareContent.url);
+        if (shareContent.imgpath  == null) {
+//            InputStream is = getResources().openRawResource(R.drawable.ring_icon);
+//        Bitmap mBitmap = BitmapFactory.decodeStream(is);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ring);
+            wechat.setImageData(bitmap);
+        } else {
+            wechat.setImageUrl(shareContent.imgpath);//网络图用Url
+
+        }
 //        wechat.setImageData(wechatfriendbit);
         wechat.setShareType(Platform.SHARE_WEBPAGE);
         Platform weixin = ShareSDK.getPlatform(this, WechatMoments.NAME);
@@ -171,6 +186,9 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         SinaWeibo.ShareParams sina = new SinaWeibo.ShareParams();
         sina.setText(shareContent.title + shareContent.url);
 //        sina.setImagePath(sianimg);
+        if (shareContent.imgpath != null ) {
+            sina.setImagePath(shareContent.imgpath);
+        }
         Platform sinap = ShareSDK.getPlatform(SinaWeibo.NAME);
         sinap.setPlatformActionListener(this);
 //        sinap.SSOSetting(true);//审核未通过
@@ -183,6 +201,9 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         sp.setTitle(shareContent.title);
         sp.setTitleUrl(shareContent.url); // 标题的超链接
         sp.setText(shareContent.content);
+        if (shareContent.imgpath != null) {
+            sp.setImageUrl(shareContent.imgpath);
+        }
 //        sp.setImageUrl("http://www.someserver.com/测试图片网络地址.jpg");
 //        sp.setSite("发布分享的网站名称");
 //        sp.setSiteUrl("发布分享网站的地址");
@@ -199,6 +220,9 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         sp.setText(shareContent.content);
         sp.setSite("能量圈");//分享应用的名称
         sp.setSiteUrl("http://m.pp.cn/detail.html?appid=6863306&ch_src=pp_dev&ch=default");//分享应用的网页地址
+        if (shareContent.imgpath != null) {
+            sp.setImageUrl(shareContent.imgpath);
+        }
         Platform qzone = ShareSDK.getPlatform(QZone.NAME);
         qzone.setPlatformActionListener(this); // 设置分享事件回调
         qzone.share(sp);

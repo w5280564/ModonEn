@@ -3,14 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/my_Lin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/popupwhite_bg"
+        android:background="@drawable/popupblack_bg"
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -26,9 +25,10 @@
             android:id="@+id/name_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#4d4d4d"
+            android:textColor="#e3e7eb"
             android:text="名字"
             android:textSize="14sp"
+            android:lines="1"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
 

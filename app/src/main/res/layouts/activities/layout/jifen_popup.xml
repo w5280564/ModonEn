@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/fen_Lin"
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/jifen_Rel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/jifen_icon"
-        android:gravity="center"
+        android:background="@drawable/jifen_bg"
+        android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/fen_Txt"
+            android:id="@+id/jifen_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20"
-            android:textColor="#ffffff"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:textColor="#ff2727"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="40sp"
+            android:textStyle="bold"/>
 
-</LinearLayout>
+    </RelativeLayout>
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/fen_Sim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/jifen_Rel"/>
+
+
+</RelativeLayout>
 
 
 

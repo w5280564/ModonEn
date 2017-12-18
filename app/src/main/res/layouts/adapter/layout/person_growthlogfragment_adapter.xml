@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -31,7 +30,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:lines="2"
-            android:textColor="#676767"
+            android:textColor="#e3e7eb"
             android:textSize="12sp" />
 
 
@@ -86,7 +85,7 @@
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:text="删除"
-                android:textColor="#6b6b6b"
+                android:textColor="#e3e7eb"
                 android:textSize="12sp" />
 
             <TextView
@@ -97,7 +96,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/remove_Txt"
                 android:gravity="left"
-                android:textColor="#6b6b6b"
+                android:textColor="#989797"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -120,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#aeaeae"
+                    android:textColor="#989797"
                     android:textSize="9sp" />
 
                 <LinearLayout
@@ -141,7 +140,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="#aeaeae"
+                        android:textColor="#989797"
                         android:textSize="9sp" />
 
                 </LinearLayout>

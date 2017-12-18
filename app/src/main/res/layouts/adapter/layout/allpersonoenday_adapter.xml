@@ -11,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <TextView
             android:id="@+id/round_Txt"
@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/round_Txt"
             android:text="健康走"
-            android:textColor="#acacac"
+            android:textColor="#ffffff"
             android:textSize="12sp" />
 
         <TextView
@@ -40,7 +40,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:text=""
-            android:textColor="#acacac"
             android:textSize="12sp" />
 
 

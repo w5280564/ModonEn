@@ -73,7 +73,7 @@ public class newPk_Model {
         private String ProjectUnit;
         private String ProjectName;
         private String FilePath;
-        private int ReportNum;
+        private double ReportNum;
         private int ReportID;
         private int Ranking;
         private double Report_Num_Month;
@@ -121,11 +121,11 @@ public class newPk_Model {
             this.FilePath = FilePath;
         }
 
-        public int getReportNum() {
+        public double getReportNum() {
             return ReportNum;
         }
 
-        public void setReportNum(int ReportNum) {
+        public void setReportNum(double ReportNum) {
             this.ReportNum = ReportNum;
         }
 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <HorizontalScrollView
+        android:id="@+id/link_scro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_Include"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/yi_Lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" />
+
+    </HorizontalScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/edit_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/link_scro"
+        android:background="#3e3d3d">
+
+
+        <com.moying.energyring.waylenBaseView.DragSortView
+            android:id="@+id/drag_SortView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/add_photo_Img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/pk_huizong_icon" />
+        </com.moying.energyring.waylenBaseView.DragSortView>
+
+
+        <ImageView
+            android:id="@+id/huizong_remid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/drag_SortView"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/huizong_remid"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/add_Edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/drag_SortView"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="分享点经验和心得吧......"
+            android:textColor="#989797"
+            android:textColorHint="#989797"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/finsh_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/botview"
+        android:layout_below="@id/edit_Rel"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gan_gradient"
+        android:gravity="center"
+        android:text="完成"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

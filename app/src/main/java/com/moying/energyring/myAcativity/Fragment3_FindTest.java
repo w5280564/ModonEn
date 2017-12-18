@@ -2,7 +2,9 @@ package com.moying.energyring.myAcativity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,6 +32,7 @@ import com.moying.energyring.Model.RadioList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.myMediaplayerTest;
+import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Find.FindRadioListActivityTest;
 import com.moying.energyring.myAcativity.Find.FindSeekActivity;
 import com.moying.energyring.myAcativity.Find.Find_BannerDetail;
@@ -79,6 +82,7 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
             parentView = inflater.inflate(R.layout.fragment3_find, null);
             setStatusBar();
 
+            initTitle(parentView);
             initView(parentView);
 
 //            initData();
@@ -105,9 +109,31 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
         seek_Btn = (Button) view.findViewById(R.id.seek_Btn);
         seek_Btn.setLayoutParams(params);
         StaticData.ViewScale(seek_Btn, 646, 52);
-        seek_Btn.setOnClickListener(new seek_Btn());
+//        seek_Btn.setOnClickListener(new seek_Btn());
+
 //        StaticData.changeXRecycleHeadGif(find_recy,R.drawable.gif_sun_icon,500,200);
     }
+
+    private void initTitle(View view) {
+        View title_Include = (View) view.findViewById(R.id.title_Include);
+        title_Include.setBackgroundColor(Color.parseColor("#232121"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            title_Include.setElevation(2f);//阴影
+        }
+        Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
+        return_Btn.setVisibility(View.GONE);
+        TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setText("发现");
+        Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
+        right_Btn.setVisibility(View.VISIBLE);
+        right_Btn.setBackgroundResource(R.drawable.find_seek_gray);
+        StaticData.ViewScale(title_Include, 0, 88);
+        StaticData.ViewScale(right_Btn, 38, 38);
+        viewTouchDelegate.expandViewTouchDelegate(right_Btn,100,100,100,100);
+        right_Btn.setOnClickListener(new seek_Btn());
+    }
+
 
     myMediaplayerTest myplayer;
 
