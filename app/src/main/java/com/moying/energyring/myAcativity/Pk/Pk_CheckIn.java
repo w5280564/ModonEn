@@ -44,7 +44,7 @@ import java.util.List;
 public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListener {
 
     private XRecyclerView pk_xrecy;
-    private TextView allday_Txt,con_Txt,rank_Txt,rankCount_Txt;
+    private TextView allday_Txt, con_Txt, rank_Txt, rankCount_Txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
         MobclickAgent.onPageStart("Pk_CheckIn"); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写。"SplashScreen"为页面名称，可自定义)
         MobclickAgent.onResume(this);          //统计时长
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("Pk_CheckIn"); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
@@ -100,10 +101,10 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
         ImageView toal_round_one = (ImageView) header.findViewById(R.id.toal_round_one);
         ImageView toa_round_two = (ImageView) header.findViewById(R.id.toa_round_two);
         RelativeLayout top_Rel = (RelativeLayout) header.findViewById(R.id.top_Rel);
-         allday_Txt = (TextView) header.findViewById(R.id.allday_Txt);
+        allday_Txt = (TextView) header.findViewById(R.id.allday_Txt);
         con_Txt = (TextView) header.findViewById(R.id.con_Txt);
-         rank_Txt = (TextView) header.findViewById(R.id.rank_Txt);
-         rankCount_Txt = (TextView) header.findViewById(R.id.rankCount_Txt);
+        rank_Txt = (TextView) header.findViewById(R.id.rank_Txt);
+        rankCount_Txt = (TextView) header.findViewById(R.id.rankCount_Txt);
         TextView below_Txt = (TextView) header.findViewById(R.id.below_Txt);
         TextView ban_Txt = (TextView) header.findViewById(R.id.ban_Txt);
         ImageView round_one = (ImageView) header.findViewById(R.id.round_one);
@@ -164,7 +165,7 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
         styledText.setSpan(new AbsoluteSizeSpan(padSize), 0, alltext.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); //初始字体大小
         int padEndSize = (int) (Float.parseFloat(saveFile.getShareData("scale", Pk_CheckIn.this)) * endsize);
         styledText.setSpan(new AbsoluteSizeSpan(padEndSize), 1, alltext.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); //修改字体大小
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#f27b7b")), 1, alltext.length()-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//修改颜色
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#f27b7b")), 1, alltext.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//修改颜色
         myTxt.setText(styledText);
     }
 
@@ -174,7 +175,7 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
         styledText.setSpan(new AbsoluteSizeSpan(padSize), 0, alltext.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); //初始字体大小
         int padEndSize = (int) (Float.parseFloat(saveFile.getShareData("scale", Pk_CheckIn.this)) * endsize);
         styledText.setSpan(new AbsoluteSizeSpan(padEndSize), 0, alltext.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); //修改字体大小
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#f27b7b")), 0, alltext.length()-1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//修改颜色
+        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#f27b7b")), 0, alltext.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);//修改颜色
         myTxt.setText(styledText);
     }
 
@@ -184,7 +185,6 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
             finish();
         }
     }
-
 
 
     public void initData(Context context) {
@@ -208,7 +208,6 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
         pageSize = 10;
         ListData(Pk_CheckIn.this, saveFile.BaseUrl + saveFile.checkUrl + "?PageIndex=" + PageIndex + "&PageSize=" + pageSize);
     }
-
 
 
     pk_CheckIn_Adapter mAdapter;
@@ -301,13 +300,18 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
             public void onSuccess(String resultString) {
                 if (resultString != null) {
 
-                   CheckData_Model baseModel = new Gson().fromJson(resultString, CheckData_Model.class);
+                    CheckData_Model baseModel = new Gson().fromJson(resultString, CheckData_Model.class);
                     if (baseModel.isIsSuccess() && !baseModel.getData().equals("[]")) {
 
-                        rankCountTextsColor(28, 72,baseModel.getData().getCheckInDays()+"天",allday_Txt);
-                        rankCountTextsColor(28, 72,baseModel.getData().getContinueDays()+"天",con_Txt);
-                        TextsColor(28, 72,"第"+baseModel.getData().getEarlyRanking()+"名",rank_Txt);
-                        rankCountTextsColor(28, 72,baseModel.getData().getEarlyDays()+"天",rankCount_Txt);
+                        rankCountTextsColor(28, 72, baseModel.getData().getCheckInDays() + "天", allday_Txt);
+                        rankCountTextsColor(28, 72, baseModel.getData().getContinueDays() + "天", con_Txt);
+
+                        if (baseModel.getData().getEarlyRanking() == 0) {
+                            rank_Txt.setText("暂无排名");
+                        } else {
+                            TextsColor(28, 72, "第" + baseModel.getData().getEarlyRanking() + "名", rank_Txt);
+                        }
+                        rankCountTextsColor(28, 72, baseModel.getData().getEarlyDays() + "天", rankCount_Txt);
 //                        baseModel.addAll(listModel.getData());
 //                        if (PageIndex == 1) {
 //                            pk_xrecy.refreshComplete();

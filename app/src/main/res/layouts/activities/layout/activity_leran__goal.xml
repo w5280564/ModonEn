@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121">
+    android:background="#232121"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
     <include
         android:id="@+id/title_Include"
@@ -10,13 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/seek_Edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/find_gazy"
+        android:gravity="center"
+        android:hint="搜索"
+        android:lines="1"
+        android:textColor="#ffffff"
+        android:textColorHint="#989797"
+        android:textSize="10sp"
+        android:visibility="gone"/>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/All_XRecy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title_Include"/>
+        android:layout_below="@id/title_Include" />
 
 
-
-</RelativeLayout>
+</LinearLayout>

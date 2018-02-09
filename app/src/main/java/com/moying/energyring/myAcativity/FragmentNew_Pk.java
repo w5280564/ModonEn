@@ -2,9 +2,9 @@ package com.moying.energyring.myAcativity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
@@ -19,18 +19,22 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.JiFenAndBadge_Model;
+import com.moying.energyring.Model.Pk_MyIntegral_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.myCheckData_Model;
 import com.moying.energyring.Model.newPk_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Energy.HasNewActivity;
 import com.moying.energyring.myAcativity.Person.Person_BadgeHas;
+import com.moying.energyring.myAcativity.Person.Person_Commendation;
 import com.moying.energyring.myAcativity.Pk.JiFenActivity;
+import com.moying.energyring.myAcativity.Pk.Pk_AddReport;
 import com.moying.energyring.myAcativity.Pk.Pk_CheckIn;
 import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd_More;
-import com.moying.energyring.myAcativity.Pk.Pk_Daypk;
+import com.moying.energyring.myAcativity.Pk.Pk_DayPk_Project_Detail;
+import com.moying.energyring.myAcativity.Pk.Pk_DayPk_Project_Detail_RankAll;
+import com.moying.energyring.myAcativity.Pk.Pk_FenRankList;
 import com.moying.energyring.myAcativity.Pk.Pk_Guide;
 import com.moying.energyring.myAcativity.Pk.Pk_HuiZong;
 import com.moying.energyring.myAdapter.newPk_Fragment_Adapter;
@@ -54,15 +58,13 @@ import static android.app.Activity.RESULT_OK;
 
 public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingListener {
     private View parentView;
-    TabLayout pk_tab_layout;
     private XRecyclerView pk_recy;
-    LinearLayout taglin;
     LinearLayout check_Lin;
-    //    VerticalScrollTextView ScrollTextView;
     MarqueeView marqueeView;
     public static int guideID = 1001;
     public static int jifenID = 1002;
-    public static int TixingResult = 1003;
+    private TextView my_rank_Txt, my_change_Txt, my_Count_Txt;
+    private ImageView my_change_Img;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,9 +105,10 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
     private void initData() {
         checkData(saveFile.BaseUrl + saveFile.Check_Url);//是否签到
+        myRankData(getActivity(), saveFile.BaseUrl + saveFile.My_Rank_Url);
         String userId = saveFile.getShareData("userId", getActivity());
 //        ListData(getActivity(), saveFile.BaseUrl + saveFile.DayPk_Url + "?UserID=" + userId);
-        ListData(getActivity(), saveFile.BaseUrl + "ec/pk/Report_List_Sta");
+        ListData(getActivity(), saveFile.BaseUrl + saveFile.My_ReportProject_List_Url);
 
     }
 
@@ -131,6 +134,13 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                 Intent intent = new Intent(getActivity(), Person_BadgeHas.class);
                 intent.putExtra("jiFenmodel", jiFenmodel);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
+            }
+        } else if (resultCode == 1003) {
+            if (!jiFenmodel.getData().get_Praise().isEmpty()) {
+                Intent intentSuccess = new Intent(getActivity(), Person_Commendation.class);
+                intentSuccess.putExtra("jiFenmodel", jiFenmodel);
+                startActivity(intentSuccess);
                 getActivity().overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
             }
         }
@@ -189,36 +199,64 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     }
 
     private void initView(View view) {
-//        ScrollTextView = (VerticalScrollTextView) view.findViewById(R.id.ScrollTextView);
         marqueeView = (MarqueeView) view.findViewById(R.id.MarqueeView);
         RelativeLayout titlebg_Rel = (RelativeLayout) view.findViewById(R.id.titlebg_Rel);
         LinearLayout my_Lin = (LinearLayout) view.findViewById(R.id.my_Lin);
         check_Lin = (LinearLayout) view.findViewById(R.id.check_Lin);
         ImageView pk_check_img = (ImageView) view.findViewById(R.id.pk_check_img);
-        ImageView pk_more_img = (ImageView) view.findViewById(R.id.pk_more_img);
         TextView hui_Txt = (TextView) view.findViewById(R.id.hui_Txt);
-        viewTouchDelegate.expandViewTouchDelegate(pk_more_img, 100, 100, 100, 100);
-        pk_tab_layout = (TabLayout) view.findViewById(R.id.pk_tab_layout);
+        ImageView pk_more_img = (ImageView) view.findViewById(R.id.pk_more_img);
+        my_rank_Txt = (TextView) view.findViewById(R.id.my_rank_Txt);
+        my_change_Img = (ImageView) view.findViewById(R.id.my_change_Img);
+        my_change_Txt = (TextView) view.findViewById(R.id.my_change_Txt);
+        my_Count_Txt = (TextView) view.findViewById(R.id.my_Count_Txt);
+        View rank_Img = view.findViewById(R.id.rank_Img);
+//        View rank_Rel = view.findViewById(R.id.rank_Rel);
+//        View rank_icon = view.findViewById(R.id.rank_icon);
+        View rank_Txt = view.findViewById(R.id.rank_Txt);
+
+
         pk_recy = (XRecyclerView) view.findViewById(R.id.pk_recy);
         pk_recy.setLoadingListener(this);//添加事件
         pk_recy.setPullRefreshEnabled(true);
         pk_recy.setLoadingMoreEnabled(false);
         ImageView pk_ce_Img = (ImageView) view.findViewById(R.id.pk_ce_Img);
-        taglin = (LinearLayout) view.findViewById(R.id.taglin);
-        StaticData.ViewScale(titlebg_Rel, 0, 108);
+//        StaticData.ViewScale(titlebg_Rel, 0, 326);
+        StaticData.ViewScale(titlebg_Rel, 0, 232);
         StaticData.ViewScale(my_Lin, 0, 56);
         StaticData.ViewScale(check_Lin, 164, 56);
+        StaticData.ViewScale(pk_more_img, 56, 44);
+        StaticData.ViewScale(my_change_Img, 16, 18);
+
         StaticData.ViewScale(pk_check_img, 36, 40);
-        StaticData.ViewScale(pk_more_img, 38, 20);
         StaticData.ViewScale(pk_ce_Img, 94, 308);
-        StaticData.ViewScale(pk_tab_layout, 500, 100);
         StaticData.ViewScale(hui_Txt, 164, 56);
+//        StaticData.ViewScale(rank_Rel, 0, 76);
+        StaticData.ViewScale(rank_Txt, 56, 56);
+        StaticData.ViewScale(rank_Img, 40, 40);
         check_Lin.setOnClickListener(new check_Lin());
         pk_ce_Img.setOnClickListener(new pk_ce_Img());
         marqueeView.setOnItemClickListener(new marqueeView());
         hui_Txt.setOnClickListener(new hui_Txt());
+        titlebg_Rel.setOnClickListener(new titlebg_Rel());
+        rank_Txt.setOnClickListener(new rank_Txt());
     }
 
+
+    private class titlebg_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+//            Intent intent = new Intent(getActivity(),);
+            Intent intent = new Intent(getActivity(), Pk_FenRankList.class);
+            startActivity(intent);
+
+//            Intent intentJiFen = new Intent(getActivity(), JiFenActivity.class);
+//            intentJiFen.putExtra("media", "daypk");
+//            intentJiFen.putExtra("jifen", 10);
+//            intentJiFen.putExtra("RewardIntegral", 10+"");
+//            startActivity(intentJiFen);
+        }
+    }
 
     private class check_Lin implements View.OnClickListener {
         @Override
@@ -275,6 +313,15 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         }
     }
 
+    private class rank_Txt implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), Pk_DayPk_Project_Detail_RankAll.class);
+//            intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
+            startActivity(intent);
+        }
+    }
+
 
     newPk_Fragment_Adapter mAdapter;
 
@@ -288,9 +335,28 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         mAdapter.setOnItemClickLitener(new newPk_Fragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), Pk_Daypk.class);
-                intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
-                startActivity(intent);
+                if (baseModel.getData().get(position).getReportID() == 0) { //0今天没有汇报项目
+                    if (!baseModel.getData().get(position).getProjectName().equals("健康走")) {
+                        Intent intent = new Intent(getActivity(), Pk_AddReport.class);
+                        intent.putExtra("projectModel", baseModel.getData().get(position));
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getActivity(), Pk_DayPk_Project_Detail.class);
+                        intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
+                        startActivity(intent);
+                    }
+                } else {
+
+//                    Intent intent = new Intent(getActivity(), Pk_DayPkDetail.class);
+                    Intent intent = new Intent(getActivity(), Pk_DayPk_Project_Detail.class);
+//                    intent.putExtra("titleName", baseModel.getData().get(position).getProjectName());
+                    intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
+//                intent.putExtra("imgPath",baseModel.getData().get(position).getFilePath());
+                    startActivity(intent);
+//                Intent intent = new Intent(getActivity(), Pk_Daypk.class);
+//                intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
+//                startActivity(intent);
+                }
             }
 
             @Override
@@ -407,6 +473,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 //                        check_Lin.setVisibility(View.GONE);
 //                        ScrollTextView.setVisibility(View.VISIBLE);
                         Intent intent = new Intent(getActivity(), JiFenActivity.class);
+                        intent.putExtra("media", "check");
                         intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
                         startActivityForResult(intent, jifenID);
 //                        startActivity(intent);
@@ -422,6 +489,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
             @Override
             public void onError(Throwable throwable, boolean b) {
+                check_Lin.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
                     Intent intent = new Intent(getActivity(), LoginRegister.class);
@@ -431,6 +499,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
             @Override
             public void onCancelled(CancelledException e) {
+                check_Lin.setEnabled(true);
             }
 
             @Override
@@ -622,6 +691,59 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+    public void myRankData(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    Pk_MyIntegral_Model Integral_Model = new Gson().fromJson(resultString, Pk_MyIntegral_Model.class);
+                    if (Integral_Model.isIsSuccess() && !Integral_Model.getData().equals("[]")) {
+                        my_Count_Txt.setText("积分" + Integral_Model.getData().getAllIntegral());
+                        my_rank_Txt.setText("第" + Integral_Model.getData().getRanking() + "名");
+                        if (Integral_Model.getData().getWorld() == 0) {
+                            my_change_Img.setVisibility(View.INVISIBLE);
+                            my_change_Txt.setVisibility(View.INVISIBLE);
+                        } else if (Integral_Model.getData().getWorld() < 0) {
+                            my_change_Img.setImageResource(R.drawable.change_down);
+                            my_change_Txt.setTextColor(Color.parseColor("#FF0100"));
+                            my_change_Txt.setText(Integral_Model.getData().getWorld() + "");
+                        } else if (Integral_Model.getData().getWorld() > 0) {
+                            my_change_Img.setImageResource(R.drawable.change_update);
+                            my_change_Txt.setTextColor(Color.parseColor("#0BC10B"));
+                            my_change_Txt.setText(Integral_Model.getData().getWorld() + "");
+                        }
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
                 }

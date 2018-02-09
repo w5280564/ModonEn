@@ -8,8 +8,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +40,7 @@ import java.util.Map;
 public class Pk_DayPkAdd_Project_More extends Activity {
     RecyclerView All_XRecy;
     List<ProjectModel> projectModel;
+    private EditText seek_Edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,19 +70,23 @@ public class Pk_DayPkAdd_Project_More extends Activity {
         All_XRecy = (RecyclerView) findViewById(R.id.All_XRecy);
 //        All_XRecy.setPullRefreshEnabled(false);
 //        All_XRecy.setLoadingMoreEnabled(false);
+        seek_Edit = (EditText) findViewById(R.id.seek_Edit);
+        seek_Edit.setVisibility(View.VISIBLE);
+        StaticData.ViewScale(seek_Edit, 646, 52);
 
         return_Btn.setOnClickListener(new return_Btn());
         right_Btn.setOnClickListener(new right_Btn());
+        seek_Edit.addTextChangedListener(new seek_Edit());
 
         projectModel = (List<ProjectModel>) getIntent().getSerializableExtra("baseModel");
 //        choiceModel = baseModel;
 //        choiceLin_List(choiceModel);
+        personData(saveFile.BaseUrl + saveFile.DayPk_ProjectNotWalk);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        personData(saveFile.BaseUrl + saveFile.DayPk_ProjectNotWalk);
 //        personData(saveFile.BaseUrl + "/pk/GetProject");
     }
 
@@ -108,6 +118,37 @@ public class Pk_DayPkAdd_Project_More extends Activity {
         resultString();
         super.onBackPressed();
     }
+
+    private String SearchKey;
+
+    private class seek_Edit implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (StaticData.Stringspace(editable.toString())) {
+                SearchKey = "";
+                addListData(SearchKey);
+            } else {
+                SearchKey = editable.toString();
+                addListData(SearchKey);
+            }
+        }
+    }
+
+    private void  addListData(String seekStr){
+        personData(saveFile.BaseUrl + saveFile.DayPk_ProjectNotWalk+"?SearchKey="+seekStr);
+    }
+
 
     public void initlist(Context context) {
         GridLayoutManager mMangaer = new GridLayoutManager(context, 3);
@@ -245,6 +286,44 @@ public class Pk_DayPkAdd_Project_More extends Activity {
             public void onFinished() {
             }
         });
+    }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (isShouldHideInput(v, ev)) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    v.clearFocus();
+                }
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+        // 必不可少，否则所有的组件都不会有TouchEvent了
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+    public boolean isShouldHideInput(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] leftTop = {0, 0};
+            v.getLocationInWindow(leftTop);
+            int left = leftTop[0];
+            int top = leftTop[1];
+            int bottom = top + v.getHeight();
+            int right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right && event.getY() > top && event.getY() < bottom) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
 

@@ -422,21 +422,21 @@ public class VitalityStepService extends Service {
         sensorManager.registerListener(stepDetector, sensor,
                 SensorManager.SENSOR_DELAY_UI);
         stepDetector.setOnStepCounterListener(new OnStepCounterListener() {
-                    @Override
-                    public void onChangeStepCounter(int step) {
+            @Override
+            public void onChangeStepCounter(int step) {
 
-                        updateNotification(StepDcretor.CURRENT_SETP);
+                updateNotification(StepDcretor.CURRENT_SETP);
 
-                        mHandler.removeMessages(STEP_COUNTER_STOP_HANDLER);
-                        mHandler.sendEmptyMessageDelayed(STEP_COUNTER_STOP_HANDLER, STEP_COUNTER_STOP_HANDLER_DURATION);
-                    }
+                mHandler.removeMessages(STEP_COUNTER_STOP_HANDLER);
+                mHandler.sendEmptyMessageDelayed(STEP_COUNTER_STOP_HANDLER, STEP_COUNTER_STOP_HANDLER_DURATION);
+            }
 
-                    @Override
-                    public void onSaveStepCounter(int step, long millisecond) {
-                        saveVitalityStepData(millisecond / 1000, step);
+            @Override
+            public void onSaveStepCounter(int step, long millisecond) {
+                saveVitalityStepData(millisecond / 1000, step);
 
-                    }
-                });
+            }
+        });
     }
 
     private void unregisterAccelerometerListener() {
@@ -503,7 +503,9 @@ public class VitalityStepService extends Service {
                     //计步暂停保存数据库
                     Logger.e(TAG, "计步暂停保存数据库");
                     saveVitalityStepData(System.currentTimeMillis() / 1000, StepDcretor.CURRENT_SETP);
-                    AddPk_Data(VitalityStepService.this, "http://120.26.218.68:1111/" + "ec/v3/PK/Report_Add", "");
+                    if (StepDcretor.CURRENT_SETP != 0) {
+                        AddPk_Data(VitalityStepService.this, "http://120.26.218.68:1111/" + "ec/v3/PK/Report_Add", "");
+                    }
                     break;
                 }
                 case SAVE_TODAY_STEP: {
@@ -674,7 +676,7 @@ public class VitalityStepService extends Service {
             public void onSuccess(String resultString) {
                 PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
                 if (model.isIsSuccess()) {
-                    Toast.makeText(VitalityStepService.this,StepDcretor.CURRENT_SETP,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VitalityStepService.this, StepDcretor.CURRENT_SETP, Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(MainActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
 //                    String sbf = centent_Txt.getText().toString() + count_Edit.getText().toString() + unit_Txt.getText().toString() + "，";
 ////                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
@@ -710,10 +712,6 @@ public class VitalityStepService extends Service {
             }
         });
     }
-
-
-
-
 
 
 }

@@ -1,5 +1,6 @@
 package com.moying.energyring.myAcativity;
 
+import android.annotation.SuppressLint;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -138,6 +140,7 @@ public class MainActivity extends BaseActivity {
 
     private JobScheduler mJobScheduler;
 
+    @SuppressLint("WrongConstant")
     private void initJobScheduler() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mJobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
@@ -191,7 +194,8 @@ public class MainActivity extends BaseActivity {
 //        }
     }
 
-   public isFristSee_Model isFristModel;
+    public isFristSee_Model isFristModel;
+
     public void guideFristData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -232,7 +236,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-public void hasMesData(final Context context, String baseUrl) {
+
+    public void hasMesData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -246,10 +251,12 @@ public void hasMesData(final Context context, String baseUrl) {
 
                         if (isFristModel.getData().isIs_FirstEditProfile_Remind() || saveFile.getShareData("isGuidePer", context).equals("false")) {
                             unrend_Txt.setVisibility(View.VISIBLE);
+                            if (isHuaweiSupport) {
+                                huaweiShortCut(baseModel.getData());
+                            }
                         } else {
                             unrend_Txt.setVisibility(View.INVISIBLE);
                         }
-
 
 
                     } else {
@@ -439,6 +446,21 @@ public void hasMesData(final Context context, String baseUrl) {
         }
     }
 
+
+    /*在fragment的管理类中，我们要实现这部操作，而他的主要作用是，当D这个activity回传数据到
+ 这里碎片管理器下面的fragnment中时，往往会经过这个管理器中的onActivityResult的方法。*/
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        /*在这里，我们通过碎片管理器中的Tag，就是每个碎片的名称，来获取对应的fragment*/
+////            Fragment f = fragmentManager.findFragmentByTag(curFragmentTag);
+//        if (resultCode == Activity.RESULT_OK) {
+//            Fragment f = fragments.get(3);
+//        /*然后在碎片中调用重写的onActivityResult方法*/
+//            f.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
+
+
     /**
      * 回转到上一次的fragment
      */
@@ -624,5 +646,34 @@ public void hasMesData(final Context context, String baseUrl) {
 
     }
 
+
+    /*
+   * 是否支持华为徽章
+   * */
+    private boolean isHuaweiSupport = true;
+
+
+
+    //华为显示角标
+    private void huaweiShortCut(int aCount) {
+//        ShortcutBadger.applyCount(this, aCount); //for 1.1.4+
+        try {
+//            Intent intent = new Intent("launcher.action.CHANGE_APPLICATION_NOTIFICATION_NUM");
+//            intent.putExtra("packageName", getPackageName());
+//            String launchClassName = getPackageManager().getLaunchIntentForPackage(getPackageName()).getComponent().getClassName();
+//            intent.putExtra("className", launchClassName);
+//            intent.putExtra("notificationNum", aCount);
+//            sendBroadcast(intent);
+
+            Bundle extra = new Bundle();
+            extra.putString("package", getPackageName());
+            String launchClassName = getPackageManager().getLaunchIntentForPackage(getPackageName()).getComponent().getClassName();
+            extra.putString("class", launchClassName);
+            extra.putInt("badgenumber", aCount);
+            getContentResolver().call(Uri.parse("content://com.huawei.android.launcher.settings/badge/"),"change_badge",null,extra);
+        } catch (Exception aE) {
+            isHuaweiSupport = false;
+        }
+    }
 
 }

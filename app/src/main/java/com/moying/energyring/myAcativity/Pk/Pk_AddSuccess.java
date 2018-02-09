@@ -18,6 +18,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAcativity.Person.Person_BadgeHas;
+import com.moying.energyring.myAcativity.Person.Person_Commendation;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.viewpagercards.PkSuccess_CardItem;
 import com.moying.energyring.waylenBaseView.viewpagercards.PkSuccess_CardPagerAdapter;
@@ -51,13 +52,20 @@ public class Pk_AddSuccess extends Activity {
                 if (!jiFenmodel.getData().get_Badge().isEmpty()) {
                     Intent intentSuccess = new Intent(Pk_AddSuccess.this, Person_BadgeHas.class);
                     intentSuccess.putExtra("jiFenmodel", jiFenmodel);
+//                    startActivity(intentSuccess);
+                    startActivityForResult(intentSuccess,1003);
+                    overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
+                }else if (!jiFenmodel.getData().get_Praise().isEmpty()) {
+                    Intent intentSuccess = new Intent(Pk_AddSuccess.this, Person_Commendation.class);
+                    intentSuccess.putExtra("jiFenmodel", jiFenmodel);
                     startActivity(intentSuccess);
                     overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
                 }
             }else{
-
                 Intent intentJiFen = new Intent(Pk_AddSuccess.this, JiFenActivity.class);
+                intentJiFen.putExtra("media","daypk");
                 intentJiFen.putExtra("jifen", jiFenmodel.getData().getIntegral());
+                intentJiFen.putExtra("RewardIntegral", jiFenmodel.getData().getRewardIntegral()+"");
                 startActivityForResult(intentJiFen, 1002);
 
             }
@@ -90,6 +98,13 @@ public class Pk_AddSuccess extends Activity {
                 Intent intent = new Intent(Pk_AddSuccess.this, Person_BadgeHas.class);
                 intent.putExtra("jiFenmodel", jiFenmodel);
                 startActivity(intent);
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
+            }
+        }else if (resultCode == 1003){
+            if (!jiFenmodel.getData().get_Praise().isEmpty()) {
+                Intent intentSuccess = new Intent(Pk_AddSuccess.this, Person_Commendation.class);
+                intentSuccess.putExtra("jiFenmodel", jiFenmodel);
+                startActivity(intentSuccess);
                 overridePendingTransition(R.anim.zoomin, R.anim.zoomin);
             }
         }

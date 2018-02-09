@@ -368,7 +368,7 @@ public class Fragment3_FindTest extends Fragment implements XRecyclerView.Loadin
                 if (baseModel.get(position).getFilePath() != null) {
                     imgpath = String.valueOf(baseModel.get(position).getFilePath());
                 }
-                String content = baseModel.get(position).getPostContent();
+                String content = baseModel.get(position).getPostTitle();
                 String postId = baseModel.get(position).getPostID() + "";
                 String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
                 Intent intent = new Intent(context, Find_WebDetail.class);

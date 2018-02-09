@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +24,13 @@ import android.widget.Toast;
 
 import com.example.sanjay.selectorphotolibrary.SelectedPhotoActivity;
 import com.example.sanjay.selectorphotolibrary.bean.ImgOptions;
+import com.example.sanjay.selectorphotolibrary.utils.PermissionUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.AddPhoto_Model;
 import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Base_Model;
+import com.moying.energyring.Model.ShareContent;
 import com.moying.energyring.Model.huiZongpkPhoto_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.person_daypk_Model;
@@ -55,7 +60,7 @@ import java.util.List;
 import me.shaohui.advancedluban.Luban;
 import me.shaohui.advancedluban.OnMultiCompressListener;
 
-public class Pk_HuiZong extends Activity {
+public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private LinearLayout yiLin;
     public List<String> photoPaths;
@@ -143,15 +148,40 @@ public class Pk_HuiZong extends Activity {
     private class add_photo_Img implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            int choice = 9 - photoPaths.size();
-            ImgOptions options = new ImgOptions(choice, 1, true);
-            startActivityForResult(SelectedPhotoActivity.makeIntent(Pk_HuiZong.this, options), REQUEST_IMAGE);
-
+            /*申请读取存储的权限*/
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PermissionUtils.requestPermission(Pk_HuiZong.this, PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE, permissionGrant);
+            } else {
+                int choice = 9 - photoPaths.size();
+                ImgOptions options = new ImgOptions(choice, 1, true);
+                startActivityForResult(SelectedPhotoActivity.makeIntent(Pk_HuiZong.this, options), REQUEST_IMAGE);
+            }
         }
     }
 
-    private class finsh_Txt implements View.OnClickListener {
+    private PermissionUtils.PermissionGrant permissionGrant = new PermissionUtils.PermissionGrant() {
+        @Override
+        public void onPermissionGranted(int requestCode) {
+            switch (requestCode) {
+                case PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE:
+//                Toast.makeText(ImagePickerActivity.this, "读取存储权限已打开", Toast.LENGTH_SHORT).show();
+                    int choice = 9 - photoPaths.size();
+                    ImgOptions options = new ImgOptions(choice, 1, true);
+                    startActivityForResult(SelectedPhotoActivity.makeIntent(Pk_HuiZong.this, options), REQUEST_IMAGE);
+                    break;
+            }
+        }
+    };
 
+    /*申请权限的回调*/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionUtils.requestPermissionsResult(this, requestCode, permissions, grantResults, permissionGrant);
+    }
+
+
+    private class finsh_Txt implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             if (StaticData.isSpace(add_Edit.getText().toString())) {
@@ -240,10 +270,11 @@ public class Pk_HuiZong extends Activity {
                     if (isFristModel.isIsSuccess()) {
                         if (!isFristModel.getData().isIs_FirstPool_Pic()) {
                             huizong_remid.setVisibility(View.VISIBLE);
-                            updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPool_Pic");//展示功能提醒页
+
                         } else {
                             huizong_remid.setVisibility(View.GONE);
                         }
+
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
                     }
@@ -583,7 +614,7 @@ public class Pk_HuiZong extends Activity {
         });
     }
 
-    public void AddPost_Data(final Context context, String baseUrl, String files) {
+    public void AddPost_Data(final Context context, String baseUrl, final String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -604,20 +635,55 @@ public class Pk_HuiZong extends Activity {
                 finsh_Txt.setEnabled(true);
 
                 BaseDataInt_Model reteModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                String shareTitle = "";
+                String shareConStr = "我的能量源是" + saveFile.getShareData("InviteCode", context);
+                String shareUrl = "";
+                String imgUrl = null;
+//                String shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + postId;
+                ShareContent shareContent = new ShareContent(shareUrl, shareTitle, shareConStr,imgUrl);
+
+                if (!files.equals("")) {
+                    updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPool_Pic");//展示功能提醒页
+                }
                 int integral = reteModel.getData();
                 if (integral == -1) {
                     Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
-                } else if (integral == 0) {
-//                    Intent intent = new Intent(context, Pk_HuiZong.class);
-//                    startActivity(intent);
+                }else if (integral == 0) {
+                    Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+                    Intent intentSucc = new Intent(context, Pk_HuiZong_Success.class);
+                    intentSucc.putExtra("shareContent", shareContent);
+                    startActivity(intentSucc);
                     finish();
                 } else if (integral > 0) {
-                    finish();
                     Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+                    Intent intentSucc = new Intent(context, Pk_HuiZong_Success.class);
+//                    intentSucc.putExtra("shareContent", shareContent);
+                    startActivity(intentSucc);
+
                     Intent intent = new Intent(context, JiFenActivity.class);
+                    intent.putExtra("media", "huizong");
                     intent.putExtra("jifen", integral);
                     startActivity(intent);
+                    finish();
                 }
+
+
+//                else if (integral == 0) {
+////                    Intent intent = new Intent(context, Pk_HuiZong.class);
+////                    startActivity(intent);
+//                    finish();
+//                } else if (integral > 0) {
+//                    finish();
+//                    Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(context, JiFenActivity.class);
+//                    intent.putExtra("media", "huizong");
+//                    intent.putExtra("jifen", integral);
+//                    startActivity(intent);
+//                }
+
+
+
+
             }
 
             @Override

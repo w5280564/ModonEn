@@ -76,7 +76,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_pk_history_line_view);
         chart = (LineChartView) findViewById(R.id.chart);
-        StaticData.ViewScale(chart,0,500);
+        StaticData.ViewScale(chart,0,370);
         chart.setZoomEnabled(false);//设置是否支持缩放
         chart.setVisibility(View.INVISIBLE);
         chart.setValueSelectionEnabled(true);//点击选中

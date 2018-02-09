@@ -2,11 +2,13 @@ package com.moying.energyring.myAcativity.Person;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,8 +16,10 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.moying.energyring.Model.JiFenAndBadge_Model;
+import com.moying.energyring.Model.ShareContent;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.network.saveFile;
 
 
 public class Person_BadgeHas extends Activity {
@@ -25,6 +29,8 @@ public class Person_BadgeHas extends Activity {
     private SimpleDraweeView badge_Img;
     private JiFenAndBadge_Model jiFenmodel;
     private LinearLayout my_Lin;
+    private Button share_Btn;
+    private ShareContent shareContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +50,13 @@ public class Person_BadgeHas extends Activity {
         ImageView badge_chaImg = (ImageView) findViewById(R.id.badge_chaImg);
         have_Txt = (TextView) findViewById(R.id.have_Txt);
         badge_Txt = (TextView) findViewById(R.id.badge_Txt);
+        share_Btn = (Button) findViewById(R.id.share_Btn);
         StaticData.ViewScale(hasbadge_Rel, 510, 712);
         StaticData.ViewScale(badge_Img, 360, 420);
         StaticData.ViewScale(badge_chaImg, 35, 35);
+        StaticData.ViewScale(share_Btn, 450, 92);
+        MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.badge_media);//这时就不用调用setDataSource
+        mPlayer.start();
 
 
         Intent intent = getIntent();
@@ -82,6 +92,7 @@ public class Person_BadgeHas extends Activity {
 //        badge_Txt.setText(myHaveName);
 
         badge_chaImg.setOnClickListener(new badge_chaImg());
+        share_Btn.setOnClickListener(new share_Btn());
     }
 
     private class badge_chaImg implements View.OnClickListener {
@@ -93,14 +104,27 @@ public class Person_BadgeHas extends Activity {
 //            intent.putExtra("jiFenmodel", (Serializable) jiFenmodel);
 //            startActivity(intent);
             if (index + 1 <= jiFenmodel.getData().get_Badge().size()) {
-                onCreate(null);
+                onCreate(null); //刷新加载
                 addAnim(my_Lin);
             } else {
+                Intent intent1 = new Intent();
+                setResult(1003, intent1);
                 finish();
                 overridePendingTransition(0, R.anim.zoomout);
             }
         }
     }
+
+    private class share_Btn implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Person_BadgeHas.this, Person_myShareActivity.class);
+            intent.putExtra("shareContent", shareContent);
+            startActivity(intent);
+//            finish();
+        }
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -125,6 +149,12 @@ public class Person_BadgeHas extends Activity {
         have_Txt.setText(HaveNum);
         badge_Txt.setText(myHaveName);
 
+        String shareTitle = saveFile.getShareData("NickName",this)+"的能量圈徽章墙";
+        String shareConStr = "更多徽章等你发现~";
+        String UserID = saveFile.getShareData("userId",this);
+        String shareUrl = saveFile.BaseUrl + "/Share/Badge?UserID=" + UserID;
+        String imgUrl = null;
+        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr, imgUrl);
     }
 
 }

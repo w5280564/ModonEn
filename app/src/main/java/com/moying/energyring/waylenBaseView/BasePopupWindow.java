@@ -3,8 +3,10 @@ package com.moying.energyring.waylenBaseView;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +79,13 @@ public class BasePopupWindow extends PopupWindow {
 
     @Override
     public void showAsDropDown(View anchor) {
+        if(Build.VERSION.SDK_INT >= 24){
+            Rect visibleFrame = new Rect();
+            anchor.getGlobalVisibleRect(visibleFrame);
+            int height = anchor.getResources().getDisplayMetrics().heightPixels - visibleFrame.bottom;
+            setHeight(height);
+        }
+
         super.showAsDropDown(anchor);
         showAnimator().start();
     }

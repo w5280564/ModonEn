@@ -26,11 +26,12 @@ import java.util.Locale;
 @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
 public class saveFile {
     //    public static String BaseUrl = "http://www.ec.dev.com/";
-    public static String BaseUrl = "http://172.16.0.111/";//本地
-//        public static String BaseUrl = "http://120.26.218.68:1111/";
+//    public static String BaseUrl = "http://172.16.0.111/";//本地
+        public static String BaseUrl = "http://120.26.218.68:1111/";
     public static String Post_Add_Url = "ec/v2/Post/Post_Add";
 
     public static String AddPk_Url = "ec/v4/PK/Report_Add";
+//    public static String AddPkV3_Url = "ec/v3/PK/Report_Add";
     public static String Report_Status_Url = "ec/v3/Post/Report_Post_Add";
     public static String EditInfo_Url = "ec/v2/User/UserInfo_Edit";
 
@@ -102,7 +103,23 @@ public class saveFile {
     public static String haveNewRepost_Url = "ec/v3/post/Report_Post_IsHaveNewRepost";
     public static String badge_List_Url = "ec/badge/User_Badge_List";
     public static String user_hot_Url = "ec/user/User_Hot_List";
-
+    public static String My_Rank_Url = "ec/User/MyIntegral_Ranking";
+    public static String My_FriendRank_Url = "ec/User/Friend_Integral_Ranking_List";
+    public static String My_ReportRank_Url = "ec/pk/My_Report_Ranking";
+    public static String My_ReportRecordProject_Url = "ec/pk/Report_Record_Project_List";
+    public static String My_ProjectType_Url = "ec/pk/ProjectType_List";
+    public static String My_ProjectType_List_Url = "ec/PK/ProjectType_List";
+    public static String My_ProjectList_Search_Url = "ec/PK/Project_List_Search";
+    public static String My_Ranking_One_Url = "ec/pk/Report_Ranking_One_Get";
+    public static String My_preoject_Dele_Url = "ec/pk/ReportProject_Del";
+    public static String My_ReportProject_List_Url = "ec/pk/ReportProject_List";
+    public static String Limit_like_Url = "ec/pk/Likes_Add_Limit_One";
+    public static String Early_like_Url = "ec/pk/Likes_Add_Early";
+    public static String Clock_Add_Url = "ec/pk/Project_Clock_Add";
+    public static String Project_Clock_Data_Url = "ec/pk/Project_Clock_Get";
+    public static String Project_Add_Url = "ec/pk/Project_Add";
+    public static String Share_Project_Url = "ec/pk/Project_RankingNum_Get";
+    public static String Invite_Bind_Url = "ec/user/Invite_Bind";
 
     private static SharedPreferences mShared = null;
     /**

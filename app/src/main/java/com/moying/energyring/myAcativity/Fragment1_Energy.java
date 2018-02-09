@@ -73,7 +73,7 @@ public class Fragment1_Energy extends Fragment {
 
     private void initData() {
         userArr = new ArrayList<>();
-        userArr.add("成长日志");
+        userArr.add("动态");
         userArr.add("公众承诺");
         userArr.add("我的关注");
         tablayout.setTabTextColors(Color.parseColor("#989797"), Color.parseColor("#ffffff"));//初始颜色，选中颜色

@@ -103,7 +103,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     private LinearLayout project_Lin;
     private SimpleDraweeView paadd_Simple;
     EditText pkadd_Edit;
-    ImageView count_Img;
+    TextView count_Txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +161,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         RelativeLayout count_Rel = (RelativeLayout) findViewById(R.id.count_Rel);
         int padRight = (int) (Float.parseFloat(saveFile.getShareData("scale", this)) * 30);
         count_Rel.setPadding(0, 0, padRight, 0);
-        count_Img = (ImageView) findViewById(R.id.count_Img);
+        count_Txt = (TextView) findViewById(R.id.count_Txt);
 
         StaticData.ViewScale(share_Lin, 0, 90);
         StaticData.ViewScale(share_friend, 72, 72);
@@ -171,7 +171,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         StaticData.ViewScale(share_qzone, 72, 72);
         StaticData.ViewScale(pkadd_Rel, 590, 0);
         StaticData.ViewScale(paadd_Simple, 60, 60);
-        StaticData.ViewScale(count_Img, 244, 96);
+        StaticData.ViewScale(count_Txt, 244, 96);
 
         return_Btn.setOnClickListener(new return_Btn());
         add_Btn.setOnClickListener(new add_Btn());
@@ -247,7 +247,9 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     private class add_Btn extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
-            Intent intent = new Intent(Pk_DayPkAdd_More.this, Pk_DayPkAdd_Project_More.class);
+//            Intent intent = new Intent(Pk_DayPkAdd_More.this, Pk_DayPkAdd_Project_More.class);
+//            Intent intent = new Intent(Pk_DayPkAdd_More.this, Pk_DayPKAdd_Project_Classification.class);
+            Intent intent = new Intent(Pk_DayPkAdd_More.this, Pk_DayPKAdd_Project_Tab.class);
             intent.putExtra("baseModel", (Serializable) projectModel);
             //第二个参数为请求码，可以根据业务需求自己编号
             startActivityForResult(intent, RESULT_CODE_MORE);
@@ -298,13 +300,13 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 //                return;
 //            }
             mu_Btn.setEnabled(false);
-//            for (int i = 0; i < projectModel.size(); i++) {
-//                if (StaticData.isSpace(projectModel.get(i).getReportNum())) {
-//                    mu_Btn.setEnabled(true);
-//                    Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//            }
+            for (int i = 0; i < projectModel.size(); i++) {
+                if (StaticData.isSpace(projectModel.get(i).getReportNum()) || projectModel.get(i).getReportNum().equals("0")) {
+                    mu_Btn.setEnabled(true);
+                    Toast.makeText(Pk_DayPkAdd_More.this, "请填写pk数", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
 //
 //            MobclickAgent.onEvent(Pk_DayPkAdd_More.this, "releasePk");//统计页签
 //            if (photoPaths.size() == 0) {
@@ -340,10 +342,12 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                     isFristSee_Model isFristModel = new Gson().fromJson(resultString, isFristSee_Model.class);
                     if (isFristModel.isIsSuccess()) {
                         if (!isFristModel.getData().isIs_FirstPK_Pic()) {
-                            count_Img.setVisibility(View.VISIBLE);
-                            updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPK_Pic");//展示功能提醒页
+                            count_Txt.setVisibility(View.VISIBLE);
+
                         } else {
-                            count_Img.setVisibility(View.GONE);
+                            count_Txt.setVisibility(View.VISIBLE);
+                            count_Txt.setBackgroundResource(0);
+                            count_Txt.setText("添加照片奖励10积分");
                         }
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -559,6 +563,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             share_qzone();
             if (ArticleCount != 0) {
                 Intent intent = new Intent(Pk_DayPkAdd_More.this, JiFenActivity.class);
+                intent.putExtra("media", "daypk");
                 intent.putExtra("jifen", ArticleCount);
                 startActivity(intent);
             }
@@ -569,6 +574,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
         } else {
             if (ArticleCount != 0) {
                 Intent intent = new Intent(Pk_DayPkAdd_More.this, JiFenActivity.class);
+                intent.putExtra("media", "daypk");
                 intent.putExtra("jifen", ArticleCount);
                 startActivity(intent);
             }
@@ -672,7 +678,8 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 255 && data != null) {
-            projectModel = (List<ProjectModel>) data.getSerializableExtra("projectModel");
+//            projectModel = (List<ProjectModel>) data.getSerializableExtra("projectModel");
+            projectModel = saveFile.getGosnClass(this, "moreModel", ProjectModel.class);
 
             projectList(project_Lin, projectModel);
 
@@ -720,7 +727,9 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                 continue;
 //                project_Edit.setEnabled(false);
 //                myBean.get(i).setReportNum(saveFile.getShareData("myStep", this) + "");
-            } else if (myBean.get(i).getName().equals("戒网络小说") || myBean.get(i).getName().equals("戒游戏")|| myBean.get(i).getName().equals("早起")) {
+            } else if (myBean.get(i).getLimit() == 1) {
+//                myBean.get(i).getLimit()
+//                if (myBean.get(i).getLimit() == 1) {
                 project_Edit.setEnabled(false);
                 myBean.get(i).setReportNum("1");
             }
@@ -976,7 +985,7 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
 
     int ArticleCount = 0;
 
-    public void AddPk_Data(final Context context, String baseUrl, String files) {
+    public void AddPk_Data(final Context context, String baseUrl, final String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -994,10 +1003,10 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             allObj.put("Report_Items", jsonArray);
             allObj.put("FileIDs", files);
             allObj.put("PostContent", pkadd_Edit.getText().toString());
-            boolean sync = false;
-            if (add_energy_Img.isChecked()) {
-                sync = true;
-            }
+//            boolean sync = false;
+//            if (add_energy_Img.isChecked()) {
+            boolean sync = true;
+//            }
             allObj.put("Is_Sync", sync);
 
         } catch (JSONException e) {
@@ -1010,6 +1019,53 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
             @Override
             public void onSuccess(String resultString) {
                 mu_Btn.setEnabled(true);
+//                resultString = "     \n" +
+//                        "{\n" +
+//                        "    \"IsSuccess\":true,\n" +
+//                        "    \"Msg\":\"操作成功！\",\n" +
+//                        "    \"Status\":200,\n" +
+//                        "    \"Data\":{\n" +
+//                        "        \"Integral\":0,\n" +
+//                        "        \"_Badge\":[\n" +
+//                        "            {\n" +
+//                        "                \"BadgeID\":16,\n" +
+//                        "                \"BadgeName\":\"累计签到50天徽章\",\n" +
+//                        "                \"BadgeDays\":50,\n" +
+//                        "                \"BadgeType\":2,\n" +
+//                        "                \"Is_Have\":false,\n" +
+//                        "                \"HaveNum\":280,\n" +
+//                        "                \"FileID\":0,\n" +
+//                        "                \"FilePath\":\"http://172.16.0.111/Uploads/2017-11-27/4bc3c882-5115-4be9-99f0-84ef4a7a51ca.png\",\n" +
+//                        "                \"FileID_Gray\":0,\n" +
+//                        "                \"FilePath_Gray\":null\n" +
+//                        "            }\n" +
+//                        "        ],\n" +
+//                        "        \"_Praise\":[\n" +
+//                        "            {\n" +
+//                        "                \"PraiseID\":14,\n" +
+//                        "                \"UserID\":2066,\n" +
+//                        "                \"ProjectID\":2,\n" +
+//                        "                \"PraiseNum\":80,\n" +
+//                        "                \"CreateTime\":\"2018-01-15 16:08:06\",\n" +
+//                        "                \"HaveNum\":1,\n" +
+//                        "                \"ProjectName\":\"跑步\",\n" +
+//                        "                \"ProjectUnit\":\"公里\",\n" +
+//                        "                \"FilePath\":\"http://120.26.218.68:1111/Uploads/2017-12-18/1b21ffe6-7de6-4e08-ac6c-3aa143ac9169.png\"\n" +
+//                        "            },\n" +
+//                        "            {\n" +
+//                        "                \"PraiseID\":15,\n" +
+//                        "                \"UserID\":2066,\n" +
+//                        "                \"ProjectID\":7,\n" +
+//                        "                \"PraiseNum\":100,\n" +
+//                        "                \"CreateTime\":\"2018-01-15 16:08:06\",\n" +
+//                        "                \"HaveNum\":3,\n" +
+//                        "                \"ProjectName\":\"背单词\",\n" +
+//                        "                \"ProjectUnit\":\"个\",\n" +
+//                        "                \"FilePath\":\"http://120.26.218.68:1111/Uploads/2017-10-25/8a7d31d6-62eb-4184-ac84-7179b620f931.png\"\n" +
+//                        "            }\n" +
+//                        "        ]\n" +
+//                        "    }\n" +
+//                        "}\n";
                 JiFenAndBadge_Model model = new Gson().fromJson(resultString, JiFenAndBadge_Model.class);
                 if (model.isIsSuccess()) {
                     Toast.makeText(Pk_DayPkAdd_More.this, "发布成功", Toast.LENGTH_SHORT).show();
@@ -1042,6 +1098,10 @@ public class Pk_DayPkAdd_More extends Activity implements PlatformActionListener
                     Intent intentsucc = new Intent(Pk_DayPkAdd_More.this, Pk_AddSuccess.class);
                     intentsucc.putExtra("jiFenmodel", model);
                     startActivity(intentsucc);
+
+                    if (!files.equals("")) {
+                        updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPK_Pic");//展示功能提醒页
+                    }
 
 
                 } else {

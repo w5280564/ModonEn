@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
+    android:background="#232121"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#4b4b4b"
+        android:textColor="#95a0ab"
         android:layout_margin="20dp"
         android:textSize="16sp"
         android:text="      能量圈是由上海摩英教育集团打造出品，致力于组建学习，运动型家庭。让每一个家庭成为正能量的传播站！让每一个孩子在自信，感恩，好学的环境中成长成才！新圈子，新起点，新生活，加入能量圈，开启属于您的蜕变之旅！"/>

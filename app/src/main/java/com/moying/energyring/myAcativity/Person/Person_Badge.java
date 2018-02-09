@@ -96,7 +96,7 @@ public class Person_Badge extends FragmentActivity {
     public MyFragmentPagerAdapter myAdapter;
 
     private void initData() {
-        tablayout.setTabTextColors(Color.parseColor("#66000000"), Color.parseColor("#ffd800"));//初始颜色，选中颜色
+        tablayout.setTabTextColors(Color.parseColor("#95a0ab"), Color.parseColor("#ffd800"));//初始颜色，选中颜色
         tablayout.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
         tablayout.setTabMode(TabLayout.MODE_FIXED);//设置可以滑动 根据标签自适应宽度 TabLayout.MODE_FIXED
 

@@ -68,6 +68,26 @@ public class Pk_Guide extends Activity {
                     finish();
                 }
             });
+        }else if (guideId.equals("4")){
+            guide_img.setBackgroundResource(R.drawable.guide_feedback);
+            guide_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    Intent intent2 = new Intent();
+//                    setResult(1003,intent2);
+                    finish();
+                }
+            });
+        }else if (guideId.equals("5")){
+            guide_img.setBackgroundResource(R.drawable.guide_daypk);
+            guide_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    Intent intent2 = new Intent();
+//                    setResult(1003,intent2);
+                    finish();
+                }
+            });
         }
     }
 }

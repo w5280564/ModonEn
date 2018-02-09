@@ -13,8 +13,9 @@
             android:id="@+id/my_simple"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/goal_btn_selector_more" />
+            android:layout_centerInParent="true" />
+
+        <!--android:background="@drawable/goal_btn_selector_more"-->
 
         <TextView
             android:id="@+id/name_Txt"

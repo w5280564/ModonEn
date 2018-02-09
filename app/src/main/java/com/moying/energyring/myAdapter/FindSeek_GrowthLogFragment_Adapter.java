@@ -16,8 +16,10 @@ import android.widget.Toast;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
@@ -30,6 +32,7 @@ import org.xutils.x;
 import java.util.List;
 
 import static com.moying.energyring.StaticData.FrescoStatic.addGif;
+import static com.moying.energyring.network.saveFile.getShareData;
 
 /**
  * Created by Admin on 2016/3/29.
@@ -152,6 +155,16 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
                 zanData(context, saveFile.BaseUrl + saveFile.PostLike_Url + "?PostID=" + PostID, position);
             }
         });
+
+
+        holder.remove_Txt.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                holder.remove_Txt.setEnabled(false);
+                int postID = oneData.getPostID();
+                deleData(context, saveFile.BaseUrl + saveFile.DelePost_Url, postID, position, holder.remove_Txt);
+            }
+        });
     }
 
 
@@ -168,6 +181,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  TextView remove_Txt;
         private LinearLayout hero_Lin, like_Lin;
         private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt,hero_Txt,yue_Txt;
         private ImageView energy_img, energy_like;
@@ -194,6 +208,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
             hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
             yue_Txt = (TextView) itemView.findViewById(R.id.yue_Txt);
+            remove_Txt = (TextView) itemView.findViewById(R.id.remove_Txt);
             StaticData.ViewScale(mu_Rel, 710, 0);
 //            StaticData.ViewScale(myhead_simple, 100, 100);
 
@@ -214,6 +229,53 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
     public void setOnItemClickLitener(OnItemClickLitener listener) {
         mOnItemClickLitener = listener;
     }
+
+    //删帖
+    public void deleData(final Context context, String baseUrl, int postID, final int pos, final TextView mytext) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", getShareData("JSESSIONID", context));
+        }
+        params.addBodyParameter("PostID", postID + "");
+        x.http().post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
+                    if (model.isIsSuccess()) {
+                        mytext.setEnabled(true);
+                        otherList.remove(pos);
+                        notifyItemRemoved(pos + 2);//加1是有头部
+//                        notifyDataSetChanged();
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    context.startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
 
     public void zanData(final Context context, String baseUrl, final int pos) {
         RequestParams params = new RequestParams(baseUrl);

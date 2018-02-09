@@ -130,7 +130,7 @@
         android:layout_below="@id/top_Rel"
         android:background="@drawable/ban_round"
         android:gravity="center"
-        android:text="排行"
+        android:text="早起签到排行"
         android:textColor="#ffffff"
         android:textSize="14sp" />
 
@@ -140,7 +140,7 @@
         android:layout_height="20dp"
         android:layout_below="@id/below_Txt"
         android:background="#343434"
-        android:text="早晨5:00-6:30累计签到有效"
+        android:text="早晨5:00-7:00累计签到有效"
         android:textSize="10sp"
         android:gravity="center"
         android:textColor="#989797"/>

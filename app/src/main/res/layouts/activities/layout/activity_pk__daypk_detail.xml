@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121">
+
+    <RelativeLayout
+        android:id="@+id/title_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2b2a2a">
+
+        <ImageView
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/return_black" />
+
+        <ImageView
+            android:id="@+id/right_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/daypk_share_icon"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/cententtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/right_BtnTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/right_Btn"
+            android:src="@drawable/daypk_delete_icon"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/my_tab_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/ac_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/timechioce_next"
+            app:tabPaddingEnd="-0.1dp"
+            app:tabPaddingStart="-0.1dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/my_tab_Lin"
+        android:layout_below="@id/title_Rel"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pos_Txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#343434"
+            android:gravity="center"
+            android:lines="1"
+            android:text="您还未发布动态，发布动态可额外获得积分，去发布>>"
+            android:textColor="#f24d4c"
+            android:textSize="13sp"
+            android:visibility="gone"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/Slideviewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

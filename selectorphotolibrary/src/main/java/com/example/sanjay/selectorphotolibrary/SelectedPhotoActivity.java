@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -14,8 +15,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
@@ -38,6 +42,7 @@ import com.example.sanjay.selectorphotolibrary.bean.ImageBean;
 import com.example.sanjay.selectorphotolibrary.bean.ImageFolder;
 import com.example.sanjay.selectorphotolibrary.bean.ImgOptions;
 import com.example.sanjay.selectorphotolibrary.utils.FileUtils;
+import com.example.sanjay.selectorphotolibrary.utils.PermissionUtils;
 import com.example.sanjay.selectorphotolibrary.utils.ScreenUtil;
 import com.example.sanjay.selectorphotolibrary.utils.TimeUtils;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -47,11 +52,10 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectedPhotoActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, PopupWindow.OnDismissListener, ImageListAdapter.onImageClickListener {
+public class SelectedPhotoActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, PopupWindow.OnDismissListener, ImageListAdapter.onImageClickListener , ActivityCompat.OnRequestPermissionsResultCallback{
 
 
     private static final String TAG = SelectedPhotoActivity.class.getSimpleName();
@@ -77,6 +81,7 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
     private View maskView;
     private ImgOptions imgOptions;
     private TextView confirmBtn;
+    private Uri mCameraUri, mImageUriFromFile;
 
     public static Intent makeIntent(Context mContext, ImgOptions imgOptions) {
         return new Intent(mContext, SelectedPhotoActivity.class).putExtra(EXTRA_DATA, imgOptions);
@@ -95,10 +100,26 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
         findView();
         setActionBar();
         initView();
-
-
         getSupportLoaderManager().initLoader(LOADER_ALL, null, mLoaderCallback);
     }
+
+    private  PermissionUtils.PermissionGrant permissionGrant = new PermissionUtils.PermissionGrant() {
+        @Override
+        public void onPermissionGranted(int requestCode) {
+            switch (requestCode){
+                case PermissionUtils.CODE_CAMERA:
+                    showCameraAction();
+                    break;
+            }
+        }
+    };
+    /*申请权限的回调*/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionUtils.requestPermissionsResult(this, requestCode, permissions, grantResults, permissionGrant);
+    }
+
 
     private void initImageLoaderOption() {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
@@ -122,14 +143,14 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
     private void setActionBar() {
 
         findViewById(R.id.ab_back_btn).setOnClickListener(
-                 new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setResult(RESULT_CANCELED);
+                        finish();
 
-            }
-        });
+                    }
+                });
 
         ((TextView) findViewById(R.id.ab_title_tv)).setText(R.string.selected_pic);
 
@@ -302,10 +323,31 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (mImageAdapter.isShowCamera() && position == 0) {
-            showCameraAction();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PermissionUtils.requestPermission(this, PermissionUtils.CODE_CAMERA,permissionGrant);
+            } else {
+                showCameraAction();
+            }
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                if (haspermissionInManifest(Manifest.permission.CAMERA)) {
+//                    showCameraAction();
+//                } else {
+//                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+//                }
+//            } else {
+//                showCameraAction();
+//            }
         } else {
             ImageBean imageBean = (ImageBean) parent.getItemAtPosition(position);
         }
+    }
+
+    private boolean haspermissionInManifest(String camera) {
+        if (checkSelfPermission(camera) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
     }
 
     private void showCameraAction() {
@@ -314,12 +356,25 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
             // 设置系统相机拍照后的输出路径
             // 创建临时文件
             mTmpFile = FileUtils.createTmpFile(mContext);
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mTmpFile));
+            mImageUriFromFile = Uri.fromFile(mTmpFile);
+            if (mTmpFile != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    /*7.0以上要通过FileProvider将File转化为Uri*/
+
+                    mCameraUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", mTmpFile);
+//                    mCameraUri = FileProvider.getUriForFile(this, FILE_PROVIDER_AUTHORITY, imageFile);
+                } else {
+                    /*7.0以下则直接使用Uri的fromFile方法将File转化为Uri*/
+                    mCameraUri = Uri.fromFile(mTmpFile);
+                }
+            }
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraUri);//将用于输出的文件Uri传递给相机
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
         } else {
             Toast.makeText(mContext, R.string.msg_no_camera, Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallback = new LoaderManager.LoaderCallbacks<Cursor>() {
 
@@ -333,7 +388,7 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             if (id == LOADER_ALL) {
-                return new CursorLoader(mContext,MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,  null, null, IMAGE_PROJECTION[2] + " DESC");
+                return new CursorLoader(mContext, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION, null, null, IMAGE_PROJECTION[2] + " DESC");
             } else if (id == LOADER_CATEGORY) {
                 return new CursorLoader(mContext,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_PROJECTION,
@@ -394,12 +449,22 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onDismiss() {
-
         maskView.setVisibility(View.INVISIBLE);
         maskView.startAnimation(AnimationUtils
                 .loadAnimation(getApplicationContext(),
                         R.anim.alpha_to_zero));
 
+    }
+
+    /**
+     * 将拍的照片添加到相册
+     *
+     * @param uri 拍的照片的Uri
+     */
+    private void galleryAddPic(Uri uri) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        mediaScanIntent.setData(uri);
+        mContext.sendBroadcast(mediaScanIntent);
     }
 
     @Override
@@ -410,13 +475,7 @@ public class SelectedPhotoActivity extends AppCompatActivity implements AdapterV
             if (resultCode == Activity.RESULT_OK) {
                 if (mTmpFile != null) {
                     //更新图库
-                    try {
-                        MediaStore.Images.Media.insertImage(mContext.getContentResolver(), mTmpFile.getAbsolutePath(),null, null);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + mTmpFile.getAbsolutePath())));
-                    Log.e(TAG, " dist=" + mTmpFile.getAbsolutePath());
+                    galleryAddPic(mImageUriFromFile);
                 }
             } else {
                 if (mTmpFile != null && mTmpFile.exists()) {

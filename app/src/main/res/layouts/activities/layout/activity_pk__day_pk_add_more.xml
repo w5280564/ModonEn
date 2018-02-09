@@ -122,12 +122,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/count_Img"
+            <TextView
+                android:id="@+id/count_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pkadd_counticon"
+                android:gravity="center"
+                android:background="@drawable/pkadd_counticon"
                 android:layout_alignParentRight="true"
+                android:textColor="#ffd800"
+                android:textSize="10sp"
                 android:visibility="gone"/>
         </RelativeLayout>
 

@@ -68,6 +68,7 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
             });
         }
         newPk_Model.DataBean oneData = listModel.getData().get(position);
+        NumberFormat nf = new DecimalFormat("#.#");//# 0 不显示
         if (oneData.getReportID() == 0) { //0今天没有汇报项目
             setGray(holder);
 //            if (oneData.getFilePath() != null) {
@@ -75,6 +76,7 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
 //                holder.project_Simple.setImageURI(contentUri);
 //            }
             holder.rank_Txt.setVisibility(View.INVISIBLE);
+            holder.count_Txt.setText("- - " + oneData.getProjectUnit());
         } else {
             setYellow(holder);
             holder.rank_Txt.setVisibility(View.VISIBLE);
@@ -82,6 +84,12 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
 //                Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
 //                holder.project_Simple.setImageURI(contentUri);
 //            }
+
+            if (oneData.getLimit() == 1) {
+                holder.count_Txt.setText(oneData.getReport_Days() + oneData.getProjectUnit());
+            } else {
+                holder.count_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
+            }
         }
 //        holder.today_Txt.setText(oneData.getRanking() + "");
 //        holder.project_Txt.setText(oneData.getProjectName());
@@ -90,24 +98,28 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
 //        holder.unit_Txt.setText(oneData.getProjectUnit());
 //        holder.all_Txt.setText("本月累计" + nf.format(oneData.getReport_Num_Month()) + oneData.getProjectUnit());
 
-        NumberFormat nf = new DecimalFormat("#.#");//# 0 不显示
-        if (oneData.getLimit() == 1) {
-            holder.count_Txt.setText(oneData.getReport_Days() + oneData.getProjectUnit());
-        } else {
-            holder.count_Txt.setText(nf.format(oneData.getReportNum()) + oneData.getProjectUnit());
-        }
+
         holder.project_Txt.setText(oneData.getProjectName());
         holder.all_Txt.setText("本月累计" + nf.format(oneData.getReport_Num_Month()) + oneData.getProjectUnit());
-        if (oneData.getRanking() == 1) {
-            holder.rank_Txt.setBackgroundResource(R.drawable.rank_one);
-        } else if (oneData.getRanking() == 2) {
-            holder.rank_Txt.setBackgroundResource(R.drawable.rank_two);
-        } else if (oneData.getRanking() == 2) {
-            holder.rank_Txt.setBackgroundResource(R.drawable.rank_three);
-        } else {
-            holder.rank_Txt.setText(oneData.getRanking() + "");
+        if (oneData.getProjectTypeID() == -1){
+            holder.rank_Txt.setVisibility(View.INVISIBLE);
+        }else {
+
+            if (oneData.getRanking() == 1) {
+                holder.rank_Txt.setBackgroundResource(R.drawable.rank_one);
+            } else if (oneData.getRanking() == 2) {
+                holder.rank_Txt.setBackgroundResource(R.drawable.rank_two);
+            } else if (oneData.getRanking() == 3) {
+                holder.rank_Txt.setBackgroundResource(R.drawable.rank_three);
+            } else {
+                holder.rank_Txt.setText(oneData.getRanking() + "");
 //            holder.rank_Txt.setVisibility(View.INVISIBLE);
+            }
         }
+        if (oneData.getClockID() > 0){
+            holder.colock_Img.setVisibility(View.VISIBLE);
+        }
+
 
     }
 
@@ -125,6 +137,7 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  ImageView colock_Img;
         private LinearLayout my_Lin;
         private TextView count_Txt, project_Txt, all_Txt, rank_Txt;
 //        private AutoScaleTextView project_Txt, all_Txt;
@@ -141,6 +154,8 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
             ImageView line_Img = (ImageView) itemView.findViewById(R.id.line_Img);
             rank_Txt = (TextView) itemView.findViewById(R.id.rank_Txt);
             StaticData.ViewScale(my_Lin, 348, 222);
+             colock_Img = (ImageView) itemView.findViewById(R.id.colock_Img);
+            StaticData.ViewScale(colock_Img, 35, 35);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             int magTop = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 18);
@@ -186,8 +201,8 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
     }
 
     private void setYellow(MyViewHolder holder) {
-        holder.count_Txt.setTextColor(Color.parseColor("#ffffff"));
-        holder.project_Txt.setTextColor(Color.parseColor("#989797"));
+        holder.count_Txt.setTextColor(Color.parseColor("#ffd800"));
+        holder.project_Txt.setTextColor(Color.parseColor("#ffffff"));
 //        holder.today_Txt.setBackgroundResource(R.drawable.today_shap);
 //        holder.today_Txt.setTextColor(Color.parseColor("#262626"));
 //        holder.project_Txt.setTextColor(Color.parseColor("#262626"));
@@ -197,8 +212,8 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
     }
 
     private void setGray(MyViewHolder holder) {
-        holder.count_Txt.setTextColor(Color.parseColor("#4d4a4a"));
-        holder.project_Txt.setTextColor(Color.parseColor("#4d4a4a"));
+        holder.count_Txt.setTextColor(Color.parseColor("#ffffff"));
+        holder.project_Txt.setTextColor(Color.parseColor("#ffffff"));
 //        holder.today_Txt.setBackgroundResource(R.drawable.today_shap_gray);
 //        holder.today_Txt.setTextColor(Color.parseColor("#ffffff"));
 //        holder.project_Txt.setTextColor(Color.parseColor("#aaaaaa"));

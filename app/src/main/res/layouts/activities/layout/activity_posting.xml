@@ -42,7 +42,8 @@
                     android:gravity="left"
                     android:textColor="#989797"
                     android:textColorHint="#989797"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:hint="谈谈此时的想法吧"/>
 
                 <RelativeLayout
                     android:id="@+id/remindRel"
@@ -86,7 +87,7 @@
 
                 <com.moying.energyring.waylenBaseView.FlowLayout
                     android:id="@+id/photoLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_above="@id/remindRel"
                     android:layout_below="@id/mu_Btn">
@@ -99,6 +100,18 @@
                         android:background="@drawable/add_photo"
                         android:scaleType="centerInside" />
                 </com.moying.energyring.waylenBaseView.FlowLayout>
+
+
+                <ImageView
+                    android:id="@+id/post_remid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/photoLayout"
+                    android:src="@drawable/posting_remid_icon"
+                    android:layout_alignTop="@id/photoLayout"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"/>
+
 
                 <LinearLayout
                     android:id="@+id/hero_Lin"

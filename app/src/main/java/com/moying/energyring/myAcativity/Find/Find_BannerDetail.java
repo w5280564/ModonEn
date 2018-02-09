@@ -64,7 +64,7 @@ public class Find_BannerDetail extends Activity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.news_web);
         LinearLayout layoutRoot = new LinearLayout(this);//根布局
-        layoutRoot.setBackgroundColor(Color.parseColor("#f3f3f3"));
+        layoutRoot.setBackgroundColor(Color.parseColor("#232121"));
         layoutRoot.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
@@ -93,7 +93,7 @@ public class Find_BannerDetail extends Activity {
         myWebView.addJavascriptInterface(this, "android");
 //        myWebView.addJavascriptInterface(this, "downimg");
         changeCookies(this, url);//同步cookike
-
+//        uriHttpFirst(url);
         // 调用loadUrl()
         myWebView.loadUrl(url);
         myWebView.setWebViewClient(new WebViewClient() {
@@ -105,11 +105,11 @@ public class Find_BannerDetail extends Activity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    view.loadUrl(request.getUrl().toString());
-                } else {
-                    view.loadUrl(request.toString());
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    view.loadUrl(request.getUrl().toString());
+//                } else {
+//                    view.loadUrl(request.toString());
+//                }
 
 //                view.loadUrl(url);
                 return false;
@@ -136,7 +136,7 @@ public class Find_BannerDetail extends Activity {
 
     private void initTitle(LinearLayout mycontentView) {
         final View view = LayoutInflater.from(Find_BannerDetail.this).inflate(R.layout.base_titlebar, null);
-        view.setBackgroundColor(Color.parseColor("#ffffff"));
+        view.setBackgroundColor(Color.parseColor("#2b2a2a"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setElevation(2f);//阴影
         }
@@ -146,10 +146,10 @@ public class Find_BannerDetail extends Activity {
         Button return_Btn = (Button) view.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) view.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#909090"));
+        cententtxt.setTextColor(Color.parseColor("#ffffff"));
 //        cententtxt.setText(myWebView.getTitle());
         cententtxt.setText("详情");
-        StaticData.ViewScale(return_Btn, 48, 48);
+        StaticData.ViewScale(return_Btn, 80, 88);
         Button right_Btn = (Button) view.findViewById(R.id.right_Btn);
         right_Btn.setBackgroundResource(R.drawable.share_icon);
         StaticData.ViewScale(right_Btn, 40, 40);
@@ -396,5 +396,12 @@ public class Find_BannerDetail extends Activity {
 
     }
 
+    //地址HTTP协议判断，无HTTP打头的，增加http://，并返回。
+    private String uriHttpFirst(String strUri){
+        if(strUri.indexOf("http://",0) != 0 && strUri.indexOf("https://",0) != 0 ){
+            strUri = "http://" + strUri;
+        }
+        return strUri;
+    }
 
 }

@@ -75,7 +75,11 @@ public class Person_Integral_Adapter extends RecyclerView.Adapter<Person_Integra
             contentStr = "" + oneData.getIntegral();
         }
         holder.content_Txt.setText(contentStr);
+        StringBuffer sbf = new StringBuffer();
+        sbf.append(oneData.getCreateTime().substring(0, 16));
+//        sbf.insert(6, "  ");
 
+        holder.time_Txt.setText(sbf.toString());
     }
 
 
@@ -93,13 +97,14 @@ public class Person_Integral_Adapter extends RecyclerView.Adapter<Person_Integra
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private RelativeLayout my_Rel;
-        private TextView name_Txt, content_Txt;
+        private TextView name_Txt, content_Txt,time_Txt;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             my_Rel = (RelativeLayout) itemView.findViewById(R.id.my_Rel);
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
             content_Txt = (TextView) itemView.findViewById(R.id.content_Txt);
+            time_Txt = (TextView) itemView.findViewById(R.id.time_Txt);
 
             StaticData.ViewScale(my_Rel, 710, 120);
         }

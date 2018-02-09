@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -30,6 +32,7 @@ import android.widget.Toast;
 
 import com.example.sanjay.selectorphotolibrary.SelectedPhotoActivity;
 import com.example.sanjay.selectorphotolibrary.bean.ImgOptions;
+import com.example.sanjay.selectorphotolibrary.utils.PermissionUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeController;
 import com.facebook.drawee.generic.RoundingParams;
@@ -41,6 +44,7 @@ import com.google.gson.Gson;
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.AddPhoto_Model;
 import com.moying.energyring.Model.PostAndPk_Add;
+import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.postTagList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
@@ -84,7 +88,7 @@ import cn.sharesdk.wechat.moments.WechatMoments;
 import me.shaohui.advancedluban.Luban;
 import me.shaohui.advancedluban.OnMultiCompressListener;
 
-public class PostingActivity extends Activity implements PlatformActionListener, Handler.Callback {
+public class PostingActivity extends Activity implements PlatformActionListener, Handler.Callback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private FlowLayout photoLayout;
     private ImageButton add_photo_Img;
@@ -93,7 +97,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     List<Integer> choiceId;
     private EditText content_Edit;
     private Button right_Btn;
-    private ImageView share_friend, share_mom, share_sina, share_qq, share_qzone, energy_img;
+    private ImageView share_friend, share_mom, share_sina, share_qq, share_qzone, energy_img, post_remid;
     private Map<Integer, Boolean> shareFlag;
     private LinearLayout hero_Lin;
     private TextView hero_Txt;
@@ -110,7 +114,6 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         mam.pushOneActivity(this);//把当前activity压入了栈中
 
         initTitle();
-        initView();
         initView();
         initData();
     }
@@ -143,7 +146,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         return_Btn.setText("取消");
         TextView cententTxt = (TextView) title_Include.findViewById(R.id.cententtxt);
         cententTxt.setTextColor(Color.parseColor("#ffffff"));
-        cententTxt.setText("成长日志");
+        cententTxt.setText("动态");
         right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
         right_Btn.setTextColor(Color.parseColor("#ffffff"));
@@ -165,9 +168,9 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 //        if (!saveFile.getShareData("role", PostingActivity.this).equals("false")) {
 //            int role = Integer.parseInt(saveFile.getShareData("role", PostingActivity.this));
 //            if (role < 3) {
-                isrole = false;
-                hero_Lin.setVisibility(View.VISIBLE);
-                hero_Txt.setTextColor(Color.parseColor("#b9b9b9"));
+        isrole = false;
+        hero_Lin.setVisibility(View.VISIBLE);
+        hero_Txt.setTextColor(Color.parseColor("#b9b9b9"));
 //            }
 //        }
         initDb();//初始化数据库
@@ -177,6 +180,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         }
 
         tagListData(saveFile.BaseUrl + saveFile.Tag_List_Url, PostingActivity.this);//签到
+        guideFristData(this, saveFile.BaseUrl + saveFile.GuidePerFirst_Url);//展示功能提醒页
     }
 
     private save_Popup savePop;
@@ -267,6 +271,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         hero_Lin = (LinearLayout) findViewById(R.id.hero_Lin);
         energy_img = (ImageView) findViewById(R.id.energy_img);
         hero_Txt = (TextView) findViewById(R.id.hero_Txt);
+        post_remid = (ImageView) findViewById(R.id.post_remid);
 
         StaticData.ViewScale(edit_Rel, 710, 1032);
         StaticData.ViewScale(arrow_img, 16, 30);
@@ -276,6 +281,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         StaticData.ViewScale(share_qq, 72, 72);
         StaticData.ViewScale(share_qzone, 72, 72);
         StaticData.ViewScale(energy_img, 40, 40);
+        StaticData.ViewScale(post_remid, 284, 58);
 //        StaticData.ViewScale(add_photo_Img, 82, 82);
         add_photo_Img.setOnClickListener(new add_photo_Img());
         remindRel.setOnClickListener(new remindRel());
@@ -320,12 +326,38 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     private class add_photo_Img implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-
-            int choice = 9 - photoPaths.size();
-            ImgOptions options = new ImgOptions(choice, 1, true);
-            startActivityForResult(SelectedPhotoActivity.makeIntent(PostingActivity.this, options), REQUEST_IMAGE);
+            /*申请读取存储的权限*/
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PermissionUtils.requestPermission(PostingActivity.this, PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE, permissionGrant);
+            } else {
+                int choice = 9 - photoPaths.size();
+                ImgOptions options = new ImgOptions(choice, 1, true);
+                startActivityForResult(SelectedPhotoActivity.makeIntent(PostingActivity.this, options), REQUEST_IMAGE);
+            }
         }
     }
+
+    private PermissionUtils.PermissionGrant permissionGrant = new PermissionUtils.PermissionGrant() {
+        @Override
+        public void onPermissionGranted(int requestCode) {
+            switch (requestCode) {
+                case PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE:
+//                Toast.makeText(ImagePickerActivity.this, "读取存储权限已打开", Toast.LENGTH_SHORT).show();
+                    int choice = 9 - photoPaths.size();
+                    ImgOptions options = new ImgOptions(choice, 1, true);
+                    startActivityForResult(SelectedPhotoActivity.makeIntent(PostingActivity.this, options), REQUEST_IMAGE);
+                    break;
+            }
+        }
+    };
+
+    /*申请权限的回调*/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionUtils.requestPermissionsResult(this, requestCode, permissions, grantResults, permissionGrant);
+    }
+
 
     private boolean popisShow = false;
 
@@ -458,7 +490,13 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     private void ChangeAddPhotoImage() {
         if (photoPaths.size() >= 9) {
             add_photo_Img.setVisibility(View.GONE);
+
         } else {
+            if (photoPaths.size() > 0) {
+                post_remid.setVisibility(View.GONE);
+            } else {
+                post_remid.setVisibility(View.VISIBLE);
+            }
             add_photo_Img.setVisibility(View.VISIBLE);
         }
     }
@@ -555,11 +593,12 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
                 if (model.isIsSuccess()) {
                     Toast.makeText(PostingActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                    String data = model.getData();
                     shareTitle = content_Edit.getText().toString();
                     shareContent = "我的能量源是" + saveFile.getShareData("InviteCode", PostingActivity.this);
-                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData();
+                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + data.substring(0, data.indexOf(","));
 
-                    String data = model.getData();
+
                     ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
 
                     isShare(shareIndex());//同步分享
@@ -653,7 +692,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 @Override
                 public void onClick(View view) {
                     int tag = (Integer) view.getTag();
-                    if ( TagTxtArr.get(tag).isSelected()) {
+                    if (TagTxtArr.get(tag).isSelected()) {
                         TagTxtArr.get(tag).setTextColor(Color.parseColor("#989797"));
                         TagTxtArr.get(tag).setSelected(false);
                         TagID = 0;
@@ -772,6 +811,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             share_qzone();
             if (ArticleCount != 0) { // 0是超过发帖上限
                 Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
+                intent.putExtra("media", "posting");
                 intent.putExtra("jifen", ArticleCount);
                 startActivity(intent);
             }
@@ -779,6 +819,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         } else {
             if (ArticleCount != 0) {
                 Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
+                intent.putExtra("media", "posting");
                 intent.putExtra("jifen", ArticleCount);
                 startActivity(intent);
             }
@@ -1255,4 +1296,50 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         choiceModel.clear();
         choiceId.clear();
     }
+
+    public void guideFristData(final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    isFristSee_Model isFristModel = new Gson().fromJson(resultString, isFristSee_Model.class);
+                    if (isFristModel.isIsSuccess()) {
+                        if (!isFristModel.getData().isIs_First_Post_Pic()) {
+                            post_remid.setVisibility(View.VISIBLE);
+
+                        } else {
+                            post_remid.setVisibility(View.GONE);
+                        }
+
+                    } else {
+                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, LoginRegister.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+            }
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
 }

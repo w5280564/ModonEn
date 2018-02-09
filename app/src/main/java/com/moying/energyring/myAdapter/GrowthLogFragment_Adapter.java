@@ -134,7 +134,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 //        }
         if (oneData.getFilePath() != null) {
 //            StaticData.addPlace(holder.content_simple, context);
-            StaticData.ViewScale(holder.content_simple, 710, 440);
+            StaticData.ViewScale(holder.content_simple, 710, 710);
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
             holder.content_simple.setImageURI(contentUri);
         }

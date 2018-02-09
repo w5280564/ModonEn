@@ -63,6 +63,7 @@ public class Goal_Model implements Serializable{
          * Is_Disabled : false
          * Limit : 100.0
          * FileID : 54
+         * ProjectTypeID
          */
 
         private int ProjectID;
@@ -73,6 +74,16 @@ public class Goal_Model implements Serializable{
         private boolean Is_Disabled;
         private double Limit;
         private int FileID;
+        private int ProjectTypeID;
+
+        public int getProjectTypeID() {
+            return ProjectTypeID;
+        }
+
+        public void setProjectTypeID(int projectTypeID) {
+            ProjectTypeID = projectTypeID;
+        }
+
 
         public int getProjectID() {
             return ProjectID;

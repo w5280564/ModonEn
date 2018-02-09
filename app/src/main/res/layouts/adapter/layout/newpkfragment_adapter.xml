@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:background="@drawable/newpk_relbg_black"
+        android:background="@drawable/newpk_relbg"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -28,7 +28,7 @@
             android:id="@+id/project_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#989797"
+            android:textColor="#ffffff"
             android:textSize="10sp"
             android:textStyle="bold" />
 
@@ -38,13 +38,13 @@
             android:layout_height="1dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="#804d4a4a" />
+            android:background="#ffffff" />
 
         <TextView
             android:id="@+id/all_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#4d4a4a"
+            android:textColor="#ffffff"
             android:textSize="10sp"
             android:textStyle="bold" />
 
@@ -57,6 +57,15 @@
         android:textSize="10sp"
         android:textColor="#f55e6b"
         android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/colock_Img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/daypk_colock_icon"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/my_Lin"
+        android:visibility="gone"/>
 
     <!-- <RelativeLayout
          android:id="@+id/mu_Rel"

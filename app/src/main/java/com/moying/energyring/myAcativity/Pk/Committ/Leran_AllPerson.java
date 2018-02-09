@@ -216,7 +216,8 @@ public class Leran_AllPerson extends Activity implements XRecyclerView.LoadingLi
         @Override
         public void onClick(View view) {
             MobclickAgent.onEvent(Leran_AllPerson.this, "setagoal");//统计页签
-            Intent intent = new Intent(Leran_AllPerson.this, Leran_Goal.class);
+//            Intent intent = new Intent(Leran_AllPerson.this, Leran_Goal.class);
+            Intent intent = new Intent(Leran_AllPerson.this, Leran_Goal_Add.class);
             startActivity(intent);
         }
     }

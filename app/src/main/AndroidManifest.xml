@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.moying.energyring">
 
     <!-- service权限 -->
@@ -32,6 +33,9 @@
     <!-- 6.0忽略电池优化 -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
+    <!-- 声明权限添加角标 -->
+    <uses-permission android:name=" com.huawei.android.launcher.permission. CHANGE_BADGE" />
+
     <application
         android:name=".waylenBaseView.MyApplication"
         android:allowBackup="true"
@@ -39,7 +43,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppThemeprice">
-        <!--android:theme="@android:style/Theme.NoTitleBar"-->
+
+        <!-- android:theme="@android:style/Theme.NoTitleBar" -->
         <activity
             android:name=".myAcativity.LaunchActivity"
             android:screenOrientation="portrait"
@@ -53,7 +58,7 @@
         <activity
             android:name=".myAcativity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeprice" />
+            android:theme="@style/AppThemeprice"></activity>
         <activity
             android:name=".myAcativity.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -325,11 +330,126 @@
             android:name=".myAcativity.Person.setDataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MyDialog" />
-        <activity android:name=".myAcativity.Pk.Pk_HuiZong" android:screenOrientation="portrait"/>
-        <activity android:name=".myAcativity.Person.Person_Badge" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".myAcativity.Pk.Pk_HuiZong"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Badge"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.WelcomeNew"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_BadgeHas"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
 
-        <activity android:name=".myAcativity.WelcomeNew" android:screenOrientation="portrait" />
-        <activity android:name=".myAcativity.Person.Person_BadgeHas" android:screenOrientation="portrait"  android:theme="@style/MyDialog"/>
+        <!-- android:authorities="${applicationId}.provider" -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name=".myAcativity.Pk.Pk_FenRankList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_AddReport"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".myAcativity.Person.Person_Feedback"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Feedback_Posting"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Feedback_Detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPKAdd_Project_Classification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPKAdd_Project_Tab"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkAdd_Project_TabSeek"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPk_Project_Detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Commendation"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_Goal_Add"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Committ.Leran_Goal_Add_TabSeek"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPk_Project_Detail_RankAll"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_AddReport_Succ"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_HuiZong_Success"
+            android:screenOrientation="portrait" />
+        <activity android:name=".myAcativity.Pk.Pk_AddReport_Colock" />
+        <activity
+            android:name=".myAcativity.Person.Person_myShareActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+
+        <receiver
+            android:name=".Recriver.MyReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+
+                <category android:name="com.moying.energyring" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPkAdd_Project_Crate"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentTheme" />
+
+        <!-- com.moying.energyring.myAcativity.Person.Person_Zong -->
+
+        <activity
+            android:name=".myAcativity.Person.Person_Zong"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.moying"
+                    android:scheme="waylen" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".myAcativity.OpenapkActivity"></activity>
+        <activity android:name=".myAcativity.Person.Person_Neng"></activity>
     </application>
 
 </manifest>

@@ -376,15 +376,6 @@
                     android:layout_centerVertical="true"
                     android:background="@drawable/right_arrow_black" />
 
-                <TextView
-                    android:id="@+id/guirend_Txt"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/calendar_item_red"
-                    android:layout_toLeftOf="@id/gui_arrow"
-                    android:layout_centerVertical="true"
-                    android:visibility="invisible" />
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
@@ -433,12 +424,52 @@
                     android:background="#343434" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/idea_Rel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/personnew_idea_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/personnew_idea_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/personnew_idea_icon"
+                    android:text="我要吐槽"
+                    android:textColor="#e3e7eb"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/idea_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/right_arrow_black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/personnew_idea_icon"
+                    android:background="#343434" />
+            </RelativeLayout>
+
 
 
             <RelativeLayout
                 android:id="@+id/bang_Rel"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/person_bang_icon"
@@ -557,6 +588,56 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/zong_Rel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/person_hui_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/person_hui_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/person_hui_icon"
+                    android:text="汇总报告"
+                    android:textColor="#e3e7eb"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/hui_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/right_arrow_black" />
+
+                <TextView
+                    android:id="@+id/idearend_Txt"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/calendar_item_red"
+                    android:layout_toLeftOf="@id/hui_arrow"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/person_hui_icon"
+                    android:background="#343434"
+                    android:visibility="gone" />
+
+
+            </RelativeLayout>
 
 
         </LinearLayout>

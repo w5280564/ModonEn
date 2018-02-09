@@ -12,6 +12,15 @@ public class ProjectModel implements Serializable{
     private String ImgUrl;
     private String unit;
     private String reportNum;
+    private double Limit;
+
+    public double getLimit() {
+        return Limit;
+    }
+
+    public void setLimit(double limit) {
+        Limit = limit;
+    }
 
     public String getReportNum() {
         return reportNum;

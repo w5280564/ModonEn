@@ -1,6 +1,7 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.moying.energyring.Model.Notice_UserList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.network.saveFile;
 
 import java.util.List;
@@ -68,7 +70,7 @@ public class Notice_Mes_Adapter extends RecyclerView.Adapter<Notice_Mes_Adapter.
             });
         }
 
-        Notice_UserList_Model.DataBean oneData = otherList.get(position);
+        final Notice_UserList_Model.DataBean oneData = otherList.get(position);
 
         String userId = saveFile.getShareData("userId", context);
         if (oneData.getUserID() == Integer.parseInt(userId)) {
@@ -80,6 +82,14 @@ public class Notice_Mes_Adapter extends RecyclerView.Adapter<Notice_Mes_Adapter.
             } else {
                 StaticData.lodingheadBg(holder.mesright_simple);
             }
+            holder.mesright_simple.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                    intent.putExtra("UserID",oneData.getUserID()+"");
+                    context.startActivity(intent);
+                }
+            });
             holder.mesright_Txt.setText(HtmlToText.delHTMLTag(oneData.getMessageContent()));
         }else {
             holder.mesright_Rel.setVisibility(View.GONE);
@@ -91,7 +101,16 @@ public class Notice_Mes_Adapter extends RecyclerView.Adapter<Notice_Mes_Adapter.
                 StaticData.lodingheadBg(holder.mesleft_simple);
             }
             holder.mesleft_Txt.setText(HtmlToText.delHTMLTag(oneData.getMessageContent()));
+            holder.mesleft_simple.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                    intent.putExtra("UserID",oneData.getUserID()+"");
+                    context.startActivity(intent);
+                }
+            });
         }
+
     }
 
 

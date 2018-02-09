@@ -104,7 +104,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/fans_icon"
                 android:text="新粉丝"
-                android:textColor="#7b7b7b"
+                android:textColor="#ffffff"
                 android:textSize="12sp" />
 
             <ImageView
@@ -160,7 +160,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/nomm_icon"
                 android:text="评论"
-                android:textColor="#7b7b7b"
+                android:textColor="#ffffff"
                 android:textSize="12sp" />
 
             <ImageView
@@ -215,7 +215,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/like_icon"
                 android:text="喜欢"
-                android:textColor="#7b7b7b"
+                android:textColor="#ffffff"
                 android:textSize="12sp" />
 
             <ImageView
@@ -269,7 +269,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/atme_icon"
                 android:text="提到我"
-                android:textColor="#7b7b7b"
+                android:textColor="#ffffff"
                 android:textSize="12sp" />
 
             <ImageView
@@ -323,7 +323,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/notice_iocn"
                 android:text="通知"
-                android:textColor="#7b7b7b"
+                android:textColor="#ffffff"
                 android:textSize="12sp" />
 
             <ImageView

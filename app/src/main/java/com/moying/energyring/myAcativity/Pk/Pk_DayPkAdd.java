@@ -681,12 +681,12 @@ public class Pk_DayPkAdd extends Activity implements PlatformActionListener, Han
                 if (model.isIsSuccess()) {
                     Toast.makeText(Pk_DayPkAdd.this,"发布成功",Toast.LENGTH_SHORT).show();
 
-                    String sbf = centent_Txt.getText().toString() + count_Edit.getText().toString() + unit_Txt.getText().toString() + "，";
-//                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
-                    shareTitle = "我今天" + sbf + "(根据实际的汇报内容)，加入能量圈，和我一起PK吧！";
-//                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode",Pk_DayPkAdd.this);
-                    shareContent = "";
-                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData();
+//                    String sbf = centent_Txt.getText().toString() + count_Edit.getText().toString() + unit_Txt.getText().toString() + "，";
+////                    String contenttxt = "【"+ saveFile.getShareData("NickName",context)+"蜕变之旅 "+ StaticData.getTodaystyle() +"】  我完成了" + sbf +"欢迎到每日pk来挑战我！ 【来自能量圈APP-每日PK】";
+//                    shareTitle = "我今天" + sbf + "(根据实际的汇报内容)，加入能量圈，和我一起PK吧！";
+////                    shareContent = "我的能量源是" + saveFile.getShareData("InviteCode",Pk_DayPkAdd.this);
+//                    shareContent = "";
+//                    shareUrl = saveFile.BaseUrl + "Share/PkDetails?ReportID=" + model.getData();
 
                     String data = model.getData();
                     ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));

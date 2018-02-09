@@ -35,11 +35,14 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAcativity.Person.Person_Badge;
+import com.moying.energyring.myAcativity.Person.Person_Feedback;
 import com.moying.energyring.myAcativity.Person.Person_LineView;
+import com.moying.energyring.myAcativity.Person.Person_Neng;
 import com.moying.energyring.myAcativity.Person.Person_Notice;
 import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAcativity.Person.Person_Set;
 import com.moying.energyring.myAcativity.Person.Person_Shop;
+import com.moying.energyring.myAcativity.Person.Person_Zong;
 import com.moying.energyring.myAcativity.Pk.Pk_Daypk;
 import com.moying.energyring.myAcativity.Pk.Pk_Guide;
 import com.moying.energyring.network.saveFile;
@@ -54,6 +57,8 @@ import org.xutils.x;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import me.shaohui.advancedluban.Luban;
 import me.shaohui.advancedluban.OnCompressListener;
@@ -66,7 +71,7 @@ import static com.moying.energyring.myAcativity.Person.PersonMyCenter.REQUEST_CO
 public class Fragment4_PersonNew extends Fragment {
     private View parentView;
     private SimpleDraweeView personBg_simple, user_simple;
-    private TextView userName_Txt, userCount_Txt, myInto_Txt, zanCount_Txt, zanRank_Txt,guirend_Txt;
+    private TextView userName_Txt, userCount_Txt, myInto_Txt, zanCount_Txt, zanRank_Txt, idearend_Txt;
     private ImageView personnew_sex_Img;
     private String InviteCode;
     private AutoScaleTextView nommunrend_Txt;
@@ -103,17 +108,16 @@ public class Fragment4_PersonNew extends Fragment {
     }
 
 
-
     private void initView(View view) {
 
         ImageView personnew_set_icon = (ImageView) view.findViewById(R.id.personnew_set_icon);
         ImageView personnew_nom_icon = (ImageView) view.findViewById(R.id.personnew_nom_icon);
         nommunrend_Txt = (AutoScaleTextView) view.findViewById(R.id.nommunrend_Txt);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        int padLeft= (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 30);
+        int padLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 30);
         int padBot = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 40);
-        params.setMargins(padLeft,0,0,padBot);
-        StaticData.layoutParamsScale(params,40,40);
+        params.setMargins(padLeft, 0, 0, padBot);
+        StaticData.layoutParamsScale(params, 40, 40);
         nommunrend_Txt.setLayoutParams(params);
 
 //        nommunrend_Txt.setText(1011+"");
@@ -144,6 +148,7 @@ public class Fragment4_PersonNew extends Fragment {
         StaticData.ViewScale(personnew_com_icon, 104, 76);
         StaticData.ViewScale(fen_icon, 18, 18);
         StaticData.ViewScale(copy_Img, 60, 60);
+        viewTouchDelegate.expandViewTouchDelegate(copy_Img, 100, 100, 100, 100);
 
 
 //        ImageView person_nom_icon = (ImageView) view.findViewById(R.id.person_nom_icon);
@@ -152,28 +157,36 @@ public class Fragment4_PersonNew extends Fragment {
 //        ImageView person_fen_icon = (ImageView) view.findViewById(R.id.person_fen_icon);
         RelativeLayout neng_Rel = (RelativeLayout) view.findViewById(R.id.neng_Rel);
         RelativeLayout hui_Rel = (RelativeLayout) view.findViewById(R.id.hui_Rel);
+        RelativeLayout idea_Rel = (RelativeLayout) view.findViewById(R.id.idea_Rel);
         RelativeLayout bang_Rel = (RelativeLayout) view.findViewById(R.id.bang_Rel);
         RelativeLayout gui_Rel = (RelativeLayout) view.findViewById(R.id.gui_Rel);
         RelativeLayout che_Rel = (RelativeLayout) view.findViewById(R.id.che_Rel);
         RelativeLayout line_Rel = (RelativeLayout) view.findViewById(R.id.line_Rel);
+        RelativeLayout zong_Rel = (RelativeLayout) view.findViewById(R.id.zong_Rel);
 
         ImageView person_neng_icon = (ImageView) view.findViewById(R.id.person_neng_icon);
         ImageView personnew_hui_icon = (ImageView) view.findViewById(R.id.personnew_hui_icon);
+        ImageView personnew_idea_icon = (ImageView) view.findViewById(R.id.personnew_idea_icon);
         ImageView person_bang_icon = (ImageView) view.findViewById(R.id.person_bang_icon);
         ImageView person_gui_icon = (ImageView) view.findViewById(R.id.person_gui_icon);
         ImageView person_che_icon = (ImageView) view.findViewById(R.id.person_che_icon);
         ImageView person_line_icon = (ImageView) view.findViewById(R.id.person_line_icon);
+        ImageView person_hui_icon = (ImageView) view.findViewById(R.id.person_hui_icon);
         ImageView set_arrow = (ImageView) view.findViewById(R.id.set_arrow);
+        ImageView idea_arrow = (ImageView) view.findViewById(R.id.idea_arrow);
         ImageView gui_arrow = (ImageView) view.findViewById(R.id.gui_arrow);
         ImageView che_arrow = (ImageView) view.findViewById(R.id.che_arrow);
         ImageView line_arrow = (ImageView) view.findViewById(R.id.line_arrow);
         ImageView bang_arrow = (ImageView) view.findViewById(R.id.bang_arrow);
+        ImageView hui_arrow = (ImageView) view.findViewById(R.id.hui_arrow);
         TextView neng_Txt = (TextView) view.findViewById(R.id.neng_Txt);
-         guirend_Txt = (TextView) view.findViewById(R.id.guirend_Txt);
+        idearend_Txt = (TextView) view.findViewById(R.id.idearend_Txt);
 
 
         InviteCode = saveFile.getShareData("InviteCode", getActivity());
-        neng_Txt.setText(InviteCode);
+        if (!InviteCode.equals("false")) {
+            neng_Txt.setText(InviteCode);
+        }
 
 
 //        StaticData.ViewScale(person_nom_icon, 84, 96);
@@ -182,21 +195,27 @@ public class Fragment4_PersonNew extends Fragment {
 //        StaticData.ViewScale(person_fen_icon, 84, 96);
         StaticData.ViewScale(neng_Rel, 710, 130);
         StaticData.ViewScale(hui_Rel, 710, 130);
+        StaticData.ViewScale(idea_Rel, 710, 130);
         StaticData.ViewScale(line_Rel, 710, 130);
         StaticData.ViewScale(bang_Rel, 710, 130);
         StaticData.ViewScale(gui_Rel, 710, 130);
         StaticData.ViewScale(che_Rel, 710, 130);
+        StaticData.ViewScale(zong_Rel, 710, 130);
         StaticData.ViewScale(person_neng_icon, 64, 64);
         StaticData.ViewScale(personnew_hui_icon, 64, 64);
+        StaticData.ViewScale(personnew_idea_icon, 64, 64);
         StaticData.ViewScale(person_bang_icon, 64, 64);
         StaticData.ViewScale(person_gui_icon, 64, 64);
         StaticData.ViewScale(person_che_icon, 64, 64);
         StaticData.ViewScale(person_line_icon, 64, 64);
+        StaticData.ViewScale(person_hui_icon, 64, 64);
         StaticData.ViewScale(set_arrow, 60, 60);
+        StaticData.ViewScale(idea_arrow, 60, 60);
         StaticData.ViewScale(gui_arrow, 60, 60);
         StaticData.ViewScale(che_arrow, 60, 60);
         StaticData.ViewScale(line_arrow, 60, 60);
         StaticData.ViewScale(bang_arrow, 60, 60);
+        StaticData.ViewScale(hui_arrow, 60, 60);
 
 
         seximgMargin(getActivity(), personnew_sex_Img);
@@ -213,19 +232,22 @@ public class Fragment4_PersonNew extends Fragment {
 //        person_fen_icon.setOnClickListener(new person_fen_icon());
         neng_Rel.setOnClickListener(new neng_Rel());
         hui_Rel.setOnClickListener(new hui_Rel());
+        idea_Rel.setOnClickListener(new idea_Rel());
         bang_Rel.setOnClickListener(new bang_Rel());
         che_Rel.setOnClickListener(new che_Rel());
         gui_Rel.setOnClickListener(new gui_Rel());
         line_Rel.setOnClickListener(new line_Rel());
+        zong_Rel.setOnClickListener(new zong_Rel());
+        copy_Img.setOnClickListener(new copy_Img());
 //        RoundingParams roundingParams = RoundingParams.asCircle();
 //        roundingParams.setRoundAsCircle(true);
 //        user_simple.getHierarchy().setRoundingParams(roundingParams);
     }
 
-    private void changeRedGui(TextView redTxt){
-        if (saveFile.getShareData("RedGui", getActivity()).equals("false")) {
+    private void changeRedGui(TextView redTxt) {
+        if (saveFile.getShareData("RedHui", getActivity()).equals("false")) {
             redTxt.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             redTxt.setVisibility(View.INVISIBLE);
         }
     }
@@ -276,7 +298,7 @@ public class Fragment4_PersonNew extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        changeRedGui(guirend_Txt);
+        changeRedGui(idearend_Txt);
         initData();
     }
 
@@ -301,6 +323,14 @@ public class Fragment4_PersonNew extends Fragment {
 
 
     private class neng_Rel extends NoDoubleClickListener {
+        @Override
+        protected void onNoDoubleClick(View v) {
+            Intent intent = new Intent(getActivity(), Person_Neng.class);
+            startActivity(intent);
+        }
+    }
+
+    private class copy_Img extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
             StaticData.copy(InviteCode, getActivity());
@@ -337,6 +367,15 @@ public class Fragment4_PersonNew extends Fragment {
 //            Intent intent = new Intent(getActivity(), Pk_Gui.class);
 //            startActivity(intent);
             Intent intent = new Intent(getActivity(), Person_Badge.class);
+            startActivity(intent);
+        }
+    }
+
+    //我要吐槽
+    private class idea_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), Person_Feedback.class);
             startActivity(intent);
         }
     }
@@ -378,7 +417,8 @@ public class Fragment4_PersonNew extends Fragment {
 
         }
     }
-//    //我的资料
+
+    //    //我的资料
 //    private class person_data_icon implements View.OnClickListener {
 //        @Override
 //        public void onClick(View view) {
@@ -402,15 +442,47 @@ public class Fragment4_PersonNew extends Fragment {
 //            startActivity(intent);
 //        }
 //    }
-//    //积分攻略
+    //积分攻略
     private class gui_Rel implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            saveFile.saveShareData("RedGui","true",getActivity());
+
             MobclickAgent.onEvent(getActivity(), "guiClick");//统计页签
             Intent intent = new Intent(getActivity(), Person_Relus.class);
             startActivity(intent);
         }
+    }
+
+    //积分攻略
+    private class zong_Rel implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            saveFile.saveShareData("RedHui", "true", getActivity());
+            String imgpath = "";
+//            if (baseModel.get(position).getFilePath() != null) {
+//                imgpath = String.valueOf(baseModel.get(position).getFilePath());
+//            }
+//            String content = baseModel.get(position).getPostTitle();
+//            String postId = baseModel.get(position).getPostID() + "";
+
+//            String content = "";
+//            String postId = "";
+//            String todayString = getStringToday();
+//            String url = saveFile.BaseUrl + "/Share/PersonReport?UserID=" + userModel.getData().getUserID() + "&date=" + todayString;
+            Intent intent = new Intent(getActivity(), Person_Zong.class);
+//            intent.putExtra("content", content);
+//            intent.putExtra("postId", postId);
+//            intent.putExtra("imgpath", imgpath);
+//            intent.putExtra("url", url);
+            startActivity(intent);
+        }
+    }
+
+    public static String getStringToday() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+        return dateString;
     }
 
 
@@ -508,7 +580,6 @@ public class Fragment4_PersonNew extends Fragment {
             }
         });
     }
-
 
 
     UserInfo_Model userModel;
@@ -685,9 +756,11 @@ public class Fragment4_PersonNew extends Fragment {
             String path = data.getStringExtra("path");
 //            Uri imgUri = Uri.parse(path);
             if (!TextUtils.isEmpty(path)) {
-                if (requestCode == REQUEST_CODE_IMAGE_PICK_PERSONHEAD) {
-                    compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
-                }
+//                Uri imgUri = Uri.parse("file:// /"+path);
+//                user_simple.setImageURI(imgUri);
+//                if (requestCode == REQUEST_CODE_IMAGE_PICK_PERSONHEAD) {
+                compressSingleListener(new File(path), Luban.FIRST_GEAR, REQUEST_CODE_IMAGE_PICK_PERSONHEAD);
+//                }
 
 
             }
@@ -713,9 +786,8 @@ public class Fragment4_PersonNew extends Fragment {
                         Log.i("TAG", file.getAbsolutePath());
 //                        mImageViews.get(0).setImageURI(Uri.fromFile(file));
 //                        Log.e("图片尺寸1111111111111111111",file.length() / 1024 + "k");
-                        Uri imgUri = Uri.fromFile(file);
-                        user_simple.setImageURI(imgUri);
-//                            addSimplePath(user_simple, path);
+//                        Uri imgUri = Uri.fromFile(file);
+//                        user_simple.setImageURI(imgUri);
                         upload_PhotoData(type, getActivity(), saveFile.BaseUrl + saveFile.uploadPhoto_Url, file);
                     }
 
@@ -787,6 +859,7 @@ public class Fragment4_PersonNew extends Fragment {
             public void onSuccess(String resultString) {
                 Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
                 if (model.isIsSuccess()) {
+                    UserData(getActivity(), saveFile.BaseUrl + saveFile.UserInfo_Url + "?UserID=" + userId);
 //                    finish();
                 } else {
 //                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
