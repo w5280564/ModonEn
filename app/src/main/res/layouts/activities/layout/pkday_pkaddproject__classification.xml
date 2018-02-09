@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+
+    <RelativeLayout
+        android:id="@+id/seek_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#2b2a2a">
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/return_black"/>
+
+        <Button
+            android:id="@+id/right_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@null"/>
+
+        <EditText
+            android:id="@+id/seek_Edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/right_Btn"
+            android:layout_toRightOf="@id/return_Btn"
+            android:background="@drawable/find_gazy"
+            android:gravity="center"
+            android:hint="搜索"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textColorHint="#595f65"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/all_Txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="总共"
+        android:textColor="#ff0a0a"
+        android:textSize="11sp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

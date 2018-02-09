@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_person__count_down_timer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121">
+
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <com.moying.energyring.waylenBaseView.wheel.views.WheelView
+            android:id="@+id/wv_hour"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="#232121"
+            android:layout_marginLeft="10dp"/>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"/>
+
+        <com.moying.energyring.waylenBaseView.wheel.views.WheelView
+            android:id="@+id/wv_mine"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/week_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="#2b2a2a"
+        android:paddingLeft="30dp"
+        android:paddingRight="20dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="重复"
+            android:textColor="#989797"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/right_arrow_black" />
+
+        <TextView
+            android:id="@+id/week_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/arrow_right"
+            android:text="   "
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

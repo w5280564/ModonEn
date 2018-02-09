@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,7 +12,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupwhite_bg">
+        android:background="@drawable/popupblack_bg">
 
         <LinearLayout
             android:id="@+id/title_Lin"
@@ -28,14 +28,16 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                app:roundAsCircle="true" />
+                fresco:roundAsCircle="true" />
 
             <TextView
                 android:id="@+id/name_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"/>
 
             <TextView
                 android:id="@+id/time_Txt"
@@ -44,17 +46,18 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="left"
                 android:paddingRight="15dp"
-                android:textColor="#6b6b6b"
-                android:textSize="12sp" />
-
+                android:textColor="#e3e7eb"
+                android:textSize="12sp"
+                />
         </LinearLayout>
 
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/content_simple"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@id/title_Lin" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_Lin"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/content_Txt"
@@ -63,8 +66,9 @@
             android:layout_below="@id/content_simple"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:lines="2"
-            android:textColor="#676767"
+            android:textColor="#e3e7eb"
             android:textSize="12sp" />
 
 
@@ -73,11 +77,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/content_Txt"
-            android:visibility="invisible"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/energy_img"
@@ -86,63 +90,102 @@
                 android:src="@drawable/energy_icon" />
 
             <TextView
+                android:id="@+id/hero_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="摩英英雄榜"
-                android:textColor="#f3fb23"
+                android:text=""
+                android:textColor="#F3DB23"
                 android:textSize="12sp" />
-
         </LinearLayout>
 
         <View
+            android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@drawable/dash_line"
-            android:layerType="software"
             android:layout_below="@id/hero_Lin"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:background="@drawable/dash_line"
+            android:layerType="software" />
 
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/hero_Lin"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:gravity="right|bottom"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/energy_talk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/energy_talk" />
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/talk_Txt"
+                android:id="@+id/remove_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:textColor="#aeaeae"
-                android:textSize="9sp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="#e3e7eb"
+                android:textSize="12sp" />
 
-            <ImageView
-                android:id="@+id/energy_like"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/energy_like" />
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/like_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textColor="#aeaeae"
-                android:textSize="9sp" />
+                <TextView
+                    android:id="@+id/yue_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:textColor="#e3e7eb"
+                    android:layout_marginRight="5dp"/>
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/energy_talk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/energy_talk" />
+
+                <TextView
+                    android:id="@+id/talk_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#e3e7eb"
+                    android:textSize="9sp" />
+
+                <LinearLayout
+                    android:id="@+id/like_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/energy_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/energy_like" />
+
+                    <TextView
+                        android:id="@+id/like_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#e3e7eb"
+                        android:textSize="9sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
 
 
     </RelativeLayout>

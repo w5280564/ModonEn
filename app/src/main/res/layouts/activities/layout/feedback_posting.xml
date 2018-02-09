@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/edit_Rel"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/popupblack_bg">
+
+                <EditText
+                    android:id="@+id/content_Edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/photoLayout"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="10dp"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:textColor="#989797"
+                    android:textColorHint="#989797"
+                    android:textSize="16sp" />
+
+
+                <com.moying.energyring.waylenBaseView.FlowLayout
+                    android:id="@+id/photoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="15dp">
+
+                    <ImageButton
+                        android:id="@+id/add_photo_Img"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/add_photo"
+                        android:scaleType="centerInside" />
+                </com.moying.energyring.waylenBaseView.FlowLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

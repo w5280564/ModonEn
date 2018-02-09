@@ -6,9 +6,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Base64;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.moying.energyring.Model.ProjectModel;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,19 +20,106 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
 public class saveFile {
-//    public static String BaseUrl = "http://www.ec.dev.com";
-    public static String BaseUrl = "http://192.168.1.111/";
-    public static String CodeUrl = "ec/Account/PhoneCode_Get";
+    //    public static String BaseUrl = "http://www.ec.dev.com/";
+//    public static String BaseUrl = "http://172.16.0.111/";//本地
+        public static String BaseUrl = "http://120.26.218.68:1111/";
+    public static String Post_Add_Url = "ec/v2/Post/Post_Add";
+
+    public static String AddPk_Url = "ec/v4/PK/Report_Add";
+//    public static String AddPkV3_Url = "ec/v3/PK/Report_Add";
+    public static String Report_Status_Url = "ec/v3/Post/Report_Post_Add";
+    public static String EditInfo_Url = "ec/v2/User/UserInfo_Edit";
+
+//    public static String CodeUrl = "ec/Account/PhoneCode_Get";
+    public static String CodeUrl = "ec/Account/SendPhoneVerificationCode";
     public static String LoginUrl = "ec/Account/Login";
     public static String EnergyListUrl = "ec/Post/Post_List";
+    public static String pkUrl = "ec/PK/PK_Statistics_List";
+    public static String rankUrl = "ec/PK/PK_LikesRank_List";
+    public static String checkUrl = "ec/CheckIn/CheckIn_Early_List";
+    public static String checMyDatakUrl = "ec/CheckIn/MyCheckIn_Get";
+    public static String BadgeGuiZeUrl = "ec/Badge/MyBadge_List";
+    public static String dayPkProjectUrl = "ec/PK/Project_List";
+    public static String ReportRankUrl = "ec/PK/Report_Rank_List";
+    public static String PersonData_Url = "ec/PK/MyReport_Get";
+    public static String TargetDetails_ListUrl = "ec/Target/My_TargetDetails_List_Android";
+    public static String Target_ListUrl = "ec/Target/My_Target_List";
+    public static String Target_DetailsUrl = "ec/Target/Target_Details_Get";
+    public static String Target_DelsUrl = "ec/Target/Target_Del";
+    public static String Target_AddsUrl = "ec/Target/Target_ADD";
+    public static String uploadPhoto_Url = "ec/File/File_Upload";
+    public static String like_Url = "ec/PK/Likes_Add";
+    public static String AddPkBg_Url = "ec/User/PKCoverImg_Upd";
+    public static String Check_Url = "ec/CheckIn/CheckIn_IsExists";
+    public static String CheckAdd_Url = "ec/v2/CheckIn/CheckIn_Add";
+    public static String My_Friend_Url = "ec/User/My_Friend_List";
+    public static String banner_Url = "ec/Banner/Banner_List";
+    public static String seekUser_Url = "ec/User/Discover_UserInfo_List";
+    public static String Recommend_User_Url = "ec/User/Recommend_User_List";
+    public static String Friend_Add_User_Url = "ec/User/Friend_Add";
+    public static String RadioList_Url = "ec/Radio/Radio_List";
+    public static String UserInfo_Url = "ec/User/UserInfo_GetByUserID";
+    public static String PkHistory_Url = "ec/PK/Report_List_UserID";
+    public static String DayPk_Url = "ec/PK/Report_List_Today_UserID";
+    public static String PersonBg_Url = "ec/User/User_CoverImg_Upd";
+    public static String PersonHead_Url = "ec/User/User_ProfilePicture_Edit";
+    public static String DelePost_Url = "ec/Post/Post_Del";
+    public static String PersonRank_List_Url = "ec/User/Integral_Rank_List";
+    public static String Product_List_Url = "ec/Product/Product_List";
+    public static String Notice_Like_Url = "ec/Notice/Notice_Like_List";
+    public static String Notice_Comment_Url = "ec/Notice/Notice_Comment_List";
+    public static String Notice_Attention_Url = "ec/User/Attention_Me_List";
+    public static String Notice_NoticeList_Url = "ec/Notice/Notice_List";
+    public static String Notice_Unread_Url = "ec/Notice/Notice_NotRead_Num";
+    public static String Product_Detrail_Url = "ec/Product/Product_Get";
+    public static String shop_Adress_Url = "ec/Product/Exchange_Add";
+    public static String Mess_UserList_Url = "ec/Message/Message_User_List";
+    public static String MesList_Url = "ec/Message/Message_List";
+    public static String SendMess_Url = "ec/Message/Message_Add";
+    public static String Integral_Url = "ec/User/IntegralSource_List";
+    public static String Attention_Url = "ec/User/My_Attention_List";
+    public static String Fans_Url = "ec/User/Attention_Me_List";
+    public static String AtMe_Url = "ec/Notice/Notice_MenTion_List";
+    public static String PostLike_Url = "ec/Post/Likes_Add";
 
+    public static String HistoryPk_Url = "ec/PK/Report_Sta_ByPID";
+    public static String HistoryPk_List_Url = "ec/PK/Report_List_Record";
+    public static String NoticeHasMes_Url = "ec/Notice/Notice_NotReadCount_Num";
+    public static String Version_Url = "ec/SysConfig/Version_Last_Get";
+    public static String Sys_Notice_Url = "ec/Notice/Sys_Notice_List";
+    public static String DayPk_ProjectNotWalk = "ec/PK/Project_List_NotHaveWalk";
+    public static String Tag_List_Url = "ec/Post/Post_Tag_List";
+    public static String Phone_ChangeUrl = "ec/Account/Phone_Change";
+    public static String MyCheckIn_Url = "ec/CheckIn/MyCheckIn_Get";
+    public static String Likes_Url = "ec/user/Likes_Sta_Get";
+    public static String GuidePerFirst_Url = "ec/user/FirstEnter_Get";
+    public static String upd_guidePerFirst_Url = "ec/user/FirstEnter_Upd";
+    public static String reportImg_Url = "ec/pk/Today_Report_Img_List";
+    public static String haveNewRepost_Url = "ec/v3/post/Report_Post_IsHaveNewRepost";
+    public static String badge_List_Url = "ec/badge/User_Badge_List";
+    public static String user_hot_Url = "ec/user/User_Hot_List";
+    public static String My_Rank_Url = "ec/User/MyIntegral_Ranking";
+    public static String My_FriendRank_Url = "ec/User/Friend_Integral_Ranking_List";
+    public static String My_ReportRank_Url = "ec/pk/My_Report_Ranking";
+    public static String My_ReportRecordProject_Url = "ec/pk/Report_Record_Project_List";
+    public static String My_ProjectType_Url = "ec/pk/ProjectType_List";
+    public static String My_ProjectType_List_Url = "ec/PK/ProjectType_List";
+    public static String My_ProjectList_Search_Url = "ec/PK/Project_List_Search";
+    public static String My_Ranking_One_Url = "ec/pk/Report_Ranking_One_Get";
+    public static String My_preoject_Dele_Url = "ec/pk/ReportProject_Del";
+    public static String My_ReportProject_List_Url = "ec/pk/ReportProject_List";
+    public static String Limit_like_Url = "ec/pk/Likes_Add_Limit_One";
+    public static String Early_like_Url = "ec/pk/Likes_Add_Early";
+    public static String Clock_Add_Url = "ec/pk/Project_Clock_Add";
+    public static String Project_Clock_Data_Url = "ec/pk/Project_Clock_Get";
+    public static String Project_Add_Url = "ec/pk/Project_Add";
+    public static String Share_Project_Url = "ec/pk/Project_RankingNum_Get";
+    public static String Invite_Bind_Url = "ec/user/Invite_Bind";
 
     private static SharedPreferences mShared = null;
     /**
@@ -73,110 +159,10 @@ public class saveFile {
         editor.commit();
     }
 
-
-    public static void savelistData(List<Map<Integer, Boolean>> listA, Context context) {
-        Editor editor = context.getSharedPreferences("listselect", Context.MODE_WORLD_WRITEABLE).edit();
-        editor.clear();
-        List<Map<Integer, Boolean>> list = listA;
-        editor.putInt("size", list.size());
-        for (int i = 0; i < list.size(); i++) {
-            editor.remove("isexist" + i);
-            editor.putString("isexist" + i, list.get(i).get(i).toString());
-        }
-        editor.commit();
-    }
-
-    public static ArrayList<Map<Integer, Boolean>> getlistData(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("listselect", Context.MODE_WORLD_READABLE);
-        int size = sp.getInt("size", 0);
-        ArrayList<Map<Integer, Boolean>> list2 = new ArrayList<Map<Integer, Boolean>>();
-        if (size == 0) {
-            list2 = new ArrayList<Map<Integer, Boolean>>();
-        } else {
-            for (int j = 0; j < size; j++) {
-                Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
-                map.put(j, Boolean.valueOf(sp.getString("isexist" + j, "")));
-                list2.add(map);
-            }
-        }
-        return list2;
-    }
-
-    //保存List历史
-    public static void locList(Context context, String KEY_NAME, String content, List<String> baseList) {
-        baseList.add(content);
-        SharedPreferences sp = context.getSharedPreferences("locArr", Context.MODE_WORLD_READABLE);
-        Editor editor = sp.edit();
-        editor.putString(KEY_NAME, baseList.toString());
-        editor.commit();
-    }
-
-    public static List<String> getlocList(Context context, String KEY_NAME) {
-        List<String> baseList = new ArrayList<>();
-        SharedPreferences sp = context.getSharedPreferences("locArr", Context.MODE_PRIVATE);
-        String result = sp.getString(KEY_NAME, "");
-        try {
-            JSONArray array = new JSONArray(result);
-            for (int i = 0; i < array.length(); i++) {
-                baseList.add(0, array.getString(i));
-            }
-        } catch (JSONException e) {
-        }
-        return baseList;
-    }
-
-
-    public static void saveInfo(Context context, String key, List<Map<String, String>> datas) {
-        JSONArray mJsonArray = new JSONArray();
-        for (int i = 0; i < datas.size(); i++) {
-            Map<String, String> itemMap = datas.get(i);
-            Iterator<Map.Entry<String, String>> iterator = itemMap.entrySet().iterator();
-            JSONObject object = new JSONObject();
-            while (iterator.hasNext()) {
-                Map.Entry<String, String> entry = iterator.next();
-                try {
-                    object.put(entry.getKey(), entry.getValue());
-                } catch (JSONException e) {
-
-                }
-            }
-            mJsonArray.put(object);
-        }
-        SharedPreferences sp = context.getSharedPreferences("finals", Context.MODE_PRIVATE);
-        Editor editor = sp.edit();
-        editor.putString(key, mJsonArray.toString());
-        editor.commit();
-    }
-
-    public static List<Map<String, String>> getInfo(Context context, String key) {
-        List<Map<String, String>> datas = new ArrayList<Map<String, String>>();
-        SharedPreferences sp = context.getSharedPreferences("finals", Context.MODE_PRIVATE);
-        String result = sp.getString(key, "");
-        try {
-            JSONArray array = new JSONArray(result);
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject itemObject = array.getJSONObject(i);
-                Map<String, String> itemMap = new HashMap<String, String>();
-                JSONArray names = itemObject.names();
-                if (names != null) {
-                    for (int j = 0; j < names.length(); j++) {
-                        String name = names.getString(j);
-                        String value = itemObject.getString(name);
-                        itemMap.put(name, value);
-                    }
-                }
-                datas.add(itemMap);
-            }
-        } catch (JSONException e) {
-        }
-        return datas;
-    }
-
-
     //存List<String>
     public static void saveUserList(Context context, List<String> baseArr, String KEY_NAME) {
 //        baseArr = new ArrayList<>(new HashSet<>(baseArr));
-        Editor editor = context.getSharedPreferences(KEY_NAME, Context.MODE_WORLD_WRITEABLE).edit();
+        Editor editor = context.getSharedPreferences(KEY_NAME, Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.putInt("size", baseArr.size());
         for (int i = 0; i < baseArr.size(); i++) {
@@ -193,7 +179,7 @@ public class saveFile {
             baseArr.clear();
         }
         baseArr = new ArrayList<>();
-        SharedPreferences sp = context.getSharedPreferences(KEY_NAME, Context.MODE_WORLD_READABLE);
+        SharedPreferences sp = context.getSharedPreferences(KEY_NAME, Context.MODE_PRIVATE);
         int size = sp.getInt("size", 0);
         for (int i = 0; i < size; i++) {
             baseArr.add(sp.getString("seekname" + i, null));
@@ -228,9 +214,6 @@ public class saveFile {
         saveUserList(context, baseArr, "listselect");//保存
         editor.commit();
     }
-
-
-
 
 
     //保存map
@@ -307,7 +290,7 @@ public class saveFile {
         Boolean flag = null;
         try {
             Date nowdate = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.CHINA);
             Date d = sdf.parse(str);
             if (d == nowdate) {
                 flag = true;//日期相同
@@ -322,6 +305,7 @@ public class saveFile {
 
     /**
      * 根据用户传入的时间表示格式，返回当前时间的格式 如果是MMdd，注意字母y不能大写。
+     *
      * @param sformat MMdd
      * @return
      */
@@ -336,7 +320,57 @@ public class saveFile {
         return dateString;
     }
 
+    /**
+     * 保存实体类
+     * @param
+     */
+    public static void putClass(Context context, String KEY_NAME, List<ProjectModel> model) {//需要实体类继承一个基类
+        SharedPreferences.Editor editor = context.getSharedPreferences(KEY_NAME, Context.MODE_PRIVATE).edit();
+        editor.putInt("size", model.size());
+        for (int i = 0; i < model.size(); i++) {
+//            String key = model.getClass().getName() + i;
+            String key = KEY_NAME + i;
+            String value = new Gson().toJson(model.get(i));
+            editor.putString(key, value);
+        }
+        editor.commit();
+    }
 
+    /**
+     * 获取实体类
+     * @param
+     * @param
+     * @return
+     */
+    public static <T> List<T> getGosnClass(Context context, String KEY_NAME, Class<T> model) {
+        List<T> listModel = new ArrayList<>();
+        SharedPreferences sp = context.getSharedPreferences(KEY_NAME, Context.MODE_PRIVATE);
+        int size = sp.getInt("size", 0);
+        for (int i = 0; i < size; i++) {
+//            String key = model.getName() + i;
+            String key = KEY_NAME + i;
+            String value = sp.getString(key, "");
+            T t = new Gson().fromJson(value, model);
+            listModel.add(t);
+        }
+        return listModel;
+    }
+
+    //删除一条实体类
+    public static void removeGsonOne(Context context, String KEY_NAME, int valen_Id) {
+        SharedPreferences sp = context.getSharedPreferences(KEY_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        List<ProjectModel> listModel = getGosnClass(context, KEY_NAME, ProjectModel.class);
+        int size = sp.getInt("size", 0);
+        for (int i = 0; i < size; i++) {
+            if (listModel.get(i).getProjectId() == valen_Id){
+                listModel.remove(i);//删除
+                break;
+            }
+        }
+        putClass(context, "moreModel", listModel);//保存
+        editor.commit();
+    }
 
 
 

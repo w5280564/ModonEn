@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+
+    <!--<item android:duration="40" android:drawable="@drawable/we_two1"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two2"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two3"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two4"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two5"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two6"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two7"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two8"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two9"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two10"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two11"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two12"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two13"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two14"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two15"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two16"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two17"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two18"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two19"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two20"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two21"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two22"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two23"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two24"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two25"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two26"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two27"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two28"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two29"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two30"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two31"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two32"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two33"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two34"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two35"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two36"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two37"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two38"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two39"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two40"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two41"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two42"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two43"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two44"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two45"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two46"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two47"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two48"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two49"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two50"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two51"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two52"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two53"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two54"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two55"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two56"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two57"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two58"/>-->
+    <!--<item android:duration="40" android:drawable="@drawable/we_two59"/>-->
+
+</animation-list>

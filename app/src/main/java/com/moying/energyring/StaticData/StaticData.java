@@ -2,6 +2,7 @@ package com.moying.energyring.StaticData;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,8 +25,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.moying.energyring.R;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyApplication;
+import com.moying.energyring.xrecycle.XRecyclerView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,7 +53,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 
 public class StaticData {
@@ -82,7 +85,7 @@ public class StaticData {
      * 验证邮箱格式
      *
      * @param email
-     * @return
+     * @return true 是格式不正确
      */
     public static boolean isEmail(String email) {
         String pattern_email = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
@@ -530,7 +533,7 @@ public class StaticData {
     public static String Datatypetwo(String datestr) {
         String datestring = "";
         if (datestr != null) {
-             datestring = datestr.substring(0, 10);
+            datestring = datestr.substring(0, 10);
         }
         return datestring;
     }
@@ -571,7 +574,7 @@ public class StaticData {
         String verName = "";
         try {
             //注意："com.example.try_downloadfile_progress"对应AndroidManifest.xml里的package="……"部分
-            verName = context.getPackageManager().getPackageInfo("com.waylen.zenzox", 0).versionName;
+            verName = context.getPackageManager().getPackageInfo("com.moying.energyring", 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             Log.e("msg", e.getMessage());
         }
@@ -732,7 +735,7 @@ public class StaticData {
 
     //2061-09-01固定格式
     public static String getTodaystyle() {
-      Date currentTime = new Date();
+        Date currentTime = new Date();
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         String dateString = formatter.format(currentTime);
@@ -754,33 +757,9 @@ public class StaticData {
         }
     }
 
-//    public static void setBadge(int countDay, ImageView myview) {
-//        myview.setBackgroundResource(0);
-//        if (countDay >= 30) {
-//            myview.setBackgroundResource(R.drawable.badge_head30);
-//        }
-//        if (countDay >= 50) {
-//            myview.setBackgroundResource(R.drawable.badge_head50);
-//        }
-//        if (countDay >= 100) {
-//            myview.setBackgroundResource(R.drawable.badge_head100);
-//        }
-//        if (countDay >= 150) {
-//            myview.setBackgroundResource(R.drawable.badge_head150);
-//        }
-//        if (countDay >= 200) {
-//            myview.setBackgroundResource(R.drawable.badge_head200);
-//        }
-//        if (countDay >= 250) {
-//            myview.setBackgroundResource(R.drawable.badge_head250);
-//        }
-//        if (countDay >= 300) {
-//            myview.setBackgroundResource(R.drawable.badge_head300);
-//        }
-//    }
-
     /**
      * 固定格式
+     *
      * @param sformat MMdd
      * @return
      */
@@ -816,6 +795,137 @@ public class StaticData {
         maxDay = calendar.getActualMaximum(Calendar.DATE);
         return maxDay;
     }
+
+    public static void lodingheadBg(SimpleDraweeView simPle) {
+        Uri uri = Uri.parse("res:///" + R.drawable.loading_icon);
+        simPle.setImageURI(uri);
+    }
+
+    public static void PkBg(SimpleDraweeView simPle) {
+        Uri uri = Uri.parse("res:///" + R.drawable.pk_bg);
+        simPle.setImageURI(uri);
+    }
+
+    public static void PersonBg(SimpleDraweeView simPle) {
+        Uri uri = Uri.parse("res:///" + R.drawable.person_bg);
+        simPle.setImageURI(uri);
+    }
+
+    public static void changeXRecycleHeadGif(XRecyclerView myView, int iconId, int width, int height) {
+        Uri uri = Uri.parse("res:// /" + iconId);
+        myView.addGif(uri, width, height);
+    }
+
+    /**
+     * 将时间戳转为代表"距现在多久之前"的字符串
+     *
+     * @param timeStr 时间戳
+     * @return
+     */
+    public static String getStandardDate(String timeStr) {
+        StringBuffer sb = new StringBuffer();
+
+//        long t = Long.parseLong(timeStr);
+        long t = Long.parseLong(getTime(timeStr));
+        long time = System.currentTimeMillis() - (t * 1000);
+//        long mill = (long) Math.ceil(time /1000);//秒前
+//        long minute = (long) Math.ceil(time/60/1000.0f);// 分钟前
+//        long hour = (long) Math.ceil(time/60/60/1000.0f);// 小时
+//        long day = (long) Math.ceil(time/24/60/60/1000.0f);// 天前
+        long mill = (long) (time / 1000);//秒前
+        long minute = (long) (time / 60 / 1000.0f);// 分钟前
+        long hour = (long) (time / 60 / 60 / 1000.0f);// 小时
+        long day = (long) (time / 24 / 60 / 60 / 1000.0f);// 天前
+
+        if (day - 1 > 0) {
+            if (day - 1 >= 30) {
+                sb.append(Datatypetwo(timeStr));
+            } else {
+                sb.append(day + "天");
+            }
+        } else if (hour - 1 > 0) {
+            if (hour >= 24) {
+                sb.append("1天");
+            } else {
+                sb.append(hour + "小时");
+            }
+        } else if (minute - 1 > 0) {
+            if (minute == 60) {
+                sb.append("1小时");
+            } else {
+                sb.append(minute + "分钟");
+            }
+        } else if (mill - 1 > 0) {
+            if (mill == 60) {
+                sb.append("1分钟");
+            } else {
+                sb.append(mill + "秒");
+            }
+        } else {
+            sb.append("刚刚");
+        }
+        if (!sb.toString().equals("刚刚") && day - 1 < 30) {
+            sb.append("前");
+        }
+        return sb.toString();
+    }
+
+    // 将字符串转为时间戳
+    public static String getTime(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d;
+        try {
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block e.printStackTrace();
+        }
+        return re_time;
+    }
+
+
+//    public static void addPlace(SimpleDraweeView myDraw, Context context) {
+//        //获取GenericDraweeHierarchy对象
+//        GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(context.getResources())
+//                //设置占位图及它的缩放方式
+//                .setProgressBarImage(R.drawable.placeholder_icon)
+////                .setPlaceholderImage(ContextCompat.getDrawable(context, R.drawable.placeholder_icon), ScalingUtils.ScaleType.FIT_XY)
+//                //构建
+//                .build();
+//
+//        //设置GenericDraweeHierarchy
+//        myDraw.setHierarchy(hierarchy);
+//    }
+//
+//    public static void addPlaceRound(SimpleDraweeView myDraw, Context context) {
+//        //获取GenericDraweeHierarchy对象
+//        GenericDraweeHierarchy hierarchy = new GenericDraweeHierarchyBuilder(context.getResources())
+//                .setRoundingParams(RoundingParams.asCircle())
+//                //设置占位图及它的缩放方式
+//                .setProgressBarImage(R.drawable.placeholder_icon)
+////                .setPlaceholderImage(ContextCompat.getDrawable(context, R.drawable.placeholder_icon), ScalingUtils.ScaleType.FOCUS_CROP)
+//                //构建
+//                .build();
+//
+//        //设置GenericDraweeHierarchy
+//        myDraw.setHierarchy(hierarchy);
+//    }
+
+    /**
+     * 实现文本复制功能
+     * add by wangqianzhou
+     *
+     * @param content
+     */
+    public static void copy(String content, Context context) {
+        // 得到剪贴板管理器
+        ClipboardManager cmb = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setText(content.trim());
+    }
+
 
 
 }

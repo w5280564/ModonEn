@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reportbg_Rel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/report_Rel"
+        android:layout_width="250dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/popupwhite_bg"
+        android:orientation="vertical"
+        android:clickable="true">
+
+        <RelativeLayout
+            android:id="@+id/report_Title_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/poject_sim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp" />
+
+            <TextView
+                android:id="@+id/report_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/poject_sim"
+                android:textColor="#262626"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/colock_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/daypk_colock_icon"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="#E3E7EB" />
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/project_Edit"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:paddingLeft="10dp"
+            android:lines="1"
+            android:textStyle="bold"
+            android:phoneNumber="true"
+            android:textColor="#262626"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:id="@+id/report_Unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#262626"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/project_Edit"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"/>
+        
+        <TextView
+            android:id="@+id/report_zaoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5:00~7:00 AM为早起时间"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/project_Edit"
+            android:textColor="#9a9a9a"
+            android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/report_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e05954"
+            android:layout_alignParentBottom="true"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:text="打卡"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/my_Lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popupblack_bg"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/my_Head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:roundAsCircle="true"
+            />
+
+        <TextView
+            android:id="@+id/name_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#e3e7eb"
+            android:text="名字"
+            android:textSize="14sp"
+            android:lines="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/isfocus_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="关注"
+            android:background="@drawable/focus_icon"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

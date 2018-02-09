@@ -2,21 +2,167 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     defaultConfig {
         applicationId "com.moying.energyring"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 43
+        versionName "2.83"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+// 07-07 22 2.1  07-12 23 2.2 08-01 24 2.3  08-03 25 2.31 09-06 26 2.4  10-10 27 2.5 10-11 28 2.51 10-12 28 2.52 10-16 30 2.53
+        //10-24 31 2.54  11-01 32 2.60 11-03 33 2.61 11-27 2.62 34  2.63 35 11-30 2.64 36  12-15 37 2.65  12-22 38 2.66 12-30 39 2.70
+        // 01-17 40 2.80 01-18 41 2.81  01-22 42 2.82 02-06 43 2.83
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "da84470cd94e0e2dc2db282b", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer", //用户渠道统计的渠道名称
+        ]
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    def outFile = output.outputFile
+//                    if (outFile != null && outFile.name.endsWith(".apk")) {
+//                        def fileName = "${variant.productFlavors[0].name}" + ".apk"
+//                        output.outputFile = new File(outFile.parent, fileName);
+//                    }
+//                }
+//
+//            }
+
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = outputFile.name.replace("app", "${defaultConfig.applicationId}_${defaultConfig.versionName}_${releaseTime()}")
+                        outputFileName = fileName
+
+                    }
+
+                }
+            }
+
+//            3.0之后需要修改为这样
+//            android.applicationVariants.all {variant ->
+//                variant.outputs.all {
+//                        outputFileName =rootProject.getName()+defaultConfig.versionName+releaseTime()+variant.productFlavors[0].name+".apk"
+////                    if (variant.buildType.name == 'release') {
+////                        // release：输出文件名必须命名为 outputFileName
+////                        outputFileName = "${project.getName()}_${variant.flavorName}_${buildType.name}_v${variant.versionCode}.apk"
+//////                        output.outputFile = new File(output.outputFile.parent, apkName)
+////                    } else {
+////                        // debug 输出文件名必须命名为 outputFileName
+////                        outputFileName = "${project.getName()}_${buildType.name}.apk"
+//////                        output.outputFile = new File(output.outputFile.parent, apkName)
+////                    }
+//                }
+//            }
+
+
+        }
+
+        debug {
+
+        }
+        staging {
+            matchingFallbacks = ['release', 'debug']
         }
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        jumboMode = true
+    }
+
+
+    flavorDimensions "default"
+    productFlavors {
+
+        WanDouJia {
+            dimension "default"
+        }
+        XiaoMi {
+            dimension "default"
+        }
+        QiHoo {
+            dimension "default"
+        }
+        YingYongBao {
+            dimension "default"
+        }
+        BaiDu {
+            dimension "default"
+        }
+        HuaWei {
+            dimension "default"
+        }
+        Oppo {
+            dimension "default"
+        }
+        Vivo {
+            dimension "default"
+        }
+
+        productFlavors.all { flavor ->
+
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
+
+    //渠道
+//    productFlavors {
+////        googleplay {}
+////        huawei {}
+//        XiaoMi {}
+//        WanDouJia {}
+////        baidu {}
+//        YingYongBao {}
+//        QiHoo {}
+////        uc {}
+////        umeng {}
+////        meizu {}
+//        //批量配置
+//        productFlavors.all { flavor ->
+//            flavor.manifestPlaceholders = [UMENG_CHANNEL: name]
+//        }
+//
+//    }
+
+//    productFlavors{
+//        XiaoMi{
+//            manifestPlaceholders = [UMENG_CHANNEL:"XiaoMi"]
+//        }
+//
+//        QiHoo360{
+//            manifestPlaceholders = [UMENG_CHANNEL:"QiHoo360"]
+//        }
+//
+//        YingYongBao{
+//            manifestPlaceholders = [UMENG_CHANNEL:"YingYongBao"]
+//        }
+//
+//        WanDouJia{
+//            manifestPlaceholders = [UMENG_CHANNEL:"WanDouJia"]
+//        }
+//
+//    }
+
 
     sourceSets {
         main {
@@ -35,23 +181,66 @@ android {
 
 }
 
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-//    compile project(':library')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.android:flexbox:0.2.6'
-    compile 'org.xutils:xutils:3.5.0'
-    testCompile 'junit:junit:4.12'
+    //    compile project(':library')
+
     //使用TabLayout
-    compile 'com.android.support:design:25.3.1'
+
     // 其他依赖
-    compile 'com.facebook.fresco:fresco:0.12.0'
+
+    //    compile 'com.facebook.fresco:fresco:0.12.0'
+
     // 支持 GIF 动图，需要添加
-    compile 'com.facebook.fresco:animated-gif:0.12.0'
-    compile 'com.google.code.gson:gson:2.7'
+    implementation project(':selectorphotolibrary')
+    implementation files('libs/MobCommons-2017.0412.1554.jar')
+    implementation files('libs/ShareSDK-QQ-2.8.3.jar')
+    implementation files('libs/ShareSDK-SinaWeibo-2.8.3.jar')
+    implementation files('libs/ShareSDK-QZone-2.8.3.jar')
+    implementation files('libs/ShareSDK-Core-2.8.3.jar')
+    implementation files('libs/ShareSDK-Wechat-2.8.3.jar')
+    implementation files('libs/MobTools-2017.0412.1554.jar')
+    implementation files('libs/ShareSDK-Wechat-Core-2.8.3.jar')
+    implementation files('libs/ShareSDK-Wechat-Moments-2.8.3.jar')
+    implementation files('libs/ShareSDK-Wechat-Favorite-2.8.3.jar')
+    implementation files('libs/commons-io-1.4.jar')
+    implementation project(':hellocharts-library')
+    //jpush 3.0以后需要两个依赖
+    compile project(':todaystepcounterlib')
+
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.android.support:recyclerview-v7:25.3.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.android:flexbox:0.2.6'
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.android.support:cardview-v7:25.3.1'
+
+    implementation 'com.android.support:multidex:1.0.2'
+//    androidTestCompile 'com.android.support:multidex:1.0.2'
+//    androidTestCompile 'com.android.support:multidex-instrumentation:1.0.2'
+
+    implementation 'org.xutils:xutils:3.5.0'
+    implementation 'com.facebook.fresco:fresco:0.13.0'
+    implementation 'com.facebook.fresco:animated-gif:0.13.0'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    implementation 'com.sothree.slidinguppanel:library:3.3.1'
+    implementation 'com.kyleduo.switchbutton:library:1.4.1'
+    implementation 'me.shaohui.advancedluban:library:1.3.5'
+    implementation 'cn.jiguang.sdk:jpush:3.0.9'
+    implementation 'cn.jiguang.sdk:jcore:1.1.7'
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+    implementation 'com.coolerfall:android-app-daemon:1.2.0'
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+    implementation 'com.sunfusheng:marqueeview:1.3.2'
+    testCompile 'junit:junit:4.12'
+    implementation 'com.heaven7.android.dragflowlayout:dragflowlayout:1.8.8'
+    compile "me.leolin:ShortcutBadger:1.1.21@aar"
 }

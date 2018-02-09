@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_remind_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121">
+
+
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:id="@+id/remingLin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/title_Include"
+        android:orientation="horizontal">
+
+        <HorizontalScrollView
+            android:id="@+id/choiceScro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <LinearLayout
+                android:id="@+id/choiceLin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <EditText
+            android:id="@+id/seek_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00ffffff"
+            android:hint="搜索"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="15dp"
+            android:lines="1"
+            android:textColor="#989797"
+            android:textColorHint="#989797"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <com.moying.energyring.pinyin.HeaderListView
+        android:id="@+id/friendList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/remingLin"
+        android:fadingEdge="none"
+        android:scrollbars="none"/>
+
+    <com.moying.energyring.pinyin.AssortView
+        android:id="@+id/assort"
+        android:layout_width="30dip"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/remingLin"
+        android:layout_marginBottom="20dp"
+        android:background="@null" />
+
+
+</RelativeLayout>

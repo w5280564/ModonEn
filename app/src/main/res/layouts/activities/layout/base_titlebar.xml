@@ -13,16 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true" />
 
-    <TextView
-        android:id="@+id/cententtxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
-
-
     <Button
         android:id="@+id/right_Btn"
         android:layout_width="wrap_content"
@@ -32,5 +22,15 @@
         android:background="@null"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/cententtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:lines="1"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

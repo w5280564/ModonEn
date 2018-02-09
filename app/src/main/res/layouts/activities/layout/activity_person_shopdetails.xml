@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121">
+
+    <Button
+        android:id="@+id/dui_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#f14d4c"
+        android:text="立即兑换"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/dui_Btn"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#2b2a2a">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/content_simple"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <TextView
+                    android:id="@+id/name_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/content_simple"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:lines="1"
+                    android:textColor="#ffffff" />
+
+
+                <TextView
+                    android:id="@+id/price_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name_Txt"
+                    android:layout_margin="10dp"
+                    android:lines="1"
+                    android:textColor="#989797" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignLeft="@id/price_Txt"
+                    android:layout_below="@id/price_Txt"
+                    android:background="#343434" />
+
+                <TextView
+                    android:id="@+id/dui_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/line"
+                    android:layout_alignTop="@id/line"
+                    android:background="#f14d4c"
+                    android:gravity="center"
+                    android:text="限时兑换"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/fen_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/line"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/dui_Txt"
+                    android:text=""
+                    android:textColor="#f14d4c"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/content_Txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fen_Txt"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text=""
+                    android:textColor="#989797"
+                    android:textSize="12sp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/return_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/return_black" />
+
+
+
+</RelativeLayout>

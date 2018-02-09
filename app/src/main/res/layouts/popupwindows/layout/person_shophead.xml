@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/popupblack_bg">
+
+        <TextView
+            android:id="@+id/zan_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="我的积分"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/rank_Txt"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@id/zan_Txt"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:text="第999名"-->
+            <!--android:textColor="#4d4d4d"-->
+            <!--android:textSize="14sp" />-->
+
+        <TextView
+            android:id="@+id/rankCount_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/zan_Txt"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text=""
+            android:textColor="#f27b7b"
+            android:textSize="36sp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/below_Txt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/top_Rel"
+        android:background="@drawable/ban_round"
+        android:gravity="center" />
+
+    <!--<View-->
+        <!--android:id="@+id/ban_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_below="@id/below_Txt"-->
+        <!--android:background="#ffecec" />-->
+
+    <ImageView
+        android:id="@+id/round_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/top_Rel"
+        android:layout_below="@+id/top_Rel"
+        android:src="@drawable/round_line" />
+
+    <ImageView
+        android:id="@+id/round_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/top_Rel"
+        android:layout_below="@+id/top_Rel"
+        android:src="@drawable/round_line" />
+
+
+
+
+</RelativeLayout>

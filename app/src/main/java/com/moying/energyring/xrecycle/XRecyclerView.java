@@ -1,6 +1,7 @@
 package com.moying.energyring.xrecycle;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
 
@@ -72,16 +75,21 @@ public class XRecyclerView extends RecyclerView {
     }
 
     public void loadMoreComplete() {//上拉加载完成后的   隐藏上拉加载布局
-        if (previousTotal < getLayoutManager().getItemCount()) {
-            Log.d(TAG, "loadMoreComplete: ");
+        if (mFooter instanceof XRecyclerViewFooter) {
             mFooter.setState(XRecyclerViewFooter.STATE_COMPLETE);
         }
+//        if (previousTotal < getLayoutManager().getItemCount()) {
+//        if (previousTotal <= getLayoutManager().getItemCount()) {//修改比对条件
+////            Log.d(TAG, "loadMoreComplete: ");
+//            mFooter.setState(XRecyclerViewFooter.STATE_COMPLETE);
+//        }
         previousTotal = getLayoutManager().getItemCount();
     }
 
     public void refreshComplete() {//下拉刷新完成后的  隐藏下拉加载 布局
         mHeader.refreshComplate();
     }
+
 
     public void setPullRefreshEnabled(boolean enabled) {//设置是否可以刷新
         pullRefreshEnabled = enabled;
@@ -100,7 +108,7 @@ public class XRecyclerView extends RecyclerView {
 //        mWrapAdapter.notifyDataSetChanged();
     }
 
-    public void refresState(int index){
+    public void refresState(int index) {
         mHeader.setState(index);
     }
 
@@ -114,12 +122,12 @@ public class XRecyclerView extends RecyclerView {
 
 
     /**
-     * 活动监听  判断是否到底，用于加载
+     * 活动监听  判断是否到底，用于加载 添加滑动时暂停图片加载
      */
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
-        if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && loadingMoreEnabled) {
+           if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && loadingMoreEnabled) {//空闲状态
             LayoutManager layoutManager = getLayoutManager();
             int lastVisibleItemPosition;  //最后可见的Item的position的值
             if (layoutManager instanceof GridLayoutManager) {   //网格布局的中lastVisibleItemPosition的取值
@@ -139,6 +147,18 @@ public class XRecyclerView extends RecyclerView {
 
                 mLoadingListener.onLoadMore();
             }
+
+            if (Fresco.getImagePipeline().isPaused()) {//加载
+                Fresco.getImagePipeline().resume();
+            }
+        }else if (state == RecyclerView.SCROLL_STATE_SETTLING){ //滚动状态
+            if (!Fresco.getImagePipeline().isPaused()) {
+                Fresco.getImagePipeline().pause();
+            }
+        }else if (state == RecyclerView.SCROLL_STATE_IDLE ){
+            if (Fresco.getImagePipeline().isPaused()) {//加载
+                Fresco.getImagePipeline().resume();
+            }
         }
     }
 
@@ -147,6 +167,7 @@ public class XRecyclerView extends RecyclerView {
      */
     @Override
     public boolean onTouchEvent(MotionEvent e) {
+
         if (mLastY == -1) {
             mLastY = e.getRawY();
         }
@@ -183,7 +204,7 @@ public class XRecyclerView extends RecyclerView {
     }
 
     //判断是不是在顶部
-    private boolean isOnTop() {
+    public boolean isOnTop() {
         if (mHeaderViews == null || mHeaderViews.isEmpty()) {
             return false;
         }
@@ -414,4 +435,9 @@ public class XRecyclerView extends RecyclerView {
 
         void onLoadMore();
     }
+
+    public void addGif(Uri uri, int width, int height) {
+        mHeader.addGif(uri, width, height);
+    }
+
 }

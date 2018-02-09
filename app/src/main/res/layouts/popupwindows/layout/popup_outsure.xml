@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/my_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/popupwhite_bg"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="确定要退出目标么\n退出将扣除100积分作为惩罚"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F24d40" />
+
+
+        <TextView
+            android:id="@+id/finshTxt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#F24d40"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

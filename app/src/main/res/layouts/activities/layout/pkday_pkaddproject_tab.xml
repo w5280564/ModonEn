@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+
+
+    <RelativeLayout
+        android:id="@+id/seek_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#2b2a2a">
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/return_black"/>
+
+        <Button
+            android:id="@+id/right_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="创建"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="@null"/>
+
+        <Button
+            android:id="@+id/seek_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/right_Btn"
+            android:layout_toRightOf="@id/return_Btn"
+            android:background="@drawable/find_gazy"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="#595f65"
+            android:textSize="10sp" />
+
+        <!--<EditText-->
+            <!--android:id="@+id/seek_Edit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toLeftOf="@id/right_Btn"-->
+            <!--android:layout_toRightOf="@id/return_Btn"-->
+            <!--android:background="@drawable/find_gazy"-->
+            <!--android:gravity="center"-->
+            <!--android:hint="搜索"-->
+            <!--android:lines="1"-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:textColorHint="#595f65"-->
+            <!--android:textSize="10sp" />-->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/sure_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/sure_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pk_daypkadd_sure"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/ac_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seek_Rel"
+        app:tabPaddingEnd="-0.1dp"
+        app:tabPaddingStart="-0.1dp"
+        android:background="#2b2a2a"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/Slideviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ac_tab_layout"
+        android:layout_above="@id/sure_Lin"/>
+
+</RelativeLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/head_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/head_simple"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            app:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/headcontent_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/head_simple"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:maxEms="4"
+            android:ellipsize="end"
+            android:text="俯卧撑"
+            android:textColor="#e3e7eb"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/tui_foucuse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/head_simple"
+            android:layout_alignTop="@id/head_simple"
+            android:src="@drawable/tui_focuse" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

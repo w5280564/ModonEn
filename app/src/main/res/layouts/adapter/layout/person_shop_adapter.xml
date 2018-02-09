@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/shop_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:background="#2b2a2a">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/content_simple"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/name_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/content_simple"
+            android:layout_alignRight="@id/content_simple"
+            android:layout_below="@id/content_simple"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/price_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/content_simple"
+            android:layout_alignRight="@id/content_simple"
+            android:layout_below="@id/name_Txt"
+            android:lines="1"
+            android:text="200"
+            android:textSize="10sp"
+            android:textColor="#ffffff"/>
+
+        <TextView
+            android:id="@+id/fen_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/content_simple"
+            android:layout_alignRight="@id/content_simple"
+            android:layout_below="@id/price_Txt"
+            android:lines="1"
+            android:textColor="#f14d4c"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/exchange_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/fen_Txt"
+            android:background="@drawable/exchange_icon" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.moying.energyring.myAcativity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,9 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
@@ -52,6 +50,12 @@ public class Fragment1_Energy extends Fragment {
         return parentView;
     }
 
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+
+    }
+
     public List<String> userArr;
     private TabLayout tablayout;
     public List<Fragment> fragments;
@@ -69,11 +73,15 @@ public class Fragment1_Energy extends Fragment {
 
     private void initData() {
         userArr = new ArrayList<>();
-        userArr.add("成长日志");
+        userArr.add("动态");
         userArr.add("公众承诺");
         userArr.add("我的关注");
+        tablayout.setTabTextColors(Color.parseColor("#989797"), Color.parseColor("#ffffff"));//初始颜色，选中颜色
+        tablayout.setSelectedTabIndicatorColor(Color.parseColor("#ffffff"));//进度条颜色
+//        tablayout.setTabMode(TabLayout.MODE_FIXED);//设置可以滑动 根据标签自适应宽度 TabLayout.MODE_FIXED
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
-        tablayout.setSelectedTabIndicatorHeight(0);//去掉下导航条
+
+//        tablayout.setSelectedTabIndicatorHeight(0);//去掉下导航条
         //添加页卡标题
         if (fragments != null) {
             fragments.clear();
@@ -104,7 +112,7 @@ public class Fragment1_Energy extends Fragment {
             tablayout.getTabAt(i).setText(userArr.get(i));
             TabLayout.Tab tab = tablayout.getTabAt(i);
             if (tab != null) {
-                tab.setCustomView(myAdapter.getTabView(i));
+//                tab.setCustomView(myAdapter.getTabView(i));
 //                if (i == 0) {
 //                    tab.getCustomView().findViewById(R.id.tab_Img).setSelected(true);//第一个tab被选中
 //                }
@@ -118,19 +126,19 @@ public class Fragment1_Energy extends Fragment {
             fragments = list;
         }
 
-        public View getTabView(int position) {
-            View v = LayoutInflater.from(getContext()).inflate(R.layout.custom_tab, null);
-            LinearLayout Lin = (LinearLayout) v.findViewById(R.id.Lin);
-            StaticData.ViewScale(Lin, 0, 80);
-            LinearLayout tab_Lin = (LinearLayout) v.findViewById(R.id.tab_Lin);
-            StaticData.ViewScale(tab_Lin, 160, 56);
-            ImageView tab_Img = (ImageView) v.findViewById(R.id.tab_Img);
-            StaticData.ViewScale(tab_Img, 40, 40);
-            tab_Img.setImageResource(iconImg[position]);
-            TextView tab_Txt = (TextView) v.findViewById(R.id.tab_Txt);
-            tab_Txt.setText(userArr.get(position));
-            return v;
-        }
+//        public View getTabView(int position) {
+//            View v = LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+//            LinearLayout Lin = (LinearLayout) v.findViewById(R.id.Lin);
+//            StaticData.ViewScale(Lin, 0, 80);
+//            LinearLayout tab_Lin = (LinearLayout) v.findViewById(R.id.tab_Lin);
+//            StaticData.ViewScale(tab_Lin, 160, 56);
+////            ImageView tab_Img = (ImageView) v.findViewById(R.id.tab_Img);
+////            StaticData.ViewScale(tab_Img, 40, 40);
+////            tab_Img.setImageResource(iconImg[position]);
+//            TextView tab_Txt = (TextView) v.findViewById(R.id.tab_Txt);
+//            tab_Txt.setText(userArr.get(position));
+//            return v;
+//        }
 
         @Override
         public Fragment getItem(int position) {
@@ -142,13 +150,12 @@ public class Fragment1_Energy extends Fragment {
             return fragments.size();
         }
 
-        //设置tablayout标题
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return userArr.get(position);
-//        }
+//        设置tablayout标题
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return userArr.get(position);
+        }
 
     }
-
 
 }

@@ -14,13 +14,14 @@ import android.widget.EditText;
 /**
  * Created by Admin on 2016/3/24.
  */
-public class myActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener {
+public class    myActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initGesture();
     }
+
 
     /*
     *  目标Activity的onCreate()调用initGesture()

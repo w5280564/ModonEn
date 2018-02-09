@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2b2a2a"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/bg_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/pk_addbg"
+            android:visibility="gone" />
+
+
+        <RelativeLayout
+            android:id="@+id/title_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#232121">
+
+            <Button
+                android:id="@+id/return_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/return_black" />
+
+            <TextView
+                android:id="@+id/return_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/return_Btn"
+                android:text="返回"
+                android:textColor="#909090"
+                android:textSize="14sp"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/centent_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="发布每日PK"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/project_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_Rel"
+            android:orientation="vertical" />
+
+        <Button
+            android:id="@+id/add_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/project_Lin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/pk_addicon" />
+
+        <RelativeLayout
+            android:id="@+id/project_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_Rel"
+            android:visibility="gone">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/project_simple"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                fresco:roundAsCircle="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/project_simple"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/count_Edit"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:phoneNumber="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@id/unit_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="个"
+                    android:textColor="#000000"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/count_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/count_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/pkadd_counticon"
+                android:layout_alignParentRight="true"
+                android:textColor="#ffd800"
+                android:textSize="10sp"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pkadd_Rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_gazy"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/paadd_Simple"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitXY" />
+
+            <EditText
+                android:id="@+id/pkadd_Edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/paadd_Simple"
+                android:background="@null"
+                android:hint="分享下您的心得与经验吧......"
+                android:textColor="#95a0ab"
+                android:textColorHint="#95a0ab"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/mu_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_Btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/timechioce_next"
+            android:text="提交"
+            android:textColor="#f24d4d"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/add_Rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mu_Btn"
+            android:visibility="gone">
+
+            <com.moying.energyring.waylenBaseView.FlowLayout
+                android:id="@+id/photoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp">
+
+                <ImageButton
+                    android:id="@+id/add_photo_Img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/add_photo"
+                    android:scaleType="centerInside" />
+            </com.moying.energyring.waylenBaseView.FlowLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignBottom="@id/add_Rel"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#545454"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/energy_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/add_Rel"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tie_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:text="一键生成能量帖"
+                android:textColor="#545454"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/add_energy_Img"
+                android:layout_width="45dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/tie_Txt"
+                android:background="@drawable/remindcheck_selector"
+                android:button="@null"
+                android:focusable="false" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignBottom="@id/energy_Rel"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#545454"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/share_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/energy_Rel"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="同步分享到"
+                android:textColor="#545454"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/share_friend"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/share_friend_icon" />
+
+            <ImageView
+                android:id="@+id/share_mom"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/share_wechat_icon" />
+
+            <ImageView
+                android:id="@+id/share_sina"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/share_sina_icon" />
+
+            <ImageView
+                android:id="@+id/share_qq"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/share_qq_icon" />
+
+            <ImageView
+                android:id="@+id/share_qzone"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/share_qzone_icon" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

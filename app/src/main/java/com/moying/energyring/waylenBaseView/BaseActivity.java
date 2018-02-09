@@ -1,8 +1,12 @@
 package com.moying.energyring.waylenBaseView;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.List;
 
@@ -12,7 +16,11 @@ import java.util.List;
 
 public class BaseActivity extends FragmentActivity{
 
-
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        setStatusBar();
+    }
 
     /**
      * activity中搭载了多个fragment，需要显示某个fragment时使用
@@ -36,4 +44,11 @@ public class BaseActivity extends FragmentActivity{
         }
         ft.commit();
     }
+
+
+    protected void setStatusBar() {
+        StatusBarUtil.setTranslucentForImageViewInFragment(this,null);
+    }
+
+
 }

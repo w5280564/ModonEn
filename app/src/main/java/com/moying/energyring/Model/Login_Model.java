@@ -6,11 +6,12 @@ package com.moying.energyring.Model;
 
 public class Login_Model{
 
+
     /**
      * IsSuccess : true
      * Msg : 登录成功！
      * Status : 200
-     * Data : {"UserID":3,"UserName":null,"NickName":null,"LoginName":"18721666525","Pwd":"","Birthday":null,"Brief":null,"Gender":0,"Role":3,"Integral":0,"RegTime":"2017-05-09 20:05:08","InviteCode":null,"RefUserID":0,"IsLock":false,"ProfilePicture":null,"OpenID":null,"LoginType":0,"Email":null,"Ticket":"37391BC48BEC456B3E26F26F4044B6DEBABBEB5850DC5B35A9D58F2374000656109939FF1D55C5340B045D2C8AE4DEF782F4A0AEA77270C802F8DE23079FA49D964205047A5A81C68F027692BC7598A030CFE6AFD6CA351A453120635E4341F00542A090D647F755E426F105D9DD0E566CC5AC3E66C6F1DD3404ADEDA7B8E30E","Code":0}
+     * Data : {"UserID":3,"UserName":"你好","NickName":"Start丶小夏","LoginName":"18721666525","Pwd":"","Birthday":"1991-11-14 00:00:00","Brief":"开心就好","Gender":1,"Role":3,"Integral":66718,"RegTime":"2017-05-09 20:05:08","InviteCode":"333333","RefUserID":0,"Is_Lock":false,"Is_Recommend":true,"Is_Del":false,"ProfilePicture":"http://172.16.0.111/Uploads/2017-06-28/dfd12c70-46d4-4a29-b1f6-9224a463c54c.jpg","CoverImg":"http://172.16.0.111/Uploads/2017-06-28/ecd35659-f850-4167-88f2-7106fd05deee.jpg","OpenID":null,"LoginType":0,"Email":"waylen1009@163.com","Code":0,"Attention":0,"Attention_Me":0,"Is_Attention":false}
      */
 
     private boolean IsSuccess;
@@ -53,47 +54,57 @@ public class Login_Model{
     public static class DataBean {
         /**
          * UserID : 3
-         * UserName : null
-         * NickName : null
+         * UserName : 你好
+         * NickName : Start丶小夏
          * LoginName : 18721666525
          * Pwd :
-         * Birthday : null
-         * Brief : null
-         * Gender : 0
+         * Birthday : 1991-11-14 00:00:00
+         * Brief : 开心就好
+         * Gender : 1
          * Role : 3
-         * Integral : 0
+         * Integral : 66718
          * RegTime : 2017-05-09 20:05:08
-         * InviteCode : null
+         * InviteCode : 333333
          * RefUserID : 0
-         * IsLock : false
-         * ProfilePicture : null
+         * Is_Lock : false
+         * Is_Recommend : true
+         * Is_Del : false
+         * ProfilePicture : http://172.16.0.111/Uploads/2017-06-28/dfd12c70-46d4-4a29-b1f6-9224a463c54c.jpg
+         * CoverImg : http://172.16.0.111/Uploads/2017-06-28/ecd35659-f850-4167-88f2-7106fd05deee.jpg
          * OpenID : null
          * LoginType : 0
-         * Email : null
-         * Ticket : 37391BC48BEC456B3E26F26F4044B6DEBABBEB5850DC5B35A9D58F2374000656109939FF1D55C5340B045D2C8AE4DEF782F4A0AEA77270C802F8DE23079FA49D964205047A5A81C68F027692BC7598A030CFE6AFD6CA351A453120635E4341F00542A090D647F755E426F105D9DD0E566CC5AC3E66C6F1DD3404ADEDA7B8E30E
+         * Email : waylen1009@163.com
          * Code : 0
+         * Attention : 0
+         * Attention_Me : 0
+         * Is_Attention : false
          */
 
         private int UserID;
-        private Object UserName;
-        private Object NickName;
+        private String UserName;
+        private String NickName;
         private String LoginName;
         private String Pwd;
-        private Object Birthday;
-        private Object Brief;
+        private String Birthday;
+        private String Brief;
         private int Gender;
         private int Role;
         private int Integral;
         private String RegTime;
-        private Object InviteCode;
+        private String InviteCode;
         private int RefUserID;
-        private boolean IsLock;
-        private Object ProfilePicture;
+        private boolean Is_Lock;
+        private boolean Is_Recommend;
+        private boolean Is_Del;
+        private String ProfilePicture;
+        private String CoverImg;
         private Object OpenID;
         private int LoginType;
-        private Object Email;
-        private String Ticket;
+        private String Email;
         private int Code;
+        private int Attention;
+        private int Attention_Me;
+        private boolean Is_Attention;
 
         public int getUserID() {
             return UserID;
@@ -103,19 +114,19 @@ public class Login_Model{
             this.UserID = UserID;
         }
 
-        public Object getUserName() {
+        public String getUserName() {
             return UserName;
         }
 
-        public void setUserName(Object UserName) {
+        public void setUserName(String UserName) {
             this.UserName = UserName;
         }
 
-        public Object getNickName() {
+        public String getNickName() {
             return NickName;
         }
 
-        public void setNickName(Object NickName) {
+        public void setNickName(String NickName) {
             this.NickName = NickName;
         }
 
@@ -135,19 +146,19 @@ public class Login_Model{
             this.Pwd = Pwd;
         }
 
-        public Object getBirthday() {
+        public String getBirthday() {
             return Birthday;
         }
 
-        public void setBirthday(Object Birthday) {
+        public void setBirthday(String Birthday) {
             this.Birthday = Birthday;
         }
 
-        public Object getBrief() {
+        public String getBrief() {
             return Brief;
         }
 
-        public void setBrief(Object Brief) {
+        public void setBrief(String Brief) {
             this.Brief = Brief;
         }
 
@@ -183,11 +194,11 @@ public class Login_Model{
             this.RegTime = RegTime;
         }
 
-        public Object getInviteCode() {
+        public String getInviteCode() {
             return InviteCode;
         }
 
-        public void setInviteCode(Object InviteCode) {
+        public void setInviteCode(String InviteCode) {
             this.InviteCode = InviteCode;
         }
 
@@ -199,20 +210,44 @@ public class Login_Model{
             this.RefUserID = RefUserID;
         }
 
-        public boolean isIsLock() {
-            return IsLock;
+        public boolean isIs_Lock() {
+            return Is_Lock;
         }
 
-        public void setIsLock(boolean IsLock) {
-            this.IsLock = IsLock;
+        public void setIs_Lock(boolean Is_Lock) {
+            this.Is_Lock = Is_Lock;
         }
 
-        public Object getProfilePicture() {
+        public boolean isIs_Recommend() {
+            return Is_Recommend;
+        }
+
+        public void setIs_Recommend(boolean Is_Recommend) {
+            this.Is_Recommend = Is_Recommend;
+        }
+
+        public boolean isIs_Del() {
+            return Is_Del;
+        }
+
+        public void setIs_Del(boolean Is_Del) {
+            this.Is_Del = Is_Del;
+        }
+
+        public String getProfilePicture() {
             return ProfilePicture;
         }
 
-        public void setProfilePicture(Object ProfilePicture) {
+        public void setProfilePicture(String ProfilePicture) {
             this.ProfilePicture = ProfilePicture;
+        }
+
+        public String getCoverImg() {
+            return CoverImg;
+        }
+
+        public void setCoverImg(String CoverImg) {
+            this.CoverImg = CoverImg;
         }
 
         public Object getOpenID() {
@@ -231,20 +266,12 @@ public class Login_Model{
             this.LoginType = LoginType;
         }
 
-        public Object getEmail() {
+        public String getEmail() {
             return Email;
         }
 
-        public void setEmail(Object Email) {
+        public void setEmail(String Email) {
             this.Email = Email;
-        }
-
-        public String getTicket() {
-            return Ticket;
-        }
-
-        public void setTicket(String Ticket) {
-            this.Ticket = Ticket;
         }
 
         public int getCode() {
@@ -254,9 +281,29 @@ public class Login_Model{
         public void setCode(int Code) {
             this.Code = Code;
         }
+
+        public int getAttention() {
+            return Attention;
+        }
+
+        public void setAttention(int Attention) {
+            this.Attention = Attention;
+        }
+
+        public int getAttention_Me() {
+            return Attention_Me;
+        }
+
+        public void setAttention_Me(int Attention_Me) {
+            this.Attention_Me = Attention_Me;
+        }
+
+        public boolean isIs_Attention() {
+            return Is_Attention;
+        }
+
+        public void setIs_Attention(boolean Is_Attention) {
+            this.Is_Attention = Is_Attention;
+        }
     }
-
-
-
-
 }

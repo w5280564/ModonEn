@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:id="@+id/title_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2b2a2a">
+
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/return_black" />
+
+        <RelativeLayout
+            android:id="@+id/choice_Rel"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/timechioce_next"
+            android:padding="1dp">
+
+            <TextView
+                android:id="@+id/remind_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/personnotice_choice"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:text="提醒"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/mes_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/round_rectangle_black"
+                android:gravity="center"
+                android:text="私信"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/mesunrend_Txt"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignTop="@id/tab_group"
+                android:elevation="2dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/calendar_item_red"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/noticecontent_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/popupblack_bg"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/fans_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/fans_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_newfans_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/fans_icon"
+                android:text="新粉丝"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/fans_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/fansunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/fans_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:visibility="invisible" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/fans_icon"
+                android:background="#343434" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/nomm_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/nomm_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_nomm_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/nomm_icon"
+                android:text="评论"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/nomm_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/nommunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/nomm_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/nomm_icon"
+                android:background="#343434" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/like_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/like_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_like_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/like_icon"
+                android:text="喜欢"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/like_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/likeunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/like_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/like_icon"
+                android:background="#343434" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/atme_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/atme_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/atme_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/atme_icon"
+                android:text="提到我"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/atme_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/atmeunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/atme_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/atme_icon"
+                android:background="#343434" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/notice_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/notice_iocn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/notice_iocn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/notice_iocn"
+                android:text="通知"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/notice_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/right_arrow" />
+
+            <TextView
+                android:id="@+id/noticeunrend_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/notice_arrow"
+                android:background="@drawable/calendar_item_red"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="10sp"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/notice_iocn"
+                android:background="#343434" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <com.moying.energyring.xrecycle.XRecyclerView
+        android:id="@+id/All_XRecy"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</LinearLayout>

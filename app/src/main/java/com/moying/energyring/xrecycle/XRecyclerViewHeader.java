@@ -50,6 +50,8 @@ public class XRecyclerViewHeader extends LinearLayout {
     public int mMeasuredHeight;//布局的原始高度，用于做状态改变的标志
     // 均匀旋转动画
     private RotateAnimation refreshingAnimation;
+    private SimpleDraweeView my_DraweeView;
+    private LinearLayout myGif_Lin;
 
     public XRecyclerViewHeader(Context context) {
         super(context);
@@ -78,10 +80,12 @@ public class XRecyclerViewHeader extends LinearLayout {
         addView(mContainer, new LayoutParams(LayoutParams.MATCH_PARENT, 0));
         setGravity(Gravity.BOTTOM);
 
-        SimpleDraweeView my_DraweeView = (SimpleDraweeView)findViewById(R.id.my_DraweeView);
-        StaticData.ViewScale(my_DraweeView,46,46);
-        Uri uri  = Uri.parse("res://com.waylen.energycircle/" + R.drawable.logo_refesh);
-        addGif(my_DraweeView,uri);
+        myGif_Lin = (LinearLayout)findViewById(R.id.myGif_Lin);
+        my_DraweeView = (SimpleDraweeView)findViewById(R.id.my_DraweeView);
+//        StaticData.ViewScale(my_DraweeView,46,46);
+//        Uri uri  = Uri.parse("res:///" + R.drawable.logo_refesh);
+        Uri uri  = Uri.parse("res:///" + R.drawable.gif_sun_icon);
+        addGif(uri,500,200);
 
         mArrowImageView = (ImageView)findViewById(R.id.listview_header_arrow);
         mStatusTextView = (TextView)findViewById(R.id.refresh_status_textview);
@@ -109,12 +113,22 @@ public class XRecyclerViewHeader extends LinearLayout {
         mMeasuredHeight=getMeasuredHeight();
     }
 
-    public static void addGif(SimpleDraweeView draweeView, Uri uri) {
+//    public  void addGif(SimpleDraweeView draweeView, Uri uri) {
+//        DraweeController controller = Fresco.newDraweeControllerBuilder()
+//                .setUri(uri)
+//                .setAutoPlayAnimations(true)
+//                .build();
+//        draweeView.setController(controller);
+//    }
+
+    public  void addGif(Uri uri,int width,int height) {
+        StaticData.ViewScale(myGif_Lin,0,height);
+        StaticData.ViewScale(my_DraweeView,width,height);
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setUri(uri)
                 .setAutoPlayAnimations(true)
                 .build();
-        draweeView.setController(controller);
+        my_DraweeView.setController(controller);
     }
     //设置状态
     public void setState(int state){
@@ -232,16 +246,14 @@ public class XRecyclerViewHeader extends LinearLayout {
     public void setVisiableHeight(int height) {
         if (height < 0)
             height = 0;
-        LayoutParams lp = (LayoutParams) mContainer
-                .getLayoutParams();
+        LayoutParams lp = (LayoutParams) mContainer .getLayoutParams();
         lp.height = height;
         mContainer.setLayoutParams(lp);
     }
     //获得刷新头可见的高度
     public int getVisiableHeight() {
         int height = 0;
-        LayoutParams lp = (LayoutParams) mContainer
-                .getLayoutParams();
+        LayoutParams lp = (LayoutParams) mContainer .getLayoutParams();
         height = lp.height;
         return height;
     }

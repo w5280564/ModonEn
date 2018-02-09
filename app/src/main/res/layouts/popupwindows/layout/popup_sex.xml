@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popup_black">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/topbtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:text="男"
+            android:textColor="#87d0e3"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c8c8c8"
+            android:layout_below="@id/topbtn"
+            android:layout_alignLeft="@id/topbtn"
+            android:layout_alignRight="@id/topbtn"/>
+
+
+        <Button
+            android:id="@+id/belowbtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/line"
+            android:background="#ffffff"
+            android:text="女"
+            android:textColor="#87d0e3"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/cancelbtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/belowbtn"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/popupwhite_bg"
+            android:text="取消"
+            android:textColor="#87d0e3"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

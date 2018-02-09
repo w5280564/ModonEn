@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#232121"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/seek_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#2b2a2a"
+        android:focusableInTouchMode="true">
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/return_black" />
+
+        <Button
+            android:id="@+id/right_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/seek_Edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/right_Btn"
+            android:layout_toRightOf="@id/return_Btn"
+            android:background="@drawable/find_gazy"
+            android:gravity="center"
+            android:hint="搜索"
+            android:lines="1"
+            android:textColor="#ffffff"
+            android:textColorHint="#595f65"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/ch_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#2b2a2a"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/no_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/ch_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="点击创建"
+            android:textColor="#ffd800"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/All_XRecy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
