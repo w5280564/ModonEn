@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -95,6 +96,12 @@ public class DayPk_AddTab_Adapter extends RecyclerView.Adapter<DayPk_AddTab_Adap
             holder.my_Lin.setBackgroundResource(R.drawable.addtab_adapter);
         }
         holder.choice_check.setChecked(mcheckflag.get(position));
+        if (oneData.isIs_Train()){
+            holder.istrain_Img.setVisibility(View.VISIBLE);
+        }else {
+            holder.istrain_Img.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -108,6 +115,7 @@ public class DayPk_AddTab_Adapter extends RecyclerView.Adapter<DayPk_AddTab_Adap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  ImageView istrain_Img;
         public CheckBox choice_check;
         public LinearLayout my_Lin;
         private RelativeLayout mu_Rel;
@@ -120,9 +128,11 @@ public class DayPk_AddTab_Adapter extends RecyclerView.Adapter<DayPk_AddTab_Adap
             my_simple = (SimpleDraweeView) itemView.findViewById(R.id.my_simple);
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
             choice_check = (CheckBox) itemView.findViewById(R.id.choice_check);
+            istrain_Img = (ImageView) itemView.findViewById(R.id.istrain_Img);
             StaticData.ViewScale(my_Lin, 210, 240);
             StaticData.ViewScale(my_simple, 160, 160);
             StaticData.ViewScale(choice_check, 40, 40);
+            StaticData.ViewScale(istrain_Img, 60, 60);
         }
     }
 

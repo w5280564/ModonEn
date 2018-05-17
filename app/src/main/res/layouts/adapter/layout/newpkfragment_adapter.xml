@@ -54,18 +54,29 @@
         android:id="@+id/rank_Txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
         android:textColor="#f55e6b"
-        android:textStyle="bold"/>
+        android:textSize="10sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/colock_Img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/daypk_colock_icon"
-        android:layout_marginLeft="5dp"
         android:layout_alignTop="@id/my_Lin"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/daypk_colock_icon"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:id="@+id/istrain_Img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/istrain_icon"
         android:visibility="gone"/>
+
 
     <!-- <RelativeLayout
          android:id="@+id/mu_Rel"

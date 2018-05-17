@@ -347,6 +347,7 @@ public class Fragment4_PersonNew extends Fragment {
                 intent.putExtra("UserID", userModel.getData().getUserID() + "");
             }
             startActivity(intent);
+
         }
     }
 

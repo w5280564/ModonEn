@@ -67,12 +67,23 @@ public class JiFenAndBadge_Model implements Parcelable {
         private List<BadgeBean> _Badge;
         private List<PraiseBean> _Praise;
         private int RewardIntegral;
+        /**
+         * ProjectID : 25
+         * TrainFre : 5
+         * TargetNum : 30
+         */
 
+        private int ProjectID;
+        private int TrainFre;
+        private int TargetNum;
 
 
         protected DataBean(Parcel in) {
             Integral = in.readInt();
             RewardIntegral = in.readInt();
+            ProjectID = in.readInt();
+            TrainFre = in.readInt();
+            TargetNum = in.readInt();
             _Badge = in.createTypedArrayList(BadgeBean.CREATOR);
             _Praise = in.createTypedArrayList(PraiseBean.CREATOR);
         }
@@ -130,8 +141,35 @@ public class JiFenAndBadge_Model implements Parcelable {
         public void writeToParcel(Parcel parcel, int i) {
             parcel.writeInt(Integral);
             parcel.writeInt(RewardIntegral);
+            parcel.writeInt(ProjectID);
+            parcel.writeInt(TrainFre);
+            parcel.writeInt(TargetNum);
             parcel.writeTypedList(_Badge);
             parcel.writeTypedList(_Praise);
+        }
+
+        public int getProjectID() {
+            return ProjectID;
+        }
+
+        public void setProjectID(int ProjectID) {
+            this.ProjectID = ProjectID;
+        }
+
+        public int getTrainFre() {
+            return TrainFre;
+        }
+
+        public void setTrainFre(int TrainFre) {
+            this.TrainFre = TrainFre;
+        }
+
+        public int getTargetNum() {
+            return TargetNum;
+        }
+
+        public void setTargetNum(int TargetNum) {
+            this.TargetNum = TargetNum;
         }
 
         public static class BadgeBean implements Parcelable{

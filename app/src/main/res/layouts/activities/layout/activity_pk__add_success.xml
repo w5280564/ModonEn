@@ -25,9 +25,9 @@
             android:id="@+id/success_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/sure_Btn"
-            android:background="@drawable/success_icon"/>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/success_icon" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"

@@ -31,6 +31,7 @@ import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Pk.Training.TrainingTodaySet;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -68,6 +69,7 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
     private int pos;
     final int RESULT_CODE_MORE = 300;
     public final int REQUEST_CODE_IMAGE_PICK = 34;
+    private TextView addpkOrTrain_Txt;
 
 
     public static Pk_DayPk_Project_Detail_Fragment newInstance(int pos, String Type, String ProjectID, String projectName, newPk_Model newPk_model) {
@@ -121,11 +123,14 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
         RelativeLayout my_tab_Rel = (RelativeLayout) view.findViewById(R.id.my_tab_Rel);
         ac_tab_layout = (TabLayout) view.findViewById(R.id.ac_tab_layout);
         addpk_Img = view.findViewById(R.id.addpk_Img);
+        addpkOrTrain_Txt = (TextView) view.findViewById(R.id.addpkOrTrain_Txt);
         Slideviewpager = (ViewPager) view.findViewById(R.id.Slideviewpager);
         StaticData.ViewScale(my_tab_Rel, 0, 138);
         StaticData.ViewScale(ac_tab_layout, 410, 80);
         StaticData.ViewScale(addpk_Img, 128, 52);
+        StaticData.ViewScale(addpkOrTrain_Txt, 268, 100);
         addpk_Img.setOnClickListener(new addpk_Img());
+        addpkOrTrain_Txt.setOnClickListener(new addpkOrTrain_Txt());
         add_Photo_Lin.setOnClickListener(new add_Photo_Lin());
     }
 
@@ -136,6 +141,22 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
             intent.putExtra("projectModel", newPk_model.getData().get(pos));
 //            intent.putExtra("projectModel", Integral_Model.getData());
             startActivityForResult(intent, RESULT_CODE_MORE);
+        }
+    }
+
+    private class addpkOrTrain_Txt implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            if (addpkOrTrain_Txt.getText().equals("打卡")) {
+                Intent intent = new Intent(getActivity(), Pk_AddReport.class);
+                intent.putExtra("projectModel", newPk_model.getData().get(pos));
+                startActivityForResult(intent, RESULT_CODE_MORE);
+            } else if (addpkOrTrain_Txt.getText().equals("开始训练")) {
+                Intent intent1 = new Intent(getActivity(), TrainingTodaySet.class);
+                intent1.putExtra("ProjectID", ProjectID);
+                startActivity(intent1);
+            }
         }
     }
 
@@ -230,13 +251,17 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
-                tab_Name.setTextColor(Color.parseColor("#ffffff"));
+                int txtSize = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 30);
+                tab_Name.setTextSize(30);
+                tab_Name.setTextColor(Color.parseColor("#f24d4c"));
                 StaticData.ViewScale(tab_Name, 205, 80);
-                if (tab.getPosition() == 0) {
-                    tab_Name.setBackgroundResource(R.drawable.fen_tab_leftred);
-                } else {
-                    tab_Name.setBackgroundResource(R.drawable.fen_tab_rightred);
-                }
+
+//                if (tab.getPosition() == 0) {
+//                    tab_Name.setBackgroundResource(R.drawable.fen_tab_leftred);
+//                } else {
+//                    tab_Name.setBackgroundResource(R.drawable.fen_tab_rightred);
+//                }
+
 //                initData();
 //                initData(tab.getPosition());
             }
@@ -244,13 +269,16 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
+                int txtSize = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 20);
+                tab_Name.setTextSize(20);
                 tab_Name.setTextColor(Color.parseColor("#95a0ab"));
                 StaticData.ViewScale(tab_Name, 205, 80);
-                if (tab.getPosition() == 0) {
-                    tab_Name.setBackgroundResource(R.drawable.fen_tab_leftgazy);
-                } else {
-                    tab_Name.setBackgroundResource(R.drawable.fen_tab_rightgazy);
-                }
+
+//                if (tab.getPosition() == 0) {
+//                    tab_Name.setBackgroundResource(R.drawable.fen_tab_leftgazy);
+//                } else {
+//                    tab_Name.setBackgroundResource(R.drawable.fen_tab_rightgazy);
+//                }
             }
 
             @Override
@@ -312,7 +340,7 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
 
     }
 
-       DayPkDetail_Model Integral_Model;
+    DayPkDetail_Model Integral_Model;
 
     public void myRankData(final Context context, String baseUrl, final int isChange) {
         RequestParams params = new RequestParams(baseUrl);
@@ -497,18 +525,32 @@ public class Pk_DayPk_Project_Detail_Fragment extends Fragment {
         Type = pkModel.getData().getReportID() + "";
         projectName = pkModel.getData().getProjectName();
         int Limit = pkModel.getData().getLimit();
-
+        boolean isTrain = pkModel.getData().isIs_Train();
         if (Limit == 1) { //上限是1的项目
-            if (Type.equals("0")) {
-                addpk_Img.setVisibility(View.VISIBLE);
+            if (Type.equals("0")) { // 每日只能打卡一次 还未汇报
+//                addpk_Img.setVisibility(View.VISIBLE);
+//                if (isTrain){
+                addpkOrTrain_Txt.setVisibility(View.VISIBLE);
+                addpkOrTrain_Txt.setText("打卡");
+//                }
             } else {
-                addpk_Img.setVisibility(View.GONE);
+//                addpk_Img.setVisibility(View.GONE);
+                addpkOrTrain_Txt.setVisibility(View.GONE);
             }
         } else {
+            //可多次汇报的项目
             if (projectName.equals("健康走")) {
-                addpk_Img.setVisibility(View.GONE);
+//                addpk_Img.setVisibility(View.GONE);
+                addpkOrTrain_Txt.setVisibility(View.GONE);
             } else {
-                addpk_Img.setVisibility(View.VISIBLE);
+//                addpk_Img.setVisibility(View.VISIBLE);
+                //不是健康走 是否是训练项目
+                if (isTrain) {
+                    addpkOrTrain_Txt.setText("开始训练");
+                }else {
+                    addpkOrTrain_Txt.setText("打卡");
+                }
+                addpkOrTrain_Txt.setVisibility(View.VISIBLE);
             }
         }
 

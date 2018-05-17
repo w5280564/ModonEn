@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/popupwhite_bg">
+
+        <TextView
+            android:id="@+id/hint_Txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="提示"
+            android:textColor="#262626"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/hint_Txt"
+            android:background="#d8d7d7" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:id="@+id/left_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/set_left_icon"
+                android:layout_centerVertical="true"/>
+
+
+            <ImageView
+                android:id="@+id/right_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/set_right_icon"
+                android:layout_centerVertical="true"/>
+
+            <com.moying.energyring.waylenBaseView.HorizontalselectedView
+                android:id="@+id/select_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/right_Img"
+                android:layout_toRightOf="@id/left_Img"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                fresco:HorizontalselectedViewSelectedTextColor="#2b2a2a"
+                fresco:HorizontalselectedViewSelectedTextSize="60"
+                fresco:HorizontalselectedViewTextColor="#00ffffff"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/cha_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cancel_Txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#e3e7eb"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#95a0ab"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/sure_Txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#e35a57"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

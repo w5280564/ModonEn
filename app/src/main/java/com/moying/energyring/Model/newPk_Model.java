@@ -71,6 +71,8 @@ public class newPk_Model implements Parcelable{
          * Report_Days : 45
          * Gray_FilePath : http://localhost:58245/Uploads/2017-10-25/4770dff0-2a71-4950-9ecc-4ace5cd2763e.png
          * ClockID
+         * Is_CanDel
+         * Is_Train
          */
 
         private int ProjectID;
@@ -86,6 +88,26 @@ public class newPk_Model implements Parcelable{
         private int Report_Days;
         private String Gray_FilePath;
         private int ProjectTypeID;
+        private boolean Is_CanDel;
+        private boolean Is_Train;
+
+        public boolean isIs_CanDel() {
+            return Is_CanDel;
+        }
+
+        public void setIs_CanDel(boolean is_CanDel) {
+            Is_CanDel = is_CanDel;
+        }
+
+        public boolean isIs_Train() {
+            return Is_Train;
+        }
+
+        public void setIs_Train(boolean is_Train) {
+            Is_Train = is_Train;
+        }
+
+
 
         public int getClockID() {
             return ClockID;
@@ -221,6 +243,8 @@ public class newPk_Model implements Parcelable{
             dest.writeString(this.Gray_FilePath);
             dest.writeInt(this.ProjectTypeID);
             dest.writeInt(this.ClockID);
+            dest.writeByte(this.Is_Train ? (byte) 1 : (byte) 0);
+            dest.writeByte(this.Is_CanDel ? (byte) 1 : (byte) 0);
         }
 
         public DataBean() {
@@ -241,6 +265,8 @@ public class newPk_Model implements Parcelable{
             this.Gray_FilePath = in.readString();
             this.ProjectTypeID = in.readInt();
             this.ClockID = in.readInt();
+            this.Is_Train = in.readByte() != 0;
+            this.Is_CanDel = in.readByte() != 0;
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {

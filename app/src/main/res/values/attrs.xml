@@ -39,4 +39,39 @@
     </declare-styleable>
 
 
+    <declare-styleable name="WaterProgressView">
+        <attr name="circle_color" format="color" /><!--圆的颜色-->
+        <attr name="progress_color" format="color" /><!--进度的颜色-->
+        <attr name="text_color" format="color" /><!--文字的颜色-->
+        <attr name="text_size" format="dimension" /><!--文字大小-->
+        <attr name="ripple_topheight" format="dimension" /><!--水页涟漪最大高度-->
+    </declare-styleable>
+
+    <declare-styleable name="CountDownView">
+        <!--颜色-->
+        <attr name="ringColor" format="color" />
+        <!-- 进度文本的字体大小 -->
+        <attr name="progressTextSize" format="dimension" />
+        <!-- 圆环宽度 -->
+        <attr name="ringWidth" format="float" />
+        <!--进度文本颜色-->
+        <attr name="progressTextColor" format="color" />
+        <!--倒计时-->
+        <attr name="countdownTime" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="HorizontalselectedView">
+        <!--可见数目-->
+        <attr name="HorizontalselectedViewSeesize" format="integer"></attr>
+        <!--被选择文字的大小和颜色-->
+        <attr name="HorizontalselectedViewSelectedTextSize" format="float"></attr>
+        <attr name="HorizontalselectedViewSelectedTextColor" format="color|reference"></attr>
+
+
+        <!--未被被选择文字的大小和颜色-->
+        <attr name="HorizontalselectedViewTextSize" format="float"></attr>
+        <attr name="HorizontalselectedViewTextColor" format="color|reference"></attr>
+
+    </declare-styleable>
+
 </resources>

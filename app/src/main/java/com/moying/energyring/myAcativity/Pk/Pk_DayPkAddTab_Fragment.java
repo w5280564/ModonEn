@@ -13,8 +13,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.Goal_Model;
 import com.moying.energyring.Model.ProjectModel;
+import com.moying.energyring.Model.newPk_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.Pk.Training.TrainingTodaySet;
 import com.moying.energyring.myAdapter.DayPk_AddTab_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
@@ -79,8 +81,6 @@ public class Pk_DayPkAddTab_Fragment extends lazyLoadFragment implements XRecycl
     }
 
 
-
-
     /**
      * 标志位，标志已经初始化完成
      */
@@ -113,7 +113,7 @@ public class Pk_DayPkAddTab_Fragment extends lazyLoadFragment implements XRecycl
     @Override
     public void onResume() {
         super.onResume();
-        projectModel = saveFile.getGosnClass(getActivity(),"moreModel",ProjectModel.class);
+        projectModel = saveFile.getGosnClass(getActivity(), "moreModel", ProjectModel.class);
         isPrepared = true;
         lazyLoad();
     }
@@ -143,6 +143,26 @@ public class Pk_DayPkAddTab_Fragment extends lazyLoadFragment implements XRecycl
             @Override
             public void onItemClick(final View view, final int position) {
                 DayPk_AddTab_Adapter.MyViewHolder viewHolder = (DayPk_AddTab_Adapter.MyViewHolder) view.getTag();
+
+                if (baseModel.getData().get(position).isIs_Train()) {
+                    Intent intent1 = new Intent(getActivity(), TrainingTodaySet.class);
+                    intent1.putExtra("ProjectID", baseModel.getData().get(position).getProjectID() + "");
+                    startActivity(intent1);
+
+                } else {
+                    Goal_Model.DataBean goal = baseModel.getData().get(position);
+                    newPk_Model.DataBean model = new newPk_Model.DataBean();
+                    model.setProjectID(goal.getProjectID());
+                    model.setFilePath(goal.getFilePath());
+                    model.setProjectName(goal.getProjectName());
+                    model.setProjectUnit(goal.getProjectUnit());
+
+                    Intent intent = new Intent(getActivity(), Pk_AddReport.class);
+                    intent.putExtra("projectModel", model);
+                    startActivity(intent);
+                }
+
+
 //                viewHolder.choice_check.toggle();
 //                mAdapter.mcheckflag.put(position, viewHolder.choice_check.isChecked());
 //                if (viewHolder.choice_check.isChecked()) {
@@ -160,26 +180,26 @@ public class Pk_DayPkAddTab_Fragment extends lazyLoadFragment implements XRecycl
 //                    saveFile.removeGsonOne(context, "moreModel", baseModel.getData().get(position).getProjectID());
 //                }
 
-                if (mAdapter.mcheckflag.get(position)) {
-                    mAdapter.mcheckflag.put(position, false);
-                    viewHolder.my_Lin.setBackgroundResource(R.drawable.addtab_adapter);
-                    removeData(position);
-                    saveFile.removeGsonOne(context, "moreModel", baseModel.getData().get(position).getProjectID());
-
-                } else {
-                    mAdapter.mcheckflag.put(position, true);
-                    viewHolder.my_Lin.setBackgroundResource(R.drawable.addtab_adapter_select);
-                    Goal_Model.DataBean model = baseModel.getData().get(position);
-                    ProjectModel moreModel = new ProjectModel();
-                    moreModel.setProjectId(model.getProjectID());
-                    moreModel.setName(model.getProjectName());
-                    moreModel.setImgUrl(model.getFilePath());
-                    moreModel.setUnit(model.getProjectUnit());
-                    moreModel.setReportNum("");
-                    moreModel.setLimit(model.getLimit());
-                    projectModel.add(moreModel);
-                    saveFile.putClass(context, "moreModel", projectModel);
-                }
+//                if (mAdapter.mcheckflag.get(position)) {
+//                    mAdapter.mcheckflag.put(position, false);
+//                    viewHolder.my_Lin.setBackgroundResource(R.drawable.addtab_adapter);
+//                    removeData(position);
+//                    saveFile.removeGsonOne(context, "moreModel", baseModel.getData().get(position).getProjectID());
+//
+//                } else {
+//                    mAdapter.mcheckflag.put(position, true);
+//                    viewHolder.my_Lin.setBackgroundResource(R.drawable.addtab_adapter_select);
+//                    Goal_Model.DataBean model = baseModel.getData().get(position);
+//                    ProjectModel moreModel = new ProjectModel();
+//                    moreModel.setProjectId(model.getProjectID());
+//                    moreModel.setName(model.getProjectName());
+//                    moreModel.setImgUrl(model.getFilePath());
+//                    moreModel.setUnit(model.getProjectUnit());
+//                    moreModel.setReportNum("");
+//                    moreModel.setLimit(model.getLimit());
+//                    projectModel.add(moreModel);
+//                    saveFile.putClass(context, "moreModel", projectModel);
+//                }
             }
 
 

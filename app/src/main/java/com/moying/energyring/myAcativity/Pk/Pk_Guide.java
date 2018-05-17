@@ -2,6 +2,7 @@ package com.moying.energyring.myAcativity.Pk;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -85,6 +86,15 @@ public class Pk_Guide extends Activity {
                 public void onClick(View view) {
 //                    Intent intent2 = new Intent();
 //                    setResult(1003,intent2);
+                    finish();
+                }
+            });
+        }else if (guideId.equals("6")){
+            guide_img.setImageResource(R.drawable.guide_train);
+            guide_img.setBackgroundColor(Color.parseColor("#2b2a2a"));
+            guide_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     finish();
                 }
             });

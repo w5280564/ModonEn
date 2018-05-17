@@ -209,23 +209,26 @@ public class Pk_DayPkAdd_Project_TabSeek extends Activity {
         mAdapter.setOnItemClickLitener(new Pk_Project_TabSeek_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(final View view, final int position) {
-                Pk_Project_TabSeek_Adapter.MyViewHolder viewHolder = (Pk_Project_TabSeek_Adapter.MyViewHolder) view.getTag();
-                viewHolder.choice_check.toggle();
-                mAdapter.mcheckflag.put(position, viewHolder.choice_check.isChecked());
-                if (viewHolder.choice_check.isChecked()) {
-                    Goal_Model.DataBean model = baseModel.getData().get(position);
-                    ProjectModel moreModel = new ProjectModel();
-                    moreModel.setProjectId(model.getProjectID());
-                    moreModel.setName(model.getProjectName());
-                    moreModel.setImgUrl(model.getFilePath());
-                    moreModel.setUnit(model.getProjectUnit());
-                    moreModel.setReportNum("");
-                    projectModel.add(moreModel);
-                    saveFile.putClass(Pk_DayPkAdd_Project_TabSeek.this, "moreModel", projectModel);
-                } else {
-                    removeData(position);
-                    saveFile.removeGsonOne(Pk_DayPkAdd_Project_TabSeek.this, "moreModel", baseModel.getData().get(position).getProjectID());
-                }
+//                Pk_Project_TabSeek_Adapter.MyViewHolder viewHolder = (Pk_Project_TabSeek_Adapter.MyViewHolder) view.getTag();
+//                viewHolder.choice_check.toggle();
+//                mAdapter.mcheckflag.put(position, viewHolder.choice_check.isChecked());
+//                if (viewHolder.choice_check.isChecked()) {
+//                    Goal_Model.DataBean model = baseModel.getData().get(position);
+//                    ProjectModel moreModel = new ProjectModel();
+//                    moreModel.setProjectId(model.getProjectID());
+//                    moreModel.setName(model.getProjectName());
+//                    moreModel.setImgUrl(model.getFilePath());
+//                    moreModel.setUnit(model.getProjectUnit());
+//                    moreModel.setReportNum("");
+//                    projectModel.add(moreModel);
+//                    saveFile.putClass(Pk_DayPkAdd_Project_TabSeek.this, "moreModel", projectModel);
+//                } else {
+//                    removeData(position);
+//                    saveFile.removeGsonOne(Pk_DayPkAdd_Project_TabSeek.this, "moreModel", baseModel.getData().get(position).getProjectID());
+//                }
+
+
+
             }
 
 

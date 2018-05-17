@@ -20,7 +20,7 @@ import android.widget.PopupWindow;
 
 public class BasePopupWindow extends PopupWindow {
     private Context mContext;
-    private float mShowAlpha = 0.88f;
+    public float mShowAlpha = 0.88f;
     private Drawable mBackgroundDrawable;
 
     public BasePopupWindow(Context context) {
@@ -42,7 +42,7 @@ public class BasePopupWindow extends PopupWindow {
     }
 
     @Override
-    public void setBackgroundDrawable(Drawable background) {
+    public void setBackgroundDrawable(Drawable background) {//0x + 透明度-红-绿-蓝
         mBackgroundDrawable = background;
         setOutsideTouchable(isOutsideTouchable());
     }
@@ -167,10 +167,15 @@ public class BasePopupWindow extends PopupWindow {
     /**
      * 控制窗口背景的不透明度
      * */
-    private void setWindowBackgroundAlpha(float alpha) {
+    public void setWindowBackgroundAlpha(float alpha) {
         Window window = ((Activity)getContext()).getWindow();
         WindowManager.LayoutParams layoutParams = window.getAttributes();
         layoutParams.alpha = alpha;
         window.setAttributes(layoutParams);
+    }
+
+    public void setmShowAlpha(float alpha){
+
+        this.mShowAlpha = alpha;
     }
 }

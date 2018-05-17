@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,8 +108,12 @@ public class FeedbackFragment_Adapter extends RecyclerView.Adapter<FeedbackFragm
         } else {
             StaticData.lodingheadBg(holder.myhead_simple);
         }
+        holder.name_Txt.setLines(1);
+        holder.name_Txt.setMaxEms(8);
+        holder.name_Txt.setEllipsize(TextUtils.TruncateAt.END);
         holder.name_Txt.setText(oneData.getNickName());
 //        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
         holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");

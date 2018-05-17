@@ -58,7 +58,7 @@
         <activity
             android:name=".myAcativity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeprice"></activity>
+            android:theme="@style/AppThemeprice" />
         <activity
             android:name=".myAcativity.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -448,8 +448,20 @@
                     android:scheme="waylen" />
             </intent-filter>
         </activity>
-        <activity android:name=".myAcativity.OpenapkActivity"></activity>
-        <activity android:name=".myAcativity.Person.Person_Neng"></activity>
+        <activity android:name=".myAcativity.Person.Person_Neng" />
+        <activity android:name=".myAcativity.Pk.Training.startTrainingActivity" />
+        <activity android:name=".myAcativity.Pk.Training.trainingCountDown" />
+        <activity android:name=".myAcativity.Pk.Training.TrainingTodaySet" />
+
+        <service android:name=".myAcativity.Pk.Training.service.DownloadService" />
+
+        <receiver android:name=".myAcativity.Pk.Training.utils.NetBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".myAcativity.Pk.Training.Training_Posting"></activity>
     </application>
 
 </manifest>

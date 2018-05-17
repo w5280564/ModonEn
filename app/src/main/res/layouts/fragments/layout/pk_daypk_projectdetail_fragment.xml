@@ -115,14 +115,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <android.support.design.widget.TabLayout
+            <!--<android.support.design.widget.TabLayout-->
+                <!--android:id="@+id/ac_tab_layout"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/timechioce_next"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--app:tabPaddingEnd="-0.1dp"-->
+                <!--app:tabPaddingStart="-0.1dp" />-->
+           <android.support.design.widget.TabLayout
                 android:id="@+id/ac_tab_layout"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/timechioce_next"
+                android:layout_centerVertical="true"
                 app:tabPaddingEnd="-0.1dp"
-                app:tabPaddingStart="-0.1dp" />
+                app:tabPaddingStart="-0.1dp"
+               android:layout_marginLeft="10dp"/>
 
             <ImageView
                 android:id="@+id/addpk_Img"
@@ -133,6 +141,20 @@
                 android:layout_toRightOf="@id/ac_tab_layout"
                 android:visibility="gone"
                 android:src="@drawable/projectdetail_addpk" />
+
+            <TextView
+                android:id="@+id/addpkOrTrain_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:textColor="#2b2a2a"
+                android:background="@drawable/daypk_train_bg"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/addpk_Img"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 

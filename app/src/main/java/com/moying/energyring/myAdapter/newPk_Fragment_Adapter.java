@@ -62,8 +62,12 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
                 @Override
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemLongClick(holder.itemView, position);
-                    return false;
+                    holder.itemView.setTag(pos);
+                    mOnItemClickLitener.onItemLongClick(holder.itemView,position);
+//                    ScaleAnimation scal = new ScaleAnimation(1.0f, 1.1f, 1.0f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//                    scal.setDuration(100);
+//                    holder.my_Lin.startAnimation(scal);
+                    return true;
                 }
             });
         }
@@ -120,6 +124,11 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
             holder.colock_Img.setVisibility(View.VISIBLE);
         }
 
+        if (oneData.isIs_Train()){
+            holder.istrain_Img.setVisibility(View.VISIBLE);
+        }else {
+            holder.istrain_Img.setVisibility(View.GONE);
+        }
 
     }
 
@@ -137,8 +146,8 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private  ImageView colock_Img;
-        private LinearLayout my_Lin;
+        private  ImageView colock_Img,istrain_Img;
+        public LinearLayout my_Lin;
         private TextView count_Txt, project_Txt, all_Txt, rank_Txt;
 //        private AutoScaleTextView project_Txt, all_Txt;
 //        private TextView count_Txt, unit_Txt, today_Txt;
@@ -156,6 +165,8 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
             StaticData.ViewScale(my_Lin, 348, 222);
              colock_Img = (ImageView) itemView.findViewById(R.id.colock_Img);
             StaticData.ViewScale(colock_Img, 35, 35);
+            istrain_Img = (ImageView) itemView.findViewById(R.id.istrain_Img);
+            StaticData.ViewScale(istrain_Img, 80, 80);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             int magTop = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 18);

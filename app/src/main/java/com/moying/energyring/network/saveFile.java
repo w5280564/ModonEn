@@ -26,7 +26,7 @@ import java.util.Locale;
 @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
 public class saveFile {
     //    public static String BaseUrl = "http://www.ec.dev.com/";
-//    public static String BaseUrl = "http://172.16.0.111/";//本地
+//    public static String BaseUrl = "http://172.16.0.222/";//本地
         public static String BaseUrl = "http://120.26.218.68:1111/";
     public static String Post_Add_Url = "ec/v2/Post/Post_Add";
 
@@ -120,6 +120,19 @@ public class saveFile {
     public static String Project_Add_Url = "ec/pk/Project_Add";
     public static String Share_Project_Url = "ec/pk/Project_RankingNum_Get";
     public static String Invite_Bind_Url = "ec/user/Invite_Bind";
+
+    public static String PK_Project_Get_Url = "ec/PK/Project_Get";
+    public static String TrainAdd_Post_Url = "ec/Train/Pro_Train_Add";
+    public static String TrainDetail_Get_Url = "ec/Train/Pro_Train_Get";
+    public static String TrainDown_Get_Url = "ec/Train/Pro_Train_File_Get";
+    public static String Train_CommonFileList_Url = "ec/Train/Pro_Train_CommonFileList";
+    public static String Train_FileList_Url = "ec/Train/Pro_Train_FileList";
+    public static String Train_GroupUpd_Url = "ec/Train/Pro_Train_Group_Upd";
+    public static String Train_Finish_Url = "ec/Train/Pro_Train_Finish";
+    public static String Train_End_Url = "ec/Train/Pro_Train_End";
+
+
+
 
     private static SharedPreferences mShared = null;
     /**

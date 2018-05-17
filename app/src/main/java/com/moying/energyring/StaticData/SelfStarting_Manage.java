@@ -90,7 +90,21 @@ public class SelfStarting_Manage {
 //                componentName = ComponentName.unflattenFromString("com.iqoo.secure/.ui.phoneoptimize.BgStartUpManager");
 //                componentName = ComponentName.unflattenFromString("com.iqoo.secure/.ui.phoneoptimize.AddWhiteListActivity");
 //                componentName = ComponentName.unflattenFromString("com.iqoo.secure/.safeguard.PurviewTabActivity");
+
                 componentName = new ComponentName("com.vivo.abe", "com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity");
+
+
+                // vivo 点击设置图标>加速白名单>我的app
+                //      点击软件管理>软件管理权限>软件>我的app>信任该软件
+                componentName = new ComponentName("com.iqoo.secure",null);
+//                Intent appIntent = context.getPackageManager().getLaunchIntentForPackage("com.iqoo.secure");
+//                if(appIntent != null){
+//                    context.startActivity(appIntent);
+//                    floatingView = new SettingFloatingView(this, "SETTING", getApplication(), 0);
+//                    floatingView.createFloatingView();
+//                    return;
+//                }
+
 
 //                vivoGodIntent.setComponent(new ComponentName("com.vivo.abe", "com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity"));
 

@@ -55,7 +55,7 @@ public class Pk_DayPKAdd_Project_Tab extends FragmentActivity {
         seek_Btn = (Button) findViewById(R.id.seek_Btn);
         View right_Btn = findViewById(R.id.right_Btn);
         View sure_Lin = findViewById(R.id.sure_Lin);
-        sure_Lin.setVisibility(View.VISIBLE);
+        sure_Lin.setVisibility(View.GONE);
         TextView sure_Txt = (TextView) findViewById(R.id.sure_Txt);
 
         StaticData.ViewScale(return_Btn, 80, 88);

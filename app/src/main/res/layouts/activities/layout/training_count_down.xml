@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_Rel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <com.moying.energyring.waylenBaseView.CountDownView
+        android:id="@+id/countdown_View"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        app:progressTextColor="#ffd800"
+        app:ringColor="#ffd800"
+        app:ringWidth="4" />
+
+    <TextView
+        android:id="@+id/xiu_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/countdown_View"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:text="轻触屏幕跳过休息"
+        android:textColor="#95a0ab"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/intr_Lin"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/xiu_Txt"
+        android:layout_centerHorizontal="true"
+        android:background="#edecec"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bang_Txt"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="太棒了，已经完成"
+            android:textColor="#4d4d4d"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#d8d7d7" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/after_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="接下来"
+                android:textColor="#4d4a4a"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:lines="1"/>
+
+            <TextView
+                android:id="@+id/other_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X组"
+                android:textColor="#4d4a4a"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:lines="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

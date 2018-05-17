@@ -9,10 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:background="#f24d4c"
         android:gravity="center"
         android:textColor="#ffffff"
-        android:textSize="12sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </LinearLayout>

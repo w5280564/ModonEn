@@ -9,12 +9,11 @@
         android:id="@+id/my_Lin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/addtab_adapter"
-        android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="4dp">
+        android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/my_simple"
@@ -27,15 +26,33 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="#804D4A4A"/>
+            android:background="#804D4A4A" />
 
-        <TextView
-            android:id="@+id/name_Txt"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="12sp" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/istrain_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/istrain_icon"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/name_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
 
         <CheckBox
             android:id="@+id/choice_check"
@@ -48,7 +65,7 @@
             android:button="@null"
             android:clickable="false"
             android:focusable="false"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 

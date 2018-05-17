@@ -32,7 +32,7 @@ public class PermissionUtils {
     public static final int CODE_ACCESS_FINE_LOCATION = 5;
     public static final int CODE_ACCESS_COARSE_LOCATION = 6;
     public static final int CODE_READ_EXTERNAL_STORAGE = 7;
-    public static final int CODE_WRITE_EXTERNAL_STORAGE = 8;
+    public static final int CODE_WRITE_EXTERNAL_STORAGE = 8;//申请读取存储权限
     public static final int CODE_MULTI_PERMISSION = 100;
 
     public static final String PERMISSION_RECORD_AUDIO = Manifest.permission.RECORD_AUDIO;

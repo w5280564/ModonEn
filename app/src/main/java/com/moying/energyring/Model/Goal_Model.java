@@ -76,6 +76,16 @@ public class Goal_Model implements Serializable{
         private int FileID;
         private int ProjectTypeID;
 
+        public boolean isIs_Train() {
+            return Is_Train;
+        }
+
+        public void setIs_Train(boolean is_Train) {
+            Is_Train = is_Train;
+        }
+
+        private boolean Is_Train;
+
         public int getProjectTypeID() {
             return ProjectTypeID;
         }

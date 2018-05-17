@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.moying.energyring.myAcativity.Pk.Training.utils.GetFileSharePreance;
 import com.umeng.analytics.MobclickAgent;
 
 import org.xutils.x;
@@ -15,7 +16,7 @@ import cn.jpush.android.api.JPushInterface;
 public class MyApplication extends Application {
     private static final String TAG = "JPush";
     public static Context mycontext;
-
+    private static MyApplication mApplication;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
         Fresco.initialize(this);
 
         mycontext = this;
+        mApplication = this;
 
         MobclickAgent.openActivityDurationTrack(false);//禁止默认的友盟页面统计方式，这样将不会再自动统计Activity
 //		MobclickAgent.setDebugMode(true);
@@ -51,4 +53,12 @@ public class MyApplication extends Application {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
+
+    public synchronized static MyApplication getApplicationInstance() {
+        return mApplication;
+    }
+    public synchronized static GetFileSharePreance getFileSharePreance(){
+        return new GetFileSharePreance(mApplication);
+    }
+
 }

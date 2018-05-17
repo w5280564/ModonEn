@@ -69,6 +69,7 @@ public class DayPkDetail_Model implements Parcelable {
          * ReportFre_All : 66
          * PKCoverImg : http://172.16.0.111/Uploads/2018-01-16/157c2c7f-c440-4351-818c-13ec23af2c13.jpg
          * ReportID : 127358
+         * Is_Train
          */
 
         private int Ranking;
@@ -84,6 +85,16 @@ public class DayPkDetail_Model implements Parcelable {
         private int ReportFre_All;
         private String PKCoverImg;
         private int ReportID;
+        private boolean Is_Train;
+
+        public boolean isIs_Train() {
+            return Is_Train;
+        }
+
+        public void setIs_Train(boolean is_Train) {
+            Is_Train = is_Train;
+        }
+
 
         public int getRanking() {
             return Ranking;
@@ -209,6 +220,7 @@ public class DayPkDetail_Model implements Parcelable {
             dest.writeInt(this.ReportFre_All);
             dest.writeString(this.PKCoverImg);
             dest.writeInt(this.ReportID);
+            dest.writeByte(this.Is_Train ? (byte) 1 : (byte) 0);
         }
 
         public DataBean() {
@@ -228,6 +240,7 @@ public class DayPkDetail_Model implements Parcelable {
             this.ReportFre_All = in.readInt();
             this.PKCoverImg = in.readString();
             this.ReportID = in.readInt();
+            this.Is_Train = in.readByte() != 0;
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {

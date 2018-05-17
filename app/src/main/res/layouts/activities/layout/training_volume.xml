@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/my_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e6403f3f"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|right">
+
+            <Button
+                android:id="@+id/cha_Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/train_cha_icon" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="背景音乐"
+                android:textColor="#95a0ab"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.kyleduo.switchbutton.SwitchButton
+                android:id="@+id/volume_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:kswBackDrawable="@drawable/sb_back_drawable"
+                app:kswThumbDrawable="@drawable/sb_thumb_drawable"
+                app:kswThumbHeight="20dp"
+                app:kswThumbWidth="20dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/choice_Rel_On"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/left_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/train_left_icon" />
+
+
+            <ImageView
+                android:id="@+id/right_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/train_right_icon" />
+
+            <com.moying.energyring.waylenBaseView.HorizontalselectedView
+                android:id="@+id/select_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/right_Img"
+                android:layout_toRightOf="@id/left_Img"
+                fresco:HorizontalselectedViewSelectedTextColor="#95a0ab"
+                fresco:HorizontalselectedViewSelectedTextSize="60"
+                fresco:HorizontalselectedViewTextColor="#00ffffff" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/choice_Rel_Off"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="你可以用喜欢的音乐播放器听音乐"
+                android:layout_centerInParent="true"
+                android:textColor="#95a0ab"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/train_volume_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/train_volume" />
+            <SeekBar
+                android:id="@+id/train_seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:maxHeight="2dp"
+                android:progressDrawable="@drawable/trainbar_corlor"
+                android:thumb="@drawable/trainbar_thumb"
+                android:thumbOffset="0dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

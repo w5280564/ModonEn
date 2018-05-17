@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
 
-//        SelfStarting_Manage.jumpStartInterface(this);
+//        SelfStarting_Manage.jumpStartInterface(this); +
 
 //        startService(new Intent(this, DaemonService.class));
 //        initJobScheduler();

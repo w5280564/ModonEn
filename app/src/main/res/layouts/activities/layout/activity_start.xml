@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <RelativeLayout
+        android:id="@+id/bar_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.moying.energyring.waylenBaseView.MySeekBar
+            android:id="@+id/titleMybar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:maxHeight="100dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="0dp"
+            android:progress="5"
+            android:progressDrawable="@drawable/startseek"
+            android:thumb="@null" />
+
+        <TextView
+            android:id="@+id/quan_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:textColor="#4d4a4a"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/name_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bar_Rel"
+        android:layout_marginLeft="10dp"
+        android:text="深蹲2/5"
+        android:textColor="#4d4a4a"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/today_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/bar_Rel"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="今日目标"
+        android:textColor="#4d4a4a"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <RelativeLayout
+        android:id="@+id/wave_Lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <!--<com.moying.energyring.waylenBaseView.WaterProgressView-->
+        <!--android:id="@+id/water_view"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp" />-->
+
+        <com.moying.energyring.waylenBaseView.WaveView
+            android:id="@+id/waveView"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <ImageView
+            android:id="@+id/training_push_Img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/training_push_icon" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/count_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wave_Lin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="10/20"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coach_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/count_Txt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="XX为你加油"
+        android:textColor="#95a0ab"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/time_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="00:00"
+        android:textColor="#95a0ab"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/set_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/time_Txt"
+        android:layout_alignEnd="@+id/today_Txt"
+        android:background="@drawable/start_set_icon" />
+
+
+
+
+</RelativeLayout>

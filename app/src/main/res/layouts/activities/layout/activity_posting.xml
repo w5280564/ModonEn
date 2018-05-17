@@ -40,10 +40,10 @@
                     android:layout_margin="10dp"
                     android:background="@null"
                     android:gravity="left"
+                    android:hint="谈谈此时的想法吧"
                     android:textColor="#989797"
                     android:textColorHint="#989797"
-                    android:textSize="16sp"
-                    android:hint="谈谈此时的想法吧"/>
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:id="@+id/remindRel"
@@ -106,11 +106,11 @@
                     android:id="@+id/post_remid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/photoLayout"
-                    android:src="@drawable/posting_remid_icon"
                     android:layout_alignTop="@id/photoLayout"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"/>
+                    android:layout_toRightOf="@id/photoLayout"
+                    android:src="@drawable/posting_remid_icon"
+                    android:visibility="gone" />
 
 
                 <LinearLayout

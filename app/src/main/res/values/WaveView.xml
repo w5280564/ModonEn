@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WaveView">
+        <!--波纹颜色-->
+        <attr name="wave_wavecolor" format="color" />
+        <!--波纹进度文字是否显示-->
+        <attr name="wave_progress_text_show" format="boolean" />
+        <!--波纹进度文字颜色-->
+        <attr name="wave_progress_text_color" format="color" />
+    </declare-styleable>
+</resources>

@@ -74,6 +74,16 @@ public class isFristSee_Model {
         private boolean Is_Suggest;
         private boolean Is_PK_Guide;
         private boolean Is_First_Post_Pic;
+        private boolean Is_First_Train;
+
+        public boolean isIs_First_Train() {
+            return Is_First_Train;
+        }
+
+        public void setIs_First_Train(boolean is_First_Train) {
+            Is_First_Train = is_First_Train;
+        }
+
 
         public int getUserID() {
             return UserID;
