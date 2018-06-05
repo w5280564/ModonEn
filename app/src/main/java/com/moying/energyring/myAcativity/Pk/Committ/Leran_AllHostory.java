@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.AllPerson_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAdapter.AllPersonHostory_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -133,7 +133,7 @@ public class Leran_AllHostory extends Activity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")){
-                    Intent intent = new Intent(Leran_AllHostory.this,LoginRegister.class);
+                    Intent intent = new Intent(Leran_AllHostory.this,MainLogin.class);
                     startActivity(intent);
                 }
             }

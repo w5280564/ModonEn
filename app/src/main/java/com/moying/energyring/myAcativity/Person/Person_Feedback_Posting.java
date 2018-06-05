@@ -35,7 +35,7 @@ import com.moying.energyring.Model.PostAndPk_Add;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Pk.JiFenActivity;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.pinyin.SortModel;
@@ -374,7 +374,7 @@ public class Person_Feedback_Posting extends Activity implements ActivityCompat.
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -435,7 +435,7 @@ public class Person_Feedback_Posting extends Activity implements ActivityCompat.
                 right_Btn.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

@@ -362,7 +362,7 @@ public class Fragment2_Pk extends Fragment {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -407,7 +407,7 @@ public class Fragment2_Pk extends Fragment {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -451,7 +451,7 @@ public class Fragment2_Pk extends Fragment {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -501,7 +501,7 @@ public class Fragment2_Pk extends Fragment {
                 view.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

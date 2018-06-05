@@ -187,7 +187,7 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         sina.setText(shareContent.title + shareContent.url);
 //        sina.setImagePath(sianimg);
         if (shareContent.imgpath != null ) {
-            sina.setImagePath(shareContent.imgpath);
+            sina.setImageUrl(shareContent.imgpath);
         }
         Platform sinap = ShareSDK.getPlatform(SinaWeibo.NAME);
         sinap.setPlatformActionListener(this);
@@ -299,6 +299,9 @@ public class myShareActivity extends Activity implements PlatformActionListener,
         msg.obj = arg2;
         UIHandler.sendMessage(msg, this);
     }
+
+
+
 
 
 }

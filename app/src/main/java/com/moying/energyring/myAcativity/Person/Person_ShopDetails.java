@@ -22,7 +22,7 @@ import com.moying.energyring.Model.ShopDetails_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -142,7 +142,7 @@ public class Person_ShopDetails extends Activity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

@@ -42,7 +42,6 @@ import com.moying.energyring.myAcativity.Pk.Pk_DayPKAdd_Project_Tab;
 import com.moying.energyring.myAcativity.Pk.Pk_DayPk_Project_Detail;
 import com.moying.energyring.myAcativity.Pk.Pk_DayPk_Project_Detail_RankAll;
 import com.moying.energyring.myAcativity.Pk.Pk_FenRankList;
-import com.moying.energyring.myAcativity.Pk.Pk_Guide;
 import com.moying.energyring.myAcativity.Pk.Pk_HuiZong;
 import com.moying.energyring.myAcativity.Pk.Training.TrainingTodaySet;
 import com.moying.energyring.myAdapter.newPk_Fragment_Adapter;
@@ -167,52 +166,6 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
     }
 
-
-    private void initGuide(boolean isCheck) {
-        if (!isCheck) {
-            Intent intent = new Intent(getActivity(), Pk_Guide.class);
-            intent.putExtra("guideId", "1");
-            startActivityForResult(intent, guideID);
-//            startActivity(intent);
-        }
-//        if (saveFile.getShareData("isGuidepk", getActivity()).equals("false")) {
-////        if (!((MainActivity)getActivity()).isFristModel.getData().isIs_FirstPool()){
-//            Intent intent = new Intent(getActivity(), Pk_Guide.class);
-//            intent.putExtra("guideId", "1");
-//            startActivity(intent);
-//        } else {
-//            Intent intent1 = new Intent(getActivity(), HasNewActivity.class);
-//            startActivity(intent1);
-//        }
-//        saveFile.saveShareData("isGuidepk", "true", getActivity());
-
-
-//        if (ActivityisTop.isForeground(getActivity(), "Pk_Guide") || ActivityisTop.isForeground(getActivity(), "Pk_Guide")) {
-////            return;
-//        }else{
-//            versionNameData(getActivity(), saveFile.BaseUrl + saveFile.Version_Url);
-//        }
-
-
-//        if (!ActivityisTop.isForeground(getActivity(), "Pk_Guide")) {
-//            versionNameData(getActivity(), saveFile.BaseUrl + saveFile.Version_Url);
-//        }
-
-//        /**获取引导界面工具类的实例**/
-//        GuideUtil guideUtil = GuideUtil.getInstance();
-////        guideUtil.isFirst()
-//        /**调用引导界面**/
-//        guideUtil.initGuide(getActivity(), R.drawable.popup_back_white);
-
-    }
-
-    private void isFristSee() {
-        Intent intent = new Intent(getActivity(), Pk_Guide.class);
-        intent.putExtra("guideId", "2");
-//        startActivityForResult(intent,TixingResult);
-        startActivity(intent);
-    }
-
     private void initView(View view) {
         marqueeView = (MarqueeView) view.findViewById(R.id.MarqueeView);
         RelativeLayout titlebg_Rel = (RelativeLayout) view.findViewById(R.id.titlebg_Rel);
@@ -318,24 +271,29 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
 //            String resultStr = "{\n" +
 //                    "  \"IsSuccess\": true,\n" +
-//                    "  \"Msg\": \"操作成功！\",\n" +
-//                    "  \"Status\": 200,\n" +
-//                    "  \"Data\": {\"Integral\":10,\"_Badge\":[{\"BadgeID\":16,\"BadgeName\":\"累计签到50天徽章\",\"BadgeDays\":50,\"BadgeType\":2,\"Is_Have\":false,\"HaveNum\":280,\"FileID\":0,\"FilePath\":\"http://172.16.0.111/Uploads/2017-11-27/4bc3c882-5115-4be9-99f0-84ef4a7a51ca.png\",\"FileID_Gray\":0,\"FilePath_Gray\":null},{\"BadgeID\":17,\"BadgeName\":\"累计签到100天徽章\",\"BadgeDays\":100,\"BadgeType\":3,\"Is_Have\":false,\"HaveNum\":380,\"FileID\":0,\"FilePath\":\"http://172.16.0.111/Uploads/2017-11-27/4bc3c882-5115-4be9-99f0-84ef4a7a51ca.png\",\"FileID_Gray\":0,\"FilePath_Gray\":null}]}\n" +
-//                    "}";
-//            String resultStr = "{\n" +
-//                    "  \"IsSuccess\": true,\n" +
 //                    "  \"Msg\": \"操作成功!\",\n" +
 //                    "  \"Status\": 200,\n" +
 //                    "  \"Data\": {\n" +
 //                    "    \"Integral\": 10,\n" +
-//                    "    \"_Badge\": []\n" +
+//                    "    \"RewardIntegral\": 10,\n" +
+//                    "    \"_Badge\": [],\n" +
+//                    "    \"_Praise\": null,\n" +
+//                    "    \"DailyTask\": {\n" +
+//                    "      \"TaskID\": 1,\n" +
+//                    "      \"TaskName\": \"每日签到\",\n" +
+//                    "      \"Summary\": \"啦啦啦啦啦绿绿绿\",\n" +
+//                    "      \"Integral\": 30,\n" +
+//                    "      \"Condition\": \"3\",\n" +
+//                    "      \"BtnText\": \"去签到,已签到\"\n" +
+//                    "    }\n" +
 //                    "  }\n" +
 //                    "}";
 //            jiFenmodel = new Gson().fromJson(resultStr, JiFenAndBadge_Model.class);
 //
 //            Intent intent = new Intent(getActivity(), JiFenActivity.class);
 //            intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
-////            intent.putExtra("jifen", 10);
+//            intent.putExtra("DailyTask",jiFenmodel.getData().getDailyTask());
+//            intent.putExtra("RewardIntegral", "10");
 //            startActivityForResult(intent, jifenID);
         }
     }
@@ -496,7 +454,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -540,7 +498,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -576,6 +534,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                         Intent intent = new Intent(getActivity(), JiFenActivity.class);
                         intent.putExtra("media", "check");
                         intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
+                        intent.putExtra("DailyTask",jiFenmodel.getData().getDailyTask());
                         startActivityForResult(intent, jifenID);
 //                        startActivity(intent);
                         Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT);
@@ -593,7 +552,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                 check_Lin.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -641,7 +600,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -702,7 +661,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                 view.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -768,7 +727,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -807,7 +766,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -860,7 +819,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -903,7 +862,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     context.startActivity(intent);
                 }
             }

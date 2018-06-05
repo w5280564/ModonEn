@@ -19,7 +19,7 @@ import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.headListModel;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -182,7 +182,7 @@ public class GrowthLogHead_Adapter extends RecyclerView.Adapter<GrowthLogHead_Ad
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     context.startActivity(intent);
                 }
             }

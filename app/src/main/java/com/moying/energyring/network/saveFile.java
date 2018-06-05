@@ -26,13 +26,13 @@ import java.util.Locale;
 @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
 public class saveFile {
     //    public static String BaseUrl = "http://www.ec.dev.com/";
-//    public static String BaseUrl = "http://172.16.0.222/";//本地
-        public static String BaseUrl = "http://120.26.218.68:1111/";
-    public static String Post_Add_Url = "ec/v2/Post/Post_Add";
+    public static String BaseUrl = "http://172.16.0.222/";//本地
+//        public static String BaseUrl = "http://120.26.218.68:1111/";
+    public static String Post_Add_Url = "ec/v3/Post/Post_Add";
 
     public static String AddPk_Url = "ec/v4/PK/Report_Add";
 //    public static String AddPkV3_Url = "ec/v3/PK/Report_Add";
-    public static String Report_Status_Url = "ec/v3/Post/Report_Post_Add";
+    public static String Report_Status_Url = "ec/v4/Post/Report_Post_Add";
     public static String EditInfo_Url = "ec/v2/User/UserInfo_Edit";
 
 //    public static String CodeUrl = "ec/Account/PhoneCode_Get";
@@ -124,12 +124,19 @@ public class saveFile {
     public static String PK_Project_Get_Url = "ec/PK/Project_Get";
     public static String TrainAdd_Post_Url = "ec/Train/Pro_Train_Add";
     public static String TrainDetail_Get_Url = "ec/Train/Pro_Train_Get";
-    public static String TrainDown_Get_Url = "ec/Train/Pro_Train_File_Get";
+    public static String TrainDown_Get_Url = "ec/Train/Pro_Train_File_Get_ByTrainID";
     public static String Train_CommonFileList_Url = "ec/Train/Pro_Train_CommonFileList";
     public static String Train_FileList_Url = "ec/Train/Pro_Train_FileList";
     public static String Train_GroupUpd_Url = "ec/Train/Pro_Train_Group_Upd";
     public static String Train_Finish_Url = "ec/Train/Pro_Train_Finish";
     public static String Train_End_Url = "ec/Train/Pro_Train_End";
+    public static String Person_Exchange_Url = "ec/Product/Exchange_List";
+    public static String LoginName_IsHaveRefUser_Url = "ec/User/User_IsHaveRefUser_ByLoginName";
+    public static String User_IsHaveRefUser_Url = "ec/User/User_IsHaveRefUser_ByUserID";
+    public static String Phone_ChangeAndInvite_Url = "ec/Account/Phone_ChangeAndInvite_Bind";
+    public static String InviteISHave_Url = "ec/User/Invite_Is_Exists";
+    public static String Task_List_Url = "ec/Task/My_Task_List";
+    public static String Task_Finish_Url = "ec/Task/Task_Finish_Share";
 
 
 

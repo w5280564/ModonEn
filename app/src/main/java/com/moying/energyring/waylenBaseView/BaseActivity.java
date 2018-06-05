@@ -22,6 +22,19 @@ public class BaseActivity extends FragmentActivity{
 //        setStatusBar();
     }
 
+
+    //解决重叠，方法1@Override
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //如果用以下这种做法则不保存状态，再次进来的话会显示默认tab
+//        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onAttachFragment(android.app.Fragment fragment) {
+        super.onAttachFragment(fragment);
+    }
+
     /**
      * activity中搭载了多个fragment，需要显示某个fragment时使用
      *

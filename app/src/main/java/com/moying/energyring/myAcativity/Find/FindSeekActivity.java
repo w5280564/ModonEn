@@ -33,7 +33,7 @@ import com.moying.energyring.Model.Recommend_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAdapter.FindSeek_GrowthLogFragment_Adapter;
 import com.moying.energyring.myAdapter.HeadAfter_Adapter;
 import com.moying.energyring.myAdapter.HeadBefo_Adapter;
@@ -452,7 +452,7 @@ public class FindSeekActivity extends Activity implements XRecyclerView.LoadingL
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(FindSeekActivity.this, LoginRegister.class);
+                    Intent intent = new Intent(FindSeekActivity.this, MainLogin.class);
                     startActivity(intent);
                 }
             }

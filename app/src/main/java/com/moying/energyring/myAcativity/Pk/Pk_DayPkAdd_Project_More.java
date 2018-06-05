@@ -23,7 +23,7 @@ import com.moying.energyring.Model.Goal_Model;
 import com.moying.energyring.Model.ProjectModel;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAdapter.Goal_Adapter_More;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -273,7 +273,7 @@ public class Pk_DayPkAdd_Project_More extends Activity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(Pk_DayPkAdd_Project_More.this, LoginRegister.class);
+                    Intent intent = new Intent(Pk_DayPkAdd_Project_More.this, MainLogin.class);
                     startActivity(intent);
                 }
             }

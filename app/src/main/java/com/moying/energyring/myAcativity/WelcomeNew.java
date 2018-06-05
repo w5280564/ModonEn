@@ -100,7 +100,7 @@ public class WelcomeNew extends Activity implements ViewPager.OnPageChangeListen
         }
         mPager.setAdapter(new myPagerAdapter());
         mPager.setCurrentItem(0);
-        mPager.setOnPageChangeListener(this);
+        mPager.addOnPageChangeListener(this);
     }
 
 //    private void initDot() {

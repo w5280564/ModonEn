@@ -42,7 +42,7 @@ import com.moying.energyring.Model.Training_Detail_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.basePopup.showCountDown;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.MainActivity;
 import com.moying.energyring.myAcativity.Pk.Pk_AddReport_Succ;
 import com.moying.energyring.myAcativity.Pk.Training.Inteface.OnDownLoadBackListener;
@@ -294,6 +294,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
                     BGMPlayerStart(getBgmName(oneData.getBGMFileName()));
                     BGMname = oneData.getBGMFileName().replace(".mp3", "");
                     saveFile.saveShareData("BGMname", BGMname, startTrainingActivity.this);
+                    saveFile.saveShareData("trainBGM_push", "true", startTrainingActivity.this);
 
                     break;
                 case 4://下载失败
@@ -851,7 +852,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
     //下载 还是恢复缓存
     private void startTrain() {
         if (fileData == null) {
-            String url = saveFile.BaseUrl + saveFile.TrainDown_Get_Url + "?ProjectID=" + oneData.getProjectID() + "&Is_HaveCommon=" + Is_HaveCommon;
+            String url = saveFile.BaseUrl + saveFile.TrainDown_Get_Url + "?TrainID=" + TrainID + "&Is_HaveCommon=" + Is_HaveCommon;
             downData(startTrainingActivity.this, url);
         } else {
             if (fileData.getDownType() == 5 || fileData.getDownType() == 0 || fileData.getDownType() == 4) {
@@ -947,7 +948,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -1001,7 +1002,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -1068,7 +1069,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -1120,7 +1121,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -1163,7 +1164,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -1229,7 +1230,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -1289,7 +1290,7 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

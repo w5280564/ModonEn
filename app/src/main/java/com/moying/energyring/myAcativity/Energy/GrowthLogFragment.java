@@ -90,8 +90,8 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
         View header = LayoutInflater.from(context).inflate(R.layout.growthlogfragment_headview, null);
         TextView tui_Txt = (TextView) header.findViewById(R.id.tui_Txt);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        int mag = (int)(Float.parseFloat(saveFile.getShareData("scale",getActivity())) *10);
-        params.setMargins(mag,mag,0,0);
+        int mag = (int) (Float.parseFloat(saveFile.getShareData("scale", getActivity())) * 10);
+        params.setMargins(mag, mag, 0, 0);
         tui_Txt.setLayoutParams(params);
         head_recycle = (RecyclerView) header.findViewById(R.id.head_recycle);
         head_recycle.setFocusable(false);

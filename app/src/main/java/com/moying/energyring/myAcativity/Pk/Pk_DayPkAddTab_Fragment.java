@@ -15,7 +15,7 @@ import com.moying.energyring.Model.Goal_Model;
 import com.moying.energyring.Model.ProjectModel;
 import com.moying.energyring.Model.newPk_Model;
 import com.moying.energyring.R;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Pk.Training.TrainingTodaySet;
 import com.moying.energyring.myAdapter.DayPk_AddTab_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -246,7 +246,7 @@ public class Pk_DayPkAddTab_Fragment extends lazyLoadFragment implements XRecycl
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

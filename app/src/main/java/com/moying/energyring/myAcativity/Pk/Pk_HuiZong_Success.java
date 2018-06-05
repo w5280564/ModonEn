@@ -20,7 +20,7 @@ import com.moying.energyring.Model.Base_DataString_Model;
 import com.moying.energyring.Model.ShareContent;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -169,7 +169,7 @@ public class Pk_HuiZong_Success extends Activity implements PlatformActionListen
                         String userID = saveFile.getShareData("userId", context);
                         String shareUrl = saveFile.BaseUrl + "/Share/PersonReport?UserID=" + userID + "&date=" + todayString;
 
-                        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr, "");
+                        shareContent = new ShareContent(shareUrl, shareTitle, shareConStr, null);
 
 
                     } else {
@@ -184,7 +184,7 @@ public class Pk_HuiZong_Success extends Activity implements PlatformActionListen
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -262,7 +262,7 @@ public class Pk_HuiZong_Success extends Activity implements PlatformActionListen
         sina.setText(shareContent.title + shareContent.url);
 //        sina.setImagePath(sianimg);
         if (shareContent.imgpath != null) {
-            sina.setImagePath(shareContent.imgpath);
+            sina.setImageUrl(shareContent.imgpath);
         }
         Platform sinap = ShareSDK.getPlatform(SinaWeibo.NAME);
         sinap.setPlatformActionListener(this);

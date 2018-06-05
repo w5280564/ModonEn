@@ -43,7 +43,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.gson.Gson;
 import com.mob.tools.utils.UIHandler;
 import com.moying.energyring.Model.AddPhoto_Model;
-import com.moying.energyring.Model.PostAndPk_Add;
+import com.moying.energyring.Model.PostAndPk_Add_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.postTagList_Model;
 import com.moying.energyring.R;
@@ -550,7 +550,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -566,7 +566,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     }
 
     int ArticleCount = 0;
-
+    PostAndPk_Add_Model addModel;
     public void AddPost_Data(final Context context, String baseUrl, String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -590,16 +590,17 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             @Override
             public void onSuccess(String resultString) {
                 right_Btn.setEnabled(true);
-                PostAndPk_Add model = new Gson().fromJson(resultString, PostAndPk_Add.class);
-                if (model.isIsSuccess()) {
+                 addModel = new Gson().fromJson(resultString, PostAndPk_Add_Model.class);
+                if (addModel.isIsSuccess()) {
                     Toast.makeText(PostingActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-                    String data = model.getData();
+                    String data = addModel.getData().getIntegral();
                     shareTitle = content_Edit.getText().toString();
                     shareContent = "我的能量源是" + saveFile.getShareData("InviteCode", PostingActivity.this);
-                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + data.substring(0, data.indexOf(","));
+                    shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + addModel.getData().getPostID();
 
 
-                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
+//                    ArticleCount = Integer.parseInt(data.substring(data.indexOf(",") + 1));
+                    ArticleCount = Integer.parseInt(data);
 
                     isShare(shareIndex());//同步分享
                 } else {
@@ -612,7 +613,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 right_Btn.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -655,7 +656,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -813,6 +814,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
                 intent.putExtra("media", "posting");
                 intent.putExtra("jifen", ArticleCount);
+                intent.putExtra("DailyTask",addModel.getData().getDailyTask());
                 startActivity(intent);
             }
             finish();
@@ -821,6 +823,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
                 intent.putExtra("media", "posting");
                 intent.putExtra("jifen", ArticleCount);
+                intent.putExtra("DailyTask",addModel.getData().getDailyTask());
                 startActivity(intent);
             }
             finish();
@@ -1327,7 +1330,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

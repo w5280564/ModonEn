@@ -67,7 +67,7 @@ public class Person_ShopList_Model {
         private int ProductID;
         private String ProductName;
         private double RefPrice;
-        private double Integral;
+        private int Integral;
         private String Brief;
         private boolean Is_Del;
         private int FileID;
@@ -97,11 +97,11 @@ public class Person_ShopList_Model {
             this.RefPrice = RefPrice;
         }
 
-        public double getIntegral() {
+        public int getIntegral() {
             return Integral;
         }
 
-        public void setIntegral(double Integral) {
+        public void setIntegral(int Integral) {
             this.Integral = Integral;
         }
 

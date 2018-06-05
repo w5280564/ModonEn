@@ -300,7 +300,7 @@ public class RemindListActivity extends Activity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(RemindListActivity.this, LoginRegister.class);
+                    Intent intent = new Intent(RemindListActivity.this, MainLogin.class);
                     startActivity(intent);
                 }
             }

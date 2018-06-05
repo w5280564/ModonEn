@@ -23,7 +23,7 @@ import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.network.saveFile;
 
@@ -269,7 +269,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     context.startActivity(intent);
                 }
             }
@@ -315,7 +315,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     context.startActivity(intent);
                 }
             }

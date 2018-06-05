@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorAllBg" >#f6f6f6</color>
+    <color name="colorFristWhite">#ffffff</color>
+    <color name="colorSecondWhite">#ffffff</color>
+    <color name="colorThridWhite">#95a0ab</color>
+    <color name="colorFourthWhite">#95a0ab</color>
+    <color name="colorFristBlack">#4d4a4a</color>
+    <color name="colorSecondBlack">#E3E7EB</color>
 </resources>

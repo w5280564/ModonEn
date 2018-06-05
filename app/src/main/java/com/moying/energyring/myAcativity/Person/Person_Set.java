@@ -15,7 +15,7 @@ import com.kyleduo.switchbutton.SwitchButton;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.DataCleanManager;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 
@@ -204,7 +204,7 @@ public class Person_Set extends Activity {
             saveFile.clearShareData("islogin", Person_Set.this);
             saveFile.clearShareData("role", Person_Set.this);
             saveFile.clearShareData("JSESSIONID", Person_Set.this);
-            Intent i = new Intent(Person_Set.this, LoginRegister.class);
+            Intent i = new Intent(Person_Set.this, MainLogin.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 

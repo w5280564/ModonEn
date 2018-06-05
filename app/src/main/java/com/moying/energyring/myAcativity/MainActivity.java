@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
+import com.moying.energyring.Model.ProjectModel;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
@@ -39,7 +40,7 @@ import com.moying.energyring.myAcativity.Person.Service.BindService;
 import com.moying.energyring.myAcativity.Person.Service.DaemonService;
 import com.moying.energyring.myAcativity.Person.Service.JobSchedulerService;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
-import com.moying.energyring.myAcativity.Pk.Pk_DayPkAdd_More;
+import com.moying.energyring.myAcativity.Pk.Pk_DayPKAdd_Project_Tab;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BaseActivity;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -53,6 +54,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -222,7 +224,7 @@ public class MainActivity extends BaseActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -248,8 +250,8 @@ public class MainActivity extends BaseActivity {
                 if (resultString != null) {
                     BaseDataInt_Model baseModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                     if (baseModel.isIsSuccess()) {
-
-                        if (isFristModel.getData().isIs_FirstEditProfile_Remind() || saveFile.getShareData("isGuidePer", context).equals("false")) {
+                        //|| saveFile.getShareData("isGuidePer", context).equals("false")
+                        if (baseModel.getData() > 0 || !isFristModel.getData().isIs_FirstEditProfile_Remind() || !isFristModel.getData().isIs_Suggest()) {
                             unrend_Txt.setVisibility(View.VISIBLE);
                             if (isHuaweiSupport) {
                                 huaweiShortCut(baseModel.getData());
@@ -271,7 +273,7 @@ public class MainActivity extends BaseActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -327,7 +329,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view, int pos) {
                 if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
-                    Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                    Intent intent = new Intent(MainActivity.this, MainLogin.class);
                     startActivity(intent);
 //                            tab_energy.setChecked(true);
                 } else {
@@ -335,8 +337,14 @@ public class MainActivity extends BaseActivity {
                         case 0:
                             MobclickAgent.onEvent(MainActivity.this, "Pk_DayPkAdd");//统计页签
 //                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd.class);
-                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd_More.class);
-                            startActivity(intent1);
+//                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd_More.class);
+//                            startActivity(intent1);
+                            Intent intent = new Intent(MainActivity.this, Pk_DayPKAdd_Project_Tab.class);
+                            List<ProjectModel> projectModel = new ArrayList<>();
+                            intent.putExtra("baseModel", (Serializable) projectModel);
+                            //第二个参数为请求码，可以根据业务需求自己编号
+//            startActivityForResult(intent, RESULT_CODE_MORE);
+                            startActivity(intent);
                             break;
                         case 1:
                             MobclickAgent.onEvent(MainActivity.this, "PostAdd");//统计页签
@@ -390,7 +398,14 @@ public class MainActivity extends BaseActivity {
         StaticData.ViewScale(tab_person, 150, 98);
 
         tab_group.setOnCheckedChangeListener(new tab_group());
-        tab_pk.setChecked(true);
+
+        Intent intent = getIntent();
+        String tabType = intent.getStringExtra("tabType");
+        if (StaticData.isSpace(tabType)){
+            tab_pk.setChecked(true);
+        }else if (tabType.equals("1")){
+            ((RadioButton) tab_group.getChildAt(1)).setChecked(true);
+        }
     }
 
     private void unReadMargin(Context context, View view) {
@@ -409,7 +424,7 @@ public class MainActivity extends BaseActivity {
             switch (i) {
                 case R.id.tab_pk:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
-                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                        Intent intent = new Intent(MainActivity.this, MainLogin.class);
                         startActivity(intent);
                         tab_pk.setChecked(true);
                     } else {
@@ -418,7 +433,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case R.id.tab_energy:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
-                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                        Intent intent = new Intent(MainActivity.this, MainLogin.class);
                         startActivity(intent);
                     } else {
                         addFragmentStack(fragments, R.id.main_content_layout, 1);//加载不同的fragment
@@ -426,7 +441,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case R.id.tab_find:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
-                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                        Intent intent = new Intent(MainActivity.this, MainLogin.class);
                         startActivity(intent);
                         tab_pk.setChecked(true);
                     } else {
@@ -435,7 +450,7 @@ public class MainActivity extends BaseActivity {
                     break;
                 case R.id.tab_person:
                     if (saveFile.getShareData("islogin", MainActivity.this).equals("false")) {
-                        Intent intent = new Intent(MainActivity.this, LoginRegister.class);
+                        Intent intent = new Intent(MainActivity.this, MainLogin.class);
                         startActivity(intent);
                         tab_pk.setChecked(true);
                     } else {

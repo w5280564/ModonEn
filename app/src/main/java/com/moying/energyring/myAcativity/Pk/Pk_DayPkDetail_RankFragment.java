@@ -20,7 +20,7 @@ import com.moying.energyring.Model.DayPkDetail_Model;
 import com.moying.energyring.Model.DayPkList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAdapter.DayPk_DetailFragment_Adapter;
@@ -297,7 +297,7 @@ private class colock_Img implements View.OnClickListener{
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -339,7 +339,7 @@ private class colock_Img implements View.OnClickListener{
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

@@ -6,11 +6,12 @@ package com.moying.energyring.Model;
 
 public class Training_TodaySet_Model {
 
+
     /**
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : {"ProjectID":3,"ProjectName":"深蹲","ProjectUnit":"个","FilePath":null,"ReportFre":6868,"Is_Disabled":false,"Limit":1000,"FileID":0,"CreateTime":null,"ReportNum":0,"Gray_FileID":0,"Gray_FilePath":null,"ProjectTypeID":3,"UserID":0,"Is_Recommend":true,"Is_Recent":false,"Praise":"10,30,50,100,200,300,400,500,600,700,800,900,1000","ReportID":0,"RestInterval_s":30,"RestInterval_m":40,"RestInterval_l":50,"Interval":5,"Trainlimit":100,"GroupNum":20}
+     * Data : {"ProjectID":3,"ProjectName":"深蹲","ProjectUnit":"个","FilePath":null,"ReportFre":10420,"Is_Disabled":false,"Limit":300,"FileID":0,"CreateTime":null,"ReportNum":0,"Gray_FileID":0,"Gray_FilePath":null,"ProjectTypeID":1,"UserID":0,"Is_Recommend":true,"Is_Recent":false,"Praise":"100,200,300,400,500,600,700,800,900,1000","ReportID":0,"RestInterval_s":30,"RestInterval_m":40,"RestInterval_l":50,"Interval":3,"Trainlimit":300,"GroupNum":100,"Is_Train":true,"GroupNums":"20,40,60,80,100","GroupCount":10}
      */
 
     private boolean IsSuccess;
@@ -56,26 +57,29 @@ public class Training_TodaySet_Model {
          * ProjectName : 深蹲
          * ProjectUnit : 个
          * FilePath : null
-         * ReportFre : 6868
+         * ReportFre : 10420
          * Is_Disabled : false
-         * Limit : 1000
+         * Limit : 300
          * FileID : 0
          * CreateTime : null
          * ReportNum : 0
          * Gray_FileID : 0
          * Gray_FilePath : null
-         * ProjectTypeID : 3
+         * ProjectTypeID : 1
          * UserID : 0
          * Is_Recommend : true
          * Is_Recent : false
-         * Praise : 10,30,50,100,200,300,400,500,600,700,800,900,1000
+         * Praise : 100,200,300,400,500,600,700,800,900,1000
          * ReportID : 0
          * RestInterval_s : 30
          * RestInterval_m : 40
          * RestInterval_l : 50
-         * Interval : 5
-         * Trainlimit : 100
-         * GroupNum : 20
+         * Interval : 3
+         * Trainlimit : 300
+         * GroupNum : 100
+         * Is_Train : true
+         * GroupNums : 20,40,60,80,100
+         * GroupCount : 10
          */
 
         private int ProjectID;
@@ -102,6 +106,9 @@ public class Training_TodaySet_Model {
         private int Interval;
         private int Trainlimit;
         private int GroupNum;
+        private boolean Is_Train;
+        private String GroupNums;
+        private int GroupCount;
 
         public int getProjectID() {
             return ProjectID;
@@ -293,6 +300,30 @@ public class Training_TodaySet_Model {
 
         public void setGroupNum(int GroupNum) {
             this.GroupNum = GroupNum;
+        }
+
+        public boolean isIs_Train() {
+            return Is_Train;
+        }
+
+        public void setIs_Train(boolean Is_Train) {
+            this.Is_Train = Is_Train;
+        }
+
+        public String getGroupNums() {
+            return GroupNums;
+        }
+
+        public void setGroupNums(String GroupNums) {
+            this.GroupNums = GroupNums;
+        }
+
+        public int getGroupCount() {
+            return GroupCount;
+        }
+
+        public void setGroupCount(int GroupCount) {
+            this.GroupCount = GroupCount;
         }
     }
 }

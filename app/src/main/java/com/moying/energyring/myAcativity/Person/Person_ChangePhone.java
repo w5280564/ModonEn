@@ -150,7 +150,7 @@ public class quit_Btn extends NoDoubleClickListener {
 
                     digestStr = MD5.MessageDigest(MD5.MessageDigest(baseModel.getData().getBytes()).getBytes());
 //                    if (baseModel.isIsSuccess()) {
-//                        Toast.makeText(LoginRegister.this, baseModel.getMsg(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainLogin.this, baseModel.getMsg(), Toast.LENGTH_SHORT).show();
 //                    }
                 } else {
                     Toast.makeText(Person_ChangePhone.this, "数据获取失败", Toast.LENGTH_SHORT).show();

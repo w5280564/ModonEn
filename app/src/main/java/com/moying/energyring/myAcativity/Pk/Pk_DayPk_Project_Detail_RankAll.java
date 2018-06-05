@@ -1,5 +1,6 @@
 package com.moying.energyring.myAcativity.Pk;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,9 +27,10 @@ import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.newPk_Model;
 import com.moying.energyring.Model.pk_Project_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.GuideUtil;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.pinyin.CharacterParser;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
@@ -55,6 +57,7 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
     private String projectId;
     private TextView cententtxt;
     private ImageView more_Img;
+    private GuideUtil guideUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,7 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
 
     private void initGuide() {
         guideFristData(Pk_DayPk_Project_Detail_RankAll.this, saveFile.BaseUrl + saveFile.GuidePerFirst_Url, 0);//展示功能提醒页
+        guideUtil = GuideUtil.getInstance();
     }
 
     private void setpkbg(int tag) {
@@ -391,7 +395,7 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -421,9 +425,11 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
                         if (!isFristModel.getData().isIs_PK_Guide()) {
 
 //                            isFristSee();
-                            Intent intent = new Intent(context, Pk_Guide.class);
-                            intent.putExtra("guideId", "5");
-                            startActivity(intent);
+//                            Intent intent = new Intent(context, Pk_Guide.class);
+//                            intent.putExtra("guideId", "5");
+//                            startActivity(intent);
+
+                            guideUtil.initGuide((Activity) context,5,1);
                             updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_PK_Guide");//展示功能提醒页
                         }
 
@@ -440,7 +446,7 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -479,7 +485,7 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -522,7 +528,7 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

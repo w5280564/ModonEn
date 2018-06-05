@@ -28,15 +28,15 @@ import com.example.sanjay.selectorphotolibrary.utils.PermissionUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.AddPhoto_Model;
-import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Base_Model;
+import com.moying.energyring.Model.Pk_HuiZong_Model;
 import com.moying.energyring.Model.ShareContent;
 import com.moying.energyring.Model.huiZongpkPhoto_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.person_daypk_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.AutoScaleTextView;
 import com.moying.energyring.waylenBaseView.DragSortView;
@@ -287,7 +287,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -326,7 +326,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -371,7 +371,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -473,7 +473,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -599,7 +599,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -634,7 +634,8 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
             public void onSuccess(String resultString) {
                 finsh_Txt.setEnabled(true);
 
-                BaseDataInt_Model reteModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+//                BaseDataInt_Model reteModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
+                Pk_HuiZong_Model reteModel = new Gson().fromJson(resultString, Pk_HuiZong_Model.class);
                 String shareTitle = "";
                 String shareConStr = "我的能量源是" + saveFile.getShareData("InviteCode", context);
                 String shareUrl = "";
@@ -645,7 +646,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
                 if (!files.equals("")) {
                     updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPool_Pic");//展示功能提醒页
                 }
-                int integral = reteModel.getData();
+                int integral = Integer.parseInt(reteModel.getData().getIntegral());
                 if (integral == -1) {
                     Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
                 }else if (integral == 0) {
@@ -663,6 +664,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
                     Intent intent = new Intent(context, JiFenActivity.class);
                     intent.putExtra("media", "huizong");
                     intent.putExtra("jifen", integral);
+                    intent.putExtra("DailyTask",reteModel.getData().getDailyTask());
                     startActivity(intent);
                     finish();
                 }
@@ -691,7 +693,7 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
                 finsh_Txt.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

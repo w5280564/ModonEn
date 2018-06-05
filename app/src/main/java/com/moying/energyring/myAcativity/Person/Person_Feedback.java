@@ -18,9 +18,9 @@ import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.R;
+import com.moying.energyring.StaticData.GuideUtil;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
-import com.moying.energyring.myAcativity.Pk.Pk_Guide;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAdapter.FeedbackFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.xrecycle.XRecyclerView;
@@ -37,6 +37,7 @@ public class Person_Feedback extends Activity implements XRecyclerView.LoadingLi
     private XRecyclerView All_XRecy;
     private int PageIndex;
     private int pageSize;
+    private GuideUtil guideUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,6 +207,7 @@ public class Person_Feedback extends Activity implements XRecyclerView.LoadingLi
     //展示功能提醒页
     private void initGuide() {
         guideFristData(Person_Feedback.this, saveFile.BaseUrl + saveFile.GuidePerFirst_Url);
+        guideUtil = GuideUtil.getInstance();
     }
 
     public void guideFristData(final Context context, String baseUrl) {
@@ -221,9 +223,10 @@ public class Person_Feedback extends Activity implements XRecyclerView.LoadingLi
                     if (isFristModel.isIsSuccess()) {
                         if (!isFristModel.getData().isIs_Suggest()) {
 
-                            Intent intent = new Intent(context, Pk_Guide.class);
-                            intent.putExtra("guideId", "4");
-                            startActivity(intent);
+//                            Intent intent = new Intent(context, Pk_Guide.class);
+//                            intent.putExtra("guideId", "4");
+//                            startActivity(intent);
+                            guideUtil.initGuide((Activity) context, 4, 1);
                             updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_Suggest");//展示功能提醒页
                         }
 
@@ -240,7 +243,7 @@ public class Person_Feedback extends Activity implements XRecyclerView.LoadingLi
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -279,7 +282,7 @@ public class Person_Feedback extends Activity implements XRecyclerView.LoadingLi
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

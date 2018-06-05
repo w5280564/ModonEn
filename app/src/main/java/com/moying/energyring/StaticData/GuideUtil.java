@@ -29,7 +29,7 @@ public class GuideUtil {
     private boolean isFirst = true;
     private int i = 0;
     int img[] = new int[]{R.drawable.guide_one, R.drawable.guide_two};
-    int detailImageArray[] = new int[]{R.drawable.guide_one, R.drawable.guide_two, R.drawable.guide_train};
+    int detailImageArray[] = new int[]{R.drawable.guide_one, R.drawable.guide_two, R.drawable.guide_train,R.drawable.guide_three,R.drawable.guide_feedback,R.drawable.guide_daypk};
     private RemoveListener removeListener;
 
     private GuideUtil() {

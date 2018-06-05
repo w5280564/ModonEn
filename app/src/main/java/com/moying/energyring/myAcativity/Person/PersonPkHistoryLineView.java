@@ -19,7 +19,7 @@ import com.moying.energyring.Model.Line_Model;
 import com.moying.energyring.Model.PkHistoryLineList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAdapter.Person_PkHistoryLine_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.xrecycle.XRecyclerView;
@@ -216,7 +216,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -578,7 +578,7 @@ public class PersonPkHistoryLineView extends Activity implements XRecyclerView.L
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

@@ -45,6 +45,7 @@
         android:theme="@style/AppThemeprice">
 
         <!-- android:theme="@android:style/Theme.NoTitleBar" -->
+        <!-- &lt;!&ndash; android:name=".myAcativity.MainLogin" &ndash;&gt;LaunchActivity -->
         <activity
             android:name=".myAcativity.LaunchActivity"
             android:screenOrientation="portrait"
@@ -448,10 +449,18 @@
                     android:scheme="waylen" />
             </intent-filter>
         </activity>
-        <activity android:name=".myAcativity.Person.Person_Neng" />
-        <activity android:name=".myAcativity.Pk.Training.startTrainingActivity" />
-        <activity android:name=".myAcativity.Pk.Training.trainingCountDown" />
-        <activity android:name=".myAcativity.Pk.Training.TrainingTodaySet" />
+        <activity
+            android:name=".myAcativity.Person.Person_Neng"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Training.startTrainingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Training.trainingCountDown"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Training.TrainingTodaySet"
+            android:screenOrientation="portrait" />
 
         <service android:name=".myAcativity.Pk.Training.service.DownloadService" />
 
@@ -461,7 +470,29 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".myAcativity.Pk.Training.Training_Posting"></activity>
+        <activity
+            android:name=".myAcativity.Pk.Training.Training_Posting"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Exchange"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Exchange_Detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.MainLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.MainLoginNext"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.MainChangePhone"
+            android:screenOrientation="portrait" />
+        <activity android:name=".myAcativity.Person.Person_Task" android:screenOrientation="portrait"></activity>
+        <activity android:name=".myAcativity.Energy.TaskShareActivity" android:screenOrientation="portrait"
+            android:theme="@style/MyDialog"></activity>
+
+
     </application>
 
 </manifest>

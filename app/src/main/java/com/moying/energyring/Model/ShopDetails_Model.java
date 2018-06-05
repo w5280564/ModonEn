@@ -64,8 +64,8 @@ public class ShopDetails_Model {
 
         private int ProductID;
         private String ProductName;
-        private double RefPrice;
-        private double Integral;
+        private int RefPrice;
+        private int Integral;
         private String Brief;
         private boolean Is_Del;
         private int FileID;
@@ -87,19 +87,19 @@ public class ShopDetails_Model {
             this.ProductName = ProductName;
         }
 
-        public double getRefPrice() {
+        public int getRefPrice() {
             return RefPrice;
         }
 
-        public void setRefPrice(double RefPrice) {
+        public void setRefPrice(int RefPrice) {
             this.RefPrice = RefPrice;
         }
 
-        public double getIntegral() {
+        public int getIntegral() {
             return Integral;
         }
 
-        public void setIntegral(double Integral) {
+        public void setIntegral(int Integral) {
             this.Integral = Integral;
         }
 

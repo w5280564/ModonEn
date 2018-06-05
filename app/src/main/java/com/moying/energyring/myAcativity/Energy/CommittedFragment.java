@@ -15,7 +15,7 @@ import com.moying.energyring.Model.AllPerson_Model;
 import com.moying.energyring.Model.Committed_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPersonDetails;
 import com.moying.energyring.myAdapter.CommHead_Adapter;
 import com.moying.energyring.myAdapter.CommittedFragment_Adapter;
@@ -233,7 +233,7 @@ public class CommittedFragment extends lazyLoadFragment implements XRecyclerView
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(getActivity(), LoginRegister.class);
+                    Intent intent = new Intent(getActivity(), MainLogin.class);
                     startActivity(intent);
                 }
             }

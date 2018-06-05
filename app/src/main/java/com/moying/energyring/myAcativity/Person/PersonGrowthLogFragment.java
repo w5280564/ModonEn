@@ -72,6 +72,10 @@ public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecycl
         other_recycle.setLoadingListener(this);//添加事件
         other_recycle.getItemAnimator().setChangeDuration(0);//动画执行时间为0 刷新不会闪烁
         StaticData.changeXRecycleHeadGif(other_recycle, R.drawable.gif_bird_icon, 750, 200);
+
+        isPrepared = true;
+        lazyLoad();
+
         return parentView;
     }
 
@@ -112,7 +116,8 @@ public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecycl
     public void onResume() {
         super.onResume();
         isPrepared = true;
-        lazyLoad();
+//        lazyLoad();
+
 //        PageIndex = 1;
 //        pageSize = 10;
 //        ListData(saveFile.BaseUrl + saveFile.EnergyListUrl + "?Type=1&PageIndex=" + PageIndex + "&PageSize=" + pageSize);
@@ -139,6 +144,7 @@ public class PersonGrowthLogFragment extends lazyLoadFragment implements XRecycl
                 intent.putExtra("content", content);
                 intent.putExtra("postId", postId);
                 intent.putExtra("url", url);
+                intent.putExtra("imgUrl", baseModel.get(position).getFilePath());
                 startActivity(intent);
             }
 

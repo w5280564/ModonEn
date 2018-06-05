@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -158,6 +159,9 @@ public class Energy_WebDetail extends Activity {
         @Override
         public void onClick(View v) {
 //            Intent intent = new Intent(learn_WebDetail.this, ShareActivity.class);
+
+            Log.e("shareImg",shareContent.imgpath);
+
 
             Intent intent = new Intent(Energy_WebDetail.this, myShareActivity.class);
             intent.putExtra("shareContent", shareContent);

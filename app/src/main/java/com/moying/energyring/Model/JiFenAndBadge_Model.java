@@ -55,12 +55,15 @@ public class JiFenAndBadge_Model implements Parcelable {
         this.Data = Data;
     }
 
+
     public static class DataBean implements Parcelable {
+
         /**
          *
          * Integral : 0
          * _Badge : [{"BadgeID":16,"BadgeName":"累计签到50天徽章","BadgeDays":50,"BadgeType":2,"Is_Have":false,"HaveNum":280,"FileID":0,"FilePath":"http://172.16.0.111/Uploads/2017-11-27/4bc3c882-5115-4be9-99f0-84ef4a7a51ca.png","FileID_Gray":0,"FilePath_Gray":null}]
          * _Praise : [{"PraiseID":14,"UserID":2066,"ProjectID":2,"PraiseNum":80,"CreateTime":"2018-01-15 16:08:06","HaveNum":1,"ProjectName":"跑步","ProjectUnit":"公里","FilePath":"http://120.26.218.68:1111/Uploads/2017-12-18/1b21ffe6-7de6-4e08-ac6c-3aa143ac9169.png"},{"PraiseID":15,"UserID":2066,"ProjectID":7,"PraiseNum":100,"CreateTime":"2018-01-15 16:08:06","HaveNum":3,"ProjectName":"背单词","ProjectUnit":"个","FilePath":"http://120.26.218.68:1111/Uploads/2017-10-25/8a7d31d6-62eb-4184-ac84-7179b620f931.png"}]
+         * DailyTask : {"TaskID":1,"TaskName":"每日签到","Summary":"啦啦啦啦啦绿绿绿","Integral":30,"Condition":"3","BtnText":"去签到,已签到"}
          */
 
         private int Integral;
@@ -76,6 +79,7 @@ public class JiFenAndBadge_Model implements Parcelable {
         private int ProjectID;
         private int TrainFre;
         private int TargetNum;
+        private DailyTaskBean DailyTask;
 
 
         protected DataBean(Parcel in) {
@@ -86,6 +90,8 @@ public class JiFenAndBadge_Model implements Parcelable {
             TargetNum = in.readInt();
             _Badge = in.createTypedArrayList(BadgeBean.CREATOR);
             _Praise = in.createTypedArrayList(PraiseBean.CREATOR);
+            DailyTask = in.readParcelable(DailyTaskBean.class.getClassLoader());
+
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
@@ -146,6 +152,7 @@ public class JiFenAndBadge_Model implements Parcelable {
             parcel.writeInt(TargetNum);
             parcel.writeTypedList(_Badge);
             parcel.writeTypedList(_Praise);
+            parcel.writeParcelable(DailyTask, i);
         }
 
         public int getProjectID() {
@@ -170,6 +177,14 @@ public class JiFenAndBadge_Model implements Parcelable {
 
         public void setTargetNum(int TargetNum) {
             this.TargetNum = TargetNum;
+        }
+
+        public DailyTaskBean getDailyTask() {
+            return DailyTask;
+        }
+
+        public void setDailyTask(DailyTaskBean DailyTask) {
+            this.DailyTask = DailyTask;
         }
 
         public static class BadgeBean implements Parcelable{
@@ -463,6 +478,111 @@ public class JiFenAndBadge_Model implements Parcelable {
                 @Override
                 public PraiseBean[] newArray(int size) {
                     return new PraiseBean[size];
+                }
+            };
+        }
+
+        public static class DailyTaskBean implements Parcelable {
+            /**
+             * TaskID : 1
+             * TaskName : 每日签到
+             * Summary : 啦啦啦啦啦绿绿绿
+             * Integral : 30
+             * Condition : 3
+             * BtnText : 去签到,已签到
+             */
+
+            private int TaskID;
+            private String TaskName;
+            private String Summary;
+            private int Integral;
+            private String Condition;
+            private String BtnText;
+
+            public int getTaskID() {
+                return TaskID;
+            }
+
+            public void setTaskID(int TaskID) {
+                this.TaskID = TaskID;
+            }
+
+            public String getTaskName() {
+                return TaskName;
+            }
+
+            public void setTaskName(String TaskName) {
+                this.TaskName = TaskName;
+            }
+
+            public String getSummary() {
+                return Summary;
+            }
+
+            public void setSummary(String Summary) {
+                this.Summary = Summary;
+            }
+
+            public int getIntegral() {
+                return Integral;
+            }
+
+            public void setIntegral(int Integral) {
+                this.Integral = Integral;
+            }
+
+            public String getCondition() {
+                return Condition;
+            }
+
+            public void setCondition(String Condition) {
+                this.Condition = Condition;
+            }
+
+            public String getBtnText() {
+                return BtnText;
+            }
+
+            public void setBtnText(String BtnText) {
+                this.BtnText = BtnText;
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeInt(this.TaskID);
+                dest.writeString(this.TaskName);
+                dest.writeString(this.Summary);
+                dest.writeInt(this.Integral);
+                dest.writeString(this.Condition);
+                dest.writeString(this.BtnText);
+            }
+
+            public DailyTaskBean() {
+            }
+
+            protected DailyTaskBean(Parcel in) {
+                this.TaskID = in.readInt();
+                this.TaskName = in.readString();
+                this.Summary = in.readString();
+                this.Integral = in.readInt();
+                this.Condition = in.readString();
+                this.BtnText = in.readString();
+            }
+
+            public static final Creator<DailyTaskBean> CREATOR = new Creator<DailyTaskBean>() {
+                @Override
+                public DailyTaskBean createFromParcel(Parcel source) {
+                    return new DailyTaskBean(source);
+                }
+
+                @Override
+                public DailyTaskBean[] newArray(int size) {
+                    return new DailyTaskBean[size];
                 }
             };
         }

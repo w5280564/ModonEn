@@ -182,7 +182,7 @@ public class Person_myShareActivity extends Activity implements PlatformActionLi
         sina.setText(shareContent.title + shareContent.url);
 //        sina.setImagePath(sianimg);
         if (shareContent.imgpath != null ) {
-            sina.setImagePath(shareContent.imgpath);
+            sina.setImageUrl(shareContent.imgpath);
         }
         Platform sinap = ShareSDK.getPlatform(SinaWeibo.NAME);
         sinap.setPlatformActionListener(this);

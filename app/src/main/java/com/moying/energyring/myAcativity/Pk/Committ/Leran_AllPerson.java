@@ -39,7 +39,7 @@ import com.moying.energyring.Model.AllPerson_CalModel;
 import com.moying.energyring.Model.AllPerson_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
 import com.moying.energyring.myAdapter.AllPersonOneDay_Adapter;
 import com.moying.energyring.myAdapter.AllPerson_Adapter;
@@ -344,7 +344,7 @@ public class Leran_AllPerson extends Activity implements XRecyclerView.LoadingLi
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")){
-                    Intent intent = new Intent(Leran_AllPerson.this,LoginRegister.class);
+                    Intent intent = new Intent(Leran_AllPerson.this,MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -639,7 +639,7 @@ public class Leran_AllPerson extends Activity implements XRecyclerView.LoadingLi
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")){
-                    Intent intent = new Intent(Leran_AllPerson.this,LoginRegister.class);
+                    Intent intent = new Intent(Leran_AllPerson.this,MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -678,7 +678,7 @@ public class Leran_AllPerson extends Activity implements XRecyclerView.LoadingLi
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")){
-                    Intent intent = new Intent(Leran_AllPerson.this,LoginRegister.class);
+                    Intent intent = new Intent(Leran_AllPerson.this,MainLogin.class);
                     startActivity(intent);
                 }
             }

@@ -16,7 +16,6 @@
 package com.moying.energyring.waylenBaseView.wheel.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Gravity;
@@ -39,7 +38,7 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
 	protected static final int NO_RESOURCE = 0;
 
 	/** Default text color */
-	public static final int DEFAULT_TEXT_COLOR = 0xFF101010;
+	public  int DEFAULT_TEXT_COLOR = 0xFF101010;
 
 	/** Default text color */
 	public static final int LABEL_COLOR = 0xFF700070;
@@ -246,10 +245,10 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
 
 				if (index == currentIndex) {
 					textView.setTextSize(maxsize);
-					textView.setTextColor(Color.parseColor("#ffffff"));
+//					textView.setTextColor(Color.parseColor("#ffffff"));
 				} else {
 					textView.setTextSize(minsize);
-					textView.setTextColor(Color.parseColor("#919090"));
+//					textView.setTextColor(Color.parseColor("#919090"));
 				}
 
 				if (itemResourceId == TEXT_VIEW_ITEM_RESOURCE) {

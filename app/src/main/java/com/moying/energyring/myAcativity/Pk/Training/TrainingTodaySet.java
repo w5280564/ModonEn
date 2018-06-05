@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,10 +21,14 @@ import com.moying.energyring.Model.Training_TodaySet_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.moying.energyring.waylenBaseView.HorizontalselectedView;
+import com.moying.energyring.waylenBaseView.wheel.adapters.AbstractWheelTextAdapter;
+import com.moying.energyring.waylenBaseView.wheel.views.OnWheelChangedListener;
+import com.moying.energyring.waylenBaseView.wheel.views.OnWheelScrollListener;
+import com.moying.energyring.waylenBaseView.wheel.views.WheelView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +53,18 @@ public class TrainingTodaySet extends Activity {
     String TargetNum = "0"; //目标数量
     int SoundType = 1; //教练
     String[] BGMnameArr;
+    private WheelView wv_group, wv_count;
+    private String GroupCount, GroupNum;
+
+    private int maxTextSize = 40;
+    private int minTextSize = 20;
+    private ArrayList<String> arry_groups = new ArrayList<String>();
+    private ArrayList<String> arry_counts = new ArrayList<String>();
+    private String selectGroup = "0";
+    private String selectGroupNum = "0";
+    private CalendarTextAdapter mGroupAdapter;
+    private CalendarTextAdapter mCountAdapter;
+    public int Trainlimit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +108,22 @@ public class TrainingTodaySet extends Activity {
         View bgmusic_arrow = findViewById(R.id.bgmusic_arrow);
         bgmusic_selectName_Txt = (TextView) findViewById(R.id.bgmusic_selectName_Txt);
         next_Txt = findViewById(R.id.next_Txt);
+        LinearLayout wheel_Lin = (LinearLayout) findViewById(R.id.wheel_Lin);
+        wv_group = (WheelView) findViewById(R.id.wv_group);
+        StaticData.ViewScale(wv_group, 0, 400);
+//        int color[] = {Color.parseColor("#f6f6f6"),Color.parseColor("#f6f6f6"),Color.parseColor("#f6f6f6")};
+//        wv_group.setTopandBotColor(color);
+        wv_group.selectCenter(this.getDrawable(R.drawable.wheel_select_color));
+        wv_group.setBgColor(Color.parseColor("#f6f6f6"));
+
+        wv_count = (WheelView) findViewById(R.id.wv_count);
+        StaticData.ViewScale(wv_count, 0, 400);
+        wv_count.selectCenter(this.getDrawable(R.drawable.wheel_select_color));
+        wv_count.setBgColor(Color.parseColor("#f6f6f6"));
+//        wv_count.setTopandBotColor(color);
+//        wv_count.selectCenter(this.getDrawable(R.drawable.wheel_select_color));
+//        wv_count.setBgColor(Color.parseColor("#f6f6f6"));
+
 
         dataStr = new ArrayList<>();
 
@@ -110,6 +145,7 @@ public class TrainingTodaySet extends Activity {
         StaticData.ViewScale(bgmusic_Rel, 0, 160);
         StaticData.ViewScale(bgmusic_arrow, 48, 56);
         StaticData.ViewScale(next_Txt, 0, 120);
+        StaticData.ViewScale(wheel_Lin, 0, 500);
 
         coachName = "";
         bgMusic = "";
@@ -140,11 +176,27 @@ public class TrainingTodaySet extends Activity {
         }
     }
 
+
     private class next_Txt implements View.OnClickListener {
+
         @Override
         public void onClick(View view) {
-            TargetNum = horView.getSelectedString();
-            next_Txt.setEnabled(false);
+
+            String currentTextGroup = (String) mGroupAdapter.getItemText(wv_group.getCurrentItem());
+            String currentTextNum = (String) mCountAdapter.getItemText(wv_count.getCurrentItem());
+
+            int targetNum = Integer.parseInt(currentTextGroup) * Integer.parseInt(currentTextNum);
+            if (targetNum > Trainlimit){
+                Toast.makeText(TrainingTodaySet.this,"总数不能超过"+Trainlimit,Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+//            TargetNum = horView.getSelectedString();
+                next_Txt.setEnabled(false);
+
+            TargetNum = String.valueOf(targetNum);
+            GroupCount = currentTextGroup;
+            GroupNum = currentTextNum;
 
             trainingNext_Data(TrainingTodaySet.this, saveFile.BaseUrl + saveFile.TrainAdd_Post_Url);
         }
@@ -205,7 +257,7 @@ public class TrainingTodaySet extends Activity {
                     coach_selectName_Txt.setText(select_View.getSelectedString());
                 } else {
                     bgmusic_selectName_Txt.setText(select_View.getSelectedString());
-                    BGMFileName =  getBGMname(select_View.getSelectCount());
+                    BGMFileName = getBGMname(select_View.getSelectCount());
 //                    BGMFileName = BGMnameArr[select_View.getSelectCount()];
                 }
             }
@@ -224,15 +276,17 @@ public class TrainingTodaySet extends Activity {
         });
 
     }
-    private String getBGMname(int pos){
-        String BGMStr = "梦的海洋";;
-        if (pos == 0){
+
+    private String getBGMname(int pos) {
+        String BGMStr = "梦的海洋";
+        ;
+        if (pos == 0) {
             BGMStr = "梦的海洋";
-        }else if (pos == 1){
+        } else if (pos == 1) {
             BGMStr = "Intro";
-        }else if (pos == 2){
+        } else if (pos == 2) {
             BGMStr = "Pacific Rim";
-        }else if (pos == 3){
+        } else if (pos == 3) {
             BGMStr = "Battle";
         }
         return BGMStr;
@@ -251,17 +305,18 @@ public class TrainingTodaySet extends Activity {
                     if (setModel.isIsSuccess() && !setModel.getData().equals("[]")) {
                         Training_TodaySet_Model.DataBean oneData = setModel.getData();
 
+                        Trainlimit = oneData.getTrainlimit();
 //                        TargetNum = oneData.getTrainlimit();
 
-                        int size = oneData.getTrainlimit() / oneData.getGroupNum();
-                        for (int i = 0; i < size; i++) {
-                            int index = oneData.getGroupNum() * (i + 1);
-                            dataStr.add(index + "");
-                        }
-                        horView.setshowCenterData(dataStr);
-                        horView.setSeeSize(7);
-
-                        TargetNum = horView.getSelectedString();
+//                        int size = oneData.getTrainlimit() / oneData.getGroupNum();
+//                        for (int i = 0; i < size; i++) {
+//                            int index = oneData.getGroupNum() * (i + 1);
+//                            dataStr.add(index + "");
+//                        }
+//                        horView.setshowCenterData(dataStr);
+//                        horView.setSeeSize(7);
+//
+//                        TargetNum = horView.getSelectedString();
 
                         try {
 //                            String[] fileNames = context.getResources().getAssets().list("bgm");
@@ -270,6 +325,9 @@ public class TrainingTodaySet extends Activity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+                        setTimes("00", "00");
+                        initSelector(setModel.getData().getGroupCount(), setModel.getData().getGroupNums());
 
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -283,7 +341,7 @@ public class TrainingTodaySet extends Activity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -299,6 +357,7 @@ public class TrainingTodaySet extends Activity {
     }
 
     public void trainingNext_Data(final Context context, String baseUrl) {
+
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
             params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
@@ -309,6 +368,8 @@ public class TrainingTodaySet extends Activity {
             obj.put("TargetNum", TargetNum);//目标数
             obj.put("SoundType", SoundType);//教练声
             obj.put("BGMFileName", BGMFileName);//背景音乐
+            obj.put("GroupCount", GroupCount);
+            obj.put("GroupNum", GroupNum);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -331,7 +392,7 @@ public class TrainingTodaySet extends Activity {
 //                    finish();
                     overridePendingTransition(0, 0);
                 } else {
-//                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
+                    Toast.makeText(context, model.getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -340,7 +401,7 @@ public class TrainingTodaySet extends Activity {
                 next_Txt.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -355,6 +416,210 @@ public class TrainingTodaySet extends Activity {
                 next_Txt.setEnabled(true);
             }
         });
+    }
+
+    private void initSelector(int group, String groupnums) {
+        initHours(group);
+        mGroupAdapter = new CalendarTextAdapter(this, arry_groups, getHour(selectGroup), maxTextSize, minTextSize);
+        wv_group.isRectCanvas(false);
+        wv_group.setVisibleItems(5);
+        wv_group.setViewAdapter(mGroupAdapter);
+        wv_group.setCurrentItem(getHour(selectGroup));
+        String currentText = (String) mGroupAdapter.getItemText(wv_group.getCurrentItem());
+        setTextviewSize(currentText, mGroupAdapter);
+
+//        wvHour.addScrollingListener(null);
+
+
+        String[] groupNums = groupnums.split(",");
+        initMinus(groupNums);
+        mCountAdapter = new CalendarTextAdapter(this, arry_counts, getMinu(selectGroupNum), maxTextSize, minTextSize);
+//        setTextviewSize(String.valueOf(getMinu(selectMinu)), mMineAdapter);
+        wv_count.isRectCanvas(false);
+        wv_count.setVisibleItems(5);
+        wv_count.setViewAdapter(mCountAdapter);
+//        wv_count.setCurrentItem(getMinu(selectMinu));
+
+        String currentTextMine = (String) mCountAdapter.getItemText(wv_count.getCurrentItem());
+        setTextviewSize(currentTextMine, mCountAdapter);
+
+        wv_group.addChangingListener(new OnWheelChangedListener() {
+
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                // TODO Auto-generated method stub
+                String currentText = (String) mGroupAdapter.getItemText(wheel.getCurrentItem());
+                selectGroup = currentText;
+                setTextviewSize(currentText, mGroupAdapter);
+            }
+        });
+
+        wv_group.addScrollingListener(new OnWheelScrollListener() {
+
+            @Override
+            public void onScrollingStarted(WheelView wheel) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onScrollingFinished(WheelView wheel) {
+                // TODO Auto-generated method stub
+                String currentText = (String) mGroupAdapter.getItemText(wheel.getCurrentItem());
+                setTextviewSize(currentText, mGroupAdapter);
+            }
+        });
+
+        wv_count.addChangingListener(new OnWheelChangedListener() {
+
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                // TODO Auto-generated method stub
+                String currentText = (String) mCountAdapter.getItemText(wheel.getCurrentItem());
+                selectGroupNum = currentText;
+                setTextviewSize(currentText, mCountAdapter);
+            }
+        });
+
+        wv_count.addScrollingListener(new OnWheelScrollListener() {
+
+            @Override
+            public void onScrollingStarted(WheelView wheel) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onScrollingFinished(WheelView wheel) {
+                // TODO Auto-generated method stub
+                String currentText = (String) mCountAdapter.getItemText(wheel.getCurrentItem());
+                setTextviewSize(currentText, mCountAdapter);
+            }
+        });
+    }
+
+    // 设置当前时间
+    public void setTimes(String hour, String minu) {
+        this.selectGroup = hour;
+        this.selectGroupNum = minu;
+    }
+
+    /**
+     * 初始化小时
+     */
+    public void initHours(int group) {
+        for (int i = 0; i < group; i++) {
+            if (i < group) {
+                arry_groups.add("" + (i + 1));
+            } else {
+                arry_groups.add(i + "");
+            }
+        }
+    }
+
+    /**
+     * 获取小时的索引
+     *
+     * @param hour
+     * @return
+     */
+    public int getHour(String hour) {
+        int h = Integer.parseInt(hour);
+        for (int i = 0; i < 24; i++) {
+            if (h == i)
+                return i;
+        }
+        return 0;
+    }
+
+    /**
+     * 初始和分钟
+     */
+    public void initMinus(String[] groupNums) {
+        for (int i = 0; i < groupNums.length; i++) {
+//            if (i < 10) {
+//                arry_counts.add("0" + i);
+//            } else {
+//                arry_counts.add(i + "");
+//            }
+            arry_counts.add(groupNums[i]);
+        }
+    }
+
+    /**
+     * 获取分钟索引
+     *
+     * @param minu
+     * @return
+     */
+    public int getMinu(String minu) {
+        int m = Integer.parseInt(minu);
+        for (int i = 0; i < 60; i++) {
+            if (i == m)
+                return m;
+        }
+        return 0;
+    }
+
+    private class CalendarTextAdapter extends AbstractWheelTextAdapter {
+        private TextView zu_Txt;
+        ArrayList<String> list;
+
+        protected CalendarTextAdapter(Context context, ArrayList<String> list, int currentItem, int maxsize, int minsize) {
+            super(context, R.layout.trainset_group_item, NO_RESOURCE, currentItem, maxsize, minsize);
+            View view = LayoutInflater.from(context).inflate(R.layout.trainset_group_item, null);
+            this.list = list;
+            setItemTextResource(R.id.tempValue);
+//            setItemResource(R.id.zu_Txt);
+            zu_Txt = (TextView) view.findViewById(R.id.zu_Txt);
+//             if (currentItem == getHour(selectHour)){
+//                 zu_Txt.setVisibility(View.VISIBLE);
+//             }
+
+
+        }
+
+        @Override
+        public View getItem(int index, View cachedView, ViewGroup parent) {
+            View view = super.getItem(index, cachedView, parent);
+
+            return view;
+        }
+
+        @Override
+        public int getItemsCount() {
+            return list.size();
+        }
+
+        @Override
+        protected CharSequence getItemText(int index) {
+            return list.get(index) + "";
+        }
+    }
+
+    /**
+     * 设置字体大小
+     *
+     * @param curriteItemText
+     * @param adapter
+     */
+    public void setTextviewSize(String curriteItemText, CalendarTextAdapter adapter) {
+        ArrayList<View> arrayList = adapter.getTestViews();
+        int size = arrayList.size();
+        String currentText;
+        for (int i = 0; i < size; i++) {
+            TextView textvew = (TextView) arrayList.get(i);
+            currentText = textvew.getText().toString();
+            if (curriteItemText.equals(currentText)) {
+                StaticData.ViewScale(textvew, 0, 130);
+                textvew.setTextColor(Color.parseColor("#2b2a2a"));
+                textvew.setTextSize(maxTextSize);
+            } else {
+                StaticData.ViewScale(textvew, 0, 90);
+                textvew.setTextColor(Color.parseColor("#2b2a2a"));
+                textvew.setTextSize(minTextSize);
+            }
+        }
     }
 
 

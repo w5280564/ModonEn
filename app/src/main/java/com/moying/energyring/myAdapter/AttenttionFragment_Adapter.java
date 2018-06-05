@@ -20,7 +20,7 @@ import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.network.saveFile;
 
@@ -120,8 +120,10 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
                 Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));
                 holder.content_simple.setImageURI(contentUri);
             }
+            if (oneData.getProfilePicture() != null){
             Uri headUri = Uri.parse(oneData.getProfilePicture());
-            holder.myhead_simple.setImageURI(headUri);
+                holder.myhead_simple.setImageURI(headUri);
+            }
             holder.name_Txt.setText(oneData.getNickName());
             holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
             holder.content_Txt.setText(oneData.getPostContent());
@@ -281,7 +283,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     context.startActivity(intent);
                 }
             }

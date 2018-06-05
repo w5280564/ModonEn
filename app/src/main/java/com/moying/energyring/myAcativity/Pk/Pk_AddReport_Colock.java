@@ -20,7 +20,7 @@ import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.Colock_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.wheel.adapters.AbstractWheelTextAdapter;
 import com.moying.energyring.waylenBaseView.wheel.views.OnWheelChangedListener;
@@ -93,6 +93,11 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
 
         wvHour = (WheelView) findViewById(R.id.wv_hour);
         wvMine = (WheelView) findViewById(R.id.wv_mine);
+
+//        int color[] = {Color.WHITE,Color.WHITE,Color.WHITE};
+//        wvHour.setTopandBotColor(color);
+//        wvHour.selectCenter(this.getDrawable(R.drawable.wheel_select_color));
+//        wvHour.setBgColor(Color.parseColor("#ffffff"));
 
         StaticData.ViewScale(switch_Rel, 0, 128);
         StaticData.ViewScale(wheel_Lin, 0, 500);
@@ -453,7 +458,7 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -517,7 +522,7 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

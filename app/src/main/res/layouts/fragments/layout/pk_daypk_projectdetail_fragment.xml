@@ -151,10 +151,11 @@
                 android:textColor="#2b2a2a"
                 android:background="@drawable/daypk_train_bg"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/addpk_Img"
+                android:layout_toRightOf="@id/ac_tab_layout"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

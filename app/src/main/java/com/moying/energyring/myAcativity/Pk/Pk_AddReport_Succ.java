@@ -43,7 +43,7 @@ public class Pk_AddReport_Succ extends Activity {
                 intentJiFen.putExtra("media", "daypk");
                 intentJiFen.putExtra("jifen", jiFenmodel.getData().getIntegral());
                 intentJiFen.putExtra("RewardIntegral", jiFenmodel.getData().getRewardIntegral()+"");
-
+                intentJiFen.putExtra("DailyTask",jiFenmodel.getData().getDailyTask());
                 startActivityForResult(intentJiFen, 1002);
 
             }

@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.Goal_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAdapter.Goal_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -137,7 +137,7 @@ public class Pk_DayPkAdd_Project extends Activity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")){
-                    Intent intent = new Intent(Pk_DayPkAdd_Project.this,LoginRegister.class);
+                    Intent intent = new Intent(Pk_DayPkAdd_Project.this,MainLogin.class);
                     startActivity(intent);
                 }
             }

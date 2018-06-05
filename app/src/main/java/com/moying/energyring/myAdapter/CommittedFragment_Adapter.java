@@ -19,7 +19,7 @@ import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Committed_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
 import com.moying.energyring.network.saveFile;
 
@@ -213,7 +213,7 @@ public class CommittedFragment_Adapter extends RecyclerView.Adapter<CommittedFra
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     context.startActivity(intent);
                 }
             }

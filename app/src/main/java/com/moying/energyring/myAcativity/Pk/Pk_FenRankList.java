@@ -33,7 +33,7 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.Pk_MyIntegral_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.Person_Integral;
 import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.network.saveFile;
@@ -346,7 +346,7 @@ public class Pk_FenRankList extends AppCompatActivity {
 
 
         public View getTabView(int position) {
-            View v = LayoutInflater.from(Pk_FenRankList.this).inflate(R.layout.pkfenrank_custom_tab, null);
+            View v = LayoutInflater.from(Pk_FenRankList.this).inflate(R.layout.pkrank_custom_tab, null);
             TextView tab_Name = (TextView) v.findViewById(R.id.tab_Name);
             tab_Name.setText(userArr.get(position));
             return v;
@@ -394,7 +394,7 @@ public class Pk_FenRankList extends AppCompatActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

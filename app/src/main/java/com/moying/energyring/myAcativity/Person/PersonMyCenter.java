@@ -38,7 +38,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.LoginRegister;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.AppBarStateChangeListener;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -114,6 +114,7 @@ public class PersonMyCenter extends AppCompatActivity {
         fans_Txt = (TextView) findViewById(R.id.fans_Txt);
         intr_Txt = (TextView) findViewById(R.id.intr_Txt);
         StaticData.ViewScale(return_Btn, 80, 88);
+        return_Btn.setAlpha(1f);
         StaticData.ViewScale(person_bg_simple, 0, 440);
         StaticData.ViewScale(user_simple, 180, 180);
         StaticData.ViewScale(gender_img, 24, 24);
@@ -398,7 +399,7 @@ public class PersonMyCenter extends AppCompatActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -562,7 +563,7 @@ public class PersonMyCenter extends AppCompatActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -599,7 +600,7 @@ public class PersonMyCenter extends AppCompatActivity {
             public void onError(Throwable throwable, boolean b) {
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }
@@ -642,7 +643,7 @@ public class PersonMyCenter extends AppCompatActivity {
                 rete_Txt.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, LoginRegister.class);
+                    Intent intent = new Intent(context, MainLogin.class);
                     startActivity(intent);
                 }
             }

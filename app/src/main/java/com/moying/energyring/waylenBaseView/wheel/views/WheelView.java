@@ -22,6 +22,7 @@ package com.moying.energyring.waylenBaseView.wheel.views;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.GradientDrawable.Orientation;
@@ -48,7 +49,7 @@ public class WheelView extends View {
     /**
      * Top and bottom shadows colors 背景颜色
      */
-    private static final int[] SHADOWS_COLORS = new int[]{232121, 232121, 232121};
+    private int[] SHADOWS_COLORS = new int[]{232121, 232121, 232121}; //分别为开始颜色，中间夜色，结束颜色
 
     /**
      * Top and bottom items offset (to hide that)
@@ -80,6 +81,8 @@ public class WheelView extends View {
     // Shadows drawables
     private GradientDrawable topShadow;
     private GradientDrawable bottomShadow;
+
+    private int viewBgColor = 0;
 
     // Scrolling
     private WheelScroller scroller;
@@ -463,7 +466,11 @@ public class WheelView extends View {
             bottomShadow = new GradientDrawable(Orientation.BOTTOM_TOP, SHADOWS_COLORS);
         }
 
-        setBackgroundResource(R.drawable.wheel_bg); //背景色
+        if (viewBgColor == 0) {
+            viewBgColor = Color.parseColor("#232121");
+            setBackgroundColor(viewBgColor);
+        }
+//        setBackgroundResource(R.drawable.wheel_bg); //背景色
     }
 
     /**
@@ -734,7 +741,7 @@ public class WheelView extends View {
      * Scroll the wheel
      *
      * @param itemsToScroll items to scroll
-     * @param time        scrolling duration
+     * @param time          scrolling duration
      */
     public void scroll(int itemsToScroll, int time) {
         int distance = itemsToScroll * getItemHeight() - scrollingOffset;
@@ -922,9 +929,27 @@ public class WheelView extends View {
 
     /**
      * 不绘制边框
+     *
      * @param iscanvas
      */
-    public void isRectCanvas(boolean iscanvas){
+    public void isRectCanvas(boolean iscanvas) {
         isRectCanvas = iscanvas;
+    }
+
+
+    //修改背景颜色
+    public void setTopandBotColor(int[] colorArr) {
+        this.SHADOWS_COLORS = colorArr;
+
+    }
+
+    //选择颜色
+    public void selectCenter(Drawable selectDrawble) {
+        this.centerDrawable = selectDrawble;
+    }
+
+    //view背景色
+    public void setBgColor(int color){
+        this.viewBgColor = color;
     }
 }

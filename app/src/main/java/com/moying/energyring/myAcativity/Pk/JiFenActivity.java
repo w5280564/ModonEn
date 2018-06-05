@@ -13,6 +13,7 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -23,6 +24,10 @@ import android.widget.TextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.moying.energyring.Model.JiFenAndBadge_Model;
+import com.moying.energyring.Model.JiFeng_Task_Model;
+import com.moying.energyring.Model.Pk_HuiZong_Model;
+import com.moying.energyring.Model.PostAndPk_Add_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.network.saveFile;
@@ -36,10 +41,16 @@ public class JiFenActivity extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jifen_popup);
-
+        setView();
 //        RelativeLayout jifen_Rel = (RelativeLayout) findViewById(R.id.jifen_Rel);
 //        StaticData.ViewScale(jifen_Rel, 550, 270);
 //        TextView jifen_Txt = (TextView) findViewById(R.id.jifen_Txt);
+        View task_Lin = findViewById(R.id.task_Lin);
+        ImageView task_Img = (ImageView) findViewById(R.id.task_Img);
+        TextView task_Txt = (TextView) findViewById(R.id.task_Txt);
+        StaticData.ViewScale(task_Img, 34, 34);
+        StaticData.ViewScale(task_Lin, 0, 70);
+
         ImageView fen_guang_Img = (ImageView) findViewById(R.id.fen_guang_Img);
         StaticData.ViewScale(fen_guang_Img, 680, 680);
 
@@ -54,8 +65,10 @@ public class JiFenActivity extends Activity {
 
         TextView other_Txt = (TextView) findViewById(R.id.other_Txt);
         RelativeLayout.LayoutParams otherparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        int othermargTop = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 490);
-        int othermargLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 178);
+//        int othermargTop = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 490);
+//        int othermargLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 178);
+        int othermargTop = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 787);
+        int othermargLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 213);
         otherparams.setMargins(othermargLeft, othermargTop, 0, 0);
         other_Txt.setLayoutParams(otherparams);
 
@@ -67,14 +80,15 @@ public class JiFenActivity extends Activity {
         RelativeLayout.LayoutParams jifenparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 //        jifenparams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 //        StaticData.layoutParamsScale(succparams, 680, 680);
-        int jifenmargTop = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 360);
-        int jifenmargLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 295);
+//        int jifenmargTop = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 360);
+//        int jifenmargLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 295);
+        int jifenmargTop = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 657);
+        int jifenmargLeft = (int) (Float.parseFloat(saveFile.getShareData("scale", JiFenActivity.this)) * 330);
         jifenparams.setMargins(jifenmargLeft, jifenmargTop, 0, 0);
         jifen_Txt.setLayoutParams(jifenparams);
 
         Animation scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.jifen_animation);
         jifen_Txt.startAnimation(scaleAnimation);
-
 
 
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -89,6 +103,7 @@ public class JiFenActivity extends Activity {
         int count = intent.getIntExtra("jifen", 0);
         String mediaStr = intent.getStringExtra("media");
         String RewardIntegral = intent.getStringExtra("RewardIntegral");
+
 
         if (mediaStr != null) {
             if (mediaStr.equals("daypk")) {
@@ -106,18 +121,76 @@ public class JiFenActivity extends Activity {
             }
         }
 
-        jifen_Txt.setText(count + "积分");
+        if (count == 0) {
+            fen_guang_Img.setVisibility(View.GONE);
+            fen_has_Img.setVisibility(View.GONE);
+        } else {
+            jifen_Txt.setText(count + "积分");
+        }
 
         if (RewardIntegral != null && !RewardIntegral.equals("0")) {
             fen_has_Img.setImageResource(R.drawable.fen_hasother_icon);
             other_Txt.setVisibility(View.VISIBLE);
             String allTxt = "恭喜你，额外获得了" + RewardIntegral + "积分";
-            TextsColor(JiFenActivity.this,RewardIntegral,allTxt,other_Txt);
+            TextsColor(JiFenActivity.this, RewardIntegral, allTxt, other_Txt);
 //            other_Txt.setText(start);
-        }else {
+        } else {
             other_Txt.setVisibility(View.INVISIBLE);
             fen_has_Img.setImageResource(R.drawable.fen_no_icon);
 
+        }
+
+        if (mediaStr.equals("huizong")) {
+            Pk_HuiZong_Model.DataBean.DailyTaskBean DailyTask = intent.getParcelableExtra("DailyTask");
+
+            if (DailyTask != null) {
+                task_Lin.setVisibility(View.VISIBLE);
+                String taskStr = "完成" + DailyTask.getTaskName() + "任务奖励" + DailyTask.getIntegral() + "积分";
+                task_Txt.setText(taskStr);
+            } else {
+                task_Lin.setVisibility(View.GONE);
+            }
+        } else if (mediaStr.equals("posting")) {
+            PostAndPk_Add_Model.DataBean.DailyTaskBean DailyTask = intent.getParcelableExtra("DailyTask");
+
+            if (DailyTask != null) {
+                task_Lin.setVisibility(View.VISIBLE);
+                String taskStr = "完成" + DailyTask.getTaskName() + "任务奖励" + DailyTask.getIntegral() + "积分";
+                task_Txt.setText(taskStr);
+            } else {
+                task_Lin.setVisibility(View.GONE);
+            }
+        }else if (mediaStr.equals("check")) {
+            JiFenAndBadge_Model.DataBean.DailyTaskBean DailyTask = intent.getParcelableExtra("DailyTask");
+
+            if (DailyTask != null) {
+                task_Lin.setVisibility(View.VISIBLE);
+                String taskStr = "完成" + DailyTask.getTaskName() + "任务奖励" + DailyTask.getIntegral() + "积分";
+                task_Txt.setText(taskStr);
+            } else {
+                task_Lin.setVisibility(View.GONE);
+            }
+        }else if (mediaStr.equals("daypk")) {
+            JiFenAndBadge_Model.DataBean.DailyTaskBean DailyTask = intent.getParcelableExtra("DailyTask");
+
+            if (DailyTask != null) {
+                task_Lin.setVisibility(View.VISIBLE);
+                String taskStr = "完成" + DailyTask.getTaskName() + "任务奖励" + DailyTask.getIntegral() + "积分";
+                task_Txt.setText(taskStr);
+            } else {
+                task_Lin.setVisibility(View.GONE);
+            }
+        } else {
+
+            JiFeng_Task_Model.DailyTaskBean DailyTask = intent.getParcelableExtra("DailyTask");
+
+            if (DailyTask != null) {
+                task_Lin.setVisibility(View.VISIBLE);
+                String taskStr = "完成" + DailyTask.getTaskName() + "任务奖励" + DailyTask.getIntegral() + "积分";
+                task_Txt.setText(taskStr);
+            } else {
+                task_Lin.setVisibility(View.GONE);
+            }
         }
 
 
@@ -147,7 +220,7 @@ public class JiFenActivity extends Activity {
 
     }
 
-    public void TextsColor(Context context , String RewardIntegral, String alltext, TextView myTxt) {
+    public void TextsColor(Context context, String RewardIntegral, String alltext, TextView myTxt) {
         SpannableStringBuilder styledText = new SpannableStringBuilder(alltext);
 //        int padSize = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * size);
 //        styledText.setSpan(new AbsoluteSizeSpan(padSize), 0, alltext.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE); //初始字体大小
@@ -174,6 +247,13 @@ public class JiFenActivity extends Activity {
             return false;
         }
         return false;
+    }
+
+    public void setView() {
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+        getWindow().setAttributes(layoutParams);
     }
 
 }

@@ -32,20 +32,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignBottom="@id/jifen_Rel"/>
+
+
 -->
+
+    <LinearLayout
+        android:id="@+id/task_Lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/jifen_trask_bg">
+
+        <ImageView
+            android:id="@+id/task_Img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/task_fen_icon"/>
+
+        <TextView
+            android:id="@+id/task_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="13sp"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/fen_guang_Img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/fen_guang_icon" />
+        android:layout_centerInParent="true"
+        android:src="@drawable/fen_guang_icon"/>
 
     <ImageView
         android:id="@+id/fen_has_Img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerInParent="true"/>
 
     <TextView
         android:id="@+id/other_Txt"

@@ -82,6 +82,7 @@ public class UserInfo_Model implements Parcelable {
          * Code : 0
          * Attention : 3
          * Attention_Me : 1
+         * PostCount
          */
 
         private int UserID;
@@ -109,6 +110,7 @@ public class UserInfo_Model implements Parcelable {
         private int Attention;
         private int Attention_Me;
         private boolean Is_Attention;
+        private int PostCount;
 
         public boolean is_Attention() {
             return Is_Attention;
@@ -311,6 +313,15 @@ public class UserInfo_Model implements Parcelable {
             this.Attention_Me = Attention_Me;
         }
 
+        public int getPostCount() {
+            return PostCount;
+        }
+
+        public void setPostCount(int postCount) {
+            PostCount = postCount;
+        }
+
+
         @Override
         public int describeContents() {
             return 0;
@@ -345,6 +356,7 @@ public class UserInfo_Model implements Parcelable {
             dest.writeInt(this.Code);
             dest.writeInt(this.Attention);
             dest.writeInt(this.Attention_Me);
+            dest.writeInt(this.PostCount);
         }
 
         public DataBean() {
@@ -378,6 +390,7 @@ public class UserInfo_Model implements Parcelable {
             this.Code = in.readInt();
             this.Attention = in.readInt();
             this.Attention_Me = in.readInt();
+            this.PostCount = in.readInt();
         }
 
         public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
