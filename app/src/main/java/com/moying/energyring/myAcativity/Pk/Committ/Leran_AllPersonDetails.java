@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -169,14 +170,14 @@ public class Leran_AllPersonDetails extends Activity implements GestureDetector.
 
     private void initTitle(){
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
         right_Btn.setBackgroundResource(R.drawable.persondetails_out);
@@ -579,8 +580,8 @@ public class Leran_AllPersonDetails extends Activity implements GestureDetector.
 
     public void TextsColor(int start, int end, int allSize, String allText, TextView myTxt) {
         SpannableStringBuilder styledText = new SpannableStringBuilder(allText);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#989797")), 0, allSize, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this,R.color.colorSecondWhite)), 0, allSize, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this,R.color.colorFristBlack)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         myTxt.setText(styledText);
     }
 

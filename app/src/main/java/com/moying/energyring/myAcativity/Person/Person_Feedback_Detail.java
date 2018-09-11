@@ -3,10 +3,10 @@ package com.moying.energyring.myAcativity.Person;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -36,7 +36,7 @@ public class Person_Feedback_Detail extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LinearLayout layoutRoot = new LinearLayout(this);//根布局
-        layoutRoot.setBackgroundColor(Color.parseColor("#232121"));
+        layoutRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.colorAllBg));
         layoutRoot.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
@@ -89,7 +89,7 @@ public class Person_Feedback_Detail extends Activity {
 
     private void initTitle(LinearLayout mycontentView) {
         final View view = LayoutInflater.from(Person_Feedback_Detail.this).inflate(R.layout.base_titlebar, null);
-        view.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        view.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setElevation(2f);//阴影
         }
@@ -99,7 +99,7 @@ public class Person_Feedback_Detail extends Activity {
         Button return_Btn = (Button) view.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) view.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
 //        cententtxt.setText(myWebView.getTitle());
         cententtxt.setText("帖子详情");
         StaticData.ViewScale(return_Btn, 80, 88);
@@ -141,7 +141,7 @@ public class Person_Feedback_Detail extends Activity {
     //JS调用Android JAVA方法名和HTML中的按钮 onclick后的别名后面的名字对应
     @JavascriptInterface
     public void UserID_Get(int UserId) {
-        Intent intent = new Intent(Person_Feedback_Detail.this, PersonMyCenter_Other.class);
+        Intent intent = new Intent(Person_Feedback_Detail.this, PersonMyCenter_And_Other.class);
         intent.putExtra("UserID", UserId + "");
         startActivity(intent);
     }

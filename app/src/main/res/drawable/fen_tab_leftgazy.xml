@@ -15,8 +15,8 @@
             <corners
                 android:bottomLeftRadius="50dp"
                 android:topLeftRadius="50dp" />
-            <solid android:color="#2b2a2a" />
-            <stroke android:color="#2b2a2a" />
+            <solid android:color="#ffffff" />
+            <stroke android:color="#ffffff" />
         </shape>
     </item>
 </layer-list>

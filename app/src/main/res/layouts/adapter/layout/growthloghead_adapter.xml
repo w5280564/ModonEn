@@ -20,6 +20,14 @@
             android:layout_centerHorizontal="true"
             app:roundAsCircle="true" />
 
+        <ImageView
+            android:id="@+id/grade_Img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"/>
+
         <TextView
             android:id="@+id/headcontent_Txt"
             android:layout_width="wrap_content"
@@ -31,7 +39,7 @@
             android:maxEms="4"
             android:ellipsize="end"
             android:text="俯卧撑"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorFristBlack"
             android:textSize="10sp" />
 
         <ImageView

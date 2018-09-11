@@ -12,16 +12,16 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupblack_bg">
+        android:background="@drawable/popupwhite_bg">
+
 
         <LinearLayout
             android:id="@+id/title_Lin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/myhead_simple"
@@ -30,26 +30,46 @@
                 android:layout_marginLeft="10dp"
                 fresco:roundAsCircle="true" />
 
-            <TextView
-                android:id="@+id/name_Txt"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLength="15"
-                android:layout_marginLeft="10dp"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/time_Txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="left"
-                android:paddingRight="15dp"
-                android:textColor="#e3e7eb"
-                android:textSize="12sp"
-                />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/name_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:maxLength="12"
+                        android:textColor="@color/colorFristBlack"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/grade_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/time_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorSecondWhite"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
 
@@ -69,7 +89,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:lines="2"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="12sp" />
 
 
@@ -82,7 +102,7 @@
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/energy_img"
@@ -126,7 +146,7 @@
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:text="删除"
-                android:textColor="#e3e7eb"
+                android:textColor="@color/colorSecondBlack"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -143,10 +163,10 @@
                     android:id="@+id/yue_Txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:textSize="10sp"
-                    android:textColor="#e3e7eb"
-                    android:layout_marginRight="5dp"/>
+                    android:textColor="@color/colorSecondBlack"
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/energy_talk"
@@ -160,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#e3e7eb"
+                    android:textColor="@color/colorSecondBlack"
                     android:textSize="9sp" />
 
                 <LinearLayout
@@ -181,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="#e3e7eb"
+                        android:textColor="@color/colorSecondBlack"
                         android:textSize="9sp" />
                 </LinearLayout>
 

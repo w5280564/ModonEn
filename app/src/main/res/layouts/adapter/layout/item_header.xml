@@ -9,10 +9,10 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3e3d3d"
+        android:background="@color/colorAllBg"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:text="A"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorFristBlack"
         android:textSize="18sp"/>
 </LinearLayout>

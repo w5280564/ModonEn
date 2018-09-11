@@ -34,7 +34,7 @@
                 android:id="@+id/All_XRecy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#232121"
+                android:background="@color/colorAllBg"
                 android:paddingBottom="20dp" />
 
         </FrameLayout>
@@ -44,7 +44,7 @@
             android:id="@+id/dragView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#232121"
+            android:background="@color/colorAllBg"
             android:clickable="true"
             android:orientation="vertical">
 
@@ -52,7 +52,7 @@
                 android:id="@+id/title_Rel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#2b2a2a">
+                android:background="@color/colorFristWhite">
 
                 <TextView
                     android:id="@+id/month_lineTxt"
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/current_Lin"
-                    android:background="#2b2a2a"
+                    android:background="@color/colorFristWhite"
                     android:orientation="horizontal">
 
                     <TextView
@@ -143,6 +143,7 @@
                         android:textColor="#989797"
                         android:textSize="10sp" />
 
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -166,7 +167,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="#343434" />
+                android:background="@color/colorline" />
 
             <ViewFlipper
                 android:id="@+id/flipper"

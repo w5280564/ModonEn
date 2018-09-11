@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:background="@color/colorAllBg">
 
 
     <RelativeLayout
@@ -34,8 +34,8 @@
             android:gravity="center"
             android:hint="搜索 用户/成长日志"
             android:lines="1"
-            android:textColorHint="#595f65"
-            android:textColor="#ffffff"
+            android:textColorHint="@color/colorSecondBlack"
+            android:textColor="@color/colorFristBlack"
             android:textSize="10sp" />
 
     </RelativeLayout>

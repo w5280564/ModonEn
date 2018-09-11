@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/popupblack_bg">
+                android:background="@drawable/popupwhite_bg">
 
                 <EditText
                     android:id="@+id/content_Edit"
@@ -41,8 +41,8 @@
                     android:background="@null"
                     android:gravity="left"
                     android:hint="谈谈此时的想法吧"
-                    android:textColor="#989797"
-                    android:textColorHint="#989797"
+                    android:textColor="@color/colorFristBlack"
+                    android:textColorHint="@color/colorSecondWhite"
                     android:textSize="16sp" />
 
                 <RelativeLayout
@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="\@提醒谁看"
-                        android:textColor="#989797"
+                        android:textColor="@color/colorSecondWhite"
                         android:textSize="14sp" />
 
                     <ImageView
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:text="同步分享到"
-                    android:textColor="#e3e7eb"
+                    android:textColor="@color/colorFristBlack"
                     android:textSize="13sp" />
 
                 <ImageView

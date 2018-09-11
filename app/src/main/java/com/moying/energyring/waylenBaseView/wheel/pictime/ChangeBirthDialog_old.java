@@ -3,6 +3,7 @@ package com.moying.energyring.waylenBaseView.wheel.pictime;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -69,8 +70,11 @@ public class ChangeBirthDialog_old extends Dialog implements View.OnClickListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dialog_myinfo_changebirth);
 		wvYear = (WheelView) findViewById(R.id.wv_birth_year);
+		wvYear.setBgColor(ContextCompat.getColor(context,R.color.colorFristWhite));
 		wvMonth = (WheelView) findViewById(R.id.wv_birth_month);
+		wvMonth.setBgColor(ContextCompat.getColor(context,R.color.colorFristWhite));
 		wvDay = (WheelView) findViewById(R.id.wv_birth_day);
+		wvDay.setBgColor(ContextCompat.getColor(context,R.color.colorFristWhite));
 
 		vChangeBirth = findViewById(R.id.ly_myinfo_changebirth);
 		vChangeBirthChild = findViewById(R.id.ly_myinfo_changebirth_child);

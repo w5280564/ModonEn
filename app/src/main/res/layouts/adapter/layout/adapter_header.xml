@@ -8,7 +8,7 @@
         android:id="@+id/my_Lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2b2a2a"
+        android:background="@color/colorFristWhite"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -18,13 +18,13 @@
             android:layout_height="12dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="10dp"
-            android:background="#ffd800" />
+            android:background="@color/colorThridYellow" />
 
         <TextView
             android:id="@+id/tv_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorFristBlack"
             android:textSize="15sp"
             android:textStyle="bold"/>
     </LinearLayout>

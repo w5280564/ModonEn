@@ -13,7 +13,7 @@
         android:layout_below="@id/today_Txt"
         android:layout_marginLeft="5dp"
         android:text=""
-        android:textColor="#ffffff"
+        android:textColor="@color/colorFristBlack"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:text=""
-            android:textColor="#ffffff"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="10sp"
             android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="7sp"
             android:textStyle="bold" />
 

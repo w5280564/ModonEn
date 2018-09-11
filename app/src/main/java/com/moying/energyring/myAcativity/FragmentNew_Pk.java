@@ -1,26 +1,27 @@
 package com.moying.energyring.myAcativity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.view.Gravity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.JiFenAndBadge_Model;
@@ -28,7 +29,6 @@ import com.moying.energyring.Model.Pk_MyIntegral_Model;
 import com.moying.energyring.Model.ProjectModel;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.myCheckData_Model;
-import com.moying.energyring.Model.newPk_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.GuideUtil;
 import com.moying.energyring.StaticData.StaticData;
@@ -36,18 +36,12 @@ import com.moying.energyring.myAcativity.Energy.HasNewActivity;
 import com.moying.energyring.myAcativity.Person.Person_BadgeHas;
 import com.moying.energyring.myAcativity.Person.Person_Commendation;
 import com.moying.energyring.myAcativity.Pk.JiFenActivity;
-import com.moying.energyring.myAcativity.Pk.Pk_AddReport;
+import com.moying.energyring.myAcativity.Pk.Pk_CalnerFragment;
 import com.moying.energyring.myAcativity.Pk.Pk_CheckIn;
-import com.moying.energyring.myAcativity.Pk.Pk_DayPKAdd_Project_Tab;
-import com.moying.energyring.myAcativity.Pk.Pk_DayPk_Project_Detail;
+import com.moying.energyring.myAcativity.Pk.Pk_DayPKAdd_ProjectSeek;
 import com.moying.energyring.myAcativity.Pk.Pk_DayPk_Project_Detail_RankAll;
 import com.moying.energyring.myAcativity.Pk.Pk_FenRankList;
-import com.moying.energyring.myAcativity.Pk.Pk_HuiZong;
-import com.moying.energyring.myAcativity.Pk.Training.TrainingTodaySet;
-import com.moying.energyring.myAdapter.newPk_Fragment_Adapter;
 import com.moying.energyring.network.saveFile;
-import com.moying.energyring.waylenBaseView.BasePopupWindow;
-import com.moying.energyring.xrecycle.XRecyclerView;
 import com.sunfusheng.marqueeview.MarqueeView;
 
 import org.xutils.common.Callback;
@@ -55,26 +49,37 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
-import static com.moying.energyring.network.saveFile.getShareData;
 
 
 /**
  * Created by waylen on 2017/10/19.
  */
 
-public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingListener, GuideUtil.RemoveListener {
+public class FragmentNew_Pk extends Fragment implements  GuideUtil.RemoveListener {
     private View parentView;
-    private XRecyclerView pk_recy;
-    LinearLayout check_Lin;
     MarqueeView marqueeView;
     public static int guideID = 1001;
     public static int jifenID = 1002;
-    private TextView my_rank_Txt, my_change_Txt, my_Count_Txt;
-    private ImageView my_change_Img;
     GuideUtil guideUtil;
+    private SimpleDraweeView my_simple;
+    private TextView  fen_Txt;
+    private ImageView grade_Img;
+
+    private int year_c = 0;
+    private int month_c = 0;
+    private int day_c = 0;
+    private String currentDate = "";
+    private Calendar calendar;
+    private Date date;
+    private TextView calendar_Txt,my_Rank_Txt;
+    private TabLayout ac_tab_layout;
+    private ViewPager Slideviewpager;
+    private ImageView left_Img, right_Img;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +99,8 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         guideUtil.setRemoveListener(this);
 
 
+        initDate();
+
         return parentView;
     }
 
@@ -107,32 +114,38 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     @Override
     public void onStart() {
         super.onStart();
-        marqueeView.startFlipping();
+//        marqueeView.startFlipping();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        marqueeView.stopFlipping();
+//        marqueeView.stopFlipping();
     }
 
     private void initData() {
         checkData(saveFile.BaseUrl + saveFile.Check_Url);//是否签到
         myRankData(getActivity(), saveFile.BaseUrl + saveFile.My_Rank_Url);
-        String userId = saveFile.getShareData("userId", getActivity());
+//        String userId = saveFile.getShareData("userId", getActivity());
 //        ListData(getActivity(), saveFile.BaseUrl + saveFile.DayPk_Url + "?UserID=" + userId);
-        ListData(getActivity(), saveFile.BaseUrl + saveFile.My_ReportProject_List_Url);
-
     }
 
-    @Override
-    public void onRefresh() {
-        initData();
-    }
+    //初始时间 今天
+    private void initDate() {
+        calendar = Calendar.getInstance();
+        date = new Date();//当前时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = sdf.format(date);
+        year_c = Integer.parseInt(currentDate.split("-")[0]);
+        month_c = Integer.parseInt(currentDate.split("-")[1]);
+        day_c = Integer.parseInt(currentDate.split("-")[2]);
 
-    @Override
-    public void onLoadMore() {
+        String time = month_c + "月" + day_c + "日";
+//       initXrecyData(time,0);
+        calendar_Txt.setText(time);
 
+        initLocaData(ac_tab_layout);
+        tabViewSetView(ac_tab_layout);
     }
 
     @Override
@@ -167,47 +180,44 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     }
 
     private void initView(View view) {
-        marqueeView = (MarqueeView) view.findViewById(R.id.MarqueeView);
-        RelativeLayout titlebg_Rel = (RelativeLayout) view.findViewById(R.id.titlebg_Rel);
-        LinearLayout my_Lin = (LinearLayout) view.findViewById(R.id.my_Lin);
-        check_Lin = (LinearLayout) view.findViewById(R.id.check_Lin);
-        ImageView pk_check_img = (ImageView) view.findViewById(R.id.pk_check_img);
-        TextView hui_Txt = (TextView) view.findViewById(R.id.hui_Txt);
-        ImageView pk_more_img = (ImageView) view.findViewById(R.id.pk_more_img);
-        my_rank_Txt = (TextView) view.findViewById(R.id.my_rank_Txt);
-        my_change_Img = (ImageView) view.findViewById(R.id.my_change_Img);
-        my_change_Txt = (TextView) view.findViewById(R.id.my_change_Txt);
-        my_Count_Txt = (TextView) view.findViewById(R.id.my_Count_Txt);
-        View rank_Img = view.findViewById(R.id.rank_Img);
-//        View rank_Rel = view.findViewById(R.id.rank_Rel);
-//        View rank_icon = view.findViewById(R.id.rank_icon);
-        View rank_Txt = view.findViewById(R.id.rank_Txt);
+//        View rank_Txt = view.findViewById(R.id.rank_Txt);
+        left_Img = (ImageView) view.findViewById(R.id.left_Img);
+        right_Img = (ImageView) view.findViewById(R.id.right_Img);
+        View calendar_Img = view.findViewById(R.id.calendar_Img);
+        calendar_Txt = (TextView) view.findViewById(R.id.calendar_Txt);
+        my_Rank_Txt = (TextView) view.findViewById(R.id.my_Rank_Txt);
 
+        ac_tab_layout = (TabLayout) view.findViewById(R.id.ac_tab_layout);
+        Slideviewpager = (ViewPager) view.findViewById(R.id.Slideviewpager);
+        StaticData.ViewScale(ac_tab_layout, 0, 6);
 
-        pk_recy = (XRecyclerView) view.findViewById(R.id.pk_recy);
-        pk_recy.setLoadingListener(this);//添加事件
-        pk_recy.setPullRefreshEnabled(true);
-        pk_recy.setLoadingMoreEnabled(false);
         ImageView pk_ce_Img = (ImageView) view.findViewById(R.id.pk_ce_Img);
-//        StaticData.ViewScale(titlebg_Rel, 0, 326);
-        StaticData.ViewScale(titlebg_Rel, 0, 232);
-        StaticData.ViewScale(my_Lin, 0, 56);
-        StaticData.ViewScale(check_Lin, 164, 56);
-        StaticData.ViewScale(pk_more_img, 56, 44);
-        StaticData.ViewScale(my_change_Img, 16, 18);
-
-        StaticData.ViewScale(pk_check_img, 36, 40);
         StaticData.ViewScale(pk_ce_Img, 94, 308);
-        StaticData.ViewScale(hui_Txt, 164, 56);
-//        StaticData.ViewScale(rank_Rel, 0, 76);
-        StaticData.ViewScale(rank_Txt, 56, 56);
-        StaticData.ViewScale(rank_Img, 40, 40);
-        check_Lin.setOnClickListener(new check_Lin());
+        StaticData.ViewScale(left_Img, 18, 30);
+        StaticData.ViewScale(right_Img, 18, 30);
+        StaticData.ViewScale(calendar_Img, 30, 30);
         pk_ce_Img.setOnClickListener(new pk_ce_Img());
-        marqueeView.setOnItemClickListener(new marqueeView());
-        hui_Txt.setOnClickListener(new hui_Txt());
-        titlebg_Rel.setOnClickListener(new titlebg_Rel());
-        rank_Txt.setOnClickListener(new rank_Txt());
+
+        RelativeLayout title_rel = (RelativeLayout) view.findViewById(R.id.title_rel);
+        View Pkbg_Img = view.findViewById(R.id.Pkbg_Img);
+        my_simple = (SimpleDraweeView) view.findViewById(R.id.my_simple);
+        grade_Img = (ImageView) view.findViewById(R.id.grade_Img);
+        fen_Txt = (TextView) view.findViewById(R.id.fen_Txt);
+        LinearLayout bang_Lin = (LinearLayout) view.findViewById(R.id.bang_Lin);
+        ImageView bang_Img = (ImageView) view.findViewById(R.id.bang_Img);
+        ImageView arrow_Img = (ImageView) view.findViewById(R.id.arrow_Img);
+
+        StaticData.ViewScale(title_rel, 0, 264);
+        StaticData.ViewScale(Pkbg_Img, 0, 152);
+        StaticData.ViewScale(grade_Img, 56, 28);
+        StaticData.ViewScale(my_simple, 138, 138);
+        StaticData.ViewScale(bang_Img, 36, 36);
+        StaticData.ViewScale(arrow_Img, 28, 24);
+
+        bang_Lin.setOnClickListener(new bang_Lin());
+        left_Img.setOnClickListener(new left_Img());
+        right_Img.setOnClickListener(new right_Img());
+        calendar_Txt.setOnClickListener(new calendar_Txt());
     }
 
     @Override
@@ -244,7 +254,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
     private class check_Lin implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            check_Lin.setEnabled(false);
+//            check_Lin.setEnabled(false);
             AddData(saveFile.BaseUrl + saveFile.CheckAdd_Url);//签到
         }
     }
@@ -254,7 +264,9 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         public void onClick(View view) {
 //            Intent intent1 = new Intent(getActivity(), Pk_DayPkAdd_More.class);
 //            startActivityForResult(intent1, guideID);
-            Intent intent = new Intent(getActivity(), Pk_DayPKAdd_Project_Tab.class);
+
+//            Intent intent = new Intent(getActivity(), Pk_DayPKAdd_Project_Tab.class);
+            Intent intent = new Intent(getActivity(), Pk_DayPKAdd_ProjectSeek.class);
             List<ProjectModel> projectModel = new ArrayList<>();
             intent.putExtra("baseModel", (Serializable) projectModel);
             //第二个参数为请求码，可以根据业务需求自己编号
@@ -303,7 +315,7 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         @Override
         public void onClick(View view) {
             view.setEnabled(false);
-            isReteDayPk(view, getActivity(), saveFile.BaseUrl + saveFile.haveNewRepost_Url);
+
         }
     }
 
@@ -316,158 +328,215 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         }
     }
 
-
-    newPk_Fragment_Adapter mAdapter;
-
-    public void initlist(final Context context) {
-        GridLayoutManager mGridMangaer = new GridLayoutManager(context, 2);
-        pk_recy.setLayoutManager(mGridMangaer);
-        //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
-//        pk_recy.setHasFixedSize(true);
-        mAdapter = new newPk_Fragment_Adapter(context, baseModel);
-        pk_recy.setAdapter(mAdapter);
-        mAdapter.setOnItemClickLitener(new newPk_Fragment_Adapter.OnItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (baseModel.getData().get(position).getReportID() == 0) { //0今天没有汇报项目
-                    if (baseModel.getData().get(position).getProjectName().equals("健康走")) {
-                        Intent intent = new Intent(getActivity(), Pk_DayPk_Project_Detail.class);
-                        intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
-                        startActivity(intent);
-
-                    } else if (baseModel.getData().get(position).isIs_Train()) {
-                        Intent intent1 = new Intent(getActivity(), TrainingTodaySet.class);
-                        intent1.putExtra("ProjectID", baseModel.getData().get(position).getProjectID() + "");
-                        startActivity(intent1);
-
-//                        Intent intent1 = new Intent(getActivity(), startTrainingActivity.class);
-//                        startActivity(intent1);
-                    } else {
-                        Intent intent = new Intent(getActivity(), Pk_AddReport.class);
-                        intent.putExtra("projectModel", baseModel.getData().get(position));
-                        startActivity(intent);
-                    }
-                } else {
-
-                    Intent intent = new Intent(getActivity(), Pk_DayPk_Project_Detail.class);
-                    intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
-                    startActivity(intent);
-//                    Intent intent = new Intent(getActivity(), Pk_DayPkDetail.class);
-//                    intent.putExtra("titleName", baseModel.getData().get(position).getProjectName());
-//                intent.putExtra("imgPath",baseModel.getData().get(position).getFilePath());
-//                Intent intent = new Intent(getActivity(), Pk_Daypk.class);
-//                intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
-//                startActivity(intent);
-                }
-
-
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-                if (baseModel.getData().get(position).isIs_CanDel()) {
-                    ScaleAnimation scal = new ScaleAnimation(0.8f, 1.1f, 0.8f, 1.1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    scal.setDuration(100);
-                    view.startAnimation(scal);
-                    showRemove(getActivity(), view, position);
-                }
-            }
-        });
-    }
-
-
-    private void showRemove(final Context mContext, View view, final int pos) {
-        View contentView = View.inflate(mContext, R.layout.training_stop, null);
-        final BasePopupWindow popupWindow = new BasePopupWindow(mContext);
-//        popupWindow.setmShowAlpha(0.5f);
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0x1a000000));
-        popupWindow.setWidth(RadioGroup.LayoutParams.MATCH_PARENT);
-        popupWindow.setHeight(RadioGroup.LayoutParams.MATCH_PARENT);
-        popupWindow.setTouchable(true);
-        popupWindow.setContentView(contentView);
-//        popupWindow.showAsDropDown(view, 0, 0);
-        popupWindow.showAtLocation(contentView, Gravity.CENTER, 0, 0);
-        view.setEnabled(true);
-
-        View my_Rel = contentView.findViewById(R.id.my_Rel);
-        View hint_Txt = contentView.findViewById(R.id.hint_Txt);
-        View cha_Lin = contentView.findViewById(R.id.cha_Lin);
-        TextView content_Txt = (TextView) contentView.findViewById(R.id.content_Txt);
-        TextView cancel_Txt = (TextView) contentView.findViewById(R.id.cancel_Txt);
-        TextView sure_Txt = (TextView) contentView.findViewById(R.id.sure_Txt);
-        StaticData.ViewScale(my_Rel, 610, 490);
-        StaticData.ViewScale(hint_Txt, 0, 120);
-        StaticData.ViewScale(cha_Lin, 0, 120);
-
-        String contentStr = "确定删除“" + baseModel.getData().get(pos).getProjectName() + "”习惯卡吗?\n删除后可在右下角“+”处添加。";
-        content_Txt.setText(contentStr);
-        cancel_Txt.setText("删除");
-        sure_Txt.setText("点错了");
-        cancel_Txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String ProjectID = baseModel.getData().get(pos).getProjectID() + "";
-                deleData(mContext, saveFile.BaseUrl + saveFile.My_preoject_Dele_Url, ProjectID);
-                baseModel.getData().remove(pos);
-                mAdapter.notifyItemRemoved(pos);
-                popupWindow.dismiss();
-            }
-        });
-        sure_Txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                popupWindow.dismiss();
-//                popup.setmShowAlpha(0.5f);
-            }
-        });
-
-    }
-
-
-    newPk_Model baseModel;
-
-    public void ListData(final Context context, String baseUrl) {
-        RequestParams params = new RequestParams(baseUrl);
-        if (saveFile.getShareData("JSESSIONID", context) != null) {
-            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+    private class bang_Lin implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getActivity(), Pk_DayPk_Project_Detail_RankAll.class);
+//            intent.putExtra("projectId", baseModel.getData().get(position).getProjectID() + "");
+            startActivity(intent);
         }
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String resultString) {
-                if (resultString != null) {
-                    baseModel = new Gson().fromJson(resultString, newPk_Model.class);
-                    if (baseModel.isIsSuccess() && !baseModel.getData().equals("[]")) {
-                        pk_recy.refreshComplete();
-                        initlist(getActivity());
-//                        tagList(taglin,baseModel);
-                    } else {
-                        Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
-                    }
+    }
 
-                } else {
-                    Toast.makeText(getActivity(), "数据获取失败", Toast.LENGTH_SHORT).show();
-                }
+    private class left_Img implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            setImg(ac_tab_layout.getSelectedTabPosition() - 1 );
+
+            if (ac_tab_layout.getSelectedTabPosition() == 0) {
+            } else {
+                int tag = ac_tab_layout.getSelectedTabPosition()- 1;
+                ac_tab_layout.setScrollPosition(tag, 1F, true);//滑动到固定位置
+                Slideviewpager.setCurrentItem(tag);
+            }
+        }
+    }
+
+    private class right_Img implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            setImg(ac_tab_layout.getSelectedTabPosition() + 1);
+            if (ac_tab_layout.getSelectedTabPosition() == fragmentLength-1) {
+            } else {
+                int tag = ac_tab_layout.getSelectedTabPosition() + 1;
+                ac_tab_layout.setScrollPosition(tag, 1F, true);//滑动到固定位置
+                Slideviewpager.setCurrentItem(tag);
+            }
+        }
+    }
+
+    private void setImg(int pos){
+        if (pos == 0){
+            left_Img.setImageResource(R.drawable.pknew_left_gray);
+            right_Img.setImageResource(R.drawable.pknew_right_select);
+        }else if (pos == fragmentLength-1){
+            right_Img.setImageResource(R.drawable.pknew_right);
+            left_Img.setImageResource(R.drawable.pknew_left_select);
+        }else if (pos > 0 && pos < (fragmentLength -1 )){
+            left_Img.setImageResource(R.drawable.pknew_left_select);
+            right_Img.setImageResource(R.drawable.pknew_right_select);
+        }
+    }
+    private class calendar_Txt implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+//           initDate();
+            final int tag = userArr.size() - 1;
+            setImg(tag);
+            ac_tab_layout.setScrollPosition(tag, 1F, true);//滑动到固定位置
+            Slideviewpager.setCurrentItem(tag);
+        }
+    }
+
+    public List<String> userArr;
+    public List<Fragment> fragments;
+    public MyFragmentPagerAdapter myAdapter;
+    int fragmentLength = 30;
+
+    private void initLocaData(TabLayout myTab) {
+        myTab.setTabTextColors(Color.parseColor("#0095a0ab"), Color.parseColor("#00ffd800"));//初始颜色，选中颜色
+        myTab.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
+        myTab.setTabMode(TabLayout.GRAVITY_CENTER);
+        if (userArr != null) {
+            userArr.clear();
+        }
+        userArr = new ArrayList<>();
+
+        if (fragments != null) {
+            fragments.clear();
+        }
+        fragments = new ArrayList<>();
+
+
+        for (int i = 0; i < fragmentLength; i++) {
+            userArr.add(i + "");
+//            int ReportID = baseModel.getData().get(i).getReportID();
+//            int ProjectID = baseModel.getData().get(i).getProjectID();
+//            String projectName = baseModel.getData().get(i).getProjectName();
+
+            fragments.add(Pk_CalnerFragment.newInstance(ChangeTime(i), 0 + ""));
+
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    private String ChangeTime(int index) {
+
+        int changePos = fragmentLength - 1 - index;
+        calendar.setTime(date);
+        calendar.add(calendar.DATE, -changePos);//把日期往后增加.整数往后推,负数往前移动
+
+        //增加后的时间
+        year_c = calendar.get(Calendar.YEAR);
+        month_c = calendar.get(Calendar.MONDAY) + 1;
+        day_c = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+//        String time = year_c + "-" + month_c + "-" + day_c;
+
+        return year_c + "-" + month_c + "-" + day_c;
+    }
+
+    int tabCount = 0;
+
+    private void tabViewSetView(TabLayout myTab) {
+        myAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
+        Slideviewpager.setAdapter(myAdapter);
+        Slideviewpager.setOffscreenPageLimit(2);
+        //将TabLayout和ViewPager关联。
+        myTab.setupWithViewPager(Slideviewpager);
+//        Slideviewpager.setCurrentItem(1);
+//        Slideviewpager.addOnPageChangeListener(this);
+
+        final int tag = userArr.size() - 1;
+        setImg(tag);
+        ac_tab_layout.setScrollPosition(tag, 1F, true);//滑动到固定位置
+        Slideviewpager.setCurrentItem(tag);
+
+//        if (projectId != null) {
+//            int size = baseModel.getData().size();
+//            for (int i = 0; i < size; i++) {
+//                if (projectId.equals(baseModel.getData().get(i).getProjectID() + "")) {
+//                    tabCount = i;
+//                    setpkbg(i);
+//                    break;
+//                }
+//            }
+//        }
+
+        ac_tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+//                cententtxt.setText(baseModel.getData().get(tab.getPosition()).getProjectName());
+                String time = ChangeTime(tab.getPosition());
+                int month_c = Integer.parseInt(time.split("-")[1]);
+                int day_c = Integer.parseInt(time.split("-")[2]);
+
+                String nowTime = month_c + "月" + day_c + "日";
+                calendar_Txt.setText(nowTime);
+                setImg(tab.getPosition());
             }
 
             @Override
-            public void onError(Throwable throwable, boolean b) {
-                String errStr = throwable.getMessage();
-                if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, MainLogin.class);
-                    startActivity(intent);
-                }
+            public void onTabUnselected(TabLayout.Tab tab) {
             }
 
             @Override
-            public void onCancelled(CancelledException e) {
-            }
-
-            @Override
-            public void onFinished() {
+            public void onTabReselected(TabLayout.Tab tab) {
             }
         });
     }
+
+
+//    private void resetTablayout(TabLayout myTab) {
+//        /**
+//         * 使用tablayout + viewpager时注意 如果设置了setupWithViewPager
+//         * 则需要重新执行下方对每个条目赋值
+//         * 否则会出现icon文字不显示的bug
+//         */
+//        for (int i = 0; i < myAdapter.getCount(); i++) {
+//            int postion = i;
+////            myTab.getTabAt(postion).setText(userArr.get(postion));
+//            TabLayout.Tab tab = myTab.getTabAt(postion);
+//            if (tab != null) {
+////                tab.setCustomView(myAdapter.getTabView(postion));
+//            }
+//        }
+//
+//        Intent intent = getIntent();
+//        String tabType = intent.getStringExtra("tabType");
+//        if (tabType != null) {
+//            Slideviewpager.setCurrentItem(Integer.parseInt(tabType), true);
+//        } else {
+//            Slideviewpager.setCurrentItem(1, true);
+//            myTab.getTabAt(0).select();
+//        }
+//    }
+
+    private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+        public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> list) {
+            super(fm);
+            fragments = list;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        // 设置tablayout标题
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return userArr.get(position);
+        }
+
+    }
+
+
 
 
     Base_Model check_Model;
@@ -483,10 +552,11 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                 if (resultString != null) {
                     check_Model = new Gson().fromJson(resultString, Base_Model.class);
                     if (check_Model.isData()) {
-                        myCheckData(saveFile.BaseUrl + saveFile.MyCheckIn_Url);
+//                        myCheckData(saveFile.BaseUrl + saveFile.MyCheckIn_Url);
                     } else {
-                        check_Lin.setVisibility(View.VISIBLE);
-                        marqueeView.setVisibility(View.INVISIBLE);
+//                        check_Lin.setVisibility(View.VISIBLE);
+//                        marqueeView.setVisibility(View.INVISIBLE);
+                        AddData(saveFile.BaseUrl + saveFile.CheckAdd_Url);//签到
                     }
 
                 } else {
@@ -528,13 +598,12 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                     jiFenmodel = new Gson().fromJson(resultString, JiFenAndBadge_Model.class);
 
                     if (jiFenmodel.isIsSuccess()) {
-                        check_Lin.setEnabled(true);
 //                        check_Lin.setVisibility(View.GONE);
 //                        ScrollTextView.setVisibility(View.VISIBLE);
                         Intent intent = new Intent(getActivity(), JiFenActivity.class);
                         intent.putExtra("media", "check");
                         intent.putExtra("jifen", jiFenmodel.getData().getIntegral());
-                        intent.putExtra("DailyTask",jiFenmodel.getData().getDailyTask());
+                        intent.putExtra("DailyTask", jiFenmodel.getData().getDailyTask());
                         startActivityForResult(intent, jifenID);
 //                        startActivity(intent);
                         Toast.makeText(getActivity(), "签到成功", Toast.LENGTH_SHORT);
@@ -549,7 +618,6 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
             @Override
             public void onError(Throwable throwable, boolean b) {
-                check_Lin.setEnabled(true);
                 String errStr = throwable.getMessage();
                 if (errStr.equals("Unauthorized")) {
                     Intent intent = new Intent(getActivity(), MainLogin.class);
@@ -559,7 +627,6 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
             @Override
             public void onCancelled(CancelledException e) {
-                check_Lin.setEnabled(true);
             }
 
             @Override
@@ -580,8 +647,8 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                 if (resultString != null) {
                     myCheckData_Model model = new Gson().fromJson(resultString, myCheckData_Model.class);
                     if (model.isIsSuccess()) {
-                        check_Lin.setVisibility(View.GONE);
-                        marqueeView.setVisibility(View.VISIBLE);
+//                        check_Lin.setVisibility(View.GONE);
+//                        marqueeView.setVisibility(View.VISIBLE);
 
                         List<String> info = new ArrayList<>();
                         info.add("连续签到" + model.getData().getContinueDays() + "天");
@@ -616,67 +683,6 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         });
     }
 
-    public void isReteDayPk(final View view, final Context context, String baseUrl) {
-        RequestParams params = new RequestParams(baseUrl);
-        if (saveFile.getShareData("JSESSIONID", context) != null) {
-            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
-        }
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String resultString) {
-                if (resultString != null) {
-                    view.setEnabled(true);
-                    Base_Model reteModel = new Gson().fromJson(resultString, Base_Model.class);
-                    if (reteModel.isData()) {
-                        Intent intent = new Intent(getActivity(), Pk_HuiZong.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
-                    }
-
-//                    int integral = reteModel.getData();
-//                    if (integral == -1) {
-//                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
-//                    }else if (integral >= 0){
-//                        Intent intent = new Intent(getActivity(), Pk_HuiZong.class);
-//                        startActivity(intent);
-//                    }
-//                    else if (integral == 0) {
-//                        //汇报达到上限没分
-//                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
-//                    } else if (integral > 0) {
-//                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(getActivity(), JiFenActivity.class);
-//                        intent.putExtra("jifen", integral);
-//                        startActivity(intent);
-//                    }
-
-                } else {
-                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onError(Throwable throwable, boolean b) {
-                view.setEnabled(true);
-                String errStr = throwable.getMessage();
-                if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, MainLogin.class);
-                    startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onCancelled(CancelledException e) {
-                view.setEnabled(true);
-            }
-
-            @Override
-            public void onFinished() {
-                view.setEnabled(true);
-            }
-        });
-    }
 
     public void guideFristData(final Context context, String baseUrl) {
         RequestParams params = new RequestParams(baseUrl);
@@ -712,6 +718,10 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
 
                             guideUtil.initGuide(getActivity(), 2, 1);
                             updguidePer_Data(getActivity(), saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_First_Train");//展示功能提醒页
+                        }else {
+
+                            Intent intent1 = new Intent(getActivity(), HasNewActivity.class);
+                            startActivity(intent1);
                         }
 
 
@@ -792,19 +802,31 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
                 if (resultString != null) {
                     Pk_MyIntegral_Model Integral_Model = new Gson().fromJson(resultString, Pk_MyIntegral_Model.class);
                     if (Integral_Model.isIsSuccess() && !Integral_Model.getData().equals("[]")) {
-                        my_Count_Txt.setText("积分" + Integral_Model.getData().getAllIntegral());
-                        my_rank_Txt.setText("第" + Integral_Model.getData().getRanking() + "名");
-                        if (Integral_Model.getData().getWorld() == 0) {
-                            my_change_Img.setVisibility(View.INVISIBLE);
-                            my_change_Txt.setVisibility(View.INVISIBLE);
-                        } else if (Integral_Model.getData().getWorld() < 0) {
-                            my_change_Img.setImageResource(R.drawable.change_down);
-                            my_change_Txt.setTextColor(Color.parseColor("#FF0100"));
-                            my_change_Txt.setText(Integral_Model.getData().getWorld() + "");
-                        } else if (Integral_Model.getData().getWorld() > 0) {
-                            my_change_Img.setImageResource(R.drawable.change_update);
-                            my_change_Txt.setTextColor(Color.parseColor("#0BC10B"));
-                            my_change_Txt.setText(Integral_Model.getData().getWorld() + "");
+//                        my_Count_Txt.setText("积分" + Integral_Model.getData().getAllIntegral());
+//                        my_rank_Txt.setText("第" + Integral_Model.getData().getRanking() + "名");
+//                        if (Integral_Model.getData().getWorld() == 0) {
+//                            my_change_Img.setVisibility(View.INVISIBLE);
+//                            my_change_Txt.setVisibility(View.INVISIBLE);
+//                        } else if (Integral_Model.getData().getWorld() < 0) {
+//                            my_change_Img.setImageResource(R.drawable.change_down);
+//                            my_change_Txt.setTextColor(Color.parseColor("#FF0100"));
+//                            my_change_Txt.setText(Integral_Model.getData().getWorld() + "");
+//                        } else if (Integral_Model.getData().getWorld() > 0) {
+//                            my_change_Img.setImageResource(R.drawable.change_update);
+//                            my_change_Txt.setTextColor(Color.parseColor("#0BC10B"));
+//                            my_change_Txt.setText(Integral_Model.getData().getWorld() + "");
+//                        }
+
+                        my_Rank_Txt.setText("今日排名" + Integral_Model.getData().getRanking() + "名");
+
+                        StaticData.setGarde(grade_Img, Integral_Model.getData().getIntegralLevel());
+                        fen_Txt.setText("积分：" + Integral_Model.getData().getAllIntegral());
+
+                        if (Integral_Model.getData().getProfilePicture() != null) {
+                            Uri contentUri = Uri.parse(Integral_Model.getData().getProfilePicture());
+                            my_simple.setImageURI(contentUri);
+                        } else {
+                            StaticData.lodingheadBg(my_simple);
                         }
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
@@ -834,48 +856,6 @@ public class FragmentNew_Pk extends Fragment implements XRecyclerView.LoadingLis
         });
     }
 
-
-    //删帖
-    public void deleData(final Context context, String baseUrl, String projectId) {
-        RequestParams params = new RequestParams(baseUrl);
-        if (getShareData("JSESSIONID", context) != null) {
-            params.setHeader("Cookie", getShareData("JSESSIONID", context));
-        }
-        params.addBodyParameter("ProjectID", projectId + "");
-        x.http().post(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String resultString) {
-                if (resultString != null) {
-                    Base_Model model = new Gson().fromJson(resultString, Base_Model.class);
-                    if (model.isIsSuccess()) {
-
-                    } else {
-                        Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onError(Throwable throwable, boolean b) {
-                String errStr = throwable.getMessage();
-                if (errStr.equals("Unauthorized")) {
-                    Intent intent = new Intent(context, MainLogin.class);
-                    context.startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onCancelled(CancelledException e) {
-            }
-
-            @Override
-            public void onFinished() {
-            }
-        });
-    }
 
 
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -73,12 +74,12 @@ public class Pk_CheckIn extends Activity implements XRecyclerView.LoadingListene
 
     public void initView() {
         View title_Include = findViewById(R.id.title_Include);
-//        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+         title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
 //        return_Btn.setVisibility(View.GONE);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("签到");
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);

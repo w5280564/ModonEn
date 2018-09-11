@@ -19,7 +19,7 @@
             android:id="@+id/count_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorFristYellow"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -28,9 +28,9 @@
             android:id="@+id/project_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorFristBlack"
+            android:textSize="11sp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/line_Img"
@@ -38,13 +38,14 @@
             android:layout_height="1dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="#ffffff" />
+            android:background="@color/colorSecondBlack"
+            android:alpha="0.5"/>
 
         <TextView
             android:id="@+id/all_Txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="10sp"
             android:textStyle="bold" />
 

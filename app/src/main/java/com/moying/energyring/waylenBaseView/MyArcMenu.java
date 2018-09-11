@@ -276,9 +276,9 @@ public class MyArcMenu extends ViewGroup implements View.OnClickListener {
 
     public void rotateView(Status mCurrentStatus) {
         if (mCurrentStatus == Status.OPEN) {
-            rotateView(mButton, 135f, 0f, 300);
+//            rotateView(mButton, 135f, 0f, 300);
         } else {
-            rotateView(mButton, 0f, 135f, 300);
+//            rotateView(mButton, 0f, 135f, 300);
         }
     }
 

@@ -3,9 +3,9 @@ package com.moying.energyring.myAcativity.Pk;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -224,7 +224,7 @@ public class Pk_DayPk_Project_Detail_CoustFragment extends Fragment implements X
         mAdapter.setOnItemClickLitener(new DayPk_CoustHistoryFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+//                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
 //                intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
 //                context.startActivity(intent);
             }
@@ -246,12 +246,12 @@ public class Pk_DayPk_Project_Detail_CoustFragment extends Fragment implements X
                         break;
                     case MotionEvent.ACTION_MOVE:
                         if (!other_recycle.isOnTop()) {
-                            sure_Lin.setBackgroundColor(Color.parseColor("#992b2a2a"));
+                            sure_Lin.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAllBg));
                             sure_Txt.setVisibility(View.GONE);
                         }
                         break;
                     case MotionEvent.ACTION_UP:
-                        sure_Lin.setBackgroundColor(Color.parseColor("#ff2b2a2a"));
+                        sure_Lin.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorAllBg));
                         sure_Txt.setVisibility(View.VISIBLE);
                         break;
                 }

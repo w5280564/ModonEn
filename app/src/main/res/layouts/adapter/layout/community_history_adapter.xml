@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="60dp">
+
+        <RelativeLayout
+            android:id="@+id/badgenei_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/time_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorFourthBlack"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/time_Txt"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/colorFourthBlack"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/badge_Scro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/badgenei_Rel"
+            android:layout_marginBottom="20dp"
+            android:paddingRight="10dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/img_Lin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/time_Line"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/my_Rel"
+        android:layout_alignTop="@id/my_Rel"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="15dp">
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="#dcdcdc" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/item_yello" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

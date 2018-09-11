@@ -3,8 +3,8 @@ package com.moying.energyring.myAcativity.Pk;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,8 +23,8 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.MainActivity;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
 
@@ -168,7 +168,7 @@ public class Pk_DayPkAdd_Project_Crate extends Activity {
     private String[] timeArr = {"米", "秒", "分钟", "小时", "个"};
     private List<TextView> unitArr = new ArrayList<>();
 
-    public void timeUnit(LinearLayout myLin, Context context) {
+    public void timeUnit(LinearLayout myLin, final Context context) {
         if (myLin != null) {
             myLin.removeAllViews();
         }
@@ -182,10 +182,11 @@ public class Pk_DayPkAdd_Project_Crate extends Activity {
             StaticData.ViewScale(week_Txt, 100, 70);
             week_Txt.setText(timeArr[i]);
             if (i == 0) {
-                week_Txt.setTextColor(Color.parseColor("#000000"));
+                week_Txt.setTextColor(ContextCompat.getColor(context, R.color.colorFristBlack));
                 projextUnit = timeArr[i];
             } else {
-                week_Txt.setTextColor(Color.parseColor("#e3e3e3"));
+
+                week_Txt.setTextColor(ContextCompat.getColor(context, R.color.colorSecondBlack));
             }
             myview.setTag(i);
             myview.setEnabled(true);
@@ -196,9 +197,9 @@ public class Pk_DayPkAdd_Project_Crate extends Activity {
                 public void onClick(View v) {
                     int tag = (Integer) v.getTag();
                     for (int j = 0; j < timeArr.length; j++) {
-                        unitArr.get(j).setTextColor(Color.parseColor("#e3e3e3"));
+                        unitArr.get(j).setTextColor(ContextCompat.getColor(context, R.color.colorSecondBlack));
                     }
-                    unitArr.get(tag).setTextColor(Color.parseColor("#000000"));
+                    unitArr.get(tag).setTextColor(ContextCompat.getColor(context, R.color.colorFristBlack));
                     projextUnit = timeArr[tag];
                 }
             });
@@ -268,9 +269,14 @@ public class Pk_DayPkAdd_Project_Crate extends Activity {
                     BaseDataInt_Model baseModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                     if (baseModel.isIsSuccess()) {
 
+
                         Intent i = new Intent(context, MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
+
+                        Intent intent = new Intent(context, PK_Calner_Set.class);
+                        intent.putExtra("ProjectID", baseModel.getData() + "");
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();

@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import com.moying.energyring.Model.AddPhoto_Model;
 import com.moying.energyring.Model.BaseDataInt_Model;
 import com.moying.energyring.Model.Base_Model;
+import com.moying.energyring.Model.ShareContent;
 import com.moying.energyring.Model.UserInfo_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.Model.likes_Model;
@@ -34,8 +35,9 @@ import com.moying.energyring.StaticData.ImagePickerActivity;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter;
-import com.moying.energyring.myAcativity.Person.Person_Badge;
+import com.moying.energyring.myAcativity.Energy.myShareActivity;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_My_Badge;
 import com.moying.energyring.myAcativity.Person.Person_Center_FansAndAtten;
 import com.moying.energyring.myAcativity.Person.Person_Exchange;
 import com.moying.energyring.myAcativity.Person.Person_Feedback;
@@ -73,12 +75,13 @@ import static com.moying.energyring.myAcativity.Person.PersonMyCenter.REQUEST_CO
 public class Fragment4_PersonNew extends Fragment {
     private View parentView;
     private SimpleDraweeView personBg_simple, user_simple;
-    private TextView userName_Txt, userCount_Txt, myInto_Txt, fans_Txt, fo_Txt, idearend_Txt,post_Txt;
-    private ImageView personnew_sex_Img;
+    private TextView userName_Txt, userCount_Txt, myInto_Txt, fans_Txt, fo_Txt, idearend_Txt, post_Txt;
+    private ImageView personnew_sex_Img, grade_Img;
     private String InviteCode;
     private AutoScaleTextView nommunrend_Txt;
     private GuideUtil guideUtil;
     private TextView idea_Unrend_Txt;
+    private ImageView invite_Img;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,13 +135,14 @@ public class Fragment4_PersonNew extends Fragment {
         user_simple = (SimpleDraweeView) view.findViewById(R.id.user_simple);
         personnew_sex_Img = (ImageView) view.findViewById(R.id.personnew_sex_Img);
         ImageView personnew_com_icon = (ImageView) view.findViewById(R.id.personnew_com_icon);
+        grade_Img = (ImageView) view.findViewById(R.id.grade_Img);
 
         RelativeLayout.LayoutParams comParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         comParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        comParams.addRule(RelativeLayout.CENTER_VERTICAL,R.id.personBg_simple);
+        comParams.addRule(RelativeLayout.CENTER_VERTICAL, R.id.personBg_simple);
         personnew_com_icon.setLayoutParams(comParams);
 
-        LinearLayout user_Lin = (LinearLayout) view.findViewById(R.id.user_Lin);
+        RelativeLayout user_Lin = (RelativeLayout) view.findViewById(R.id.user_Lin);
         userName_Txt = (TextView) view.findViewById(R.id.userName_Txt);
         userCount_Txt = (TextView) view.findViewById(R.id.userCount_Txt);
         myInto_Txt = (TextView) view.findViewById(R.id.myInto_Txt);
@@ -150,7 +154,7 @@ public class Fragment4_PersonNew extends Fragment {
         fans_Txt = (TextView) view.findViewById(R.id.fans_Txt);
         fo_Txt = (TextView) view.findViewById(R.id.fo_Txt);
         post_Txt = (TextView) view.findViewById(R.id.post_Txt);
-         idea_Unrend_Txt = (TextView) view.findViewById(R.id.idea_Unrend_Txt);
+        idea_Unrend_Txt = (TextView) view.findViewById(R.id.idea_Unrend_Txt);
 
         LinearLayout data_Lin = (LinearLayout) view.findViewById(R.id.data_Lin);
         StaticData.ViewScale(personnew_set_icon, 50, 50);
@@ -163,6 +167,7 @@ public class Fragment4_PersonNew extends Fragment {
         StaticData.ViewScale(personnew_com_icon, 104, 76);
         StaticData.ViewScale(fen_icon, 18, 18);
         StaticData.ViewScale(zan_Lin, 0, 130);
+        StaticData.ViewScale(grade_Img, 56, 28);
 
         RelativeLayout task_Rel = (RelativeLayout) view.findViewById(R.id.task_Rel);
         RelativeLayout hui_Rel = (RelativeLayout) view.findViewById(R.id.hui_Rel);
@@ -189,6 +194,7 @@ public class Fragment4_PersonNew extends Fragment {
         ImageView dui_arrow = (ImageView) view.findViewById(R.id.dui_arrow);
         TextView neng_Txt = (TextView) view.findViewById(R.id.neng_Txt);
         idearend_Txt = (TextView) view.findViewById(R.id.idearend_Txt);
+        invite_Img = (ImageView) view.findViewById(R.id.invite_Img);
 //        InviteCode = saveFile.getShareData("InviteCode", getActivity());
 //        if (!InviteCode.equals("false")) {
 //            neng_Txt.setText(InviteCode);
@@ -214,6 +220,7 @@ public class Fragment4_PersonNew extends Fragment {
         StaticData.ViewScale(hui_arrow, 60, 60);
         StaticData.ViewScale(che_arrow, 60, 60);
         StaticData.ViewScale(dui_arrow, 60, 60);
+        StaticData.ViewScale(invite_Img, 260, 128);
 
         seximgMargin(getActivity(), personnew_sex_Img);
         layoutmarginTop(getActivity(), usericon_Rel);
@@ -234,6 +241,7 @@ public class Fragment4_PersonNew extends Fragment {
         fo_Lin.setOnClickListener(new fo_Lin());
         post_Lin.setOnClickListener(new post_Lin());
         dui_Rel.setOnClickListener(new dui_Rel());
+        invite_Img.setOnClickListener(new invite_Img());
     }
 
     private void changeRedGui(TextView redTxt) {
@@ -258,7 +266,7 @@ public class Fragment4_PersonNew extends Fragment {
         RelativeLayout.LayoutParams Params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 //        int pad = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 220);
         int padleft = (int) (Float.parseFloat(saveFile.getShareData("scale", context)) * 40);
-        Params.addRule(RelativeLayout.ALIGN_BOTTOM,R.id.personBg_simple);
+        Params.addRule(RelativeLayout.ALIGN_BOTTOM, R.id.personBg_simple);
         Params.setMargins(padleft, 0, 0, 0);
         view.setLayoutParams(Params);
     }
@@ -310,8 +318,12 @@ public class Fragment4_PersonNew extends Fragment {
     private class personBg_simple implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), PersonMyCenter.class);
+//            Intent intent = new Intent(getActivity(), PersonMyCenter.class);
+//            startActivity(intent);
+            Intent intent = new Intent(getActivity(), PersonMyCenter_And_Other.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
             startActivity(intent);
+
         }
     }
 
@@ -342,9 +354,12 @@ public class Fragment4_PersonNew extends Fragment {
     private class post_Lin extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
-            Intent intent = new Intent(getActivity(), PersonMyCenter.class);
-            intent.putExtra("UserID","0");
-            intent.putExtra("tabType","3");
+//            Intent intent = new Intent(getActivity(), PersonMyCenter.class);
+//            intent.putExtra("UserID", "0");
+//            intent.putExtra("tabType", "3");
+//            startActivity(intent);
+            Intent intent = new Intent(getActivity(), PersonMyCenter_And_Other.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
             startActivity(intent);
         }
     }
@@ -353,8 +368,8 @@ public class Fragment4_PersonNew extends Fragment {
         @Override
         protected void onNoDoubleClick(View v) {
             Intent intent = new Intent(getActivity(), Person_Task.class);
-            intent.putExtra("Integral",userModel.getData().getIntegral()+"");
-            intent.putExtra("tabType","1");
+            intent.putExtra("Integral", userModel.getData().getIntegral() + "");
+            intent.putExtra("tabType", "1");
             startActivity(intent);
         }
     }
@@ -413,7 +428,10 @@ public class Fragment4_PersonNew extends Fragment {
         public void onClick(View view) {
 //            Intent intent = new Intent(getActivity(), Pk_Gui.class);
 //            startActivity(intent);
-            Intent intent = new Intent(getActivity(), Person_Badge.class);
+
+            Intent intent = new Intent(getActivity(), PersonMyCenter_My_Badge.class);
+            intent.putExtra("UserID", userModel.getData().getUserID() + "");
+            intent.putExtra("FilePath", userModel.getData().getProfilePicture());
             startActivity(intent);
         }
     }
@@ -453,7 +471,7 @@ public class Fragment4_PersonNew extends Fragment {
 //            startActivity(intent);
 
             Intent intent = new Intent(getActivity(), Person_Task.class);
-            intent.putExtra("Integral",userModel.getData().getIntegral()+"");
+            intent.putExtra("Integral", userModel.getData().getIntegral() + "");
 //            intent.putExtra("tabType","0");
             startActivity(intent);
 
@@ -468,6 +486,26 @@ public class Fragment4_PersonNew extends Fragment {
             Intent intent = new Intent(getActivity(), Person_LineView.class);
             startActivity(intent);
 
+        }
+    }
+
+    private class invite_Img implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+
+//            String url = saveFile.BaseUrl + "Share/Invite?invitecode=" + saveFile.getShareData("InviteCode", getActivity());
+//            Intent intent = new Intent(getActivity(), Person_PrivacyPolicy.class);
+//            intent.putExtra("url", url);
+//            startActivity(intent);
+
+            String shareTitle = "我正在使用能量圈，快来和我一起培养新习惯吧~";
+            String shareConStr = "能量圈--为了打造更好的自己" ;
+            String shareUrl = saveFile.BaseUrl + "Share/Invite?invitecode=" + saveFile.getShareData("InviteCode", getActivity());
+            ShareContent shareContent = new ShareContent(shareUrl, shareTitle, shareConStr,shareUrl);
+
+            Intent intent = new Intent(getActivity(), myShareActivity.class);
+            intent.putExtra("shareContent", shareContent);
+            startActivity(intent);
         }
     }
 
@@ -567,7 +605,7 @@ public class Fragment4_PersonNew extends Fragment {
                             guideUtil.initGuide(getActivity(), 3, 1);
                             updguidePer_Data(getActivity(), saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstEditProfile_Remind");//展示功能提醒页
                         }
-                        if (!isFristModel.getData().isIs_Suggest()){
+                        if (!isFristModel.getData().isIs_Suggest()) {
                             idea_Unrend_Txt.setVisibility(View.VISIBLE);
                         }
 
@@ -687,6 +725,8 @@ public class Fragment4_PersonNew extends Fragment {
                         } else {
                             personnew_sex_Img.setVisibility(View.GONE);
                         }
+
+                        StaticData.setGarde(grade_Img, oneData.getIntegralLevel());
 
                         fans_Txt.setText(oneData.getAttention() + "");
                         fo_Txt.setText(oneData.getAttention_Me() + "");

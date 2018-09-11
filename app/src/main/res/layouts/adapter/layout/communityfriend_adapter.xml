@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorFristWhite"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/top_Rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/my_Head"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:roundAsCircle="true" />
+
+
+            <LinearLayout
+                android:id="@+id/content_Lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/my_Head"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/name_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lines="1"
+                        android:text=""
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="14sp"
+                        android:layout_marginRight="5dp"/>
+
+                    <ImageView
+                        android:id="@+id/grade_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"/>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/content_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@color/colorSecondBlack"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/isfocus_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/badge_Scro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/top_Rel"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:id="@+id/img_Lin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+
+        <ImageView
+            android:id="@+id/line_img"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorline" />
+    </RelativeLayout>
+
+
+</LinearLayout>

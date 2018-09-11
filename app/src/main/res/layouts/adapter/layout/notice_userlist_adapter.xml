@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:background="#2a2b2b"
+        android:background="@color/colorFristWhite"
         android:layout_marginTop="10dp">
 
 
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:text="名字"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorFristBlack"
                 android:textSize="14sp" />
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_below="@id/name_Txt"
                 android:lines="1"
                 android:text="内容"
-                android:textColor="#7b7b7b"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="10sp" />
 
             <TextView

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6f6f6">
+    android:background="@color/colorAllBg">
 
     <include
         android:id="@+id/title_Include"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_Include"
-        android:background="#ffffff">
+        android:background="@color/colorFristWhite">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/ac_tab_layout"
@@ -36,7 +36,7 @@
             android:layout_alignTop="@id/ac_tab_layout"
             android:layout_marginRight="15dp"
             android:gravity="center"
-            android:textColor="#f14d4c"
+            android:textColor="@color/colorFristRed"
             android:textSize="30sp"
             android:textStyle="bold" />
     </RelativeLayout>

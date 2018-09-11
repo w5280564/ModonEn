@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorFristWhite">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/my_Head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:roundAsCircle="true" />
+
+
+        <TextView
+            android:id="@+id/name_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/my_Head"
+            android:layout_centerVertical="true"
+            android:lines="1"
+            android:text="名字"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/line_img"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignLeft="@id/content_Lin"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorline" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

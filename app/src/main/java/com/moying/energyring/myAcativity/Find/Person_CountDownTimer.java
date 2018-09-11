@@ -3,8 +3,8 @@ package com.moying.energyring.myAcativity.Find;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,14 +46,15 @@ public class Person_CountDownTimer extends Activity {
         setContentView(R.layout.activity_person__count_down_timer);
 
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("设置时间");
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
-        right_Btn.setTextColor(Color.parseColor("#ffffff"));
+        right_Btn.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         right_Btn.setGravity(Gravity.CENTER);
         right_Btn.setText("保存");
         StaticData.ViewScale(return_Btn, 80, 88);
@@ -75,7 +76,9 @@ public class Person_CountDownTimer extends Activity {
 
 
         wvHour = (WheelView) findViewById(R.id.wv_hour);
+        wvHour.setBgColor(ContextCompat.getColor(this,R.color.colorAllBg));
         wvMine = (WheelView) findViewById(R.id.wv_mine);
+        wvMine.setBgColor(ContextCompat.getColor(this,R.color.colorAllBg));
 
         return_Btn.setOnClickListener(new return_Btn());
         right_Btn.setOnClickListener(new right_Btn());

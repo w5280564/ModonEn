@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:background="#2b2a2a"
+        android:background="@color/colorFristWhite"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -41,7 +41,7 @@
                 android:layout_toRightOf="@id/personset_Img"
                 android:layout_marginLeft="15dp"
                 android:text="个人资料"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textStyle="bold"
                 android:textSize="14sp" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/personset_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -80,7 +80,7 @@
                 android:layout_toRightOf="@id/phone_Img"
                 android:layout_marginLeft="15dp"
                 android:text="更换手机号"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textStyle="bold"
                 android:textSize="14sp" />
 
@@ -97,7 +97,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/phone_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
 
@@ -120,7 +120,7 @@
                 android:layout_toRightOf="@id/ideal_Img"
                 android:layout_marginLeft="15dp"
                 android:text="意见反馈"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"/>
 
@@ -136,7 +136,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/ideal_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -159,25 +159,27 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/cache_Img"
                 android:text="清理缓存"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/cache_Txt"
+
+            <ImageView
+                android:id="@+id/cache_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:textColor="#ffffff"/>
+                android:layout_centerVertical="true"
+                android:background="@drawable/set_right_arrow" />
+
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/cache_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -200,7 +202,7 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="15dp"
                 android:text="消息推送"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp" />
 
 
@@ -221,7 +223,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/mes_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
 
@@ -245,7 +247,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/about_Img"
                 android:text="关于能量圈"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold"/>
 

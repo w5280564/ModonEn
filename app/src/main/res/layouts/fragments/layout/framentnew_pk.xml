@@ -6,170 +6,179 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/titlebg_Rel"
+        android:id="@+id/title_rel"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#2b2a2a">
-        <!--android:background="@drawable/fragmentpk_titlebg_gradient"-->
+        android:background="@drawable/pknew_title_gradient">
 
 
-        <TextView
-            android:id="@+id/my_Txt"
+        <ImageView
+            android:id="@+id/Pkbg_Img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/pk_newbg" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/my_simple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="首页"
-            android:textColor="#95a0ab"
-            android:textSize="22sp" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/roundbg_white"
+            android:padding="2dp"
+            app:roundAsCircle="true" />
 
-        <TextView
-            android:id="@+id/rank_Txt"
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/newpk_rank"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp">
 
-        <LinearLayout
-            android:id="@+id/my_Lin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/rank_Txt"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_white_black"
-            android:gravity="center">
-
-            <LinearLayout
-                android:id="@+id/check_Lin"
+            <TextView
+                android:id="@+id/my_Rank_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="排名"
+                android:textColor="@color/colorFristWhite"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/fen_Lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/my_Rank_Txt"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/pk_check_img"
+                    android:id="@+id/grade_Img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/pk_check_img" />
+                    android:layout_marginRight="10dp" />
 
                 <TextView
+                    android:id="@+id/fen_Txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="签到"
-                    android:textColor="#ff7c79"
-                    android:textSize="12sp"
+                    android:textColor="@color/colorFristWhite"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/bang_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/title_rel">
 
-            <com.sunfusheng.marqueeview.MarqueeView
-                android:id="@+id/MarqueeView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                app:mvTextColor="#ff7c79"
-                app:mvTextSize="14sp" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/hui_Txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_toLeftOf="@id/my_Lin"
-            android:background="@drawable/round_white_black"
-            android:gravity="center"
-            android:text="一键汇总"
-            android:textColor="#ff7c79"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/rank_Txt">
-
-
-        <ImageView
-            android:id="@+id/pk_more_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/newpk_more" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/pk_more_img"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/my_rank_Txt"
+            <ImageView
+                android:id="@+id/left_Img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:textColor="#ffffff"
+                android:src="@drawable/pknew_left_select" />
+
+            <ImageView
+                android:id="@+id/calendar_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/pknew_calendar" />
+
+            <TextView
+                android:id="@+id/calendar_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:text="6月19日"
+                android:textColor="@color/colorFristBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/my_change_Img"
+                android:id="@+id/right_Img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/change_down" />
-
-            <TextView
-                android:id="@+id/my_change_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ff0000"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:src="@drawable/pknew_right" />
 
 
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/rank_Img"
+        <LinearLayout
+            android:id="@+id/bang_Lin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/myrank_icon"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"/>
-
-        <TextView
-            android:id="@+id/my_Count_Txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/rank_Img"
+            android:layout_marginRight="10dp"
             android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-        </RelativeLayout>
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/bang_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pknew_bang_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="排行榜"
+                android:textColor="@color/colorFristBlack"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/arrow_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pknew_arrow_icon" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/ac_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:tabPaddingEnd="-0.1dp"
+        app:tabPaddingStart="-0.1dp"
+        android:background="#00000000"
+        android:visibility="gone"/>
 
-    <com.moying.energyring.xrecycle.XRecyclerView
-        android:id="@+id/pk_recy"
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/Slideviewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titlebg_Rel" />
+        android:layout_below="@id/bang_Rel"
+        android:layout_above="@id/ac_tab_layout"/>
+
 
     <ImageView
         android:id="@+id/pk_ce_Img"

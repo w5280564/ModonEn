@@ -1,560 +1,602 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6f6f6"
     android:scrollbars="none">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/personBg_simple"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop" />
-
-
-        <ImageView
-            android:id="@+id/personnew_set_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/personnew_set_icon" />
-
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:id="@+id/personnew_nom_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/personnew_nom_icon" />
-
-            <com.moying.energyring.waylenBaseView.AutoScaleTextView
-                android:id="@+id/nommunrend_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/personnew_nom_icon"
-                android:layout_alignRight="@id/personnew_nom_icon"
-                android:background="@drawable/calendar_item_red"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="9sp"
-                android:visibility="invisible" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/usericon_Rel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/user_simple"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitXY"
-                fresco:roundAsCircle="true" />
+                android:id="@+id/personBg_simple"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop" />
+
 
             <ImageView
-                android:id="@+id/personnew_sex_Img"
+                android:id="@+id/personnew_set_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/user_simple"
-                android:layout_alignLeft="@id/user_simple" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/personnew_set_icon" />
 
-            <TextView
-                android:id="@+id/userName_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/user_simple"
-                android:lines="1"
-                android:text=""
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/myInto_Txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/userName_Txt"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:text=""
-                android:textColor="#e3e3e3"
-                android:textSize="8sp" />
-
-            <ImageView
-                android:id="@+id/personnew_com_icon"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/personnew_com_icon" />
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
 
-            <LinearLayout
-                android:id="@+id/user_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/personnew_com_icon"
-                android:gravity="center_vertical|right"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/userCount_Txt"
+                <ImageView
+                    android:id="@+id/personnew_nom_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:background="@drawable/personnew_nom_icon" />
+
+                <com.moying.energyring.waylenBaseView.AutoScaleTextView
+                    android:id="@+id/nommunrend_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/personnew_nom_icon"
+                    android:layout_alignRight="@id/personnew_nom_icon"
+                    android:background="@drawable/calendar_item_red"
+                    android:gravity="center"
                     android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="9sp"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/usericon_Rel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/user_simple"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    fresco:roundAsCircle="true" />
+
+                <ImageView
+                    android:id="@+id/personnew_sex_Img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/user_simple"
+                    android:layout_alignLeft="@id/user_simple" />
+
 
                 <LinearLayout
+                    android:id="@+id/name_Lin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
+                    android:layout_below="@id/user_simple"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/fen_icon"
+                    <TextView
+                        android:id="@+id/userName_Txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/personnew_fen" />
+                        android:lines="1"
+                        android:shadowColor="@color/colorFristBlack"
+                        android:shadowDx="5"
+                        android:shadowDy="5"
+                        android:shadowRadius="1"
+                        android:text=""
+                        android:textColor="@color/colorFristWhite"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                    <ImageView
+                        android:id="@+id/grade_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/userName_Txt"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/userName_Txt"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/myInto_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/name_Lin"
+                    android:layout_marginBottom="10dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:shadowColor="@color/colorFristBlack"
+                    android:shadowDx="5"
+                    android:shadowDy="5"
+                    android:shadowRadius="1"
+                    android:text=""
+                    android:textColor="@color/colorFristWhite"
+                    android:textSize="8sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/user_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/user_simple"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/user_simple">
+
+                    <ImageView
+                        android:id="@+id/personnew_com_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/personnew_com_icon" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/personnew_com_icon"
+                        android:gravity="center_vertical|right"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/userCount_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="#ffffff"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/fen_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/personnew_fen" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="积分"
+                                android:textColor="#ffffff"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/zan_Lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/usericon_Rel"
+                android:background="#ffffff"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/fans_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="积分"
-                        android:textColor="#ffffff"
-                        android:textSize="10sp" />
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="粉丝"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/fans_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/colorFristBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fo_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="关注"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/fo_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/colorFristBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/post_Lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="动态"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/post_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/colorFristBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data_Lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/zan_Lin"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/task_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/person_task_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/person_task_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/person_task_icon"
+                        android:text="我的任务"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/task_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0D343434" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/hui_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/personnew_hui_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/personnew_hui_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/personnew_hui_icon"
+                        android:text="我的徽章"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/set_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0D343434" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/idea_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/personnew_idea_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/personnew_idea_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/personnew_idea_icon"
+                        android:text="我要吐槽"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/idea_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <TextView
+                        android:id="@+id/idea_Unrend_Txt"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/idea_arrow"
+                        android:background="@drawable/calendar_item_red"
+                        android:visibility="gone" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0D343434" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/line_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="6dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/person_line_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/person_line_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/person_line_icon"
+                        android:text="数据曲线"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/line_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0D343434" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/zong_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/person_hui_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/person_hui_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/person_hui_icon"
+                        android:text="汇总报告"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/hui_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <TextView
+                        android:id="@+id/idearend_Txt"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/hui_arrow"
+                        android:background="@drawable/calendar_item_red"
+                        android:visibility="invisible" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0D343434" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/che_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="6dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/person_che_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/person_che_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/person_che_icon"
+                        android:text="积分商城"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/che_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0d343434" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/dui_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="#ffffff">
+
+                    <ImageView
+                        android:id="@+id/person_dui_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/person_dui_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/person_dui_icon"
+                        android:text="我的兑换"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/dui_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/right_arrow_black" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="#0d343434" />
+                </RelativeLayout>
+            </LinearLayout>
+
         </RelativeLayout>
 
+    </ScrollView>
 
-        <LinearLayout
-            android:id="@+id/zan_Lin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/usericon_Rel"
-            android:background="#ffffff"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/fans_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="粉丝"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/fans_Txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#2b2a2a"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/fo_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="关注"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/fo_Txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#2b2a2a"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/post_Lin"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="动态"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/post_Txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#2b2a2a"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/data_Lin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/zan_Lin"
-            android:orientation="vertical"
-            android:layout_marginTop="6dp"
-            android:gravity="center_horizontal">
-
-            <RelativeLayout
-                android:id="@+id/task_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="#ffffff">
-
-                <ImageView
-                    android:id="@+id/person_task_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_task_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/person_task_icon"
-                    android:text="我的任务"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/task_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0D343434" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/hui_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="#ffffff">
-
-                <ImageView
-                    android:id="@+id/personnew_hui_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/personnew_hui_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/personnew_hui_icon"
-                    android:text="我的徽章"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/set_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0D343434" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/idea_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="#ffffff">
-
-                <ImageView
-                    android:id="@+id/personnew_idea_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/personnew_idea_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/personnew_idea_icon"
-                    android:text="我要吐槽"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/idea_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <TextView
-                    android:id="@+id/idea_Unrend_Txt"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:background="@drawable/calendar_item_red"
-                    android:layout_centerVertical="true"
-                    android:visibility="gone"
-                    android:layout_toLeftOf="@id/idea_arrow"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0D343434" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/line_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="6dp"
-                android:background="#ffffff">
-
-                <ImageView
-                    android:id="@+id/person_line_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_line_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/person_line_icon"
-                    android:text="数据曲线"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/line_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0D343434" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/zong_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="#ffffff">
-
-                <ImageView
-                    android:id="@+id/person_hui_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_hui_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/person_hui_icon"
-                    android:text="汇总报告"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/hui_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <TextView
-                    android:id="@+id/idearend_Txt"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/hui_arrow"
-                    android:background="@drawable/calendar_item_red"
-                    android:visibility="invisible" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0D343434" />
-
-            </RelativeLayout>
-
-
-
-            <RelativeLayout
-                android:id="@+id/che_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="#ffffff"
-                android:layout_marginTop="6dp">
-
-                <ImageView
-                    android:id="@+id/person_che_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_che_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/person_che_icon"
-                    android:text="积分商城"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/che_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0d343434" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/dui_Rel"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="#ffffff">
-
-                <ImageView
-                    android:id="@+id/person_dui_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/person_dui_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/person_dui_icon"
-                    android:text="我的兑换"
-                    android:textColor="#4d4a4a"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:id="@+id/dui_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/right_arrow_black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_alignParentBottom="true"
-                    android:background="#0d343434" />
-
-            </RelativeLayout>
-
-
-
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
-</ScrollView>
+    <ImageView
+        android:id="@+id/invite_Img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/person_invite_icon" />
+</RelativeLayout>

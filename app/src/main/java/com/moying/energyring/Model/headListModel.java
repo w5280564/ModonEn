@@ -60,6 +60,7 @@ public class headListModel {
          * Is_Attention : true
          * Ranking : 0
          * Integral : 0
+         * IntegralLevel ： 0
          */
 
         private int UserID;
@@ -68,6 +69,16 @@ public class headListModel {
         private boolean Is_Attention;
         private int Ranking;
         private int Integral;
+        private int IntegralLevel;
+
+        public int getIntegralLevel() {
+            return IntegralLevel;
+        }
+
+        public void setIntegralLevel(int integralLevel) {
+            IntegralLevel = integralLevel;
+        }
+
 
         public int getUserID() {
             return UserID;

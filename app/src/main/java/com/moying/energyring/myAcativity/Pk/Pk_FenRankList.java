@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -145,7 +146,7 @@ public class Pk_FenRankList extends AppCompatActivity {
                     toolbar_tab_layout.setVisibility(View.INVISIBLE);
                     ac_tab_layout.setVisibility(View.VISIBLE);
                     title_Txt.setVisibility(View.VISIBLE);
-                    pk_Txt.setBackgroundColor(Color.parseColor("#343434"));
+                    pk_Txt.setBackgroundColor(ContextCompat.getColor(Pk_FenRankList.this,R.color.colorFristWhite));
                     StaticData.ViewScale(pk_Txt, 710, 40);
 //                    Slideviewpager.setPadding(padFen,0,padFen,0);
                 } else if (state == State.COLLAPSED) {
@@ -154,7 +155,7 @@ public class Pk_FenRankList extends AppCompatActivity {
                     toolbar_tab_layout.setVisibility(View.VISIBLE);
                     ac_tab_layout.setVisibility(View.INVISIBLE);
                     title_Txt.setVisibility(View.GONE);
-                    pk_Txt.setBackgroundColor(Color.parseColor("#232121"));
+                    pk_Txt.setBackgroundColor(ContextCompat.getColor(Pk_FenRankList.this,R.color.colorFristWhite));
                     StaticData.ViewScale(pk_Txt, 710, 64);
 //                    Slideviewpager.setPadding(0,0,0,0);
 //                    Slideviewpager.invalidate();
@@ -238,7 +239,7 @@ public class Pk_FenRankList extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
-                tab_Name.setTextColor(Color.parseColor("#ffffff"));
+                tab_Name.setTextColor(ContextCompat.getColor(Pk_FenRankList.this,R.color.colorFristWhite));
                 StaticData.ViewScale(tab_Name, 185, 64);
                 if (tab.getPosition() == 0) {
                     tab_Name.setBackgroundResource(R.drawable.fen_tab_leftred);
@@ -252,7 +253,7 @@ public class Pk_FenRankList extends AppCompatActivity {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
-                tab_Name.setTextColor(Color.parseColor("#95a0ab"));
+                tab_Name.setTextColor(ContextCompat.getColor(Pk_FenRankList.this,R.color.colorSecondWhite));
                 StaticData.ViewScale(tab_Name, 185, 64);
                 if (tab.getPosition() == 0) {
                     tab_Name.setBackgroundResource(R.drawable.fen_tab_leftgazy);

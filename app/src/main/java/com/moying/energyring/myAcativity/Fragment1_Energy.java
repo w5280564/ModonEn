@@ -1,20 +1,25 @@
 package com.moying.energyring.myAcativity;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Energy.AttentionFragment;
 import com.moying.energyring.myAcativity.Energy.CommittedFragment;
+import com.moying.energyring.myAcativity.Energy.Energy_Community_Friend;
 import com.moying.energyring.myAcativity.Energy.GrowthLogFragment;
 
 import java.util.ArrayList;
@@ -40,6 +45,7 @@ public class Fragment1_Energy extends Fragment {
 //        if (parentView == null) {
             parentView = inflater.inflate(R.layout.fragment1_energy, null);
 
+            initTitle(parentView);
             initView(parentView);
 //        }
 //        ViewGroup parent = (ViewGroup) parentView.getParent();
@@ -50,10 +56,39 @@ public class Fragment1_Energy extends Fragment {
         return parentView;
     }
 
+
+
+
+
     @Override
     public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
         super.onMultiWindowModeChanged(isInMultiWindowMode);
 
+    }
+
+    private void initTitle(View view) {
+        View title_Include = (View) view.findViewById(R.id.title_Include);
+        title_Include.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorFristWhite));
+        Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
+        return_Btn.setBackgroundResource(R.drawable.friend_icon);
+        TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
+        cententtxt.setTextColor(ContextCompat.getColor(getActivity(), R.color.colorFristBlack));
+        cententtxt.setText("社区");
+        StaticData.ViewScale(return_Btn, 36, 36);
+        StaticData.ViewScale(title_Include, 0, 88);
+      viewTouchDelegate.expandViewTouchDelegate(return_Btn,100,100,100,100);
+
+
+        return_Btn.setOnClickListener(new return_Btn());
+    }
+
+    public class return_Btn implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), Energy_Community_Friend.class);
+            startActivity(intent);
+
+        }
     }
 
     public List<String> userArr;
@@ -73,11 +108,11 @@ public class Fragment1_Energy extends Fragment {
 
     private void initData() {
         userArr = new ArrayList<>();
-        userArr.add("动态");
-        userArr.add("公众承诺");
+        userArr.add("精华动态");
         userArr.add("我的关注");
-        tablayout.setTabTextColors(Color.parseColor("#989797"), Color.parseColor("#ffffff"));//初始颜色，选中颜色
-        tablayout.setSelectedTabIndicatorColor(Color.parseColor("#ffffff"));//进度条颜色
+        userArr.add("公众承诺");
+        tablayout.setTabTextColors(ContextCompat.getColor(getActivity(),R.color.colorSecondWhite), ContextCompat.getColor(getActivity(),R.color.colorFristBlack));//初始颜色，选中颜色
+        tablayout.setSelectedTabIndicatorColor(ContextCompat.getColor(getActivity(),R.color.colorFristBlack));//进度条颜色
 //        tablayout.setTabMode(TabLayout.MODE_FIXED);//设置可以滑动 根据标签自适应宽度 TabLayout.MODE_FIXED
         tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
 
@@ -89,8 +124,8 @@ public class Fragment1_Energy extends Fragment {
         fragments = new ArrayList<>();
 //        for (int i = 0; i < userArr.size(); i++) {
             fragments.add(GrowthLogFragment.newInstance(userArr.get(0), 0 + ""));
-            fragments.add(CommittedFragment.newInstance(userArr.get(1), 1 + ""));
             fragments.add(AttentionFragment.newInstance(userArr.get(2), 2 + ""));
+            fragments.add(CommittedFragment.newInstance(userArr.get(1), 1 + ""));
 //        }
     }
 

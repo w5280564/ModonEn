@@ -34,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text=""
-            android:textColor="#374c7e"
+            android:textColor="@color/colorFristBlue"
             android:layout_centerHorizontal="true"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -48,7 +48,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text=""
-            android:textColor="#f6a623"
+            android:textColor="@color/colorSecondYellow"
             android:textSize="10sp"
             android:textStyle="bold"/>
 

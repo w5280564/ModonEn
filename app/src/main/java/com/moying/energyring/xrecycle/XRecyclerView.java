@@ -127,7 +127,7 @@ public class XRecyclerView extends RecyclerView {
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
-           if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && loadingMoreEnabled) {//空闲状态
+        if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null && loadingMoreEnabled) {//空闲状态
             LayoutManager layoutManager = getLayoutManager();
             int lastVisibleItemPosition;  //最后可见的Item的position的值
             if (layoutManager instanceof GridLayoutManager) {   //网格布局的中lastVisibleItemPosition的取值
@@ -151,11 +151,11 @@ public class XRecyclerView extends RecyclerView {
             if (Fresco.getImagePipeline().isPaused()) {//加载
                 Fresco.getImagePipeline().resume();
             }
-        }else if (state == RecyclerView.SCROLL_STATE_SETTLING){ //滚动状态
+        } else if (state == RecyclerView.SCROLL_STATE_SETTLING) { //滚动状态
             if (!Fresco.getImagePipeline().isPaused()) {
                 Fresco.getImagePipeline().pause();
             }
-        }else if (state == RecyclerView.SCROLL_STATE_IDLE ){
+        } else if (state == RecyclerView.SCROLL_STATE_IDLE) {
             if (Fresco.getImagePipeline().isPaused()) {//加载
                 Fresco.getImagePipeline().resume();
             }
@@ -174,6 +174,11 @@ public class XRecyclerView extends RecyclerView {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mLastY = e.getRawY();
+
+//                xDistance = yDistance = 0f;
+//                xLast = e.getX();
+//                yLast = e.getY();
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float deltaY = e.getRawY() - mLastY;
@@ -186,6 +191,18 @@ public class XRecyclerView extends RecyclerView {
                         return false;
                     }
                 }
+
+
+//                final float curX = e.getX();
+//                final float curY = e.getY();
+//                xDistance += Math.abs(curX - xLast);
+//                yDistance += Math.abs(curY - yLast);
+//                xLast = curX;
+//                yLast = curY;
+//                if (xDistance > yDistance) {
+//                    return false;
+//                }
+
                 break;
             default:
                 mLastY = -1; // reset
@@ -227,6 +244,39 @@ public class XRecyclerView extends RecyclerView {
         }
         return max;
     }
+
+    // 滑动距离及坐标
+    private float xDistance, yDistance, xLast, yLast;
+
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent ev) {
+//// TODO Auto-generated method stub
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                xDistance = yDistance = 0f;
+//                xLast = ev.getX();
+//                yLast = ev.getY();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                final float curX = ev.getX();
+//                final float curY = ev.getY();
+//
+//
+//                xDistance += Math.abs(curX - xLast);
+//                yDistance += Math.abs(curY - yLast);
+//                xLast = curX;
+//                yLast = curY;
+//
+//
+//                if (xDistance > yDistance) {
+//                    return false;
+//                }
+//        }
+//
+//
+//        return super.onInterceptTouchEvent(ev);
+//    }
+
 
     /**
      * adapter数据观察者

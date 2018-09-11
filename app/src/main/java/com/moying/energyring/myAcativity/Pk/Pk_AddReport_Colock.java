@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,15 +66,15 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("闹钟提醒");
         Button right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
-        right_Btn.setTextColor(Color.parseColor("#ffffff"));
+        right_Btn.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         right_Btn.setText("保存");
 
         StaticData.ViewScale(return_Btn, 80, 88);
@@ -92,7 +93,9 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
         weekchoice_Lin = (LinearLayout) findViewById(R.id.weekchoice_Lin);
 
         wvHour = (WheelView) findViewById(R.id.wv_hour);
+        wvHour.setBgColor(ContextCompat.getColor(this,R.color.colorAllBg));
         wvMine = (WheelView) findViewById(R.id.wv_mine);
+        wvMine.setBgColor(ContextCompat.getColor(this,R.color.colorAllBg));
 
 //        int color[] = {Color.WHITE,Color.WHITE,Color.WHITE};
 //        wvHour.setTopandBotColor(color);
@@ -248,15 +251,15 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
             week_Txt.setText(timeArr[i]);
             if (Is_Enabled){
                 if (mcheckflag.get(i)) {
-                    week_Txt.setTextColor(Color.parseColor("#2b2a2a"));
+                    week_Txt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
                     week_Txt.setBackgroundResource(R.drawable.colock_yello);
                 } else {
-                    week_Txt.setTextColor(Color.parseColor("#ffffff"));
+                    week_Txt.setTextColor(ContextCompat.getColor(this,R.color.colorSecondWhite));
                     week_Txt.setBackgroundResource(R.drawable.colock_gazy);
                 }
                 myview.setEnabled(true);
             }else {
-                week_Txt.setTextColor(Color.parseColor("#4d4a4a"));
+                week_Txt.setTextColor(ContextCompat.getColor(this,R.color.colorSecondWhite));
                 week_Txt.setBackgroundResource(R.drawable.colock_gazy);
                 myview.setEnabled(false);
             }
@@ -268,11 +271,11 @@ public class Pk_AddReport_Colock extends AppCompatActivity {
                 public void onClick(View v) {
                     int tag = (Integer) v.getTag();
                     if (mcheckflag.get(tag)) {
-                        week_Txt.setTextColor(Color.parseColor("#ffffff"));
+                        week_Txt.setTextColor(ContextCompat.getColor(Pk_AddReport_Colock.this,R.color.colorSecondWhite));
                         week_Txt.setBackgroundResource(R.drawable.colock_gazy);
                         mcheckflag.put(tag, false);
                     } else {
-                        week_Txt.setTextColor(Color.parseColor("#2b2a2a"));
+                        week_Txt.setTextColor(ContextCompat.getColor(Pk_AddReport_Colock.this,R.color.colorFristBlack));
                         week_Txt.setBackgroundResource(R.drawable.colock_yello);
                         mcheckflag.put(tag, true);
                     }

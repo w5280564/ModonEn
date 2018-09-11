@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorFristWhite"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/join_Rel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/my_Head"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:roundAsCircle="true" />
+
+
+            <LinearLayout
+                android:id="@+id/content_Lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/my_Head"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/name_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:lines="1"
+                        android:text="名字"
+                        android:textColor="@color/colorFourthBlack"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/grade_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/content_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:text="内容"
+                    android:textColor="@color/colorFourthBlack"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/isfocus_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/notJoin_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+
+            <RelativeLayout
+                android:id="@+id/haed_Rel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="10dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/project_simple"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/round_gazy_friend"
+                    app:roundAsCircle="true" />
+
+                <TextView
+                    android:id="@+id/head_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:alpha="0.9"
+                    android:maxLength="1"
+                    android:text=""
+                    android:textColor="@color/colorFourthBlack"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/headname_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/haed_Rel"
+                android:lines="1"
+                android:text="名字"
+                android:textColor="@color/colorFristBlack"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/invite_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:background="@drawable/friend_invate_icon"/>
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/line_img"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorline" />
+    </RelativeLayout>
+
+
+</LinearLayout>

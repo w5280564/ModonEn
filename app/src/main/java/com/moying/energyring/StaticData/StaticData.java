@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -18,10 +19,12 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -305,7 +308,7 @@ public class StaticData {
     public static String createDir(String filename, Bitmap mBitmap) {
         File sdcardDir = Environment.getExternalStorageDirectory();
         // 得到一个路径，内容是sdcard的文件夹路径和名字
-        String path = sdcardDir.getPath() + "/Cpp";
+        String path = sdcardDir.getPath() + "/ME";
         File path1 = new File(path);
         if (!path1.exists())
             // 若不存在，创建目录，可以在应用启动的时候创建
@@ -556,6 +559,7 @@ public class StaticData {
         return space;
     }
 
+
     public static String idstring(ArrayList<String> arrstr) {
         StringBuffer sbf = new StringBuffer();
         for (int i = 0; i < arrstr.size(); i++) {
@@ -775,6 +779,28 @@ public class StaticData {
     }
 
 
+    public static String getDate(String sformat) {
+        String dateString = "2017-03-28";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        try {
+            Date date = sdf.parse(sformat);
+            dateString = sdf.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+//        dateString = sdf.format(sformat);
+//        try {
+//            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(sformat);//先转固定格式
+//            dateString = new SimpleDateFormat("yyyy-MM-dd").format(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+        return dateString;
+    }
+
+
     public static int getMaxDayByYearMonth(int year, int month) {
         int maxDay = 0;
         int day = 1;
@@ -823,29 +849,30 @@ public class StaticData {
      * @return
      */
     public static String getStandardDate(String timeStr) {
-         final  long minute = 60 * 1000;// 1分钟
-         final  long hour = 60 * minute;// 1小时
-         final  long day = 24 * hour;// 1天
-         final  long month = 31 * day;// 月
-         final  long year = 12 * month;// 年
+        final long minute = 60 * 1000;// 1分钟
+        final long hour = 60 * minute;// 1小时
+        final long day = 24 * hour;// 1天
+        final long month = 31 * day;// 月
+        final long year = 12 * month;// 年
 
         long diff = new Date().getTime() - getTime(timeStr).getTime();
 
         long r = 0;
-        if (diff > year) {
-            r = (diff / year);
-            return r + "年前";
-        }
-        if (diff > month) {
-            r = (diff / month);
-            return r + "个月前";
-        }
+//        if (diff > year) {
+//            r = (diff / year);
+//            return r + "年前";
+//        }
+//        if (diff > month) {
+//            r = (diff / month);
+//            return r + "个月前";
+//        }
         if (diff > day) {
             r = (diff / day);
-            if (r == 1){
-                return  "昨天";
-            }
-            return r + "天前";
+//            if (r == 1){
+//                return  "昨天";
+//            }
+//            return r + "天前";
+            return Datatypetwo(timeStr);
         }
         if (diff > hour) {
             r = (diff / hour);
@@ -857,54 +884,6 @@ public class StaticData {
         }
         return "刚刚";
 
-//        StringBuffer sb = new StringBuffer();
-
-//        long t = Long.parseLong(timeStr);
-
-//        long mill = (long) Math.ceil(time /1000);//秒前
-//        long minute = (long) Math.ceil(time/60/1000.0f);// 分钟前
-//        long hour = (long) Math.ceil(time/60/60/1000.0f);// 小时
-//        long day = (long) Math.ceil(time/24/60/60/1000.0f);// 天前
-
-
-//        long t = Long.parseLong(getTime(timeStr));
-//        long time = System.currentTimeMillis() - (t * 1000);
-//        long mill = (long) (time / 1000);//秒前
-//        long minute = (long) (time / 60 / 1000.0f);// 分钟前
-//        long hour = (long) (time / 60 / 60 / 1000.0f);// 小时
-//        long day = (long) (time / 24 / 60 / 60 / 1000.0f);// 天前
-//
-//        if (day - 1 > 0) {
-//            if (day - 1 >= 30) {
-//                sb.append(Datatypetwo(timeStr));
-//            } else {
-//                sb.append(day + "天");
-//            }
-//        } else if (hour - 1 > 0) {
-//            if (hour >= 24) {
-//                sb.append("1天");
-//            } else {
-//                sb.append(hour + "小时");
-//            }
-//        } else if (minute - 1 > 0) {
-//            if (minute == 60) {
-//                sb.append("1小时");
-//            } else {
-//                sb.append(minute + "分钟");
-//            }
-//        } else if (mill - 1 > 0) {
-//            if (mill == 60) {
-//                sb.append("1分钟");
-//            } else {
-//                sb.append(mill + "秒");
-//            }
-//        } else {
-//            sb.append("刚刚");
-//        }
-//        if (!sb.toString().equals("刚刚") && day - 1 < 30) {
-//            sb.append("前");
-//        }
-//        return sb.toString();
     }
 
     // 将字符串转为时间戳
@@ -985,19 +964,106 @@ public class StaticData {
         String strMilliSecond = milliSecond < 10 ? "0" + milliSecond : "" + milliSecond;//毫秒
         strMilliSecond = milliSecond < 100 ? "0" + strMilliSecond : "" + strMilliSecond;
 
-        if (hour == 0){
-            if (minute == 0){
-                return second+"秒";
-            }else {
-                return minute+"分钟";
+        if (hour == 0) {
+            if (minute == 0) {
+                return second + "秒";
+            } else {
+                return minute + "分钟";
             }
-        }else {
-            return hour+"小时";
+        } else {
+            return hour + "小时";
         }
 
 //        return strMinute + " 分钟 " + strSecond + " 秒";
     }
 
+    //用户等级
+    public static void setGarde(ImageView myImg, int Level) {
+        myImg.setVisibility(View.VISIBLE);
+        if (Level == 0) {
+            myImg.setVisibility(View.GONE);
+        } else if (Level == 1) {
+            myImg.setImageResource(R.drawable.grade_m1);
+        } else if (Level == 2) {
+            myImg.setImageResource(R.drawable.grade_m2);
+        } else if (Level == 3) {
+            myImg.setImageResource(R.drawable.grade_m3);
+        } else if (Level == 4) {
+            myImg.setImageResource(R.drawable.grade_m4);
+        } else if (Level == 5) {
+            myImg.setImageResource(R.drawable.grade_m5);
+        } else if (Level == 6) {
+            myImg.setImageResource(R.drawable.grade_m6);
+        } else if (Level == 7) {
+            myImg.setImageResource(R.drawable.grade_m7);
+        } else if (Level == 8) {
+            myImg.setImageResource(R.drawable.grade_m8);
+        } else if (Level == 9) {
+            myImg.setImageResource(R.drawable.grade_m9);
+        } else if (Level == 10) {
+            myImg.setImageResource(R.drawable.grade_m10);
+        } else if (Level == 11) {
+            myImg.setImageResource(R.drawable.grade_m11);
+        } else if (Level == 12) {
+            myImg.setImageResource(R.drawable.grade_m12);
+        } else if (Level == 13) {
+            myImg.setImageResource(R.drawable.grade_m13);
+        } else if (Level == 14) {
+            myImg.setImageResource(R.drawable.grade_m14);
+        } else if (Level == 15) {
+            myImg.setImageResource(R.drawable.grade_m15);
+        } else if (Level == 16) {
+            myImg.setImageResource(R.drawable.grade_m16);
+        } else if (Level == 17) {
+            myImg.setImageResource(R.drawable.grade_m17);
+        } else if (Level == 18) {
+            myImg.setImageResource(R.drawable.grade_m18);
+        } else if (Level == 19) {
+            myImg.setImageResource(R.drawable.grade_m19);
+        } else if (Level == 20) {
+            myImg.setImageResource(R.drawable.grade_m20);
+        }
+
+    }
+
+    /**
+     * 截取固定的位置当前屏幕
+     *
+     * @param activity
+     * @param
+     * @param
+     * @return
+     */
+    public static Bitmap myfixed(Activity activity, int viewX, int viewY, int widht, int heght) {
+        Bitmap bmp = null;
+        if (bmp != null) {
+            bmp.recycle();
+        }
+        bmp = null;
+        // 获取windows中最顶层的view
+        View view = activity.getWindow().getDecorView();
+        view.buildDrawingCache();
+        // 获取状态栏高度
+        Rect rect = new Rect();
+        view.getWindowVisibleDisplayFrame(rect);
+        int statusBarHeights = rect.top;
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        // 获取屏幕宽和高
+        int widths = display.getWidth();
+        int heights = display.getHeight();
+        // 允许当前窗口保存缓存信息
+        view.setDrawingCacheEnabled(true);
+        // 去掉状态栏
+        statusBarHeights = statusBarHeights + viewY;
+//        heights = heights - statusBarHeights - heghtbelowy;
+//        int padd =  (int)(Float.parseFloat(saveFile.getShareData("scale", context))*311);
+
+
+        bmp = Bitmap.createBitmap(view.getDrawingCache(), viewX, viewY, widht, heght);
+        // 销毁缓存信息
+        view.destroyDrawingCache();
+        return bmp;
+    }
 
 
 }

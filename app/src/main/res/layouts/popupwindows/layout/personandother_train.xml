@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorFristWhite">
+
+
+    <RelativeLayout
+        android:id="@+id/train_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginLeft="20dp"
+           android:layout_centerVertical="true">
+           <TextView
+               android:id="@+id/trainName_Txt"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="12sp"
+               android:textColor="@color/colorFristBlack"
+               android:textStyle="bold"/>
+           <TextView
+               android:id="@+id/trainCount_Txt"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="@color/colorFourthBlack"
+               android:textSize="9sp" />
+       </LinearLayout>
+
+        <ImageView
+            android:id="@+id/train_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/right_arrow_black"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/trainTime_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:textColor="@color/colorFristBlack"
+            android:layout_toLeftOf="@id/train_arrow"
+            android:layout_centerVertical="true"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorline"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+</LinearLayout>

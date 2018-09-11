@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -105,6 +106,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     private boolean isrole;
     private String dbId;
     int TagID;//活动标签
+    private String ProjectID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,9 @@ public class PostingActivity extends Activity implements PlatformActionListener,
         MyActivityManager mam = MyActivityManager.getInstance();
         mam.pushOneActivity(this);//把当前activity压入了栈中
 
+
+        Intent intent = getIntent();
+        ProjectID = intent.getStringExtra("ProjectID");
         initTitle();
         initView();
         initData();
@@ -135,21 +140,21 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
     private void initTitle() {
         View title_Include = findViewById(R.id.title_Include);
-//        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this, R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundColor(Color.parseColor("#00000000"));
         return_Btn.setVisibility(View.VISIBLE);
-        return_Btn.setTextColor(Color.parseColor("#ffffff"));
+        return_Btn.setTextColor(ContextCompat.getColor(this, R.color.colorFristBlack));
         return_Btn.setText("取消");
         TextView cententTxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententTxt.setTextColor(Color.parseColor("#ffffff"));
+        cententTxt.setTextColor(ContextCompat.getColor(this, R.color.colorFristBlack));
         cententTxt.setText("动态");
         right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
         right_Btn.setVisibility(View.VISIBLE);
-        right_Btn.setTextColor(Color.parseColor("#ffffff"));
+        right_Btn.setTextColor(ContextCompat.getColor(this, R.color.colorFristBlack));
         right_Btn.setText("发布");
         StaticData.ViewScale(return_Btn, 100, 100);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -202,8 +207,8 @@ public class PostingActivity extends Activity implements PlatformActionListener,
     private class right_Btn extends NoDoubleClickListener {
         @Override
         protected void onNoDoubleClick(View v) {
-            if (StaticData.isSpace(content_Edit.getText().toString())) {
-                Toast.makeText(PostingActivity.this, "发帖内容不能为空", Toast.LENGTH_SHORT).show();
+            if (StaticData.isSpace(content_Edit.getText().toString()) || content_Edit.getText().length() < 10) {
+                Toast.makeText(PostingActivity.this, "不要太惜墨如金啊，请写满至少10个字~", Toast.LENGTH_SHORT).show();
                 return;
             }
             right_Btn.setEnabled(false);
@@ -567,6 +572,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
     int ArticleCount = 0;
     PostAndPk_Add_Model addModel;
+
     public void AddPost_Data(final Context context, String baseUrl, String files) {
         RequestParams params = new RequestParams(baseUrl);
         if (saveFile.getShareData("JSESSIONID", context) != null) {
@@ -581,6 +587,11 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             String choiceIds = choiceId.toString().replace("[", "").replace("]", "");
             obj.put("ToUsers", choiceIds);
             obj.put("TagID", TagID);
+            if (StaticData.isSpace(ProjectID)) {
+                obj.put("ProjectID", 0);
+            }else {
+                obj.put("ProjectID", ProjectID);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -590,7 +601,11 @@ public class PostingActivity extends Activity implements PlatformActionListener,
             @Override
             public void onSuccess(String resultString) {
                 right_Btn.setEnabled(true);
-                 addModel = new Gson().fromJson(resultString, PostAndPk_Add_Model.class);
+
+//                BaseDataString_Model baseModel = new Gson().fromJson(resultString,BaseDataString_Model.class);
+//
+//                if (baseModel.getStatus() == 200){
+                addModel = new Gson().fromJson(resultString, PostAndPk_Add_Model.class);
                 if (addModel.isIsSuccess()) {
                     Toast.makeText(PostingActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
                     String data = addModel.getData().getIntegral();
@@ -604,8 +619,13 @@ public class PostingActivity extends Activity implements PlatformActionListener,
 
                     isShare(shareIndex());//同步分享
                 } else {
-//                    Toast.makeText(ChangePhone.this, model.getMsg(), 3000).show();
+                    Toast.makeText(PostingActivity.this, addModel.getMsg(), Toast.LENGTH_SHORT).show();
                 }
+
+//                }else if (baseModel.getStatus() == 400){
+//                    Toast.makeText(PostingActivity.this, baseModel.getMsg(), Toast.LENGTH_SHORT).show();
+//                }
+
             }
 
             @Override
@@ -814,7 +834,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
                 intent.putExtra("media", "posting");
                 intent.putExtra("jifen", ArticleCount);
-                intent.putExtra("DailyTask",addModel.getData().getDailyTask());
+                intent.putExtra("DailyTask", addModel.getData().getDailyTask());
                 startActivity(intent);
             }
             finish();
@@ -823,7 +843,7 @@ public class PostingActivity extends Activity implements PlatformActionListener,
                 Intent intent = new Intent(PostingActivity.this, JiFenActivity.class);
                 intent.putExtra("media", "posting");
                 intent.putExtra("jifen", ArticleCount);
-                intent.putExtra("DailyTask",addModel.getData().getDailyTask());
+                intent.putExtra("DailyTask", addModel.getData().getDailyTask());
                 startActivity(intent);
             }
             finish();

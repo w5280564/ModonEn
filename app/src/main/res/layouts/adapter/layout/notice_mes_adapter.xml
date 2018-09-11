@@ -52,7 +52,7 @@
             android:layout_marginRight="10dp"
             android:padding="15dp"
             android:text="温度"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorFristBlack"
             android:textSize="14sp" />
     </RelativeLayout>
 

@@ -1,7 +1,7 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -133,8 +133,8 @@ public class AllPerson_Adapter extends RecyclerView.Adapter<AllPerson_Adapter.My
 
     public void TextsColor(int start, int end, int allSize, String allText, TextView myTxt) {
         SpannableStringBuilder styledText = new SpannableStringBuilder(allText);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#989797")), 0, allSize , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        styledText.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffff")),start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context,R.color.colorSecondWhite)), 0, allSize , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        styledText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context,R.color.colorFristBlack)),start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         myTxt.setText(styledText);
     }
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
@@ -19,7 +19,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupblack_bg"
+        android:background="@drawable/popupwhite_bg"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="收货人"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorFourthBlack"
                 android:textSize="16sp" />
 
             <EditText
@@ -47,7 +47,7 @@
                 android:layout_toRightOf="@id/adressName_Txt"
                 android:background="@null"
                 android:text=""
-                android:textColor="#ffffff"
+                android:textColor="@color/colorFristBlack"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -71,7 +71,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="联系电话"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorFourthBlack"
                 android:textSize="16sp" />
 
             <EditText
@@ -83,7 +83,7 @@
                 android:layout_toRightOf="@id/adressPhone_Txt"
                 android:background="@null"
                 android:text=""
-                android:textColor="#ffffff"
+                android:textColor="@color/colorFristBlack"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -107,7 +107,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text="收货地址"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorFourthBlack"
                 android:textSize="16sp" />
 
             <EditText
@@ -118,7 +118,7 @@
                 android:layout_toRightOf="@id/adress_Txt"
                 android:background="@null"
                 android:text=""
-                android:textColor="#ffffff"
+                android:textColor="@color/colorFristBlack"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -136,7 +136,7 @@
         android:id="@+id/sure_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorFristWhite"
         android:text="确定"
         android:layout_marginTop="30dp"
         android:background="@drawable/allperson_btn"/>

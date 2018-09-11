@@ -4,11 +4,28 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorAllBg" >#f6f6f6</color>
+    <color name="colorAllBg" >#f1f1f1</color>
     <color name="colorFristWhite">#ffffff</color>
-    <color name="colorSecondWhite">#ffffff</color>
-    <color name="colorThridWhite">#95a0ab</color>
-    <color name="colorFourthWhite">#95a0ab</color>
-    <color name="colorFristBlack">#4d4a4a</color>
-    <color name="colorSecondBlack">#E3E7EB</color>
+    <color name="colorSecondWhite">#95a0ab</color>
+    <color name="colorThridWhite">#E3E7EB</color>
+
+    <color name="colorFristBlack">#333333</color>
+    <color name="colorSecondBlack">#999999</color>
+    <color name="colorFourthBlack">#666666</color>
+
+    <color name="colorThridBlack">#888888</color>
+    <color name="colorFristYellow">#ffa300</color>
+    <color name="colorSecondYellow">#f6a623</color>
+    <color name="colorThridYellow">#ffd800</color>
+    <color name="colorFristRed">#f24d4d</color>
+    <color name="colorSecondRed">#df473a</color>
+    <color name="colorThridRed">#ef473a</color>
+    <color name="colorFourRed">#f27b7b</color>
+    <color name="colorline">#dcdcdc</color>
+    <color name="colorFristBlue">#374c7e</color>
+    <color name="colorSecondBlue">#4a90e2</color>
+    <color name="colorBadgeBlack">#010936</color>
+    <color name="colorheadBlue">#4784df</color>
+    <color name="colorheadgary">#8f9ba2</color>
+    <color name="badge_bg">#fef8ed</color>
 </resources>

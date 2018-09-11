@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_Include"
-        android:background="#2b2a2a">
+        android:background="@color/colorFristWhite">
 
         <TextView
             android:id="@+id/title_Name"
@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="目标时长"
-                    android:textColor="#989797"
+                    android:textColor="@color/colorSecondWhite"
                     android:textSize="15sp" />
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名称"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/colorFristBlack"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="每日目标"
-                    android:textColor="#989797"
+                    android:textColor="@color/colorSecondWhite"
                     android:textSize="15sp" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="名称"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/colorFristBlack"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
@@ -103,7 +103,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:textColor="#ffffff"/>
+            android:textColor="@color/colorFristBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
             android:layout_marginTop="10dp"
             android:layout_toLeftOf="@id/finsh_Txt"
             android:text="完成"
-            android:textColor="#989797" />
+            android:textColor="@color/colorSecondWhite" />
 
 
 
@@ -137,7 +137,7 @@
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="2014年5月6日"
-            android:textColor="#f24d4d"
+            android:textColor="@color/colorFristRed"
             android:textSize="15sp" />
 
 
@@ -217,13 +217,13 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_above="@id/ll_week"
-            android:background="#343434" />
+            android:background="@color/colorline" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@id/ll_week"
-            android:background="#343434" />
+            android:background="@color/colorline" />
 
 
         <ViewFlipper

@@ -3,7 +3,7 @@
     android:id="@+id/activity_person__date_choice"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121">
+    android:background="@color/colorAllBg">
 
     <include
         android:id="@+id/title_Include"
@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_Include"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        android:background="@color/colorFristWhite"/>
 
 </RelativeLayout>

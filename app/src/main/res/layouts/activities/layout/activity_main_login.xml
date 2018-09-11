@@ -83,14 +83,35 @@
     </LinearLayout>
 
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:textColor="#95a0ab"
-        android:text="注册或登录即同意能量圈“服务条款”"/>
+        android:layout_marginBottom="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册或登录即同意能量圈"
+            android:textColor="#95a0ab" />
+
+        <TextView
+            android:id="@+id/PrivacyPolicy_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:text="“服务条款”"
+            android:textColor="#ef473a" />
+
+    </LinearLayout>
+
+
 
 
 </RelativeLayout>

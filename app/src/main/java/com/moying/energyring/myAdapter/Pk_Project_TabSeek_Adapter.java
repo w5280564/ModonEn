@@ -1,41 +1,32 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.moying.energyring.Model.AllPerson_Model;
-import com.moying.energyring.Model.Goal_Model;
+import com.moying.energyring.Model.Project_TabSeek_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
  * Created by Admin on 2016/3/29.
  */
 public class Pk_Project_TabSeek_Adapter extends RecyclerView.Adapter<Pk_Project_TabSeek_Adapter.MyViewHolder> {
-    //    List<AllPerson_Model.DataBean> otherList;
-    Goal_Model baseModel;
+    Project_TabSeek_Model baseModel;
     Context context;
     private int myposition;
-    public Map<Integer, Boolean> mcheckflag = new HashMap<>();
 
-    public Pk_Project_TabSeek_Adapter(Context context, Goal_Model baseModel, Map<Integer, Boolean> mcheckflag) {
-//        this.otherList = otherList;
+    public Pk_Project_TabSeek_Adapter(Context context, Project_TabSeek_Model baseModel) {
         this.context = context;
         this.baseModel = baseModel;
-        this.mcheckflag = mcheckflag;
     }
 
     public void addMoreData(List<AllPerson_Model.DataBean> otherList) {
@@ -45,7 +36,7 @@ public class Pk_Project_TabSeek_Adapter extends RecyclerView.Adapter<Pk_Project_
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter_child, null));
+        MyViewHolder myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.tabseek_adapter, null));
         return myview;
     }
 
@@ -72,16 +63,14 @@ public class Pk_Project_TabSeek_Adapter extends RecyclerView.Adapter<Pk_Project_
             });
         }
 
-        if (baseModel.getData().get(position).getFilePath() != null) {
-            Uri imgUri = Uri.parse(baseModel.getData().get(position).getFilePath());
-//            Uri imgUri = Uri.parse("http://wx.qlogo.cn/mmopen/PiajxSqBRaEJeZY41PdItuibhfu1W86xuqlkrwjJz49KWKrsfQ2ljEoommY8abzibqdZNLiaNqfa1u5v595Iian20pg/0");
-            holder.my_simple.setImageURI(imgUri);
-        } else {
-//            StaticData.lodingheadBg(holder.my_simple);
-        }
-        holder.name_Txt.setText(baseModel.getData().get(position).getProjectName());
+        Project_TabSeek_Model.DataBean oneData = baseModel.getData().get(position);
 
-        holder.choice_check.setChecked(mcheckflag.get(position));
+        holder.name_Txt.setText("#" + oneData.getProjectName());
+
+        if (oneData.getJoin_Num() != 0) {
+            String contextStr = "已有%1$d人加入";
+            holder.content_Txt.setText(String.format(contextStr, oneData.getJoin_Num()));
+        }
     }
 
     @Override
@@ -96,19 +85,14 @@ public class Pk_Project_TabSeek_Adapter extends RecyclerView.Adapter<Pk_Project_
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private final RelativeLayout my_Rel;
-        public CheckBox choice_check;
-        private TextView name_Txt;
-        public SimpleDraweeView my_simple;
+        private TextView name_Txt, content_Txt;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             my_Rel = (RelativeLayout) itemView.findViewById(R.id.my_Rel);
-            my_simple = (SimpleDraweeView) itemView.findViewById(R.id.my_simple);
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
-            choice_check = (CheckBox) itemView.findViewById(R.id.choice_check);
-            StaticData.ViewScale(my_Rel, 0, 144);
-            StaticData.ViewScale(my_simple, 100, 100);
-            StaticData.ViewScale(choice_check, 40, 40);
+            content_Txt = (TextView) itemView.findViewById(R.id.content_Txt);
+            StaticData.ViewScale(my_Rel, 0, 100);
         }
     }
 

@@ -2,7 +2,6 @@ package com.moying.energyring.myAcativity.Pk;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -172,7 +172,7 @@ public class Pk_DayPKAdd_Project_Tab extends FragmentActivity {
 
     private void initLocaData(TabLayout myTab) {
         myTab.setTabMode(TabLayout.GRAVITY_CENTER);
-        myTab.setSelectedTabIndicatorColor(Color.parseColor("#ffffff"));//进度条颜色
+        myTab.setSelectedTabIndicatorColor(ContextCompat.getColor(this,R.color.colorFristBlack));//进度条颜色
         if (fragments != null) {
             fragments.clear();
         }
@@ -196,7 +196,7 @@ public class Pk_DayPKAdd_Project_Tab extends FragmentActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
-                tab_Name.setTextColor(Color.parseColor("#ffffff"));
+                tab_Name.setTextColor(ContextCompat.getColor(Pk_DayPKAdd_Project_Tab.this,R.color.colorFristBlack));
 //                StaticData.ViewScale(tab_Name, 185, 64);
 //                initData(tab.getPosition());
             }
@@ -204,7 +204,7 @@ public class Pk_DayPKAdd_Project_Tab extends FragmentActivity {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
-                tab_Name.setTextColor(Color.parseColor("#989797"));
+                tab_Name.setTextColor(ContextCompat.getColor(Pk_DayPKAdd_Project_Tab.this,R.color.colorSecondWhite));
 //                StaticData.ViewScale(tab_Name, 185, 64);
             }
 

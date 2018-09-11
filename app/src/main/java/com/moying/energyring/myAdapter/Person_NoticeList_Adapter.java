@@ -66,6 +66,8 @@ public class Person_NoticeList_Adapter extends RecyclerView.Adapter<Person_Notic
         Notice_NoticeList_Model.DataBean oneData = otherList.get(position);
         holder.name_Txt.setText(oneData.getNoticeEvent());
         holder.ceontent_Txt.setText(oneData.getNoticeContent());
+
+        holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
     }
 
 
@@ -83,7 +85,7 @@ public class Person_NoticeList_Adapter extends RecyclerView.Adapter<Person_Notic
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private  TextView name_Txt,ceontent_Txt;
+        private  TextView name_Txt,ceontent_Txt,time_Txt;
         private  LinearLayout notice_Lin;
 
         public MyViewHolder(View itemView) {
@@ -91,6 +93,7 @@ public class Person_NoticeList_Adapter extends RecyclerView.Adapter<Person_Notic
             notice_Lin = (LinearLayout) itemView.findViewById(R.id.notice_Lin);
             name_Txt = (TextView) itemView.findViewById(R.id.name_Txt);
             ceontent_Txt = (TextView) itemView.findViewById(R.id.ceontent_Txt);
+            time_Txt = (TextView) itemView.findViewById(R.id.time_Txt);
 
             StaticData.ViewScale(notice_Lin, 710, 0);
         }

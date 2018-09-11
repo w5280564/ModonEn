@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAllBg"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/mAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- contentScrim 折叠后Toolbar背景色-->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorFristWhite"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorFristWhite"
+                app:layout_collapseMode="none"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <include
+                    android:id="@+id/community_notjoined"
+                    layout="@layout/pk_daypk_community_notjoined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+                <include
+                    android:id="@+id/community_joined"
+                    layout="@layout/pk_daypk_community_joined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/return_Btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/return_black" />
+
+                    <TextView
+                        android:id="@+id/title_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/colorFristBlack"
+                        android:textSize="14sp"/>
+
+                    <ImageView
+                        android:id="@+id/report_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/ac_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAllBg"
+            android:paddingTop="5dp"
+            app:layout_collapseMode="pin"
+            app:tabPaddingBottom="-1dp"
+            app:tabPaddingEnd="-1dp"
+            app:tabPaddingStart="-1dp"
+            app:tabPaddingTop="-1dp" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/Slideviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/report_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textSize="18sp"
+            android:textColor="@color/colorFristBlack"
+            android:text="发布图文动态"
+            android:background="@color/colorThridYellow"/>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

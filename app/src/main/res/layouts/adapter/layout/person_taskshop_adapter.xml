@@ -11,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="1dp"
         android:layout_marginLeft="1dp"
-        android:background="#ffffff">
+        android:background="@color/colorFristWhite">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/content_simple"
@@ -27,7 +27,7 @@
             android:layout_below="@id/content_simple"
             android:layout_marginLeft="10dp"
             android:lines="1"
-            android:textColor="#2b2a2a"
+            android:textColor="@color/colorFristBlack"
             android:textSize="12sp"
             android:textStyle="bold"/>
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:lines="1"
-                android:textColor="#f14d4c"
+                android:textColor="@color/colorFristRed"
                 android:textSize="16sp" />
 
 
@@ -55,11 +55,12 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/daypk_train_bg"
                 android:layout_alignParentRight="true"
-                android:textColor="#000000"
+                android:textColor="@color/colorFristBlack"
                 android:textStyle="bold"
                 android:text="兑换"
                 android:textSize="12sp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                style="?android:attr/borderlessButtonStyle"/>
 
 
         </RelativeLayout>

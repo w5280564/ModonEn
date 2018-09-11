@@ -6,11 +6,12 @@ package com.moying.energyring.Model;
 
 public class Version_Model {
 
+
     /**
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : {"VersionID":1,"ios":"2.5","android":"2.5"}
+     * Data : {"VersionID":2,"Type":"2","Ver":"2.10"}
      */
 
     private boolean IsSuccess;
@@ -52,14 +53,14 @@ public class Version_Model {
 
     public static class DataBean {
         /**
-         * VersionID : 1
-         * ios : 2.5
-         * android : 2.5
+         * VersionID : 2
+         * Type : 2
+         * Ver : 2.10
          */
 
         private int VersionID;
-        private String ios;
-        private String android;
+        private String Type;
+        private String Ver;
 
         public int getVersionID() {
             return VersionID;
@@ -69,20 +70,20 @@ public class Version_Model {
             this.VersionID = VersionID;
         }
 
-        public String getIos() {
-            return ios;
+        public String getType() {
+            return Type;
         }
 
-        public void setIos(String ios) {
-            this.ios = ios;
+        public void setType(String Type) {
+            this.Type = Type;
         }
 
-        public String getAndroid() {
-            return android;
+        public String getVer() {
+            return Ver;
         }
 
-        public void setAndroid(String android) {
-            this.android = android;
+        public void setVer(String Ver) {
+            this.Ver = Ver;
         }
     }
 }

@@ -3,9 +3,9 @@ package com.moying.energyring.myAcativity.Person;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,14 +51,14 @@ public class Person_ShopDetails_Adress extends Activity {
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("收货地址");
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);

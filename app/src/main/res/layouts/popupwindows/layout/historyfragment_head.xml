@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="10dp"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:orientation="horizontal">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#2b2a2a" />
+        android:background="@color/colorline" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#4784df"
+                android:textColor="@color/colorheadBlue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#8f9ba2"
+                android:textColor="@color/colorheadgary"
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -46,7 +46,7 @@
         <ImageView
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="#2b2a2a" />
+            android:background="@color/colorline" />
 
         <LinearLayout
             android:id="@+id/zongka_Lin"
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#4784df"
+                android:textColor="@color/colorheadBlue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#8f9ba2"
+                android:textColor="@color/colorheadgary"
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -78,7 +78,7 @@
         <ImageView
             android:layout_width="1px"
             android:layout_height="match_parent"
-            android:background="#2b2a2a" />
+            android:background="@color/colorline" />
 
         <LinearLayout
             android:id="@+id/zong_Lin"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#4784df"
+                android:textColor="@color/colorheadBlue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="#8f9ba2"
+                android:textColor="@color/colorheadgary"
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -112,7 +112,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#2b2a2a"
+        android:background="@color/colorline"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

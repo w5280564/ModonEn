@@ -158,6 +158,7 @@ public class Pk_AddReport extends Activity {
 
 
                     Intent intent = new Intent(context, PostingActivity.class);
+                    intent.putExtra("ProjectID",model.getData().getProjectID()+"");
                     startActivity(intent);
 
                     Intent intentsucc = new Intent(context, Pk_AddReport_Succ.class);

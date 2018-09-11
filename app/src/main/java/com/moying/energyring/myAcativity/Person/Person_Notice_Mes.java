@@ -2,9 +2,9 @@ package com.moying.energyring.myAcativity.Person;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -66,14 +66,14 @@ public class Person_Notice_Mes extends myActivity implements XRecyclerView.Loadi
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText(titleName);
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -91,7 +91,7 @@ public class Person_Notice_Mes extends myActivity implements XRecyclerView.Loadi
         mess_edit = (EditText) findViewById(R.id.mess_edit);
 
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);//不会挤压界面屏幕整体上移
-        StaticData.ViewScale(mess_bg, 0, 100);
+        StaticData.ViewScale(mess_bg, 0, 0);
         StaticData.ViewScale(send_Btn, 100, 100);
         send_Btn.setOnClickListener(new send_Btn());
     }

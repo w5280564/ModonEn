@@ -51,8 +51,7 @@ public class GestureListener extends GestureDetector.SimpleOnGestureListener imp
         // velocityY：Y轴上的移动速度（像素/秒）
 
         // 向左滑
-        if (e1.getX() - e2.getX() > distance
-                && Math.abs(velocityX) > velocity) {
+        if (e1.getX() - e2.getX() > distance  && Math.abs(velocityX) > velocity) {
             left();
         }
         // 向右滑

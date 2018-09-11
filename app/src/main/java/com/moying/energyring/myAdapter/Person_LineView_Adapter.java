@@ -1,8 +1,8 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,11 +88,11 @@ public class Person_LineView_Adapter extends RecyclerView.Adapter<Person_LineVie
 
         final DayPkProject_Model.DataBean oneData = listModel.getData().get(position);
         if (position == 0) {
-            holder.my_Rel.setBackgroundColor(Color.parseColor("#232121"));
-            holder.content_Txt.setTextColor(Color.parseColor("#f24d4d"));
+            holder.my_Rel.setBackgroundColor(ContextCompat.getColor(context,R.color.colorAllBg));
+            holder.content_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorFristRed));
         } else {
 //            holder.my_Rel.setBackgroundColor(Color.parseColor("#f3f3f3"));
-            holder.content_Txt.setTextColor(Color.parseColor("#ffffff"));
+            holder.content_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorSecondBlack));
         }
         if (oneData.getFilePath() != null) {
             Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));

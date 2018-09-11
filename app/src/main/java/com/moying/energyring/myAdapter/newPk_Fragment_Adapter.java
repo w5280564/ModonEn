@@ -1,7 +1,7 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -212,8 +212,8 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
     }
 
     private void setYellow(MyViewHolder holder) {
-        holder.count_Txt.setTextColor(Color.parseColor("#ffd800"));
-        holder.project_Txt.setTextColor(Color.parseColor("#ffffff"));
+        holder.count_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorFristYellow));
+        holder.project_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorFristBlack));
 //        holder.today_Txt.setBackgroundResource(R.drawable.today_shap);
 //        holder.today_Txt.setTextColor(Color.parseColor("#262626"));
 //        holder.project_Txt.setTextColor(Color.parseColor("#262626"));
@@ -223,8 +223,10 @@ public class newPk_Fragment_Adapter extends RecyclerView.Adapter<newPk_Fragment_
     }
 
     private void setGray(MyViewHolder holder) {
-        holder.count_Txt.setTextColor(Color.parseColor("#ffffff"));
-        holder.project_Txt.setTextColor(Color.parseColor("#ffffff"));
+        holder.count_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorFristYellow));
+        holder.project_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorFristBlack));
+        holder.count_Txt.setAlpha(0.4f);
+
 //        holder.today_Txt.setBackgroundResource(R.drawable.today_shap_gray);
 //        holder.today_Txt.setTextColor(Color.parseColor("#ffffff"));
 //        holder.project_Txt.setTextColor(Color.parseColor("#aaaaaa"));

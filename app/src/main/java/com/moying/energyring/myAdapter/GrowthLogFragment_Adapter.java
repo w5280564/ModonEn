@@ -24,7 +24,7 @@ import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.MainLogin;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -52,9 +52,9 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
     }
 
     public void addMoreData(EnergyList_Model list) {
-        int lastIndex = this.otherList.size();
+        int lastIndex = this.otherList.size()+ 2;//头部多几项刷新需要添加
         if (this.otherList.addAll(list.getData())) {
-            notifyItemRangeInserted(lastIndex + 1, list.getData().size());
+            notifyItemRangeInserted(lastIndex , list.getData().size());
         }
     }
 
@@ -109,11 +109,15 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             StaticData.lodingheadBg(holder.myhead_simple);
         }
         holder.name_Txt.setText(oneData.getNickName());
+        holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
 //        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
-        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+//        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
         holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");
+        StaticData.setGarde(holder.grade_Img,oneData.getIntegralLevel());
+
+
         if (oneData.isIs_Like()) {
             holder.energy_like.setImageResource(R.drawable.like_red_icon);
         } else {
@@ -146,7 +150,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", oneData.getUserID() + "");
                 context.startActivity(intent);
             }
@@ -184,6 +188,7 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        private  ImageView grade_Img;
         private LinearLayout hero_Lin, like_Lin;
         private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt, hero_Txt, remove_Txt;
         private ImageView energy_img, energy_like;
@@ -208,9 +213,11 @@ public class GrowthLogFragment_Adapter extends RecyclerView.Adapter<GrowthLogFra
             viewTouchDelegate.expandViewTouchDelegate(like_Lin, 100, 100, 100, 100);
             hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
             remove_Txt = (TextView) itemView.findViewById(R.id.remove_Txt);
+            grade_Img = (ImageView) itemView.findViewById(R.id.grade_Img);
             viewTouchDelegate.expandViewTouchDelegate(remove_Txt, 100, 100, 100, 100);
             StaticData.ViewScale(mu_Rel, 710, 0);
             StaticData.ViewScale(myhead_simple, 100, 100);
+            StaticData.ViewScale(grade_Img, 56, 28);
 
             StaticData.ViewScale(energy_img, 40, 40);
             StaticData.ViewScale(energy_talk, 40, 40);

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/badge_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/badge_Sim"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:id="@+id/badgeName_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:maxEms="4"
+            android:text=""
+            android:textColor="@color/colorFristBlack"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/badgeContent_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:textColor="@color/colorFourthBlack"
+            android:textSize="9sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/mypross_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/mypross"
+                style="?android:progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="7dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:progressDrawable="@drawable/badgeprogress" />
+
+            <TextView
+                android:id="@+id/mypross_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="10%"
+                android:textColor="@color/colorFristBlack"
+                android:textSize="6sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

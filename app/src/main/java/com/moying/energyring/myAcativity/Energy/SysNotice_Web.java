@@ -3,10 +3,10 @@ package com.moying.energyring.myAcativity.Energy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -38,7 +38,7 @@ public class SysNotice_Web extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LinearLayout layoutRoot = new LinearLayout(this);//根布局
-        layoutRoot.setBackgroundColor(Color.parseColor("#232121"));
+        layoutRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         layoutRoot.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
@@ -72,7 +72,7 @@ public class SysNotice_Web extends Activity {
 
     private void initTitle(LinearLayout mycontentView) {
         final View view = LayoutInflater.from(SysNotice_Web.this).inflate(R.layout.base_titlebar, null);
-        view.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        view.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setElevation(2f);//阴影
         }
@@ -82,7 +82,7 @@ public class SysNotice_Web extends Activity {
         Button return_Btn = (Button) view.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) view.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("");
         StaticData.ViewScale(return_Btn, 80, 88);
         mycontentView.addView(view);

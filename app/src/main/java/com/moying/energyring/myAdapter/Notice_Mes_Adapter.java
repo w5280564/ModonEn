@@ -16,7 +16,7 @@ import com.moying.energyring.Model.Notice_UserList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 
 import java.util.List;
@@ -85,7 +85,7 @@ public class Notice_Mes_Adapter extends RecyclerView.Adapter<Notice_Mes_Adapter.
             holder.mesright_simple.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                    Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                     intent.putExtra("UserID",oneData.getUserID()+"");
                     context.startActivity(intent);
                 }
@@ -104,7 +104,7 @@ public class Notice_Mes_Adapter extends RecyclerView.Adapter<Notice_Mes_Adapter.
             holder.mesleft_simple.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                    Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                     intent.putExtra("UserID",oneData.getUserID()+"");
                     context.startActivity(intent);
                 }

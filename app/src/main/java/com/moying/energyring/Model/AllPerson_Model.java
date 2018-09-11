@@ -70,6 +70,7 @@ public class AllPerson_Model {
          * CreateDate : null
          * Is_Del : false
          * Is_Finish : false
+         * IntegralLevel:1
          */
 
         private String ProjectName;
@@ -87,6 +88,16 @@ public class AllPerson_Model {
         private Object CreateDate;
         private boolean Is_Del;
         private boolean Is_Finish;
+        private int IntegralLevel;
+
+        public int getIntegralLevel() {
+            return IntegralLevel;
+        }
+
+        public void setIntegralLevel(int integralLevel) {
+            IntegralLevel = integralLevel;
+        }
+
 
         public String getProjectName() {
             return ProjectName;

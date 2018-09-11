@@ -18,6 +18,7 @@ import com.moying.energyring.Model.Login_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
+import com.moying.energyring.myAcativity.Person.Person_PrivacyPolicy;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
 
@@ -39,7 +40,7 @@ import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
 
-public class MainLogin extends Activity implements PlatformActionListener,Handler.Callback {
+public class MainLogin extends Activity implements PlatformActionListener, Handler.Callback {
 
     private Handler handler;
     private int LoginType;
@@ -63,6 +64,7 @@ public class MainLogin extends Activity implements PlatformActionListener,Handle
         Button share_qq = (Button) findViewById(R.id.share_qq);
         Button share_sina = (Button) findViewById(R.id.share_sina);
         Button share_wechat = (Button) findViewById(R.id.share_wechat);
+        View PrivacyPolicy_Txt = findViewById(R.id.PrivacyPolicy_Txt);
 
         StaticData.ViewScale(login_Txt, 0, 430);
         StaticData.ViewScale(login_Btn, 570, 110);
@@ -75,6 +77,7 @@ public class MainLogin extends Activity implements PlatformActionListener,Handle
         share_qq.setOnClickListener(new share_qq());
         share_sina.setOnClickListener(new share_sina());
         share_wechat.setOnClickListener(new share_wechat());
+        PrivacyPolicy_Txt.setOnClickListener(new PrivacyPolicy_Txt());
     }
 
     private class login_Btn extends NoDoubleClickListener {
@@ -91,7 +94,17 @@ public class MainLogin extends Activity implements PlatformActionListener,Handle
         LoginType = 0;
     }
 
-    //新浪登录
+    //
+    public class PrivacyPolicy_Txt implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            String url = saveFile.BaseUrl + "Terms/PrivacyPolicy";
+            Intent intent = new Intent(MainLogin.this, Person_PrivacyPolicy.class);
+            intent.putExtra("url", url);
+            startActivity(intent);
+        }
+    }    //新浪登录
+
     public class share_sina implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -159,16 +172,15 @@ public class MainLogin extends Activity implements PlatformActionListener,Handle
 //                        finish();
 
 
-
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
 
-                        Log.e("LoginName",resultString);
+                        Log.e("LoginName", resultString);
 
                         if (StaticData.isSpace(baseModel.getData().getLoginName())) {
-                            Log.e("LoginName","true");
+                            Log.e("LoginName", "true");
                             Intent intent1 = new Intent(context, MainChangePhone.class);
                             startActivity(intent1);
                         }

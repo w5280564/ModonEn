@@ -4,7 +4,7 @@
     android:id="@+id/activity_person__play"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121">
+    android:background="@color/colorAllBg">
 
     <include
         android:id="@+id/title_Include"
@@ -18,7 +18,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/title_Include"
         android:layout_marginTop="30dp"
-        android:background="#2b2a2a"
+        android:background="@color/colorFristWhite"
         android:paddingLeft="30dp"
         android:paddingRight="20dp">
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="功能开启"
-            android:textColor="#95a0ab"
+            android:textColor="@color/colorFristBlack"
             android:textSize="18sp" />
 
         <com.kyleduo.switchbutton.SwitchButton
@@ -52,7 +52,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/stop_Rel"
         android:layout_marginTop="30dp"
-        android:background="#2b2a2a"
+        android:background="@color/colorFristWhite"
         android:paddingLeft="30dp">
 
 
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="时间"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorFristBlack"
                 android:textSize="18sp" />
 
 
@@ -83,7 +83,7 @@
             android:layout_toLeftOf="@id/play_Img"
             android:gravity="right"
             android:text=""
-            android:textColor="#ffffff"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="10sp" />
 
     </RelativeLayout>
@@ -95,7 +95,7 @@
         android:layout_height="50dp"
         android:layout_below="@id/play_Rel"
         android:layout_marginTop="30dp"
-        android:background="#2b2a2a"
+        android:background="@color/colorFristWhite"
         android:paddingLeft="30dp">
 
         <TextView
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="电台"
-            android:textColor="#95a0ab"
+            android:textColor="@color/colorFristBlack"
             android:textSize="18sp" />
 
         <ImageView
@@ -122,7 +122,7 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/arrow_right"
             android:text=""
-            android:textColor="#ffffff" />
+            android:textColor="@color/colorSecondBlack" />
     </RelativeLayout>
 
 

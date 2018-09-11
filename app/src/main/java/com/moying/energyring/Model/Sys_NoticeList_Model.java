@@ -13,7 +13,7 @@ public class Sys_NoticeList_Model {
      * IsSuccess : true
      * Msg : 操作成功！
      * Status : 200
-     * Data : [{"Sys_NoticeID":56,"NoticeType":1,"Notice_Content":"2.2更新\\n1.老鸡鸡","VersionID":1,"NoticeUrl":null,"StartDate":null,"EndDate":null,"CreateTime":"2017-09-05 15:42:06","Target":0,"Is_Old":false,"FileID":0,"FilePath":null},{"Sys_NoticeID":59,"NoticeType":2,"Notice_Content":"2.2更新\\n1.老鸡鸡","VersionID":1,"NoticeUrl":null,"StartDate":null,"EndDate":null,"CreateTime":"2017-09-06 15:42:06","Target":0,"Is_Old":false,"FileID":0,"FilePath":null},{"Sys_NoticeID":58,"NoticeType":3,"Notice_Content":"2.2更新\\n1.老鸡鸡","VersionID":1,"NoticeUrl":null,"StartDate":null,"EndDate":null,"CreateTime":"2017-09-05 15:42:06","Target":0,"Is_Old":false,"FileID":0,"FilePath":null}]
+     * Data : [{"Sys_NoticeID":26,"NoticeType":1,"Notice_Content":"","VersionID":2,"NoticeUrl":null,"StartDate":null,"EndDate":null,"CreateTime":"2018-07-10 11:53:18","Target":0,"Is_Old":false,"FileID":0,"FilePath":null,"Type":2,"Ver":"2.10"},{"Sys_NoticeID":28,"NoticeType":2,"Notice_Content":"","VersionID":2,"NoticeUrl":null,"StartDate":null,"EndDate":null,"CreateTime":"2018-07-10 11:53:18","Target":0,"Is_Old":false,"FileID":0,"FilePath":null,"Type":2,"Ver":"2.10"}]
      */
 
     private boolean IsSuccess;
@@ -55,18 +55,20 @@ public class Sys_NoticeList_Model {
 
     public static class DataBean {
         /**
-         * Sys_NoticeID : 56
+         * Sys_NoticeID : 26
          * NoticeType : 1
-         * Notice_Content : 2.2更新\n1.老鸡鸡
-         * VersionID : 1
+         * Notice_Content :
+         * VersionID : 2
          * NoticeUrl : null
          * StartDate : null
          * EndDate : null
-         * CreateTime : 2017-09-05 15:42:06
+         * CreateTime : 2018-07-10 11:53:18
          * Target : 0
          * Is_Old : false
          * FileID : 0
          * FilePath : null
+         * Type : 2
+         * Ver : 2.10
          */
 
         private int Sys_NoticeID;
@@ -81,6 +83,8 @@ public class Sys_NoticeList_Model {
         private boolean Is_Old;
         private int FileID;
         private Object FilePath;
+        private int Type;
+        private String Ver;
 
         public int getSys_NoticeID() {
             return Sys_NoticeID;
@@ -176,6 +180,22 @@ public class Sys_NoticeList_Model {
 
         public void setFilePath(Object FilePath) {
             this.FilePath = FilePath;
+        }
+
+        public int getType() {
+            return Type;
+        }
+
+        public void setType(int Type) {
+            this.Type = Type;
+        }
+
+        public String getVer() {
+            return Ver;
+        }
+
+        public void setVer(String Ver) {
+            this.Ver = Ver;
         }
     }
 }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAllBg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:id="@+id/colock_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:id="@+id/colock_Lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:id="@+id/colock_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提醒设置"
+                android:textColor="@color/colorFristBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/colockContent_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="为刚刚添加的习惯设置闹钟提醒"
+                android:textColor="@color/colorSecondBlack"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/colock_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/set_right_arrow" />
+
+        <TextView
+            android:id="@+id/colockset_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/colock_arrow"
+            android:textColor="@color/colorFristBlack" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorline" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/set_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:id="@+id/set_Lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设置隐私习惯"
+                android:textColor="@color/colorFristBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您可以设置是否将该习惯公开"
+                android:textColor="@color/colorSecondBlack"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/set_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/set_right_arrow" />
+
+        <TextView
+            android:id="@+id/set_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/set_arrow"
+            android:textColor="@color/colorFristBlack" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorline" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/invite_friend_Txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/colock_yello"
+        android:gravity="center"
+        android:text="邀请好友"
+        android:textColor="@color/colorFristBlack"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+
+</LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6f6f6"
+    android:background="@color/colorAllBg"
     android:orientation="vertical">
 
     <include
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="#ffffff">
+        android:background="@color/colorFristWhite">
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="收货人"
-            android:textColor="#95a0ab"
+            android:textColor="@color/colorSecondWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="100dp"
             android:text=""
-            android:textColor="#2b2a2a"
+            android:textColor="@color/colorFristBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -46,7 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#0d343434" />
+            android:background="@color/colorline"
+            android:alpha="0.05"/>
 
     </RelativeLayout>
 
@@ -54,7 +55,7 @@
         android:id="@+id/phone_Rel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffffff">
+        android:background="@color/colorFristWhite">
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,7 +63,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="联系电话"
-            android:textColor="#95a0ab"
+            android:textColor="@color/colorSecondWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -73,7 +74,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="100dp"
             android:text=""
-            android:textColor="#2b2a2a"
+            android:textColor="@color/colorFristBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -81,15 +82,15 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#0d343434" />
-
+            android:background="@color/colorline"
+            android:alpha="0.05"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/address_Rel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffffff">
+        android:background="@color/colorFristWhite">
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,7 +98,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="收货地址"
-            android:textColor="#95a0ab"
+            android:textColor="@color/colorSecondWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -108,7 +109,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="100dp"
             android:text=""
-            android:textColor="#2b2a2a"
+            android:textColor="@color/colorFristBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -119,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="#ffffff"
+        android:background="@color/colorFristWhite"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -140,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:textColor="#2b2a2a"
+                android:textColor="@color/colorFristBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -149,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="1"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="12sp" />
 
             <RelativeLayout
@@ -162,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lines="1"
-                    android:textColor="#f24d4c"
+                    android:textColor="@color/colorFristRed"
                     android:textSize="12sp" />
 
                 <TextView
@@ -173,7 +174,7 @@
                     android:layout_marginRight="15dp"
                     android:lines="1"
                     android:text="X1"
-                    android:textColor="#2b2a2a"
+                    android:textColor="@color/colorFristBlack"
                     android:textSize="12sp" />
             </RelativeLayout>
         </LinearLayout>
@@ -182,13 +183,14 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#0d343434" />
+        android:background="@color/colorline"
+        android:alpha="0.05"/>
 
     <RelativeLayout
         android:id="@+id/express_Rel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/colorFristWhite"
         android:paddingBottom="20dp"
         android:paddingTop="20dp">
 
@@ -199,7 +201,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:text="单号"
-            android:textColor="#95a0ab"
+            android:textColor="@color/colorSecondWhite"
             android:textSize="12sp" />
 
         <TextView
@@ -210,7 +212,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/ExpressCompany_Txt"
             android:text="单号"
-            android:textColor="#2b2a2a"
+            android:textColor="@color/colorFristBlack"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -223,9 +225,10 @@
             android:background="@drawable/daypk_train_bg"
             android:gravity="center"
             android:text="复制"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorFristWhite"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle"/>
     </RelativeLayout>
 
     <TextView
@@ -233,8 +236,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:background="#ffffff"
-        android:textColor="#2b2a2a"
+        android:background="@color/colorFristWhite"
+        android:textColor="@color/colorFristBlack"
         android:textSize="12sp"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"

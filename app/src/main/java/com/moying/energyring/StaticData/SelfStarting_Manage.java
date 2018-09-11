@@ -96,7 +96,10 @@ public class SelfStarting_Manage {
 
                 // vivo 点击设置图标>加速白名单>我的app
                 //      点击软件管理>软件管理权限>软件>我的app>信任该软件
-                componentName = new ComponentName("com.iqoo.secure",null);
+//                componentName = new ComponentName("com.iqoo.secure",null);
+
+
+
 //                Intent appIntent = context.getPackageManager().getLaunchIntentForPackage("com.iqoo.secure");
 //                if(appIntent != null){
 //                    context.startActivity(appIntent);
@@ -156,10 +159,35 @@ public class SelfStarting_Manage {
 
             intent.setComponent(componentName);
             context.startActivity(intent);
+
+//            if (getMobileType().equals("Xiaomi")) {
+//                showtip();//显示弹窗（**特别注意**）
+//            }
+//            if (getMobileType().equals("samsung")){
+//
+//                new SettingOverlayView().show(context);//显示悬浮窗
+//            }
+
         } catch (Exception e) {//抛出异常就直接打开设置页面
             intent = new Intent(Settings.ACTION_SETTINGS);
             context.startActivity(intent);
         }
     }
+
+//    private SettingDialogPermision dialog_per;
+//
+//    //小米手机显示弹窗
+//    private void showtip() {
+//        try {
+//            dialog_per=new SettingDialogPermision(context, R.style.CustomDialog4);
+//            dialog_per.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);//注意这里改成吐司类型
+//            dialog_per.show();
+//
+//            Log.e("HLQ_Struggle","显示弹窗");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e("HLQ_Struggle", "没有显示弹窗"+e.getMessage());
+//        }
+//    }
 
 }

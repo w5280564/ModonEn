@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -119,14 +120,14 @@ public class Leran_Overview extends Activity implements GestureDetector.OnGestur
         mam.pushOneActivity(this);//把当前activity压入了栈中
 
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
 //        Button  right_Btn = (Button) title_Include.findViewById(R.id.right_Btn);
 //        right_Btn.setVisibility(View.VISIBLE);
 //        right_Btn.setBackgroundResource(R.drawable.person_more);

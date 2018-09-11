@@ -44,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text=""
-                android:textColor="#010936"
+                android:textColor="@color/colorBadgeBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text=""
-                android:textColor="#f6a623"
+                android:textColor="@color/colorSecondYellow"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/person_commend_btn"
                 android:text="点击分享"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorFristWhite"
                 android:textSize="14sp" />
 
 

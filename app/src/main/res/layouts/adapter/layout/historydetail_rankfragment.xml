@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/my_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/rank_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="14sp" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/project_simple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rank_Txt"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10dp"
+            app:roundAsCircle="true" />
+
+        <LinearLayout
+            android:id="@+id/project_Lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/project_simple"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/project_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/project_Lin"
+                android:text=""
+                android:textColor="@color/colorFristBlack"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/time_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorFourthBlack"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/count_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:text=""
+            android:textColor="@color/colorFristBlack"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorline" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

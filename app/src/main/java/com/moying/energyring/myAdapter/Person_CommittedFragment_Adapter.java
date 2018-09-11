@@ -72,7 +72,8 @@ public class Person_CommittedFragment_Adapter extends RecyclerView.Adapter<Perso
 //            }
 
 //            holder.name_Txt.setText(oneData.getNickName());
-            holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+//            holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+            holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
 
             if (oneData.getFilePath() != null) {
                 Uri contentUri = Uri.parse(String.valueOf(oneData.getFilePath()));

@@ -3,12 +3,12 @@ package com.moying.energyring.myAcativity.Pk;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,11 +83,11 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("今日已打卡");
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -636,39 +636,44 @@ public class Pk_HuiZong extends Activity implements ActivityCompat.OnRequestPerm
 
 //                BaseDataInt_Model reteModel = new Gson().fromJson(resultString, BaseDataInt_Model.class);
                 Pk_HuiZong_Model reteModel = new Gson().fromJson(resultString, Pk_HuiZong_Model.class);
-                String shareTitle = "";
-                String shareConStr = "我的能量源是" + saveFile.getShareData("InviteCode", context);
-                String shareUrl = "";
-                String imgUrl = null;
+
+                if (reteModel.isIsSuccess()) {
+                    String shareTitle = "";
+                    String shareConStr = "我的能量源是" + saveFile.getShareData("InviteCode", context);
+                    String shareUrl = "";
+                    String imgUrl = null;
 //                String shareUrl = saveFile.BaseUrl + "Share/PostDetails?PostID=" + postId;
-                ShareContent shareContent = new ShareContent(shareUrl, shareTitle, shareConStr,imgUrl);
+                    ShareContent shareContent = new ShareContent(shareUrl, shareTitle, shareConStr, imgUrl);
 
-                if (!files.equals("")) {
-                    updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPool_Pic");//展示功能提醒页
-                }
-                int integral = Integer.parseInt(reteModel.getData().getIntegral());
-                if (integral == -1) {
-                    Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
-                }else if (integral == 0) {
-                    Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
-                    Intent intentSucc = new Intent(context, Pk_HuiZong_Success.class);
-                    intentSucc.putExtra("shareContent", shareContent);
-                    startActivity(intentSucc);
-                    finish();
-                } else if (integral > 0) {
-                    Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
-                    Intent intentSucc = new Intent(context, Pk_HuiZong_Success.class);
+                    if (!files.equals("")) {
+                        updguidePer_Data(context, saveFile.BaseUrl + saveFile.upd_guidePerFirst_Url + "?str=" + "Is_FirstPool_Pic");//展示功能提醒页
+                    }
+                    int integral = Integer.parseInt(reteModel.getData().getIntegral());
+                    if (integral == -1) {
+                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
+                    } else if (integral == 0) {
+                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+                        Intent intentSucc = new Intent(context, Pk_HuiZong_Success.class);
+                        intentSucc.putExtra("shareContent", shareContent);
+                        startActivity(intentSucc);
+                        finish();
+                    } else if (integral > 0) {
+                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+                        Intent intentSucc = new Intent(context, Pk_HuiZong_Success.class);
 //                    intentSucc.putExtra("shareContent", shareContent);
-                    startActivity(intentSucc);
+                        startActivity(intentSucc);
 
-                    Intent intent = new Intent(context, JiFenActivity.class);
-                    intent.putExtra("media", "huizong");
-                    intent.putExtra("jifen", integral);
-                    intent.putExtra("DailyTask",reteModel.getData().getDailyTask());
-                    startActivity(intent);
-                    finish();
+                        Intent intent = new Intent(context, JiFenActivity.class);
+                        intent.putExtra("media", "huizong");
+                        intent.putExtra("jifen", integral);
+                        intent.putExtra("DailyTask", reteModel.getData().getDailyTask());
+                        startActivity(intent);
+                        finish();
+                    }
+
+                }else {
+                    Toast.makeText(context, reteModel.getMsg(), Toast.LENGTH_SHORT).show();
                 }
-
 
 //                else if (integral == 0) {
 ////                    Intent intent = new Intent(context, Pk_HuiZong.class);

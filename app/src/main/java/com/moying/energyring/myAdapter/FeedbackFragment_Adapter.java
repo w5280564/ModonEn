@@ -25,7 +25,7 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.Energy.Energy_WebDetail;
 import com.moying.energyring.myAcativity.MainLogin;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -113,7 +113,8 @@ public class FeedbackFragment_Adapter extends RecyclerView.Adapter<FeedbackFragm
         holder.name_Txt.setEllipsize(TextUtils.TruncateAt.END);
         holder.name_Txt.setText(oneData.getNickName());
 //        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
-        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+//        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
+        holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
         holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");
@@ -136,7 +137,7 @@ public class FeedbackFragment_Adapter extends RecyclerView.Adapter<FeedbackFragm
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", oneData.getUserID() + "");
                 context.startActivity(intent);
             }

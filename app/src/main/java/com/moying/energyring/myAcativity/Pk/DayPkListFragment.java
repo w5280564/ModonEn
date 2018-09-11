@@ -32,7 +32,7 @@ import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.StaticData.viewTouchDelegate;
 import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.Person.PersonMyCenter;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.myAdapter.DayPkFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
@@ -280,7 +280,7 @@ public class DayPkListFragment extends lazyLoadFragment implements XRecyclerView
 //                intent.putExtra("TargetID", baseModel.get(position).getTargetID() + "");
 //                startActivity(intent);
 
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
                 context.startActivity(intent);
             }

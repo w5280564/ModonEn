@@ -25,17 +25,18 @@ import java.util.Locale;
 
 @SuppressLint({"WorldReadableFiles", "WorldWriteableFiles"})
 public class saveFile {
-    //    public static String BaseUrl = "http://www.ec.dev.com/";
-    public static String BaseUrl = "http://172.16.0.222/";//本地
-//        public static String BaseUrl = "http://120.26.218.68:1111/";
+//        public static String BaseUrl = "http://www.ec.dev.com/";
+//    public static String BaseUrl = "http://172.16.0.222/";//本地
+    public static String BaseUrl = "http://www.myjy.biz/";//域名
+//    public static String BaseUrl = "http://120.26.218.68:1111/";
     public static String Post_Add_Url = "ec/v3/Post/Post_Add";
 
     public static String AddPk_Url = "ec/v4/PK/Report_Add";
-//    public static String AddPkV3_Url = "ec/v3/PK/Report_Add";
+    //    public static String AddPkV3_Url = "ec/v3/PK/Report_Add";
     public static String Report_Status_Url = "ec/v4/Post/Report_Post_Add";
     public static String EditInfo_Url = "ec/v2/User/UserInfo_Edit";
 
-//    public static String CodeUrl = "ec/Account/PhoneCode_Get";
+    //    public static String CodeUrl = "ec/Account/PhoneCode_Get";
     public static String CodeUrl = "ec/Account/SendPhoneVerificationCode";
     public static String LoginUrl = "ec/Account/Login";
     public static String EnergyListUrl = "ec/Post/Post_List";
@@ -137,8 +138,23 @@ public class saveFile {
     public static String InviteISHave_Url = "ec/User/Invite_Is_Exists";
     public static String Task_List_Url = "ec/Task/My_Task_List";
     public static String Task_Finish_Url = "ec/Task/Task_Finish_Share";
-
-
+    public static String PhotoList_Url = "ec/User/Photo_Album";
+    public static String TrainList_Url = "ec/Train/Pro_Train_List";
+    public static String Report_Add_Url = "ec/Report/ReportInfo_Add";
+    public static String Badge_List_Url = "ec/Badge/User_Insignia_List";
+    public static String OtherBadge_List_Url = "ec/Badge/Insignia_List";
+    public static String Sys_Notice_List_Url = "ec/Notice/Sys_Notice_List_New";
+    public static String ProjectCommunity_List_Url = "ec/Community/Project_List_Hot";
+    public static String ProjectCommunity_Seek_Url = "ec/Community/Project_List_New";
+    public static String Community_Status_Url = "ec/Community/Community_Status";
+    public static String Community_Post_List_Url = "ec/Community/Community_Post_List";
+    public static String Community_Ranking_List_Url = "ec/Community/Community_Ranking_List";
+    public static String Community_Likes_Add_Url = "ec/Community/Likes_Add";
+    public static String Community_Privacy_Url = "ec/Community/Community_Privacy_Update";
+    public static String Community_Del_Url = "ec/Community/Community_Del";
+    public static String Community_Add_Url = "ec/Community/Community_Add";
+    public static String My_Community_Post_List = "ec/Community/My_Community_Post_List";
+    public static String AddressBook_List_Url = "ec/User/AddressBook_List";
 
 
     private static SharedPreferences mShared = null;
@@ -323,6 +339,27 @@ public class saveFile {
         return flag;
     }
 
+    //trues今天  其他flase
+    public static Boolean getTimeBig(String str) {
+        Boolean flag = null;
+        try {
+            Date nowdate = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+            Date d = sdf.parse(str);
+
+            String time = sdf.format(d);
+            String timenow = sdf.format(nowdate);
+            if (time.equals(timenow)) {
+                flag = true;
+            } else {
+                flag = false;//日期相同
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     /**
      * 根据用户传入的时间表示格式，返回当前时间的格式 如果是MMdd，注意字母y不能大写。
      *
@@ -342,6 +379,7 @@ public class saveFile {
 
     /**
      * 保存实体类
+     *
      * @param
      */
     public static void putClass(Context context, String KEY_NAME, List<ProjectModel> model) {//需要实体类继承一个基类
@@ -358,6 +396,7 @@ public class saveFile {
 
     /**
      * 获取实体类
+     *
      * @param
      * @param
      * @return
@@ -383,7 +422,7 @@ public class saveFile {
         List<ProjectModel> listModel = getGosnClass(context, KEY_NAME, ProjectModel.class);
         int size = sp.getInt("size", 0);
         for (int i = 0; i < size; i++) {
-            if (listModel.get(i).getProjectId() == valen_Id){
+            if (listModel.get(i).getProjectId() == valen_Id) {
                 listModel.remove(i);//删除
                 break;
             }
@@ -391,7 +430,30 @@ public class saveFile {
         putClass(context, "moreModel", listModel);//保存
         editor.commit();
     }
+    //保存一条实体类
+    public static void saveGsonOne(Context context, String model_NAME, ProjectModel model) {
+        SharedPreferences sp = context.getSharedPreferences(model_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        List<ProjectModel> listModel = getGosnClass(context, model_NAME, ProjectModel.class);
 
+        listModel.add(model);
+//        int size = sp.getInt("size", 0);
+//        for (int i = 0; i < size; i++) {
+//            if (listModel.get(i).getProjectId() == valen_Id) {
+//                listModel.remove(i);//删除
+//                break;
+//            }
+//        }
+        putClass(context, model_NAME, listModel);//保存
+        editor.commit();
+    }
+
+    public static void clearGson(Context context, String KEY_NAME) {
+        SharedPreferences sp = context.getSharedPreferences(KEY_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
+    }
 
 
 }

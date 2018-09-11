@@ -179,8 +179,8 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
             } else {
                 mBinder.DownLoadStart(fileData);//没网 会type==5 线程会被取消 所以开启线程
             }
-        }else {
-            if (popupDown.isShowing()){
+        } else {
+            if (popupDown.isShowing()) {
                 noConnect_Lin.setVisibility(View.VISIBLE);
             }
         }
@@ -1248,15 +1248,44 @@ public class startTrainingActivity extends Activity implements WaveView.UpdateLo
     public synchronized <T extends Comparable<T>> boolean compare(List<T> a, List<T> b) {
         if (a == null || b == null)
             return false;
-        if (a.size() != b.size())
+//        if (a.size() != b.size())
+//            return false;
+        if (a.size() < b.size())
             return false;
         Collections.sort(a);
         Collections.sort(b);
-        for (int i = 0; i < a.size(); i++) {
-            if (!a.get(i).equals(b.get(i)))
-                return false;
-        }
-        return true;
+//        for (int i = 0; i < a.size(); i++) {
+//            if (!a.get(i).equals(b.get(i)))
+//                return false;
+//        }
+
+//        for (int i = 0; i < b.size(); i++) {
+//            if (!b.get(i).equals(a.get(i)))
+//                return false;
+//        }
+
+
+        boolean isDown = false;
+//        for (int i = 0; i < b.size(); i++) {
+//
+//            for (int k = 0; k < a.size(); k++) {
+//                if (b.get(i).equals(a.get(k))) {
+//                    isDown = true;
+//                    break;
+//                } else {
+//                    isDown = false;
+//                }
+//
+//            }
+//
+//            if (!isDown) {
+//                return isDown;
+//            }
+//        }
+        isDown = a.containsAll(b);
+
+//        return true;
+        return isDown;
     }
 
 

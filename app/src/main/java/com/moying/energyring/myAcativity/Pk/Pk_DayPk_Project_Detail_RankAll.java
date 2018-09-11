@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -224,11 +225,11 @@ public class Pk_DayPk_Project_Detail_RankAll extends FragmentActivity {
 
     private void initLocaData(TabLayout myTab) {
         myTab.setTabTextColors(Color.parseColor("#0095a0ab"), Color.parseColor("#00ffd800"));//初始颜色，选中颜色
-        myTab.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
+        myTab.setSelectedTabIndicatorColor(ContextCompat.getColor(this,R.color.colorThridYellow));//进度条颜色
         myTab.setTabMode(TabLayout.GRAVITY_CENTER);
 
-        tab_layout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#ffffff"));//初始颜色，选中颜色
-        tab_layout.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
+        tab_layout.setTabTextColors(ContextCompat.getColor(this,R.color.colorFristBlack), ContextCompat.getColor(this,R.color.colorFristBlack));//初始颜色，选中颜色
+        tab_layout.setSelectedTabIndicatorColor(ContextCompat.getColor(this,R.color.colorThridYellow));//进度条颜色
         tab_layout.setTabMode(TabLayout.MODE_SCROLLABLE);//设置可以滑动 根据标签自适应宽度
         if (fragments != null) {
             fragments.clear();

@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.TintTypedArray;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -94,9 +95,9 @@ public class HorizontalselectedView extends View {
         //两种字体颜色和字体大小
         seeSize = tta.getInteger(R.styleable.HorizontalselectedView_HorizontalselectedViewSeesize, 5);
         selectedTextSize = tta.getFloat(R.styleable.HorizontalselectedView_HorizontalselectedViewSelectedTextSize, 50);
-        selectedColor = tta.getColor(R.styleable.HorizontalselectedView_HorizontalselectedViewSelectedTextColor, context.getResources().getColor(android.R.color.black));
+        selectedColor = tta.getColor(R.styleable.HorizontalselectedView_HorizontalselectedViewSelectedTextColor, ContextCompat.getColor(context,android.R.color.black));
         textSize = tta.getFloat(R.styleable.HorizontalselectedView_HorizontalselectedViewTextSize, 40);
-        textColor = tta.getColor(R.styleable.HorizontalselectedView_HorizontalselectedViewTextColor, context.getResources().getColor(android.R.color.darker_gray));
+        textColor = tta.getColor(R.styleable.HorizontalselectedView_HorizontalselectedViewTextColor, ContextCompat.getColor(context,android.R.color.darker_gray));
     }
 
     @Override

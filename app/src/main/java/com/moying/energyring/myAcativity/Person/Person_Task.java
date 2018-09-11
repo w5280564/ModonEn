@@ -1,13 +1,13 @@
 package com.moying.energyring.myAcativity.Person;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +27,18 @@ public class Person_Task extends BaseActivity {
     private ViewPager Slideviewpager;
     private String Integral;
     private TextView fen_Txt;
+    private String tabType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persontask);
+
+
+
+        Intent intent = getIntent();
+        Integral = intent.getStringExtra("Integral");
+        tabType = intent.getStringExtra("tabType");
 
 
         initTitle();
@@ -42,14 +49,14 @@ public class Person_Task extends BaseActivity {
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#ffffff"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#2b2a2a"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("我的积分");
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -70,6 +77,8 @@ public class Person_Task extends BaseActivity {
         Slideviewpager = (ViewPager) findViewById(R.id.Slideviewpager);
         fen_Txt = (TextView)findViewById(R.id.fen_Txt);
         StaticData.ViewScale(ac_tab_layout, 410, 100);
+
+        fen_Txt.setText(Integral);
     }
 
     private void initData(){
@@ -87,7 +96,7 @@ public class Person_Task extends BaseActivity {
     private void initLocaData(TabLayout myTab) {
         myTab.setTabMode(TabLayout.MODE_FIXED);//设置可以滑动
 //        myTab.setSelectedTabIndicatorHeight(0);//去掉下导航条
-        myTab.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
+        myTab.setSelectedTabIndicatorColor(ContextCompat.getColor(this,R.color.colorThridYellow));//进度条颜色
         myTab.setTabMode(TabLayout.GRAVITY_CENTER);
         if (userArr != null) {
             userArr.clear();
@@ -118,7 +127,7 @@ public class Person_Task extends BaseActivity {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
                 int txtSize = (int) (Float.parseFloat(saveFile.getShareData("scale",Person_Task.this)) * 30);
                 tab_Name.setTextSize(20);
-                tab_Name.setTextColor(Color.parseColor("#ffd800"));
+                tab_Name.setTextColor(ContextCompat.getColor(Person_Task.this,R.color.colorThridYellow));
                 StaticData.ViewScale(tab_Name, 205, 80);
 
 //                if (tab.getPosition() == 0) {
@@ -138,7 +147,7 @@ public class Person_Task extends BaseActivity {
                 TextView tab_Name = (TextView) tab.getCustomView().findViewById(R.id.tab_Name);
                 int txtSize = (int) (Float.parseFloat(saveFile.getShareData("scale", Person_Task.this)) * 20);
                 tab_Name.setTextSize(15);
-                tab_Name.setTextColor(Color.parseColor("#95a0ab"));
+                tab_Name.setTextColor(ContextCompat.getColor(Person_Task.this,R.color.colorSecondWhite));
                 StaticData.ViewScale(tab_Name, 205, 80);
 
 //                if (tab.getPosition() == 0) {
@@ -172,11 +181,7 @@ public class Person_Task extends BaseActivity {
             }
         }
 
-        Intent intent = getIntent();
-        Integral = intent.getStringExtra("Integral");
-        String tabType = intent.getStringExtra("tabType");
 
-        fen_Txt.setText(Integral);
         if (tabType != null) {
             Slideviewpager.setCurrentItem(Integer.parseInt(tabType), true);
         } else {

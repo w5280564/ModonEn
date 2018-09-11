@@ -3,7 +3,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -17,8 +17,9 @@
         android:id="@+id/persondata_Lin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#2b2a2a"
+        android:background="@color/colorFristWhite"
         android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -41,7 +42,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/head_Img"
                 android:text="头像"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -59,7 +60,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/head_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
 
@@ -83,7 +84,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/nick_Img"
                 android:text="昵称"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -98,7 +99,7 @@
                 android:gravity="center_vertical|right"
                 android:lines="1"
                 android:paddingRight="20dp"
-                android:textColor="#4d4a4a"
+                android:textColor="@color/colorSecondBlack"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -107,7 +108,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/nick_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -129,7 +130,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/bir_Img"
                 android:text="生日"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -141,7 +142,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
                 android:text=""
-                android:textColor="#4d4a4a"
+                android:textColor="@color/colorSecondBlack"
                 android:textSize="14sp" />
 
             <View
@@ -149,7 +150,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/bir_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
 
@@ -172,7 +173,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/sex_Img"
                 android:text="性别"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -198,7 +199,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/sex_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
 
@@ -222,7 +223,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/email_Img"
                 android:text="邮箱"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -237,7 +238,7 @@
                 android:gravity="center_vertical|right"
                 android:lines="1"
                 android:paddingRight="20dp"
-                android:textColor="#4d4a4a"
+                android:textColor="@color/colorSecondBlack"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -246,7 +247,7 @@
                 android:layout_height="1px"
                 android:layout_alignLeft="@id/email_Img"
                 android:layout_alignParentBottom="true"
-                android:background="#343434" />
+                android:background="@color/colorline" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -269,7 +270,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/intr_Img"
                 android:text="简介"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -281,7 +282,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@id/intr_Img"
                 android:text=""
-                android:textColor="#999999"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="14sp" />
 
             <EditText
@@ -297,8 +298,8 @@
                 android:hint="请输入你的签名"
                 android:lines="1"
                 android:paddingRight="20dp"
-                android:textColor="#4d4a4a"
-                android:textColorHint="#4d4a4a"
+                android:textColor="@color/colorSecondBlack"
+                android:textColorHint="@color/colorSecondBlack"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </RelativeLayout>

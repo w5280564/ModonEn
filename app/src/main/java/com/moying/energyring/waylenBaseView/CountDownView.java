@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -50,10 +51,10 @@ public class CountDownView extends View {
     public CountDownView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CountDownView);
-        mRingColor = a.getColor(R.styleable.CountDownView_ringColor, context.getResources().getColor(R.color.colorAccent));
+        mRingColor = a.getColor(R.styleable.CountDownView_ringColor, ContextCompat.getColor(context,R.color.colorAccent));
         mRingWidth = a.getFloat(R.styleable.CountDownView_ringWidth, 40);
         mRingProgessTextSize = a.getDimensionPixelSize(R.styleable.CountDownView_progressTextSize, Utils.sp2px(context, 20));
-        mProgessTextColor = a.getColor(R.styleable.CountDownView_progressTextColor, context.getResources().getColor(R.color.colorAccent));
+        mProgessTextColor = a.getColor(R.styleable.CountDownView_progressTextColor, ContextCompat.getColor(context,R.color.colorAccent));
         mCountdownTime = a.getInteger(R.styleable.CountDownView_countdownTime, 60);
         a.recycle();
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

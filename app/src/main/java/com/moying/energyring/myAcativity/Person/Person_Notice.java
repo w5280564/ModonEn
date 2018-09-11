@@ -3,8 +3,8 @@ package com.moying.energyring.myAcativity.Person;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -142,16 +142,16 @@ public class Person_Notice extends Activity implements XRecyclerView.LoadingList
 
     private void setinitbg() {
         remind_Txt.setBackgroundResource(0);
-        remind_Txt.setTextColor(Color.parseColor("#ffffff"));
+        remind_Txt.setTextColor(ContextCompat.getColor(this,R.color.colorSecondBlack));
         mes_Txt.setBackgroundResource(0);
-        mes_Txt.setTextColor(Color.parseColor("#ffffff"));
+        mes_Txt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
     }
 
     private void changebg(TextView myView) {
         StaticData.ViewScale(myView, 160, 0);
         myView.setElevation(2f);
         myView.setBackgroundResource(R.drawable.personnotice_choice);
-        myView.setTextColor(Color.parseColor("#ffffff"));
+        myView.setTextColor(ContextCompat.getColor(this,R.color.colorFristWhite));
     }
 
     @Override

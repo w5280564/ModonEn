@@ -20,7 +20,7 @@ import com.moying.energyring.Model.Committed_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.MainLogin;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -43,9 +43,9 @@ public class CommittedFragment_Adapter extends RecyclerView.Adapter<CommittedFra
     }
 
     public void addMoreData(Committed_Model list) {
-        int lastIndex = this.otherList.size();
+        int lastIndex = this.otherList.size() + 2;//头部多几项刷新需要添加
         if (this.otherList.addAll(list.getData())) {
-            notifyItemRangeInserted(lastIndex+1, list.getData().size());
+            notifyItemRangeInserted(lastIndex, list.getData().size());
         }
     }
 
@@ -88,7 +88,8 @@ public class CommittedFragment_Adapter extends RecyclerView.Adapter<CommittedFra
         }
 
         holder.name_Txt.setText(oneData.getNickName());
-        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+//        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+        holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
         if (oneData.isIs_Like()) {
             holder.energy_like.setImageResource(R.drawable.like_red_icon);
         } else {
@@ -107,7 +108,7 @@ public class CommittedFragment_Adapter extends RecyclerView.Adapter<CommittedFra
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", oneData.getUserID() + "");
                 context.startActivity(intent);
             }

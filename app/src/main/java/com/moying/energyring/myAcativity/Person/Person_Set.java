@@ -2,18 +2,19 @@ package com.moying.energyring.myAcativity.Person;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sanjay.selectorphotolibrary.utils.PermissionUtils;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.moying.energyring.R;
-import com.moying.energyring.StaticData.DataCleanManager;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
@@ -24,7 +25,6 @@ import cn.jpush.android.api.JPushInterface;
 public class Person_Set extends Activity {
 
     private RelativeLayout cache_Rel,change_Rel;
-    private TextView cache_Txt;
     private SwitchButton push_switch;
     static Activity person_Set;
 
@@ -44,14 +44,14 @@ public class Person_Set extends Activity {
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title_Include.setElevation(2f);//阴影
         }
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         TextView cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("设置");
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -70,8 +70,8 @@ public class Person_Set extends Activity {
         ImageView ideal_Img = (ImageView) findViewById(R.id.ideal_Img);
         ImageView idea_arrow = (ImageView) findViewById(R.id.idea_arrow);
         cache_Rel = (RelativeLayout) findViewById(R.id.cache_Rel);
-        cache_Txt = (TextView) findViewById(R.id.cache_Txt);
         ImageView cache_Img = (ImageView) findViewById(R.id.cache_Img);
+        ImageView cache_arrow = (ImageView) findViewById(R.id.cache_arrow);
         ImageView mes_Img = (ImageView) findViewById(R.id.mes_Img);
         RelativeLayout push_Rel = (RelativeLayout) findViewById(R.id.push_Rel);
         push_switch = (SwitchButton) findViewById(R.id.push_switch);
@@ -96,6 +96,7 @@ public class Person_Set extends Activity {
         StaticData.ViewScale(change_arrow, 48, 56);
         StaticData.ViewScale(idea_arrow,  48, 56);
         StaticData.ViewScale(about_arrow, 48, 56);
+        StaticData.ViewScale(cache_arrow, 48, 56);
         StaticData.ViewScale(quit_Btn, 690, 90);
 
         personData_Rel.setOnClickListener(new personData_Rel());
@@ -114,16 +115,6 @@ public class Person_Set extends Activity {
             push_switch.setChecked(true);
         }
 
-        try {
-            cache_Txt.setText(DataCleanManager.getTotalCacheSize(Person_Set.this));
-            if (StaticData.getNumbers(DataCleanManager.getTotalCacheSize(Person_Set.this)).equals("0")) {
-                cache_Rel.setEnabled(false);
-            } else {
-                cache_Rel.setEnabled(true);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -164,14 +155,37 @@ public class Person_Set extends Activity {
     public class cache_Rel implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            try {
-                DataCleanManager.clearAllCache(Person_Set.this);
-                cache_Txt.setText(DataCleanManager.getTotalCacheSize(Person_Set.this));
-            } catch (Exception e) {
-                e.printStackTrace();
+               /*申请读取存储的权限*/
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PermissionUtils.requestPermission(Person_Set.this, PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE, permissionGrant);
+            } else {
+                Intent intent = new Intent(Person_Set.this,Person_Set_Cache.class);
+                startActivity(intent);
             }
+
         }
     }
+
+    private PermissionUtils.PermissionGrant permissionGrant = new PermissionUtils.PermissionGrant() {
+        @Override
+        public void onPermissionGranted(int requestCode) {
+            switch (requestCode) {
+                case PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE:
+//                Toast.makeText(ImagePickerActivity.this, "读取存储权限已打开", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Person_Set.this,Person_Set_Cache.class);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    };
+
+    /*申请权限的回调*/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionUtils.requestPermissionsResult(this, requestCode, permissions, grantResults, permissionGrant);
+    }
+
 
 
     public class change_Rel implements View.OnClickListener {
@@ -212,6 +226,7 @@ public class Person_Set extends Activity {
 //            mam.finishAllActivity();
         }
     }
+
 
 
 }

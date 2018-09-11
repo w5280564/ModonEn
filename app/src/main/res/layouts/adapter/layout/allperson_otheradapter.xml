@@ -11,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupblack_bg">
+        android:background="@drawable/popupwhite_bg">
 
         <TextView
             android:id="@+id/title_Txt"
@@ -21,7 +21,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
             android:text="健康走"
-            android:textColor="#F24d40"
+            android:textColor="@color/colorFristRed"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="目标时长"
-                    android:textColor="#989797"
+                    android:textColor="@color/colorSecondWhite"
                     android:textSize="15sp" />
 
                 <TextView
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5天"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/colorFristBlack"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="每日目标"
-                    android:textColor="#989797"
+                    android:textColor="@color/colorSecondWhite"
                     android:textSize="15sp" />
 
                 <TextView
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5天"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/colorFristBlack"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
@@ -87,6 +87,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
+            android:textColor="@color/colorSecondWhite"
             android:text="完成" />
 
         <TextView
@@ -98,7 +99,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorFristBlack"
             android:text="" />
 
         <TextView
@@ -108,7 +109,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_below="@id/time_Lin"
-            android:textColor="#989797"
+            android:textColor="@color/colorSecondWhite"
             android:text="完成"/>
 
         <ProgressBar

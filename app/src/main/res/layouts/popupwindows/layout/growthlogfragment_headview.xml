@@ -2,23 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginLeft="10dp">
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tui_Txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="10sp"
         android:text="高手推荐"
-        android:textColor="#ffffff"/>
+        android:textColor="@color/colorSecondBlack"
+        android:textSize="10sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/head_recycle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

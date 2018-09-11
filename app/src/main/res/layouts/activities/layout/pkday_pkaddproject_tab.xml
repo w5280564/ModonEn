@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121"
+    android:background="@color/colorAllBg"
     android:orientation="vertical"
     android:focusableInTouchMode="true">
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#2b2a2a">
+        android:background="@color/colorFristWhite">
 
         <Button
             android:id="@+id/return_Btn"
@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="创建"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorSecondWhite"
             android:textSize="14sp"
             android:background="@null"/>
 
@@ -94,7 +94,7 @@
         android:layout_below="@id/seek_Rel"
         app:tabPaddingEnd="-0.1dp"
         app:tabPaddingStart="-0.1dp"
-        android:background="#2b2a2a"/>
+        android:background="@color/colorFristWhite"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/Slideviewpager"

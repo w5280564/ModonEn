@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/head_simple"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        app:roundAsCircle="true" />
+
+    <LinearLayout
+        android:id="@+id/nick_Lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/head_simple"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Nick_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/join_grade_Img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/gong_Rel"
+        android:layout_width="200dp"
+        android:layout_below="@id/nick_Lin"
+        android:layout_centerHorizontal="true"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorFristWhite">
+
+        <ImageView
+            android:id="@+id/gong_Img"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="#f5a623" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/gong_Img"
+            android:text="总共加入天数"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/gong_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="总共加入天数"
+            android:textColor="#f5a623"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chi_Rel"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/gong_Rel"
+        android:layout_centerHorizontal="true"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorFristWhite">
+
+        <ImageView
+            android:id="@+id/chi_Img"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="#5cd700" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/chi_Img"
+            android:text="已坚持天数"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/chi_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="总共加入天数"
+            android:textColor="#5cd700"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lei_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/chi_Rel"
+        android:background="@color/colorFristWhite">
+
+        <ImageView
+            android:id="@+id/lei_Img"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="#ffd800" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/lei_Img"
+            android:text="累计数"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lei_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="总共加入天数"
+            android:textColor="#ffd800"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ka_Rel"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lei_Rel"
+        android:background="@color/colorFristWhite">
+
+        <ImageView
+            android:id="@+id/ka_Img"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="#4a90e2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/ka_Img"
+            android:text="累计打卡"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/ka_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="总共加入天数"
+            android:textColor="#4a90e2"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/ka_Rel"
+        android:gravity="left"
+        android:text="时间线"
+        android:textColor="@color/colorFristBlack"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
+

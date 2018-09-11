@@ -21,7 +21,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.MainLogin;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -47,9 +47,9 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
     }
 
     public void addMoreData(EnergyList_Model list) {
-        int lastIndex = this.otherList.size();
+        int lastIndex = this.otherList.size()+ 1;//头部多几项刷新需要添加
         if (this.otherList.addAll(list.getData())) {
-            notifyItemRangeInserted(lastIndex+1, list.getData().size());
+            notifyItemRangeInserted(lastIndex, list.getData().size());
         }
     }
 
@@ -59,7 +59,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
         if (otherList.get(myposition).getPostType() == POST_TYPE) {
             myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.commitedfragment_adapter, null));
         } else {
-            myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.growthlogfragment_adapter, null));
+            myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.growthlogattention_adapter, null));
         }
         return myview;
     }
@@ -100,7 +100,8 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
             }
 
             holder.name_Txt.setText(oneData.getNickName());
-            holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+//            holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+            holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
 
 
             if (oneData.getFilePath() != null) {
@@ -125,7 +126,8 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
                 holder.myhead_simple.setImageURI(headUri);
             }
             holder.name_Txt.setText(oneData.getNickName());
-            holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+//            holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+            holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
             holder.content_Txt.setText(oneData.getPostContent());
             holder.talk_Txt.setText(oneData.getCommentNum() + "");
             holder.like_Txt.setText(oneData.getLikes() + "");
@@ -152,7 +154,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", oneData.getUserID() + "");
                 context.startActivity(intent);
             }
@@ -203,7 +205,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
                 ImageView energy_talk = (ImageView) itemView.findViewById(R.id.energy_talk);
                 energy_like = (ImageView) itemView.findViewById(R.id.energy_like);
                 like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
-                StaticData.ViewScale(mu_Rel, 710, 0);
+//                StaticData.ViewScale(mu_Rel, 710, 0);
                 StaticData.ViewScale(myhead_simple, 100, 100);
                 StaticData.ViewScale(content_simple, 190, 190);
                 StaticData.ViewScale(energy_talk, 40, 40);
@@ -222,7 +224,7 @@ public class AttenttionFragment_Adapter extends RecyclerView.Adapter<AttenttionF
                 talk_Txt = (TextView) itemView.findViewById(R.id.talk_Txt);
                 like_Txt = (TextView) itemView.findViewById(R.id.like_Txt);
                 like_Lin = (LinearLayout) itemView.findViewById(R.id.like_Lin);
-                StaticData.ViewScale(mu_Rel, 710, 0);
+//                StaticData.ViewScale(mu_Rel, 710, 0);
                 StaticData.ViewScale(myhead_simple, 100, 100);
                 StaticData.ViewScale(energy_img, 40, 40);
                 StaticData.ViewScale(energy_talk, 40, 40);

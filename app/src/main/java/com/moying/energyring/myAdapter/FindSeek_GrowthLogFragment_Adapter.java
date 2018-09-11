@@ -22,7 +22,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.NoDoubleClickListener;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.MainLogin;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 
 import org.xutils.common.Callback;
@@ -57,7 +57,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.growthlogfragment_adapter, null));
+        MyViewHolder myview = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.findseek_growthlogfragment_adapter, null));
         return myview;
     }
 
@@ -102,6 +102,8 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 //        holder.name_Txt.setText(oneData.getNickName());
 //        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
 //        holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
+//        holder.contentTime_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+        holder.contentTime_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
         if (oneData.getPostTitle() != null) {
             holder.name_Txt.setText(oneData.getPostTitle().toString());
         }
@@ -142,7 +144,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
         holder.myhead_simple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", oneData.getUserID() + "");
                 context.startActivity(intent);
             }
@@ -181,7 +183,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private  TextView remove_Txt;
+        private  TextView remove_Txt,contentTime_Txt;
         private LinearLayout hero_Lin, like_Lin;
         private TextView name_Txt, time_Txt, content_Txt, talk_Txt, like_Txt,hero_Txt,yue_Txt;
         private ImageView energy_img, energy_like;
@@ -209,6 +211,7 @@ public class FindSeek_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Fin
             hero_Txt = (TextView) itemView.findViewById(R.id.hero_Txt);
             yue_Txt = (TextView) itemView.findViewById(R.id.yue_Txt);
             remove_Txt = (TextView) itemView.findViewById(R.id.remove_Txt);
+            contentTime_Txt = (TextView) itemView.findViewById(R.id.contentTime_Txt);
             StaticData.ViewScale(mu_Rel, 710, 0);
 //            StaticData.ViewScale(myhead_simple, 100, 100);
 

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -108,11 +109,11 @@ public class Person_LineView extends Activity {
 
     private void initTitle() {
         View title_Include = (View) findViewById(R.id.title_Include);
-        title_Include.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        title_Include.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         Button return_Btn = (Button) title_Include.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) title_Include.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
         cententtxt.setText("");
         StaticData.ViewScale(return_Btn, 80, 88);
         StaticData.ViewScale(title_Include, 0, 88);
@@ -326,7 +327,7 @@ public class Person_LineView extends Activity {
             axisX = new Axis();
             axisX.setHasLines(true); //x 轴分割线
             axisX.setHasSeparationLine(false);//设置标签跟图表之间的轴线
-            axisX.setLineColor(Color.parseColor("#3e3d3d"));//虚线颜色 e0e0e0
+            axisX.setLineColor(ContextCompat.getColor(this,R.color.colorThridWhite));//虚线颜色 e0e0e0
             axisX.setValues(mAxisXValues);  //X軸加入數據列表
             axisY = new Axis().setHasLines(true);
             if (hasAxesNames) {

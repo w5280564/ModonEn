@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+
     <meta-data
         android:name="android.webkit.WebView.EnableSafeBrowding"
         android:value="true" />
@@ -35,6 +36,9 @@
 
     <!-- 声明权限添加角标 -->
     <uses-permission android:name=" com.huawei.android.launcher.permission. CHANGE_BADGE" />
+
+    <!--手机联系人-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".waylenBaseView.MyApplication"
@@ -206,9 +210,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".myAcativity.Person.Person_Shop"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".myAcativity.Person.person_Data_Edit"
             android:screenOrientation="portrait" />
         <activity
             android:name=".myAcativity.Person.Person_Relus"
@@ -488,11 +489,68 @@
         <activity
             android:name=".myAcativity.MainChangePhone"
             android:screenOrientation="portrait" />
-        <activity android:name=".myAcativity.Person.Person_Task" android:screenOrientation="portrait"></activity>
-        <activity android:name=".myAcativity.Energy.TaskShareActivity" android:screenOrientation="portrait"
-            android:theme="@style/MyDialog"></activity>
-
-
+        <activity
+            android:name=".myAcativity.Person.Person_Task"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Energy.TaskShareActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".myAcativity.Person.Person_PrivacyPolicy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.Person_Set_Cache"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPk_Project_HistoryDetail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeprice" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPk_Project_History_Coust"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_And_Other"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeprice" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_AndOther_Train"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_My_Badge"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_My_BadgeDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_Other_Badge"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_My_BadgeDetail_Share"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".myAcativity.Person.PersonMyCenter_AndOther_Photo_Detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPKAdd_ProjectSeek"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPk_Community"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.PK_Calner_Set"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.PK_Calner_SetPrivacy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Pk.Pk_DayPk_Community_History"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myAcativity.Energy.Energy_Community_Friend"
+            android:screenOrientation="portrait" />
+        <activity android:name=".myAcativity.Energy.Energy_CommunityFriend_Invite"></activity>
     </application>
 
 </manifest>

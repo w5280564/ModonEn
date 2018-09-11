@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:background="#2b2a2a">
+        android:background="@color/colorFristWhite">
 
 
         <LinearLayout
@@ -24,14 +24,14 @@
                 android:id="@+id/name_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#e3e7eb"
+                android:textColor="@color/colorFristWhite"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/time_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="10sp" />
 
 
@@ -44,14 +44,14 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:textColor="#F24d40"
+            android:textColor="@color/colorFristRed"
             android:textSize="14sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#343434" />
+            android:background="@color/colorline" />
     </RelativeLayout>
 
 

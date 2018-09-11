@@ -3,7 +3,7 @@
     android:id="@+id/activity_remind_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121">
+    android:background="@color/colorAllBg">
 
 
     <include
@@ -41,8 +41,8 @@
             android:imeOptions="actionSearch"
             android:paddingLeft="15dp"
             android:lines="1"
-            android:textColor="#989797"
-            android:textColorHint="#989797"
+            android:textColor="@color/colorFristBlack"
+            android:textColorHint="@color/colorSecondWhite"
             android:textSize="12sp" />
 
     </LinearLayout>

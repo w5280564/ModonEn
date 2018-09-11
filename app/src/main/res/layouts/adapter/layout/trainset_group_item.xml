@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:textColor="#2b2a2a"
+        android:textColor="@color/colorFristBlack"
         android:textStyle="bold"
         android:text="我地址"/>
 

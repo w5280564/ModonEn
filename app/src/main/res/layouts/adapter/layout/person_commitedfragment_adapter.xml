@@ -11,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupblack_bg">
+        android:background="@drawable/popupwhite_bg">
 
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -35,7 +35,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/content_simple"
             android:lines="3"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorFristBlack"
             android:textSize="12sp" />
 
         <LinearLayout

@@ -17,7 +17,7 @@
     <item android:bottom="3dp">
         <shape android:shape="rectangle">
             <gradient android:angle="90" />
-            <solid android:color="#2b2a2a" />
+            <solid android:color="@color/colorFristWhite" />
         </shape>
     </item>
 

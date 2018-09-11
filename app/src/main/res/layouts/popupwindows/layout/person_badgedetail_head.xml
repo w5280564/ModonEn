@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_Lin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <View
+        android:id="@+id/line_View"
+        android:layout_width="6dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/colorFristWhite" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/badgeName_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="训练"
+            android:textColor="@color/colorFristWhite"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/badgeCount_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorFristWhite"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
+

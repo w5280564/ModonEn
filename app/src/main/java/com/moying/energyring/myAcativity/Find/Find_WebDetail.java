@@ -3,13 +3,13 @@ package com.moying.energyring.myAcativity.Find;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -33,7 +33,7 @@ import com.moying.energyring.R;
 import com.moying.energyring.StaticData.HtmlToText;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.Energy.MyCallBack;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.network.saveFile;
 import com.umeng.analytics.MobclickAgent;
 
@@ -64,7 +64,7 @@ public class Find_WebDetail extends Activity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.news_web);
         LinearLayout layoutRoot = new LinearLayout(this);//根布局
-        layoutRoot.setBackgroundColor(Color.parseColor("#232121"));
+        layoutRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         layoutRoot.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.CENTER;
@@ -130,7 +130,7 @@ public class Find_WebDetail extends Activity {
 
     private void initTitle(LinearLayout mycontentView) {
         final View view = LayoutInflater.from(Find_WebDetail.this).inflate(R.layout.base_titlebar, null);
-        view.setBackgroundColor(Color.parseColor("#2b2a2a"));
+        view.setBackgroundColor(ContextCompat.getColor(this,R.color.colorFristWhite));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             view.setElevation(2f);//阴影
         }
@@ -140,7 +140,7 @@ public class Find_WebDetail extends Activity {
         Button return_Btn = (Button) view.findViewById(R.id.return_Btn);
         return_Btn.setBackgroundResource(R.drawable.return_black);
         cententtxt = (TextView) view.findViewById(R.id.cententtxt);
-        cententtxt.setTextColor(Color.parseColor("#ffffff"));
+        cententtxt.setTextColor(ContextCompat.getColor(this,R.color.colorFristBlack));
 //        cententtxt.setText(myWebView.getTitle());
         cententtxt.setText("能量帖");
         StaticData.ViewScale(return_Btn, 80, 88);
@@ -338,7 +338,7 @@ public class Find_WebDetail extends Activity {
     //JS调用Android JAVA方法名和HTML中的按钮 onclick后的别名后面的名字对应
     @JavascriptInterface
     public void UserID_Get(int UserId) {
-        Intent intent = new Intent(Find_WebDetail.this, PersonMyCenter_Other.class);
+        Intent intent = new Intent(Find_WebDetail.this, PersonMyCenter_And_Other.class);
         intent.putExtra("UserID", UserId + "");
         startActivity(intent);
     }

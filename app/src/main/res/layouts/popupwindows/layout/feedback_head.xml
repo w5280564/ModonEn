@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="1.欢迎吐槽反馈，帮助我们成长。您的每个反馈意见将获得10积分奖励；\n2.禁止发送垃圾帖、广告帖、重复帖。违反者将扣除50-100积分，维护社区环境；\n3.支持度最高的反馈意见将被优先处理；\n4.如果您的意见被采纳，将额外获得50积分奖励。\n\n谢谢您的参与！"
-        android:textColor="#e3e7eb"
+        android:textColor="@color/colorSecondBlack"
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -32,14 +32,14 @@
             android:background="@drawable/calendar_item_red"
             android:gravity="center"
             android:text="1."
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorThridWhite"
             android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="欢迎吐槽反馈，帮助我们成长。您的每个反馈意见将获得10积分奖励；"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -59,14 +59,14 @@
             android:background="@drawable/calendar_item_red"
             android:gravity="center"
             android:text="2."
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorThridWhite"
             android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="禁止发送垃圾帖、广告帖、重复帖。违反者将扣除50-100积分，维护社区环境；"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -86,14 +86,14 @@
             android:background="@drawable/calendar_item_red"
             android:gravity="center"
             android:text="3."
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorThridWhite"
             android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="支持度最高的反馈意见将被优先处理；"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -112,14 +112,14 @@
             android:background="@drawable/calendar_item_red"
             android:gravity="center"
             android:text="4."
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorThridWhite"
             android:textSize="12sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="如果您的意见被采纳，将额外获得50积分奖励。\n\n谢谢您的参与！"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorSecondBlack"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>

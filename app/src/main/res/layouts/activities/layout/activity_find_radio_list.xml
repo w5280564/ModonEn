@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232121">
+    android:background="@color/colorFristWhite">
 
     <RelativeLayout
         android:layout_width="match_parent"

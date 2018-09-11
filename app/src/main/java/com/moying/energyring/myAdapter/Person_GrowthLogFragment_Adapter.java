@@ -112,7 +112,8 @@ public class Person_GrowthLogFragment_Adapter extends RecyclerView.Adapter<Perso
 //        holder.myhead_simple.setImageURI(headUri);
 //        holder.name_Txt.setText(oneData.getNickName());
 //        holder.time_Txt.setText(StaticData.Datatypetwo(oneData.getCreateTime()));
-        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+//        holder.time_Txt.setText(StaticData.getStandardDate(oneData.getCreateTime()));
+        holder.time_Txt.setText(StaticData.getDate(oneData.getCreateTime()));
         holder.content_Txt.setText(HtmlToText.delHTMLTag(oneData.getPostContent()));
         holder.talk_Txt.setText(oneData.getCommentNum() + "");
         holder.like_Txt.setText(oneData.getLikes() + "");

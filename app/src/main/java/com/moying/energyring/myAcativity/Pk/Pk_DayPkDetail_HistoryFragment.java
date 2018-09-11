@@ -180,7 +180,7 @@ public class Pk_DayPkDetail_HistoryFragment extends lazyLoadFragment implements 
         mAdapter.setOnItemClickLitener(new DayPk_HistoryFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+//                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
 //                intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
 //                context.startActivity(intent);
             }

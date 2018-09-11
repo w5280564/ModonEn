@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/badge_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorFristWhite"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:id="@+id/badgenei_Rel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/badgeName_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:text="徽章"
+                android:textColor="@color/colorFourthBlack"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/badgeCount_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/badgeName_Txt"
+                android:textColor="@color/colorFristBlack"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/badge_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/right_arrow_black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorline"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@id/badgeName_Txt"
+                android:layout_marginRight="20dp"/>
+
+        </RelativeLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/badge_Scro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/badgenei_Rel"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:id="@+id/badge_Lin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorFristWhite"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

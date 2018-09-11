@@ -65,6 +65,7 @@ public class Person_TaskList_Fragment_Adapter extends RecyclerView.Adapter<Perso
 
         holder.taskName_Txt.setText(oneData.getTaskName());
         holder.taskContent_Txt.setText(oneData.getSummary());
+        holder.fen_Txt.setText("+"+oneData.getIntegral()+"积分");
 
         String[] taskArr = oneData.getBtnText().split(",");
         if (oneData.getFinishID() == 0){
@@ -98,7 +99,7 @@ public class Person_TaskList_Fragment_Adapter extends RecyclerView.Adapter<Perso
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private  Button task_Btn;
-        private TextView  taskName_Txt, taskContent_Txt;
+        private TextView  taskName_Txt, taskContent_Txt,fen_Txt;
         private RelativeLayout myRel;
 
         public MyViewHolder(View itemView) {
@@ -106,6 +107,7 @@ public class Person_TaskList_Fragment_Adapter extends RecyclerView.Adapter<Perso
             myRel = (RelativeLayout) itemView.findViewById(R.id.myRel);
             taskName_Txt = (TextView) itemView.findViewById(R.id.taskName_Txt);
             taskContent_Txt = (TextView) itemView.findViewById(R.id.taskContent_Txt);
+            fen_Txt = (TextView) itemView.findViewById(R.id.fen_Txt);
             task_Btn = (Button) itemView.findViewById(R.id.task_Btn);
             StaticData.ViewScale(myRel, 0, 160);
             StaticData.ViewScale(task_Btn, 160, 76);

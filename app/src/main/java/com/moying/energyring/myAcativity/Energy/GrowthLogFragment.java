@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,9 @@ import com.moying.energyring.Model.EnergyList_Model;
 import com.moying.energyring.Model.headListModel;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
-import com.moying.energyring.myAdapter.GrowthLogFragment_Adapter;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.myAdapter.GrowthLogHead_Adapter;
+import com.moying.energyring.myAdapter.GrowthLogStaggerFragment_Adapter;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.lazyLoadFragment;
 import com.moying.energyring.xrecycle.XRecyclerView;
@@ -159,7 +160,7 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
         headAdapter.setOnItemClickLitener(new GrowthLogHead_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", headModel.getData().get(position).getUserID() + "");
                 context.startActivity(intent);
             }
@@ -170,22 +171,23 @@ public class GrowthLogFragment extends lazyLoadFragment implements XRecyclerView
         });
     }
 
-    GrowthLogFragment_Adapter mAdapter;
+    GrowthLogStaggerFragment_Adapter mAdapter;
 
     public void initlist(final Context context) {
-        LinearLayoutManager mMangaer = new LinearLayoutManager(context);
-        other_recycle.setLayoutManager(mMangaer);
+//        LinearLayoutManager mMangaer = new LinearLayoutManager(context);
+        StaggeredGridLayoutManager staggerManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        other_recycle.setLayoutManager(staggerManager);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         other_recycle.setHasFixedSize(true);
-        mAdapter = new GrowthLogFragment_Adapter(context, baseModel, listModel);
+        mAdapter = new GrowthLogStaggerFragment_Adapter(context, baseModel, listModel);
         other_recycle.setAdapter(mAdapter);
-        mAdapter.setOnItemClickLitener(new GrowthLogFragment_Adapter.OnItemClickLitener() {
+        mAdapter.setOnItemClickLitener(new GrowthLogStaggerFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
 //                if (baseModel.get(position).getPostType() == 2)
                 String content = baseModel.get(position).getPostContent();
                 String postId = baseModel.get(position).getPostID() + "";
-                String url = saveFile.BaseUrl + "/Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
+                String url = saveFile.BaseUrl + "Share/PostDetails?PostID=" + baseModel.get(position).getPostID();
                 Intent intent = new Intent(context, Energy_WebDetail.class);
                 intent.putExtra("content", content);
                 intent.putExtra("postId", postId);

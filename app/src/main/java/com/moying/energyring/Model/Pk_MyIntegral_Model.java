@@ -66,6 +66,7 @@ public class Pk_MyIntegral_Model {
          * FriendExceedNum : 1
          * FriendDiffIntegral : 3422
          * PreFriendName : 系统管理员
+         * IntegralLevel
          */
 
         private int Ranking;
@@ -81,6 +82,16 @@ public class Pk_MyIntegral_Model {
         private int FriendExceedNum;
         private int FriendDiffIntegral;
         private String PreFriendName;
+        private int IntegralLevel;
+
+        public int getIntegralLevel() {
+            return IntegralLevel;
+        }
+
+        public void setIntegralLevel(int integralLevel) {
+            IntegralLevel = integralLevel;
+        }
+
 
         public int getRanking() {
             return Ranking;

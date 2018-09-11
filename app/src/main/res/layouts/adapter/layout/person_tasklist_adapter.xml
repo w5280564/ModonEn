@@ -8,9 +8,9 @@
         android:id="@+id/myRel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorFristWhite"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="#ffffff">
+        android:paddingRight="10dp">
 
 
         <LinearLayout
@@ -19,53 +19,73 @@
             android:layout_centerVertical="true"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/taskName_Txt"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发布"
-                android:textColor="#2b2a2a"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/taskName_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发布"
+                    android:textColor="@color/colorFristBlack"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fen_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorFristRed"
+                    android:textSize="10sp"
+                    android:layout_marginLeft="5dp"/>
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/taskContent_Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="发布"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="10sp" />
 
         </LinearLayout>
 
         <!--<TextView-->
-            <!--android:id="@+id/taskContent_Txt"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="发布"-->
-            <!--android:textColor="#95a0ab"-->
-            <!--android:textSize="10sp" />-->
+        <!--android:id="@+id/taskContent_Txt"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="发布"-->
+        <!--android:textColor="#95a0ab"-->
+        <!--android:textSize="10sp" />-->
 
 
         <Button
             android:id="@+id/task_Btn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/daypk_train_bg"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/daypk_train_bg"
             android:text="兑换"
+            android:textColor="@color/colorFristWhite"
             android:textSize="12sp"
-            android:layout_marginRight="5dp"/>
+            android:textStyle="bold" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#0D343434" />
+            android:alpha="0.05"
+            android:background="@color/colorline" />
 
 
     </RelativeLayout>

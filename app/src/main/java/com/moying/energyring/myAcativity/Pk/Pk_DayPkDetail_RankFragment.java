@@ -21,7 +21,7 @@ import com.moying.energyring.Model.DayPkList_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.myAcativity.MainLogin;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 import com.moying.energyring.myAcativity.Person.Person_Relus;
 import com.moying.energyring.myAdapter.DayPk_DetailFragment_Adapter;
 import com.moying.energyring.network.saveFile;
@@ -244,7 +244,7 @@ private class colock_Img implements View.OnClickListener{
         mAdapter.setOnItemClickLitener(new DayPk_DetailFragment_Adapter.OnItemClickLitener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID", baseModel.get(position).getUserID() + "");
                 context.startActivity(intent);
             }

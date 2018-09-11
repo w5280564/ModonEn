@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFristWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/seek_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorFristWhite">
+
+        <Button
+            android:id="@+id/return_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/return_black" />
+
+        <Button
+            android:id="@+id/right_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/colorSecondWhite"
+            android:textSize="14sp" />
+
+
+        <LinearLayout
+            android:id="@+id/seek_Lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toLeftOf="@id/right_Btn"
+            android:layout_toRightOf="@id/return_Btn"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:background="@drawable/projectseek_comm_bg">
+
+            <ImageView
+                android:id="@+id/seek_Img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/projectseek_icon"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/colorSecondBlack"
+                android:text="搜索社区"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="热门社区"
+        android:textColor="@color/colorSecondBlack"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+
+    <com.moying.energyring.waylenBaseView.FlowLayout
+        android:id="@+id/hot_flexbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:justifyContent="flex_start"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="历史搜索"
+            android:textColor="@color/colorSecondBlack"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/clear_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="清空"
+            android:textColor="@color/colorSecondBlack"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <com.moying.energyring.waylenBaseView.FlowLayout
+        android:id="@+id/history_flexbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        app:justifyContent="space_around" />
+</LinearLayout>

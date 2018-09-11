@@ -15,7 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.moying.energyring.Model.Notice_Nomm_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
-import com.moying.energyring.myAcativity.Person.PersonMyCenter_Other;
+import com.moying.energyring.myAcativity.Person.PersonMyCenter_And_Other;
 
 import java.util.List;
 
@@ -92,7 +92,7 @@ public class Person_NoticeLike_Adapter extends RecyclerView.Adapter<Person_Notic
         holder.my_Head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PersonMyCenter_Other.class);
+                Intent intent = new Intent(context, PersonMyCenter_And_Other.class);
                 intent.putExtra("UserID",oneData.getUserID()+"");
                 context.startActivity(intent);
             }

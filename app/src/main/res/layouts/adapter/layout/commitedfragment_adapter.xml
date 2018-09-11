@@ -12,14 +12,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/popupblack_bg">
+        android:background="@drawable/popupwhite_bg">
 
         <LinearLayout
             android:id="@+id/title_Lin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
@@ -28,25 +28,32 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                app:roundAsCircle="true"/>
+                app:roundAsCircle="true" />
 
-            <TextView
-                android:id="@+id/name_Txt"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="15sp"
-                android:textColor="#e3e7eb"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/time_Txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="right"
-                android:paddingRight="15dp"
-                android:textColor="#989797"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/name_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:maxLength="10"
+                    android:textColor="@color/colorSecondBlack"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/time_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorSecondBlack"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -69,7 +76,7 @@
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/content_simple"
             android:lines="3"
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorFristBlack"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -83,8 +90,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@drawable/dash_line"
+                android:layout_height="1dp"
+                android:background="@color/colorline"
                 android:layerType="software" />
 
             <LinearLayout
@@ -107,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#e3e7eb"
+                    android:textColor="@color/colorSecondBlack"
                     android:textSize="9sp" />
 
                 <LinearLayout
@@ -128,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="#989797"
+                        android:textColor="@color/colorSecondBlack"
                         android:textSize="9sp" />
                 </LinearLayout>
             </LinearLayout>

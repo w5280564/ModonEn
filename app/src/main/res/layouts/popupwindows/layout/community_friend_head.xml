@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/findfriend_Lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:paddingBottom="20dp"
+        android:background="@color/colorFristWhite"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/phoneadress_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/phoneadress_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/friend_phoneadress_icon" />
+
+            <TextView
+                android:id="@+id/phoneadress_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="通讯录好友"
+                android:textColor="@color/colorSecondBlack"
+                android:textSize="10sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wechat_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/wechat_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/friend_wehat_icon" />
+
+            <TextView
+                android:id="@+id/wechat_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信好友"
+                android:textColor="@color/colorSecondBlack"
+                android:textSize="10sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sina_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/sina_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/friend_sina_icon" />
+
+            <TextView
+                android:id="@+id/sina_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微博好友"
+                android:textColor="@color/colorSecondBlack"
+                android:textSize="10sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qq_Lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/qq_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/friend_qq_icon" />
+
+            <TextView
+                android:id="@+id/qq_Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="qq好友"
+                android:textColor="@color/colorSecondBlack"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

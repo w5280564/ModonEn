@@ -36,7 +36,7 @@ public class PermissionUtils {
     public static final int CODE_MULTI_PERMISSION = 100;
 
     public static final String PERMISSION_RECORD_AUDIO = Manifest.permission.RECORD_AUDIO;
-    public static final String PERMISSION_GET_ACCOUNTS = Manifest.permission.GET_ACCOUNTS;
+    public static final String PERMISSION_GET_ACCOUNTS = Manifest.permission.READ_CONTACTS;
     public static final String PERMISSION_READ_PHONE_STATE = Manifest.permission.READ_PHONE_STATE;
     public static final String PERMISSION_CALL_PHONE = Manifest.permission.CALL_PHONE;
     public static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
@@ -228,15 +228,17 @@ public class PermissionUtils {
 //            Log.i(TAG, "onRequestPermissionsResult PERMISSION NOT GRANTED");
             //TODO
 //            String[] permissionsHint = activity.getResources().getStringArray(R.array.permissions);
-            String[] permissionsHint = {"没有此权限，无法开启这个功能，请开启权限。PERMISSION_GET_ACCOUNTS",
+            String[] permissionsHint = {
+                    "没有此权限，无法开启这个功能，请开启权限。PERMISSION_RECORD_AUDIO",
+                    "没有此权限，无法开启这个功能，请开启权限。PERMISSION_GET_ACCOUNTS",
                     "没有此权限，无法开启这个功能，请开启权限。PERMISSION_READ_PHONE_STATE",
                     "没有此权限，无法开启这个功能，请开启权限。PERMISSION_CALL_PHONE",
                     "没有此权限，无法开启这个功能，请开启权限。PERMISSION_CAMERA",
                     "没有此权限，无法开启这个功能，请开启权限。PERMISSION_ACCESS_FINE_LOCATION",
                     "没有此权限，无法开启这个功能，请开启权限。PERMISSION_ACCESS_COARSE_LOCATION",
                     "没有此权限，无法开启这个功能，请开启权限。PERMISSION_READ_EXTERNAL_STORAGE",
-                    "没有此权限，无法开启这个功能，请开启权限。PERMISSION_WRITE_EXTERNAL_STORAGE",
-                    "没有此权限，无法开启这个功能，请开启权限。PERMISSION_RECORD_AUDIO"};
+                    "没有此权限，无法开启这个功能，请开启权限。PERMISSION_WRITE_EXTERNAL_STORAGE"
+                    };
             openSettingActivity(activity, "Result" + permissionsHint[requestCode]);
         }
     }

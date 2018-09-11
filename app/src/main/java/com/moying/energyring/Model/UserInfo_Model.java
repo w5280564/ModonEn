@@ -83,6 +83,7 @@ public class UserInfo_Model implements Parcelable {
          * Attention : 3
          * Attention_Me : 1
          * PostCount
+         * IntegralLevel
          */
 
         private int UserID;
@@ -111,6 +112,16 @@ public class UserInfo_Model implements Parcelable {
         private int Attention_Me;
         private boolean Is_Attention;
         private int PostCount;
+        private int IntegralLevel;
+
+        public int getIntegralLevel() {
+            return IntegralLevel;
+        }
+
+        public void setIntegralLevel(int integralLevel) {
+            IntegralLevel = integralLevel;
+        }
+
 
         public boolean is_Attention() {
             return Is_Attention;

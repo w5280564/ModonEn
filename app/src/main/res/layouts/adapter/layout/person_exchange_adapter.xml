@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:background="#ffffff">
+        android:background="@color/colorFristWhite">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/my_simple"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:textColor="#2b2a2a"
+                android:textColor="@color/colorFristBlack"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="1"
-                android:textColor="#95a0ab"
+                android:textColor="@color/colorSecondWhite"
                 android:textSize="12sp" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="1"
-                android:textColor="#f24d4c"
+                android:textColor="@color/colorFristRed"
                 android:textSize="12sp" />
 
         </LinearLayout>

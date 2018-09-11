@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAllBg">
+
+
+    <ImageView
+        android:id="@+id/badge_chaImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/cha_icon" />
+
+
+    <RelativeLayout
+        android:id="@+id/badge_Rel"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/badge_sahre_bg"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/badge_Sim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/userContent_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/badge_Sim"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorFourthBlack"
+            android:layout_marginBottom="5dp"
+            android:textSize="13sp" />
+        <TextView
+            android:id="@+id/userName_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userContent_Txt"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/badge_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userName_Txt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/badge_share_Img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:src="@drawable/badge_share_icon" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/share_Lin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/badge_Rel"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/popupwhite_bg"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/share_wechat_Lin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/badge_share_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/badge_share_wechat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_sina_Lin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/badge_share_sina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/badge_share_sina" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_qq_Lin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/badge_share_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/badge_share_qq" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_friend_Lin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/badge_share_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/badge_share_friend" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/fixed"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

@@ -25,8 +25,8 @@ import com.moying.energyring.Model.Version_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
 import com.moying.energyring.basePopup.popupMes;
-import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.myAcativity.MainActivity;
+import com.moying.energyring.myAcativity.MainLogin;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BasePopupWindow;
 import com.umeng.analytics.MobclickAgent;
@@ -38,7 +38,7 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HasNewActivity extends Activity implements ViewPager.OnPageChangeListener{
+public class HasNewActivity extends Activity implements ViewPager.OnPageChangeListener {
 
     private LinearLayout myLin;
 
@@ -47,8 +47,18 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_has_new);
 
-        myLin = (LinearLayout)findViewById(R.id.myLin);
-        versionNameData(HasNewActivity.this, saveFile.BaseUrl + saveFile.Version_Url);
+        myLin = (LinearLayout) findViewById(R.id.myLin);
+//        versionNameData(HasNewActivity.this, saveFile.BaseUrl + saveFile.Version_Url+"?Type=2");
+
+        String versionStr = StaticData.getversionName(this);
+        sys_NoticeData(HasNewActivity.this, saveFile.BaseUrl + saveFile.Sys_Notice_List_Url + "?Type=2" + "&Ver=" + versionStr);
+
+        myLin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
@@ -58,7 +68,10 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
     public void showPopup(Context context) {
 //        saveFile.saveShareData("isSee", "0.0", getActivity());
         final popupMes mesPopup = new popupMes(HasNewActivity.this, myLin, "更新", "1、更新曲线\n2、修改发现UI");
-        RelativeLayout papercontent = (RelativeLayout) mesPopup.getContentView().findViewById(R.id.papercontent);
+//        mesPopup.setBackgroundDrawable(new ColorDrawable(0x1a000000));
+//        mesPopup.setFocusable(false);//不获取焦点 父view Activity中 可监听返回键
+//        mesPopup.setTouchable(true);
+        RelativeLayout mes_Pop = (RelativeLayout) mesPopup.getContentView().findViewById(R.id.mes_Pop);
         mPager = (ViewPager) mesPopup.getContentView().findViewById(R.id.viewpager);
 //        StaticData.ViewScale(mPager, 470, 600);
         bannerdot = (LinearLayout) mesPopup.getContentView().findViewById(R.id.bannerdot);
@@ -67,7 +80,7 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
         params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         params.setMargins(0, padTop, 0, 0);
         bannerdot.setLayoutParams(params);
-        initViewPager(mesPopup,context);
+        initViewPager(mesPopup, context);
         initDot(context);
 //        taggletHandler.sleep(3000);
     }
@@ -385,7 +398,7 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
             public void onSuccess(String resultString) {
                 if (resultString != null) {
                     sys_Model = new Gson().fromJson(resultString, Sys_NoticeList_Model.class);
-                    if (sys_Model.isIsSuccess() && !sys_Model.getData().equals("[]")) {
+                    if (sys_Model.isIsSuccess() && !sys_Model.getData().equals("[]") && sys_Model.getData().size() != 0) {
                         List<Sys_NoticeList_Model.DataBean> oneData = sys_Model.getData();
                         if (showSys_Model != null) {
                             showSys_Model.clear();
@@ -401,8 +414,9 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
                         }
                         driveId = new ArrayList<>();
 
-                        Double nowVer = Double.valueOf(StaticData.getversionName(context));//当前版本
-                        String driveStr = ver_Model.getData().getAndroid();//服务器版本
+//                        Double nowVer = Double.valueOf(StaticData.getversionName(context));//当前版本
+                        String nowVer = StaticData.getversionName(context);//当前版本
+//                        String driveStr = ver_Model.getData().getVer();//服务器版本
                         Double VerD;//本地版本
                         if (saveFile.getShareData("VersionID", context).equals("false")) {
                             VerD = 0.0;
@@ -411,53 +425,71 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
                         }
                         driveId = getdriveId(oneData, 3);//服务器活动ID
 
-                        if (saveFile.getShareData("VersionID", context).equals("false") && nowVer < Double.valueOf(driveStr)) {//第一次打开 本机版本小于服务器版本
-                            showPopType(showSys_Model, 1, oneData, true);
-                            showPopup(context);//打开弹框
-                        } else if (!saveFile.getShareData("VersionID", context).equals(driveStr) && VerD != 0) {//本地存储版本与服务器不同 有新版本更新
-                            if (VerD < Double.valueOf(driveStr)) { //本地版小于服务器版 ，打开提示更新
-                                showPopType(showSys_Model, 1, oneData);
+//                        if (saveFile.getShareData("VersionID", context).equals("false") && nowVer < Double.valueOf(driveStr)) {//第一次打开 本机版本小于服务器版本
+//                            showPopType(showSys_Model, 1, oneData, true);
+//                            showPopup(context);//打开弹框
+//                        } else if (!saveFile.getShareData("VersionID", context).equals(driveStr) && VerD != 0) {//本地存储版本与服务器不同 有新版本更新
+//                            if (VerD < Double.valueOf(driveStr)) { //本地版小于服务器版 ，打开提示更新
+//                                showPopType(showSys_Model, 1, oneData);
+//
+//                                if (!saveFile.getUserList(context, "aciId").isEmpty()) {
+//                                    aciId = saveFile.getUserList(context, "aciId");//本地活动ID
+//                                    List<String> diffId = getDiffrent(aciId, driveId);//不同ID
+//                                    if (!diffId.isEmpty()) {
+//                                        showPopAci(showSys_Model, 3, oneData, diffId);//要显示窗口
+//                                    }
+//                                }
+//                                showPopup(context);//打开弹框
+//                            }
+//
+//                        } else if (saveFile.getShareData("isSeeFeatures", context).equals("false") && nowVer.equals(Double.valueOf(driveStr))) { //是否看过功能 并且本机版本等于服务器版本
+//                            saveFile.saveShareData("isSeeFeatures", "true", context);
+//                            showPopType(showSys_Model, 2, oneData, true);
+//                            showPopup(context);//打开弹框
+//
+//
+//                        } else {
+//
+//                            if (!saveFile.getUserList(context, "aciId").isEmpty()) {
+////                                showPopType(showSys_Model, 3, oneData);
+//                                aciId = saveFile.getUserList(context, "aciId");//本地活动ID
+//                                List<String> diffId = getDiffrent(aciId, driveId);//不同ID
+//                                if (!diffId.isEmpty()) {
+//                                    showPopAci(showSys_Model, 3, oneData, diffId);//要显示窗口
+//                                    showPopup(context);
+//                                } else {
+//                                    finish();
+//                                }
+//                            } else {
+//                                finish();
+//                            }
+//
+//                        }
 
-                                if (!saveFile.getUserList(context, "aciId").isEmpty()) {
-                                    aciId = saveFile.getUserList(context, "aciId");//本地活动ID
-                                    List<String> diffId = getDiffrent(aciId, driveId);//不同ID
-                                    if (!diffId.isEmpty()) {
-                                        showPopAci(showSys_Model, 3, oneData, diffId);//要显示窗口
-                                    }
-                                }
-                                showPopup(context);//打开弹框
-                            }
-
-                        } else if (saveFile.getShareData("isSeeFeatures", context).equals("false") && nowVer.equals(Double.valueOf(driveStr))) { //是否看过功能 并且本机版本等于服务器版本
+                         //版本在服务端已比对，本地只确认 是否有数据  功能提醒是否查看 活动显示对比
+                        showPopType(showSys_Model, 1, oneData);//添加更新数据
+                        if (saveFile.getShareData("isSeeFeatures", context).equals("false")) {
                             saveFile.saveShareData("isSeeFeatures", "true", context);
-                            showPopType(showSys_Model, 2, oneData, true);
-                            showPopup(context);//打开弹框
-
-
-                        } else {
-
-                            if (!saveFile.getUserList(context, "aciId").isEmpty()) {
-//                                showPopType(showSys_Model, 3, oneData);
-                                aciId = saveFile.getUserList(context, "aciId");//本地活动ID
-                                List<String> diffId = getDiffrent(aciId, driveId);//不同ID
-                                if (!diffId.isEmpty()) {
-                                    showPopAci(showSys_Model, 3, oneData, diffId);//要显示窗口
-                                    showPopup(context);
-                                }else {
-                                    finish();
-                                }
-                            }else {
-                                finish();
-                            }
-
+                            showPopType(showSys_Model, 2, oneData);// 添加功能提醒数据
                         }
 
+                        aciId = saveFile.getUserList(context, "aciId");//本地活动ID
+                        List<String> diffId = getDiffrent(aciId, driveId);//不同ID
+                        if (!diffId.isEmpty()) {
+                            showPopAci(showSys_Model, 3, oneData, diffId);//添加活动数据
+                        }
 
-//                        showPopup();
+                        if (showSys_Model.isEmpty()) {
+                            finish();
+                        } else {
+                            showPopup(context);//打开弹框
+                        }
+
                         saveFile.saveUserList(context, driveId, "aciId");//存服务器活动ID
-                        saveFile.saveShareData("VersionID", ver_Model.getData().getAndroid(), context);//存当前服务器版本
+                        saveFile.saveShareData("VersionID", ver_Model.getData().getVer(), context);//存当前服务器版本
 
                     } else {
+                        finish(); //取消本页
 //                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -508,6 +540,7 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
         }
     }
 
+
     //只显示不同的新活动
     private void showPopAci(List<Sys_NoticeList_Model.DataBean> showSys_Model, int type, List<Sys_NoticeList_Model.DataBean> oneData, List<String> aciIdArr) {
         for (int i = 0; i < oneData.size(); i++) {
@@ -546,5 +579,16 @@ public class HasNewActivity extends Activity implements ViewPager.OnPageChangeLi
         }
         return diff;
     }
+
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+////            stopSendTimerTask();
+////            mediaPlayer.stop();
+////            BGMPlayer.stop();
+//            return true;
+//        }
+//        return false;
+//    }
 
 }

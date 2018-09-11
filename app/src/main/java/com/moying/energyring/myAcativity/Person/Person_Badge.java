@@ -1,12 +1,12 @@
 package com.moying.energyring.myAcativity.Person;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
@@ -96,8 +96,8 @@ public class Person_Badge extends FragmentActivity {
     public MyFragmentPagerAdapter myAdapter;
 
     private void initData() {
-        tablayout.setTabTextColors(Color.parseColor("#95a0ab"), Color.parseColor("#ffd800"));//初始颜色，选中颜色
-        tablayout.setSelectedTabIndicatorColor(Color.parseColor("#ffd800"));//进度条颜色
+        tablayout.setTabTextColors(ContextCompat.getColor(this,R.color.colorSecondWhite), ContextCompat.getColor(this,R.color.colorThridYellow));//初始颜色，选中颜色
+        tablayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this,R.color.colorThridYellow));//进度条颜色
         tablayout.setTabMode(TabLayout.MODE_FIXED);//设置可以滑动 根据标签自适应宽度 TabLayout.MODE_FIXED
 
 //        viewpager.setOffscreenPageLimit(1);

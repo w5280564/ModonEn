@@ -15,7 +15,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:text="时间"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorSecondWhite"
         android:textSize="13sp" />
 
 

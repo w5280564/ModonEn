@@ -1,0 +1,241 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAllBg"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/mAppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAllBg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+
+        <!-- contentScrim 折叠后Toolbar背景色-->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorAllBg"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <RelativeLayout
+                android:id="@+id/history_Rel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorFristWhite"
+                android:gravity="center"
+                app:layout_collapseMode="parallax">
+
+                <RelativeLayout
+                    android:id="@+id/haed_Rel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/history_simple"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:roundAsCircle="true"
+                        android:background="@drawable/coust_headbg"
+                        android:layout_centerInParent="true"/>
+
+                    <TextView
+                        android:id="@+id/head_Txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:maxLength="1"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/colorFristWhite"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:alpha="0.9"/>
+                </RelativeLayout>
+
+
+
+                <TextView
+                    android:id="@+id/historyName_Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/haed_Rel"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorFourthBlack"
+                    android:textSize="12sp" />
+
+
+                <LinearLayout
+                    android:id="@+id/history_Lin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/historyName_Txt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/lei_Lin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/leika_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="累计打卡"
+                            android:textColor="@color/colorFourthBlack"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/lei_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text=""
+                            android:textColor="@color/colorSecondRed"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorline" />
+
+                    <LinearLayout
+                        android:id="@+id/day_Lin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/leiday_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="累计天数"
+                            android:textColor="@color/colorFourthBlack"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/day_Txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text=""
+                            android:textColor="@color/colorSecondRed"
+                            android:textSize="24sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="top"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin">
+
+                <RelativeLayout
+                    android:id="@+id/title_Rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSecondRed">
+
+                    <ImageView
+                        android:id="@+id/return_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/return_white" />
+
+                    <ImageView
+                        android:id="@+id/right_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/daypk_delete_white" />
+
+                    <ImageView
+                        android:id="@+id/colock_Img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/right_Img"
+                        android:src="@drawable/daypk_colock_white" />
+
+                    <TextView
+                        android:id="@+id/cententtxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:lines="1"
+                        android:textColor="@color/colorFristBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <TextView
+            android:id="@+id/time_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="时间"
+            android:textColor="@color/colorFristBlack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/project_Txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="回顾"
+            android:textColor="@color/colorThridRed"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <com.moying.energyring.xrecycle.XRecyclerView
+            android:id="@+id/other_recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"/>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

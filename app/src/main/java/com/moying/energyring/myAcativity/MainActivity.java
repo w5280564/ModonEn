@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.moying.energyring.Model.BaseDataInt_Model;
-import com.moying.energyring.Model.ProjectModel;
+import com.moying.energyring.Model.Base_Model;
 import com.moying.energyring.Model.isFristSee_Model;
 import com.moying.energyring.R;
 import com.moying.energyring.StaticData.StaticData;
@@ -40,7 +40,7 @@ import com.moying.energyring.myAcativity.Person.Service.BindService;
 import com.moying.energyring.myAcativity.Person.Service.DaemonService;
 import com.moying.energyring.myAcativity.Person.Service.JobSchedulerService;
 import com.moying.energyring.myAcativity.Pk.Committ.Leran_AllPerson;
-import com.moying.energyring.myAcativity.Pk.Pk_DayPKAdd_Project_Tab;
+import com.moying.energyring.myAcativity.Pk.Pk_HuiZong;
 import com.moying.energyring.network.saveFile;
 import com.moying.energyring.waylenBaseView.BaseActivity;
 import com.moying.energyring.waylenBaseView.MyActivityManager;
@@ -54,7 +54,6 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +61,8 @@ import java.util.List;
 
 //@ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
-    private static final int[] ITEM_DRAWABLES = {R.drawable.arcmenu_add, R.drawable.arcmenu_pk, R.drawable.arcmenu_growing,
+    //, R.drawable.arcmenu_growing
+    private static final int[] ITEM_DRAWABLES = {R.drawable.arcmenu_add, R.drawable.arcmenu_pk,
             R.drawable.arcmenu_goal};
     //    TextView popup_Txt;
     RadioGroup tab_group;
@@ -339,22 +339,28 @@ public class MainActivity extends BaseActivity {
 //                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd.class);
 //                            Intent intent1 = new Intent(MainActivity.this, Pk_DayPkAdd_More.class);
 //                            startActivity(intent1);
-                            Intent intent = new Intent(MainActivity.this, Pk_DayPKAdd_Project_Tab.class);
-                            List<ProjectModel> projectModel = new ArrayList<>();
-                            intent.putExtra("baseModel", (Serializable) projectModel);
+
+//                            Intent intent = new Intent(MainActivity.this, Pk_DayPKAdd_Project_Tab.class);
+//                            List<ProjectModel> projectModel = new ArrayList<>();
+//                            intent.putExtra("baseModel", (Serializable) projectModel);
                             //第二个参数为请求码，可以根据业务需求自己编号
 //            startActivityForResult(intent, RESULT_CODE_MORE);
-                            startActivity(intent);
+//                            startActivity(intent);
+
+                            isReteDayPk(view, MainActivity.this, saveFile.BaseUrl + saveFile.haveNewRepost_Url);
                             break;
                         case 1:
-                            MobclickAgent.onEvent(MainActivity.this, "PostAdd");//统计页签
-                            Intent intent2 = new Intent(MainActivity.this, PostingActivity.class);
-                            startActivity(intent2);
-                            break;
-                        case 2:
+//                            MobclickAgent.onEvent(MainActivity.this, "PostAdd");//统计页签
+//                            Intent intent2 = new Intent(MainActivity.this, PostingActivity.class);
+//                            startActivity(intent2);
                             MobclickAgent.onEvent(MainActivity.this, "AllPerson");//统计页签
                             Intent intent3 = new Intent(MainActivity.this, Leran_AllPerson.class);
                             startActivity(intent3);
+                            break;
+                        case 2:
+//                            MobclickAgent.onEvent(MainActivity.this, "AllPerson");//统计页签
+//                            Intent intent3 = new Intent(MainActivity.this, Leran_AllPerson.class);
+//                            startActivity(intent3);
                             break;
                     }
                 }
@@ -580,6 +586,71 @@ public class MainActivity extends BaseActivity {
             return false;
         }
     }
+
+    public void isReteDayPk(final View view, final Context context, String baseUrl) {
+        RequestParams params = new RequestParams(baseUrl);
+        if (saveFile.getShareData("JSESSIONID", context) != null) {
+            params.setHeader("Cookie", saveFile.getShareData("JSESSIONID", context));
+        }
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String resultString) {
+                if (resultString != null) {
+                    view.setEnabled(true);
+                    Base_Model reteModel = new Gson().fromJson(resultString, Base_Model.class);
+                    if (reteModel.isData()) {
+                        Intent intent = new Intent(context, Pk_HuiZong.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
+                    }
+
+//                    int integral = reteModel.getData();
+//                    if (integral == -1) {
+//                        Toast.makeText(context, "请汇报更多pk", Toast.LENGTH_SHORT).show();
+//                    }else if (integral >= 0){
+//                        Intent intent = new Intent(getActivity(), Pk_HuiZong.class);
+//                        startActivity(intent);
+//                    }
+//                    else if (integral == 0) {
+//                        //汇报达到上限没分
+//                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+//                    } else if (integral > 0) {
+//                        Toast.makeText(context, "汇报成功", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getActivity(), JiFenActivity.class);
+//                        intent.putExtra("jifen", integral);
+//                        startActivity(intent);
+//                    }
+
+                } else {
+                    Toast.makeText(context, "数据获取失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable throwable, boolean b) {
+                view.setEnabled(true);
+                String errStr = throwable.getMessage();
+                if (errStr.equals("Unauthorized")) {
+                    Intent intent = new Intent(context, MainLogin.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(CancelledException e) {
+                view.setEnabled(true);
+            }
+
+            @Override
+            public void onFinished() {
+                view.setEnabled(true);
+            }
+        });
+    }
+
+
+
 
     // 获取是否存在NavigationBar
 

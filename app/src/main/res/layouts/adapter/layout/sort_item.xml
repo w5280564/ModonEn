@@ -8,11 +8,11 @@
         android:id="@+id/tagtxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3e3d3d"
+        android:background="@color/colorAllBg"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:text="A"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorFristBlack"
         android:textSize="18sp" />
 
     <RelativeLayout
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tagtxt"
-        android:background="#2b2a2a">
+        android:background="@color/colorFristWhite">
 
 
         <CheckBox
@@ -55,7 +55,7 @@
             android:paddingLeft="15dp"
             android:lines="1"
             android:text="测试"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorFristBlack"
             android:textSize="16sp" />
     </RelativeLayout>
 

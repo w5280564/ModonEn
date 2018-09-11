@@ -90,6 +90,7 @@ public class Training_Posting extends Activity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(Training_Posting.this, PostingActivity.class);
+            intent.putExtra("ProjectID",jiFenmodel.getData().getProjectID()+"");
             startActivity(intent);
 //            finish();
         }

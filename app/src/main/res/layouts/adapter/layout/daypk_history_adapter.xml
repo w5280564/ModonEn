@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:textColor="#989797"
+            android:textColor="@color/colorFristBlack"
             android:textSize="8sp" />
 
         <LinearLayout
@@ -43,10 +43,10 @@
 
             <View
                 android:id="@+id/line"
-                android:layout_width="1px"
+                android:layout_width="2px"
                 android:layout_height="match_parent"
                 android:layout_below="@id/project_simple"
-                android:background="#2b2a2a" />
+                android:background="@color/colorFristWhite" />
 
         </LinearLayout>
 
@@ -57,7 +57,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/project_Lin"
             android:text=""
-            android:textColor="#ffa327"
+            android:textColor="@color/colorFristYellow"
             android:textSize="13sp" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/project_Name"
             android:text=""
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorFristBlack"
             android:textSize="13sp" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:text=""
-            android:textColor="#e3e7eb"
+            android:textColor="@color/colorFristBlack"
             android:textSize="13sp" />
 
 

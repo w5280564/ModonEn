@@ -6,6 +6,12 @@
     android:fitsSystemWindows="true"
     android:gravity="center_horizontal">
 
+    <include
+        android:id="@+id/title_Include"
+        layout="@layout/base_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
     <android.support.design.widget.TabLayout
         android:id="@+id/ac_tab_layout"

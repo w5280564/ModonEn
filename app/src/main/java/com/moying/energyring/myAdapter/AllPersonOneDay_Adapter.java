@@ -1,7 +1,7 @@
 package com.moying.energyring.myAdapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,11 +66,11 @@ public class AllPersonOneDay_Adapter extends RecyclerView.Adapter<AllPersonOneDa
             if (model.isIs_Finish()) {
                 holder.round_Txt.setBackgroundResource(R.drawable.calendar_item_red);
                 holder.finsh_Txt.setText("完成");
-                holder.finsh_Txt.setTextColor(Color.parseColor("#ffffff"));
+                holder.finsh_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorFristBlack));
             } else {
                 holder.round_Txt.setBackgroundResource(R.drawable.calendar_item_gray);
                 holder.finsh_Txt.setText("未完成");
-                holder.finsh_Txt.setTextColor(Color.parseColor("#989797"));
+                holder.finsh_Txt.setTextColor(ContextCompat.getColor(context,R.color.colorSecondWhite));
             }
 
             String contentStr = "每日目标  " + model.getProjectName() + model.getReportNum() + model.getProjectUnit();
